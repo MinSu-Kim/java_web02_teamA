@@ -9,6 +9,20 @@ public class Tax {
 	private Date tDate;
 	private String tPName; // 프로덕트로 바꿀 예정입니다.
 
+	
+	
+	public Tax() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Tax(int tNo, String tName, int tPrice, Date tDate, String tPName) {
+		this.tNo = tNo;
+		this.tName = tName;
+		this.tPrice = tPrice;
+		this.tDate = tDate;
+		this.tPName = tPName;
+	}
+
 	public int gettNo() {
 		return tNo;
 	}
