@@ -72,4 +72,3 @@ select * from grade;
 select * from product;
 select * from tax;
 select * from workdialog;
-

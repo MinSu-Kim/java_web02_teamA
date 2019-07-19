@@ -1,7 +1,7 @@
 -- 김남호
 grant all privileges 
 on hairshop.* 
-to 'knh_hairshop'@'localhost'
+to 'knh_hairshop'@'%'
 identified by 'rootroot';
 
 -- 영각형님
