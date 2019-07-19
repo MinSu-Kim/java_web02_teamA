@@ -8,4 +8,3 @@ public interface TaxMapper {
 	List<Tax> selectTaxByAll();
 	int insertTax(Tax tax);
 }
-  

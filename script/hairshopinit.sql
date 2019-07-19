@@ -1,6 +1,7 @@
 
 
 
+<<<<<<< HEAD
 -- 헤어샵
 DROP SCHEMA IF EXISTS hairshop;
 
@@ -227,4 +228,3 @@ ALTER TABLE hairshop.Guest
 		REFERENCES hairshop.Grade ( -- 등급
 			g_grade -- 등급
 		);
-	
