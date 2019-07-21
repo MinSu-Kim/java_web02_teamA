@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: java_web02_teamA
+Bundle-SymbolicName: java_web02_teamA
+Bundle-Version: 1.0.0.qualifier
+Export-Package: kr.or.yi.hairshop,
+ kr.or.yi.hairshop.dao,
+ kr.or.yi.hairshop.daoImpl,
+ kr.or.yi.hairshop.dto,
+ kr.or.yi.hairshop.frame,
+ kr.or.yi.hairshop.jdbc,
+ kr.or.yi.hairshop.panel

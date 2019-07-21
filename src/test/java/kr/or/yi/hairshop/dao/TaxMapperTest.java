@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.yi.hairshop.AbstractTest;
+import kr.or.yi.hairshop.daoImpl.TaxMapperImpl;
 import kr.or.yi.hairshop.dto.Tax;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -42,5 +43,7 @@ public class TaxMapperTest extends AbstractTest {
 		int res = taxDao.insertTax(tax);
 		log.debug(tax.toString());
 		Assert.assertEquals(1, res);
+		
+		
 	}
 }

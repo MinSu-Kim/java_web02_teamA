@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.yi.hairshop.panel.PanelDesignerScheduleBlock;
+
 public class HairMain extends JFrame {
 
 	private JPanel contentPane;
@@ -18,7 +20,7 @@ public class HairMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HairMain frame = new HairMain();
+					PanelDesignerScheduleBlock frame = new PanelDesignerScheduleBlock();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
