@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -21,8 +22,10 @@ import com.toedter.calendar.JCalendar;
 import kr.or.yi.hairshop.UI.Frame.ScheduleFrame;
 import kr.or.yi.hairshop.UI.Panel.pCalendar;
 import kr.or.yi.hairshop.UI.Panel.pRightBtn;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
-public class HairMain extends JFrame implements ActionListener {
+public class HairMain extends JFrame implements ActionListener, MouseListener {
 
 	private JPanel contentPane;
 	private JButton btnHome;
@@ -116,6 +119,7 @@ public class HairMain extends JFrame implements ActionListener {
 		Rmain.add(pCalendar, BorderLayout.NORTH);
 		
 		calendar = new JCalendar();
+		calendar.addMouseListener(this);
 		pCalendar.add(calendar);
 
 		pCalendar pMain = new pCalendar();
@@ -137,5 +141,21 @@ public class HairMain extends JFrame implements ActionListener {
 	protected void actionPerformedBtnReservation(ActionEvent e) {
 		ScheduleFrame scheduleFrame = new ScheduleFrame();
 		scheduleFrame.setVisible(true);
+	}
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == calendar) {
+			mouseClickedCalendar(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedCalendar(MouseEvent e) {
+		JOptionPane.showMessageDialog(null, "dd");
 	}
 }
