@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JCalendar;
 
+import kr.or.yi.hairshop.UI.Frame.GuestFrame;
 import kr.or.yi.hairshop.UI.Frame.ScheduleFrame;
 import kr.or.yi.hairshop.UI.Panel.pCalendar;
 import kr.or.yi.hairshop.UI.Panel.pRightBtn;
@@ -28,6 +29,7 @@ public class HairMain extends JFrame implements ActionListener {
 	private JButton btnHome;
 	private JButton btnReservation;
 	private JCalendar calendar;
+	private JButton btnCustomer;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -91,7 +93,8 @@ public class HairMain extends JFrame implements ActionListener {
 		btnReservation.addActionListener(this);
 		Top_02.add(btnReservation);
 		
-		JButton btnCustomer = new JButton("고객관리");
+		btnCustomer = new JButton("고객관리");
+		btnCustomer.addActionListener(this);
 		Top_02.add(btnCustomer);
 		
 		JButton btnProduct = new JButton("상품관리");
@@ -123,6 +126,9 @@ public class HairMain extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCustomer) {
+			actionPerformedBtnCustomerJButton(e);
+		}
 		if (e.getSource() == btnReservation) {
 			actionPerformedBtnReservation(e);
 		}
@@ -137,5 +143,9 @@ public class HairMain extends JFrame implements ActionListener {
 	protected void actionPerformedBtnReservation(ActionEvent e) {
 		ScheduleFrame scheduleFrame = new ScheduleFrame();
 		scheduleFrame.setVisible(true);
+	}
+	protected void actionPerformedBtnCustomerJButton(ActionEvent e) {
+		GuestFrame gusetFrame = new GuestFrame();
+		gusetFrame.setVisible(true);
 	}
 }
