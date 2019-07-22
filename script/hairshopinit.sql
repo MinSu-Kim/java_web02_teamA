@@ -1,230 +1,230 @@
 
 
 
--- Çì¾î¼¥
+-- í—¤ì–´ìƒµ
 DROP SCHEMA IF EXISTS hairshop;
 
--- Çì¾î¼¥
+-- í—¤ì–´ìƒµ
 CREATE SCHEMA hairshop;
 
--- »óÇ°
+-- ìƒí’ˆ
 CREATE TABLE hairshop.Product (
-	p_name     VARCHAR(20) NOT NULL COMMENT 'ÀÛ¾÷¸í', -- ÀÛ¾÷¸í
-	p_price    INT         NULL     COMMENT '°¡°İ', -- °¡°İ
-	p_division VARCHAR(10) NULL     COMMENT 'ºĞ·ù' -- ºĞ·ù
+	p_name     VARCHAR(20) NOT NULL COMMENT 'ì‘ì—…ëª…', -- ì‘ì—…ëª…
+	p_price    INT         NULL     COMMENT 'ê°€ê²©', -- ê°€ê²©
+	p_division VARCHAR(10) NULL     COMMENT 'ë¶„ë¥˜' -- ë¶„ë¥˜
 )
-COMMENT '»óÇ°';
+COMMENT 'ìƒí’ˆ';
 
--- »óÇ°
+-- ìƒí’ˆ
 ALTER TABLE hairshop.Product
-	ADD CONSTRAINT PK_Product -- »óÇ° ±âº»Å°
+	ADD CONSTRAINT PK_Product -- ìƒí’ˆ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			p_name -- ÀÛ¾÷¸í
+			p_name -- ì‘ì—…ëª…
 		);
 
--- ÀÛ¾÷ÀÏÁö
+-- ì‘ì—…ì¼ì§€
 CREATE TABLE hairshop.WorkDialog (
-	w_no         INT         NOT NULL COMMENT 'ÀÏÁ¤¹øÈ£', -- ÀÏÁ¤¹øÈ£
-	w_wrokTime   DATE        NULL     COMMENT 'ÀÛ¾÷³¯Â¥', -- ÀÛ¾÷³¯Â¥
-	w_reservTime DATE        NULL     COMMENT '¿¹¾à³¯Â¥', -- ¿¹¾à³¯Â¥
-	w_e_Name     VARCHAR(20) NULL     COMMENT 'ÀÌº¥Æ®¸í', -- ÀÌº¥Æ®¸í
-	w_d_No       INT         NULL     COMMENT 'µğÀÚÀÌ³Ê', -- µğÀÚÀÌ³Ê
-	w_c_No       INT         NULL     COMMENT '¼Õ´Ô' -- ¼Õ´Ô
+	w_no         INT         NOT NULL COMMENT 'ì¼ì •ë²ˆí˜¸', -- ì¼ì •ë²ˆí˜¸
+	w_wrokTime   DATE        NULL     COMMENT 'ì‘ì—…ë‚ ì§œ', -- ì‘ì—…ë‚ ì§œ
+	w_reservTime DATE        NULL     COMMENT 'ì˜ˆì•½ë‚ ì§œ', -- ì˜ˆì•½ë‚ ì§œ
+	w_e_Name     VARCHAR(20) NULL     COMMENT 'ì´ë²¤íŠ¸ëª…', -- ì´ë²¤íŠ¸ëª…
+	w_d_No       INT         NULL     COMMENT 'ë””ìì´ë„ˆ', -- ë””ìì´ë„ˆ
+	w_c_No       INT         NULL     COMMENT 'ì†ë‹˜' -- ì†ë‹˜
 )
-COMMENT 'ÀÛ¾÷ÀÏÁö';
+COMMENT 'ì‘ì—…ì¼ì§€';
 
--- ÀÛ¾÷ÀÏÁö
+-- ì‘ì—…ì¼ì§€
 ALTER TABLE hairshop.WorkDialog
-	ADD CONSTRAINT PK_WorkDialog -- ÀÛ¾÷ÀÏÁö ±âº»Å°
+	ADD CONSTRAINT PK_WorkDialog -- ì‘ì—…ì¼ì§€ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			w_no -- ÀÏÁ¤¹øÈ£
+			w_no -- ì¼ì •ë²ˆí˜¸
 		);
 
 ALTER TABLE hairshop.WorkDialog
-	MODIFY COLUMN w_no INT NOT NULL AUTO_INCREMENT COMMENT 'ÀÏÁ¤¹øÈ£';
+	MODIFY COLUMN w_no INT NOT NULL AUTO_INCREMENT COMMENT 'ì¼ì •ë²ˆí˜¸';
 
--- ÀÌº¥Æ®
+-- ì´ë²¤íŠ¸
 CREATE TABLE hairshop.Event (
-	e_name     VARCHAR(20) NOT NULL COMMENT 'ÀÚµ¿µî·Ï', -- ÀÌº¥Æ®¸í
-	e_startDay DATE        NULL     COMMENT '½ÃÀÛÀÏ', -- ½ÃÀÛÀÏ
-	e_endDay   DATE        NULL     COMMENT 'Á¾·áÀÏ', -- Á¾·áÀÏ
-	e_sale     INT         NULL     COMMENT 'ÇÒÀÎÀ²' -- ÇÒÀÎÀ²
+	e_name     VARCHAR(20) NOT NULL COMMENT 'ìë™ë“±ë¡', -- ì´ë²¤íŠ¸ëª…
+	e_startDay DATE        NULL     COMMENT 'ì‹œì‘ì¼', -- ì‹œì‘ì¼
+	e_endDay   DATE        NULL     COMMENT 'ì¢…ë£Œì¼', -- ì¢…ë£Œì¼
+	e_sale     INT         NULL     COMMENT 'í• ì¸ìœ¨' -- í• ì¸ìœ¨
 )
-COMMENT 'ÀÌº¥Æ®';
+COMMENT 'ì´ë²¤íŠ¸';
 
--- ÀÌº¥Æ®
+-- ì´ë²¤íŠ¸
 ALTER TABLE hairshop.Event
-	ADD CONSTRAINT PK_Event -- ÀÌº¥Æ® ±âº»Å°
+	ADD CONSTRAINT PK_Event -- ì´ë²¤íŠ¸ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			e_name -- ÀÌº¥Æ®¸í
+			e_name -- ì´ë²¤íŠ¸ëª…
 		);
 
--- °íÁ¤ºñ
+-- ê³ ì •ë¹„
 CREATE TABLE hairshop.Tax (
-	t_no     INT         NOT NULL COMMENT 'ÁöÃâ¹øÈ£', -- ÁöÃâ¹øÈ£
-	t_name   VARCHAR(20) NULL     COMMENT 'ÀÌ¸§', -- ÀÌ¸§
-	t_price  INT         NULL     COMMENT '°¡°İ', -- °¡°İ
-	t_date   DATE        NULL     COMMENT '³¯Â¥', -- ³¯Â¥
-	t_p_name VARCHAR(20) NULL     COMMENT 'ÀÛ¾÷¸í' -- ÀÛ¾÷¸í
+	t_no     INT         NOT NULL COMMENT 'ì§€ì¶œë²ˆí˜¸', -- ì§€ì¶œë²ˆí˜¸
+	t_name   VARCHAR(20) NULL     COMMENT 'ì´ë¦„', -- ì´ë¦„
+	t_price  INT         NULL     COMMENT 'ê°€ê²©', -- ê°€ê²©
+	t_date   DATE        NULL     COMMENT 'ë‚ ì§œ', -- ë‚ ì§œ
+	t_p_name VARCHAR(20) NULL     COMMENT 'ì‘ì—…ëª…' -- ì‘ì—…ëª…
 )
-COMMENT '°íÁ¤ºñ';
+COMMENT 'ê³ ì •ë¹„';
 
--- °íÁ¤ºñ
+-- ê³ ì •ë¹„
 ALTER TABLE hairshop.Tax
-	ADD CONSTRAINT PK_Tax -- °íÁ¤ºñ ±âº»Å°
+	ADD CONSTRAINT PK_Tax -- ê³ ì •ë¹„ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			t_no -- ÁöÃâ¹øÈ£
+			t_no -- ì§€ì¶œë²ˆí˜¸
 		);
 
 ALTER TABLE hairshop.Tax
-	MODIFY COLUMN t_no INT NOT NULL AUTO_INCREMENT COMMENT 'ÁöÃâ¹øÈ£';
+	MODIFY COLUMN t_no INT NOT NULL AUTO_INCREMENT COMMENT 'ì§€ì¶œë²ˆí˜¸';
 
--- ÀÛ¾÷¼±ÅÃ
+-- ì‘ì—…ì„ íƒ
 CREATE TABLE hairshop.Choice (
-	c_w_no   INT         NOT NULL COMMENT 'ÀÏÁ¤¹øÈ£2', -- ÀÏÁ¤¹øÈ£2
-	c_p_name VARCHAR(20) NOT NULL COMMENT 'ÀÛ¾÷¸í' -- ÀÛ¾÷¸í
+	c_w_no   INT         NOT NULL COMMENT 'ì¼ì •ë²ˆí˜¸2', -- ì¼ì •ë²ˆí˜¸2
+	c_p_name VARCHAR(20) NOT NULL COMMENT 'ì‘ì—…ëª…' -- ì‘ì—…ëª…
 )
-COMMENT 'ÀÛ¾÷¼±ÅÃ';
+COMMENT 'ì‘ì—…ì„ íƒ';
 
--- ÀÛ¾÷¼±ÅÃ
+-- ì‘ì—…ì„ íƒ
 ALTER TABLE hairshop.Choice
-	ADD CONSTRAINT PK_Choice -- ÀÛ¾÷¼±ÅÃ ±âº»Å°
+	ADD CONSTRAINT PK_Choice -- ì‘ì—…ì„ íƒ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			c_w_no,   -- ÀÏÁ¤¹øÈ£2
-			c_p_name  -- ÀÛ¾÷¸í
+			c_w_no,   -- ì¼ì •ë²ˆí˜¸2
+			c_p_name  -- ì‘ì—…ëª…
 		);
 
--- µğÀÚÀÌ³Ê
+-- ë””ìì´ë„ˆ
 CREATE TABLE hairshop.Designer (
-	d_no    INT          NOT NULL COMMENT '¹øÈ£', -- ¹øÈ£
-	d_grade VARCHAR(10)  NULL     COMMENT 'Á÷Ã¥', -- Á÷Ã¥
-	d_name  VARCHAR(10)  NOT NULL COMMENT 'ÀÌ¸§', -- ÀÌ¸§
-	d_tel   VARCHAR(15)  NOT NULL COMMENT '¿¬¶ôÃ³', -- ¿¬¶ôÃ³
-	d_tel2  VARCHAR(15)  NULL     COMMENT 'ºñ»ó¿¬¶ô', -- ºñ»ó¿¬¶ô
-	d_addr  VARCHAR(10)  NULL     COMMENT '¿ìÆí¹øÈ£', -- ¿ìÆí¹øÈ£
-	d_addr2 VARCHAR(50)  NULL     COMMENT 'ÁÖ¼Ò', -- ÁÖ¼Ò
-	d_addr3 VARCHAR(50)  NULL     COMMENT '»ó¼¼ÁÖ¼Ò', -- »ó¼¼ÁÖ¼Ò
-	d_birth DATE         NULL     COMMENT '»ıÀÏ', -- »ıÀÏ
-	d_join  DATE         NULL     COMMENT 'ÀÔ»çÀÏ', -- ÀÔ»çÀÏ
-	d_memo  VARCHAR(100) NULL     COMMENT '¸Ş¸ğ' -- ¸Ş¸ğ
+	d_no    INT          NOT NULL COMMENT 'ë²ˆí˜¸', -- ë²ˆí˜¸
+	d_grade VARCHAR(10)  NULL     COMMENT 'ì§ì±…', -- ì§ì±…
+	d_name  VARCHAR(10)  NOT NULL COMMENT 'ì´ë¦„', -- ì´ë¦„
+	d_tel   VARCHAR(15)  NOT NULL COMMENT 'ì—°ë½ì²˜', -- ì—°ë½ì²˜
+	d_tel2  VARCHAR(15)  NULL     COMMENT 'ë¹„ìƒì—°ë½', -- ë¹„ìƒì—°ë½
+	d_addr  VARCHAR(10)  NULL     COMMENT 'ìš°í¸ë²ˆí˜¸', -- ìš°í¸ë²ˆí˜¸
+	d_addr2 VARCHAR(50)  NULL     COMMENT 'ì£¼ì†Œ', -- ì£¼ì†Œ
+	d_addr3 VARCHAR(50)  NULL     COMMENT 'ìƒì„¸ì£¼ì†Œ', -- ìƒì„¸ì£¼ì†Œ
+	d_birth DATE         NULL     COMMENT 'ìƒì¼', -- ìƒì¼
+	d_join  DATE         NULL     COMMENT 'ì…ì‚¬ì¼', -- ì…ì‚¬ì¼
+	d_memo  VARCHAR(100) NULL     COMMENT 'ë©”ëª¨' -- ë©”ëª¨
 )
-COMMENT 'µğÀÚÀÌ³Ê';
+COMMENT 'ë””ìì´ë„ˆ';
 
--- µğÀÚÀÌ³Ê
+-- ë””ìì´ë„ˆ
 ALTER TABLE hairshop.Designer
-	ADD CONSTRAINT PK_Designer -- µğÀÚÀÌ³Ê ±âº»Å°
+	ADD CONSTRAINT PK_Designer -- ë””ìì´ë„ˆ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			d_no -- ¹øÈ£
+			d_no -- ë²ˆí˜¸
 		);
 
 ALTER TABLE hairshop.Designer
-	MODIFY COLUMN d_no INT NOT NULL AUTO_INCREMENT COMMENT '¹øÈ£';
+	MODIFY COLUMN d_no INT NOT NULL AUTO_INCREMENT COMMENT 'ë²ˆí˜¸';
 
--- ¼Õ´Ô
+-- ì†ë‹˜
 CREATE TABLE hairshop.Guest (
-	g_no    INT          NOT NULL COMMENT '¹øÈ£', -- ¹øÈ£
-	g_grade VARCHAR(10)  NULL     COMMENT 'µî±Ş', -- µî±Ş
-	g_name  VARCHAR(10)  NULL     COMMENT 'ÀÌ¸§', -- ÀÌ¸§
-	g_tel   VARCHAR(15)  NULL     COMMENT '¿¬¶ôÃ³', -- ¿¬¶ôÃ³
-	g_email VARCHAR(50)  NULL     COMMENT 'ÀÌ¸ŞÀÏ', -- ÀÌ¸ŞÀÏ
-	g_birth DATE         NULL     COMMENT '»ıÀÏ', -- »ıÀÏ
-	g_join  DATE         NULL     COMMENT '°¡ÀÔÀÏ', -- °¡ÀÔÀÏ
-	g_point INT          NULL     COMMENT 'Àû¸³Æ÷ÀÎÆ®', -- Àû¸³Æ÷ÀÎÆ®
-	g_memo  VARCHAR(100) NULL     COMMENT '¸Ş¸ğ' -- ¸Ş¸ğ
+	g_no    INT          NOT NULL COMMENT 'ë²ˆí˜¸', -- ë²ˆí˜¸
+	g_grade VARCHAR(10)  NULL     COMMENT 'ë“±ê¸‰', -- ë“±ê¸‰
+	g_name  VARCHAR(10)  NULL     COMMENT 'ì´ë¦„', -- ì´ë¦„
+	g_tel   VARCHAR(15)  NULL     COMMENT 'ì—°ë½ì²˜', -- ì—°ë½ì²˜
+	g_email VARCHAR(50)  NULL     COMMENT 'ì´ë©”ì¼', -- ì´ë©”ì¼
+	g_birth DATE         NULL     COMMENT 'ìƒì¼', -- ìƒì¼
+	g_join  DATE         NULL     COMMENT 'ê°€ì…ì¼', -- ê°€ì…ì¼
+	g_point INT          NULL     COMMENT 'ì ë¦½í¬ì¸íŠ¸', -- ì ë¦½í¬ì¸íŠ¸
+	g_memo  VARCHAR(100) NULL     COMMENT 'ë©”ëª¨' -- ë©”ëª¨
 )
-COMMENT '¼Õ´Ô';
+COMMENT 'ì†ë‹˜';
 
--- ¼Õ´Ô
+-- ì†ë‹˜
 ALTER TABLE hairshop.Guest
-	ADD CONSTRAINT PK_Guest -- ¼Õ´Ô ±âº»Å°
+	ADD CONSTRAINT PK_Guest -- ì†ë‹˜ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			g_no -- ¹øÈ£
+			g_no -- ë²ˆí˜¸
 		);
 
 ALTER TABLE hairshop.Guest
-	MODIFY COLUMN g_no INT NOT NULL AUTO_INCREMENT COMMENT '¹øÈ£';
+	MODIFY COLUMN g_no INT NOT NULL AUTO_INCREMENT COMMENT 'ë²ˆí˜¸';
 
--- µî±Ş
+-- ë“±ê¸‰
 CREATE TABLE hairshop.Grade (
-	g_grade VARCHAR(10) NOT NULL COMMENT 'µî±Ş', -- µî±Ş
-	g_sale  INT         NULL     COMMENT 'ÇÒÀÎÀ²' -- ÇÒÀÎÀ²
+	g_grade VARCHAR(10) NOT NULL COMMENT 'ë“±ê¸‰', -- ë“±ê¸‰
+	g_sale  INT         NULL     COMMENT 'í• ì¸ìœ¨' -- í• ì¸ìœ¨
 )
-COMMENT 'µî±Ş';
+COMMENT 'ë“±ê¸‰';
 
--- µî±Ş
+-- ë“±ê¸‰
 ALTER TABLE hairshop.Grade
-	ADD CONSTRAINT PK_Grade -- µî±Ş ±âº»Å°
+	ADD CONSTRAINT PK_Grade -- ë“±ê¸‰ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			g_grade -- µî±Ş
+			g_grade -- ë“±ê¸‰
 		);
 
--- ÀÛ¾÷ÀÏÁö
+-- ì‘ì—…ì¼ì§€
 ALTER TABLE hairshop.WorkDialog
-	ADD CONSTRAINT FK_Event_TO_WorkDialog -- ÀÌº¥Æ® -> ÀÛ¾÷ÀÏÁö
+	ADD CONSTRAINT FK_Event_TO_WorkDialog -- ì´ë²¤íŠ¸ -> ì‘ì—…ì¼ì§€
 		FOREIGN KEY (
-			w_e_Name -- ÀÌº¥Æ®¸í
+			w_e_Name -- ì´ë²¤íŠ¸ëª…
 		)
-		REFERENCES hairshop.Event ( -- ÀÌº¥Æ®
-			e_name -- ÀÌº¥Æ®¸í
+		REFERENCES hairshop.Event ( -- ì´ë²¤íŠ¸
+			e_name -- ì´ë²¤íŠ¸ëª…
 		);
 
--- ÀÛ¾÷ÀÏÁö
+-- ì‘ì—…ì¼ì§€
 ALTER TABLE hairshop.WorkDialog
-	ADD CONSTRAINT FK_Designer_TO_WorkDialog -- µğÀÚÀÌ³Ê -> ÀÛ¾÷ÀÏÁö
+	ADD CONSTRAINT FK_Designer_TO_WorkDialog -- ë””ìì´ë„ˆ -> ì‘ì—…ì¼ì§€
 		FOREIGN KEY (
-			w_d_No -- µğÀÚÀÌ³Ê
+			w_d_No -- ë””ìì´ë„ˆ
 		)
-		REFERENCES hairshop.Designer ( -- µğÀÚÀÌ³Ê
-			d_no -- ¹øÈ£
+		REFERENCES hairshop.Designer ( -- ë””ìì´ë„ˆ
+			d_no -- ë²ˆí˜¸
 		);
 
--- ÀÛ¾÷ÀÏÁö
+-- ì‘ì—…ì¼ì§€
 ALTER TABLE hairshop.WorkDialog
-	ADD CONSTRAINT FK_Guest_TO_WorkDialog -- ¼Õ´Ô -> ÀÛ¾÷ÀÏÁö
+	ADD CONSTRAINT FK_Guest_TO_WorkDialog -- ì†ë‹˜ -> ì‘ì—…ì¼ì§€
 		FOREIGN KEY (
-			w_c_No -- ¼Õ´Ô
+			w_c_No -- ì†ë‹˜
 		)
-		REFERENCES hairshop.Guest ( -- ¼Õ´Ô
-			g_no -- ¹øÈ£
+		REFERENCES hairshop.Guest ( -- ì†ë‹˜
+			g_no -- ë²ˆí˜¸
 		);
 
--- °íÁ¤ºñ
+-- ê³ ì •ë¹„
 ALTER TABLE hairshop.Tax
-	ADD CONSTRAINT FK_Product_TO_Tax -- »óÇ° -> °íÁ¤ºñ
+	ADD CONSTRAINT FK_Product_TO_Tax -- ìƒí’ˆ -> ê³ ì •ë¹„
 		FOREIGN KEY (
-			t_p_name -- ÀÛ¾÷¸í
+			t_p_name -- ì‘ì—…ëª…
 		)
-		REFERENCES hairshop.Product ( -- »óÇ°
-			p_name -- ÀÛ¾÷¸í
+		REFERENCES hairshop.Product ( -- ìƒí’ˆ
+			p_name -- ì‘ì—…ëª…
 		);
 
--- ÀÛ¾÷¼±ÅÃ
+-- ì‘ì—…ì„ íƒ
 ALTER TABLE hairshop.Choice
-	ADD CONSTRAINT FK_WorkDialog_TO_Choice -- ÀÛ¾÷ÀÏÁö -> ÀÛ¾÷¼±ÅÃ
+	ADD CONSTRAINT FK_WorkDialog_TO_Choice -- ì‘ì—…ì¼ì§€ -> ì‘ì—…ì„ íƒ
 		FOREIGN KEY (
-			c_w_no -- ÀÏÁ¤¹øÈ£2
+			c_w_no -- ì¼ì •ë²ˆí˜¸2
 		)
-		REFERENCES hairshop.WorkDialog ( -- ÀÛ¾÷ÀÏÁö
-			w_no -- ÀÏÁ¤¹øÈ£
+		REFERENCES hairshop.WorkDialog ( -- ì‘ì—…ì¼ì§€
+			w_no -- ì¼ì •ë²ˆí˜¸
 		);
 
--- ÀÛ¾÷¼±ÅÃ
+-- ì‘ì—…ì„ íƒ
 ALTER TABLE hairshop.Choice
-	ADD CONSTRAINT FK_Product_TO_Choice -- »óÇ° -> ÀÛ¾÷¼±ÅÃ
+	ADD CONSTRAINT FK_Product_TO_Choice -- ìƒí’ˆ -> ì‘ì—…ì„ íƒ
 		FOREIGN KEY (
-			c_p_name -- ÀÛ¾÷¸í
+			c_p_name -- ì‘ì—…ëª…
 		)
-		REFERENCES hairshop.Product ( -- »óÇ°
-			p_name -- ÀÛ¾÷¸í
+		REFERENCES hairshop.Product ( -- ìƒí’ˆ
+			p_name -- ì‘ì—…ëª…
 		);
 
--- ¼Õ´Ô
+-- ì†ë‹˜
 ALTER TABLE hairshop.Guest
-	ADD CONSTRAINT FK_Grade_TO_Guest -- µî±Ş -> ¼Õ´Ô
+	ADD CONSTRAINT FK_Grade_TO_Guest -- ë“±ê¸‰ -> ì†ë‹˜
 		FOREIGN KEY (
-			g_grade -- µî±Ş
+			g_grade -- ë“±ê¸‰
 		)
-		REFERENCES hairshop.Grade ( -- µî±Ş
-			g_grade -- µî±Ş
+		REFERENCES hairshop.Grade ( -- ë“±ê¸‰
+			g_grade -- ë“±ê¸‰
 		);
 	
