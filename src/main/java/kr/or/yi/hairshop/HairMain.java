@@ -3,31 +3,31 @@ package kr.or.yi.hairshop;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JCalendar;
 
 import kr.or.yi.hairshop.UI.Frame.ScheduleFrame;
 import kr.or.yi.hairshop.UI.Panel.pCalendar;
 import kr.or.yi.hairshop.UI.Panel.pRightBtn;
-import kr.or.yi.hairshop.UI.Panel.pSampleMain;
-
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JMenu;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class HairMain extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JMenu mnReservation;
-	private JButton btnNewButton;
+	private JButton btnHome;
+	private JButton btnReservation;
+	private JCalendar calendar;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -35,6 +35,10 @@ public class HairMain extends JFrame implements ActionListener {
 				try {
 					HairMain frame = new HairMain();
 					frame.setVisible(true);
+					
+					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");// LookAndFeel Windows 스타일 적용
+					SwingUtilities.updateComponentTreeUI(frame);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,8 +47,9 @@ public class HairMain extends JFrame implements ActionListener {
 	}
 
 	public HairMain() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1024, 768);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,30 +82,23 @@ public class HairMain extends JFrame implements ActionListener {
 		FlowLayout fl_Top_02 = (FlowLayout) Top_02.getLayout();
 		fl_Top_02.setAlignment(FlowLayout.LEFT);
 		TopMenu.add(Top_02);
-
-		JMenuBar menuBar = new JMenuBar();
-		Top_02.add(menuBar);
-
-		JMenu mnHome = new JMenu("홈");
-		menuBar.add(mnHome);
-
-		mnReservation = new JMenu("예약 관리");
-		mnReservation.addActionListener(this);	
 		
-		menuBar.add(mnReservation);
-
-		JMenu mnCustomer = new JMenu("고객 관리");
-		menuBar.add(mnCustomer);
-
-		JMenu mnProduct = new JMenu("상품 관리");
-		menuBar.add(mnProduct);
-
-		JMenu mnSale = new JMenu("매출");
-		menuBar.add(mnSale);
+		btnHome = new JButton("홈 ");
+		btnHome.addActionListener(this);
+		Top_02.add(btnHome);
 		
-		btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(this);
-		Top_02.add(btnNewButton);
+		btnReservation = new JButton("예약관리");
+		btnReservation.addActionListener(this);
+		Top_02.add(btnReservation);
+		
+		JButton btnCustomer = new JButton("고객관리");
+		Top_02.add(btnCustomer);
+		
+		JButton btnProduct = new JButton("상품관리");
+		Top_02.add(btnProduct);
+		
+		JButton btnSales = new JButton("   매출   ");
+		Top_02.add(btnSales);
 
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -110,36 +108,34 @@ public class HairMain extends JFrame implements ActionListener {
 		panel.add(Rmain, BorderLayout.EAST);
 		Rmain.setLayout(new BorderLayout(0, 0));
 
-		pCalendar pCalendar = new pCalendar();
-		Rmain.add(pCalendar, BorderLayout.NORTH);
-
 		pRightBtn pSideBtn = new pRightBtn();
 		Rmain.add(pSideBtn);
 		pSideBtn.setPreferredSize(new Dimension(50, 50)); // 사이즈 조정 (정해진 전체 사이즈 보다 작아지지 못하는듯)
+		
+		JPanel pCalendar = new JPanel();
+		Rmain.add(pCalendar, BorderLayout.NORTH);
+		
+		calendar = new JCalendar();
+		pCalendar.add(calendar);
 
-		pSampleMain pMain = new pSampleMain();
+		pCalendar pMain = new pCalendar();
 		panel.add(pMain, BorderLayout.CENTER);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnNewButton) {
-			actionPerformedBtnNewButtonJButton(e);
+		if (e.getSource() == btnReservation) {
+			actionPerformedBtnReservation(e);
 		}
-		if (e.getSource() == mnReservation) {
-			actionPerformedMnReservationJMenu(e);
+		if (e.getSource() == btnHome) {
+			actionPerformedBtnHome(e);
 		}
+	}
+	protected void actionPerformedBtnHome(ActionEvent e) {
+
 	}
 	
-	protected void actionPerformedMnReservationJMenu(ActionEvent e) {
+	protected void actionPerformedBtnReservation(ActionEvent e) {
 		ScheduleFrame scheduleFrame = new ScheduleFrame();
 		scheduleFrame.setVisible(true);
-		JOptionPane.showMessageDialog(null, "아아아아아");
-		
 	}
-	protected void actionPerformedBtnNewButtonJButton(ActionEvent e) {
-		ScheduleFrame scheduleFrame = new ScheduleFrame();
-		scheduleFrame.setVisible(true);
-		JOptionPane.showMessageDialog(null, "아아아아아");
-	}
-	
 }
