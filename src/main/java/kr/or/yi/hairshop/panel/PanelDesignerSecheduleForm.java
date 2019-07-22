@@ -5,12 +5,13 @@ import javax.swing.JPanel;
 import kr.or.yi.hairshop.dto.Designer;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 
 public class PanelDesignerSecheduleForm extends JPanel {
-	private List<Designer> d_List;
+	private List<Designer> d_List=new ArrayList<Designer>();
 	private PanelDesignerScheduleBlock[] panelList= new PanelDesignerScheduleBlock[5];
 	public PanelDesignerSecheduleForm() {
 		init();
