@@ -1,4 +1,4 @@
-package kr.or.yi.hair;
+package kr.or.yi.hairshop;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;

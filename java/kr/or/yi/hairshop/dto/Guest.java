@@ -109,8 +109,4 @@ public class Guest {
 				gNo, gGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo);
 	}
 
-	public Object[] toArray() {
-		return new Object[] { gNo, gGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo };
-	}
-
 }

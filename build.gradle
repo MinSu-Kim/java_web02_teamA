@@ -37,7 +37,7 @@ dependencies {
 
 jar{
     version = 1.0
-    mainClassName = 'kr.or.yi.hairshop.ErpMain'
+    mainClassName = 'kr.or.yi.hairshop.HairMain'
     baseName = 'Erp'
     appendix = 'bin'
     
