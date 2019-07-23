@@ -72,9 +72,8 @@ public class WorkDialog {
 	}
 
 	@Override
-	public String toString() {
-		return String.format("WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wEName=%s, wDNo=%s, wGNo=%s]", wNo,
-				wWrokTime, wReservTime, wEName, wDNo, wGNo);
+	public String toString() {	//쓸일있어서 toString 변경햇어용-나모
+		return String.format("%s", wGNo);
 	}
 	
 	

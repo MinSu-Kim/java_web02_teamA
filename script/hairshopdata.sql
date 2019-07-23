@@ -45,6 +45,8 @@ values
 ( '직원', '현홍', '010-0000-0000', '053-000-0000', '151123', '대구광역시동구', '우방맨션 103동 304','2000-01-01', '2015-01-01','깐깐합니다')
 ;
 
+
+
 INSERT INTO hairshop.tax
 (t_name, t_price, t_date, t_p_name)
 values
@@ -57,10 +59,10 @@ delete from hairshop.workdialog;
 INSERT INTO hairshop.workdialog
 (w_wrokTime, w_reservTime, w_e_Name, w_d_No, w_g_No)
 values
-('2019-07-01', '2019-07-01', null, 1, 1),
-(null, '2019-08-15', '광복절', 2, 2),
-(null, '2019-09-12', '추석', 3, 2),
-(null, '2019-09-15', '추석', 3, 2)
+('2019-07-01', '2019-07-01-11-00', null, 1, 1),
+(null, '2019-08-15-12-00', '광복절', 2, 2),
+(null, '2019-09-12-13-00', '추석', 3, 2),
+(null, '2019-09-15-14-00', '추석', 3, 2)
 ;
 
 
@@ -79,4 +81,17 @@ where w_d_No=1 and
 w_reservTime='2019-07-01'
 ;
 
+
+	select 
+		w_no,
+		w_wrokTime,
+		w_reservTime,
+		w_e_name,
+		w_d_no,
+		w_g_no,
+		g.g_no,
+		g.g_name
+		from workdialog w
+		join guest g 
+		on w.w_d_no=1 and w.w_g_no=g.g_no;
 

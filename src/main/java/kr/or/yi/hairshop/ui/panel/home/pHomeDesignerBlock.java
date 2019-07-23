@@ -22,14 +22,15 @@ import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.WorkDialog;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-public class pDesignerBlock extends JPanel implements MouseListener {
+public class pHomeDesignerBlock extends JPanel implements MouseListener {
 	JTable jtable;
 	private JLabel lblDesigner;
 	private Designer designer;
 	private List<WorkDialog> wList;
 	
-	public pDesignerBlock() {
+	public pHomeDesignerBlock() {
 		
 		setLayout(new BorderLayout());
 		final String[] columns = { "시간", "작업명"};
@@ -91,6 +92,7 @@ public class pDesignerBlock extends JPanel implements MouseListener {
 	}
 
 	public void mouseExited(MouseEvent e) {
+		jtable.clearSelection();
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -108,8 +110,7 @@ public class pDesignerBlock extends JPanel implements MouseListener {
 //	        System.out.println(jtable.getRowCount());
 //	        //column 갯수
 //	        System.out.println(jtable.getColumnCount());
-//		    jtable.setValueAt(workDialog.next().getwReservTime(), date.getHours()-7 , 1);
-		    jtable.setValueAt(work.getwReservTime().getHours(),  work.getwReservTime().getHours()-8, 1);
+		    jtable.setValueAt(work,  work.getwReservTime().getHours()-8, 1);
 		    
 		}
 

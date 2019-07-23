@@ -3,13 +3,17 @@
 <mapper namespace="kr.or.yi.hairshop.dao.WorkDialogMapper">
 
 	
+	<resultMap type="Guest" id="resultGuest">
+		<result property="gNo" column="w_g_no" />
+		<result property="gName" column="g_name" />
+	</resultMap>
 	<resultMap type="WorkDialog" id="resultWorkDialog">
 		<result property="wNo" column="w_no" />
 		<result property="wWrokTime" column="w_wrokTime" />
 		<result property="wReservTime" column="w_reservTime" />
 		<result property="wEName.eName" column="w_e_name" />
 		<result property="wDNo.dNo" column="w_d_no" />
-		<result property="wGNo.gNo" column="w_g_no" />
+		<collection property="wGNo" resultMap="resultGuest"/>		
 	</resultMap>
 
 	<select id="selectDListByNo" parameterType="int" resultMap="resultWorkDialog">
@@ -19,8 +23,10 @@
 		w_reservTime,
 		w_e_name,
 		w_d_no,
-		w_g_no
-		from workdialog
-		where w_g_no=#{dNo}
+		w_g_no,
+		g.g_name
+		from workdialog w
+		join guest g 
+		on w.w_d_no=#{dNo} and w.w_g_no=g.g_no;
 	</select>
 </mapper>
