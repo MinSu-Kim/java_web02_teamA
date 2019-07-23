@@ -104,8 +104,8 @@ CREATE TABLE hairshop.Designer (
 	d_addr  VARCHAR(10)  NULL     COMMENT '우편번호', -- 우편번호
 	d_addr2 VARCHAR(50)  NULL     COMMENT '주소', -- 주소
 	d_addr3 VARCHAR(50)  NULL     COMMENT '상세주소', -- 상세주소
-	d_birth DATE         NULL     COMMENT '생일', -- 생일
-	d_join  DATE         NULL     COMMENT '입사일', -- 입사일
+	d_birth DATETIME         NULL     COMMENT '생일', -- 생일
+	d_join  DATETIME         NULL     COMMENT '입사일', -- 입사일
 	d_memo  VARCHAR(100) NULL     COMMENT '메모' -- 메모
 )
 COMMENT '디자이너';
@@ -227,3 +227,15 @@ ALTER TABLE hairshop.Guest
 		REFERENCES hairshop.Level ( -- 등급
 			l_grade -- 등급
 		);
+	
+	
+grant all privileges 
+on hairshop.* 
+to 'user_hairshop'@'localhost'
+identified by 'rootroot';
+
+
+grant all privileges 
+on hairshop.* 
+to 'user_hairshop'@'%'
+identified by 'rootroot';
