@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,14 +17,18 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.yi.hairshop.dao.DesignerMapper;
+import kr.or.yi.hairshop.dao.DesignerMapperImpl;
+import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
+import kr.or.yi.hairshop.ui.panel.home.pDesignerForm;
 
 public class HairMainFrame extends JFrame implements ActionListener {
 
 	private static HairMainFrame mainFrame;
 	private JPanel contentPane;
-
+	private List<Designer> dList;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -85,8 +90,13 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		pMain.add(tabbedPane);
 
-		JPanel Home = new JPanel();
-		tabbedPane.addTab("홈", null, Home, "홈");
+		DesignerMapper d_Dao=new DesignerMapperImpl();
+		dList = d_Dao.selectDesignerByAll();
+		pDesignerForm home = new pDesignerForm();
+		home.setDList(dList);
+		home.refresh();
+		tabbedPane.addTab("홈", null, home, "홈");
+		revalidate();
 
 		JPanel ReservationMgn = new JPanel();
 		tabbedPane.addTab("예약 관리", null, ReservationMgn, null);
@@ -95,7 +105,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		tabbedPane.addTab("고객 관리", null, GuestMgn, null);
 
 		pProductMgn ProductMgn = new pProductMgn();
-		ProductMgn.clearProductList();
+		ProductMgn.clearList();
 		ProductMgn.reloadData();
 		tabbedPane.addTab("제품 관리", null, ProductMgn, null);
 

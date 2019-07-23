@@ -3,7 +3,7 @@ package kr.or.yi.hairshop.dto;
 import java.util.Date;
 
 public class Designer {
-	private int d_no;
+	private int dNo;
 	private String dGrade;
 	private String dName;
 	private String dTel;
@@ -17,9 +17,9 @@ public class Designer {
 	public Designer() {
 		// TODO Auto-generated constructor stub
 	}
-	public Designer(int d_no, String dGrade, String dName, String dTel, String dTel2, String dAddr, String dAddr2,
+	public Designer(int dNo, String dGrade, String dName, String dTel, String dTel2, String dAddr, String dAddr2,
 			String dAddr3, Date dBirth, Date dJoin, String dMemo) {
-		this.d_no = d_no;
+		this.dNo = dNo;
 		this.dGrade = dGrade;
 		this.dName = dName;
 		this.dTel = dTel;
@@ -31,11 +31,11 @@ public class Designer {
 		this.dJoin = dJoin;
 		this.dMemo = dMemo;
 	}
-	public int getD_no() {
-		return d_no;
+	public int getdNo() {
+		return dNo;
 	}
-	public void setD_no(int d_no) {
-		this.d_no = d_no;
+	public void setdNo(int dNo) {
+		this.dNo = dNo;
 	}
 	public String getdGrade() {
 		return dGrade;
@@ -100,10 +100,13 @@ public class Designer {
 	@Override
 	public String toString() {
 		return String.format(
-				"Designer [d_no=%s, dGrade=%s, dName=%s, dTel=%s, dTel2=%s, dAddr=%s, dAddr2=%s, dAddr3=%s, dBirth=%s, dJoin=%s, dMemo=%s]",
-				d_no, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo);
+				"Designer [dNo=%s, dGrade=%s, dName=%s, dTel=%s, dTel2=%s, dAddr=%s, dAddr2=%s, dAddr3=%s, dBirth=%s, dJoin=%s, dMemo=%s]",
+				dNo, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo);
 	}
 	
+	public Object[] toArray() {
+		return new Object[] { dNo, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo };
+	}	
 	
 	
 }
