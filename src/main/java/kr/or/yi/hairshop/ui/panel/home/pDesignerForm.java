@@ -54,9 +54,7 @@ public class pDesignerForm extends JPanel {
 	public void refresh() {
 		for(int i=0; i<3; i++) {
 			panelList[i].setDisigner(dList.get(i));
-			System.out.println(dList.get(i).getdNo());
 			wList=workDialog.selectDListByNo(dList.get(i).getdNo());
-			System.out.println(wList);
 			panelList[i].setWorkDialog(wList);
 			panelList[i].setTable(wList);
 		}

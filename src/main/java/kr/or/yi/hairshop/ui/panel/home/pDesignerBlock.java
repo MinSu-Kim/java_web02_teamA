@@ -109,8 +109,7 @@ public class pDesignerBlock extends JPanel implements MouseListener {
 //	        //column 갯수
 //	        System.out.println(jtable.getColumnCount());
 //		    jtable.setValueAt(workDialog.next().getwReservTime(), date.getHours()-7 , 1);
-		    
-//		    jtable.setValueAt(work.getwReservTime().getHours(),  work.getwReservTime().getHours()-8, 1);
+		    jtable.setValueAt(work.getwReservTime().getHours(),  work.getwReservTime().getHours()-8, 1);
 		    
 		}
 

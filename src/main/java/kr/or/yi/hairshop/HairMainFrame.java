@@ -97,6 +97,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		home.refresh();
 		tabbedPane.addTab("홈", null, home, "홈");
 		revalidate();
+		repaint();
 
 		JPanel ReservationMgn = new JPanel();
 		tabbedPane.addTab("예약 관리", null, ReservationMgn, null);
