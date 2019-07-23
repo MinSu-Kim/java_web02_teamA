@@ -33,7 +33,7 @@ public class GuestFrame extends JFrame implements ActionListener{
 	
 	public GuestFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 719, 599);
+		setBounds(100, 100, 420, 599);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

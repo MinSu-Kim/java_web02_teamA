@@ -1,5 +1,6 @@
 package kr.or.yi.hairshop.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event {
@@ -46,7 +47,8 @@ public class Event {
 	}
 	
 	public Object[] toArray() {
-		return new Object[] { eName, eStartDay, eEndDay, eSale };
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		return new Object[] { eName, date.format(eStartDay), date.format(eEndDay), eSale };
 	}
 
 }

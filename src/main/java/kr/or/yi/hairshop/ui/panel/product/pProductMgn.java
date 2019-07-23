@@ -43,8 +43,6 @@ public class pProductMgn extends JPanel {
 	private pCalendar pCalandar;
 	private pProductMgnBtn pBtn;
 	
-	
-	
 	public pProductMgn() {
 		initComponents();
 	}
@@ -157,7 +155,7 @@ public class pProductMgn extends JPanel {
 	}
 	
 	private String[] getColumnNamesEvent() {
-		return new String[] { "이름", "가격", "분류", "ㅇㅇㅇ" };
+		return new String[] { "이름", "시작일", "종료일", "할인율" };
 	}
 	
 	private String[] getColumnNamesWoker() {

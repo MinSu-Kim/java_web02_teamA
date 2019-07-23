@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.yi.hairshop.dao.GuestMapper;
+import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.panel.pCalendar;
 
@@ -21,6 +23,7 @@ public class pGuestMgn extends JPanel {
 
 	private JTable table;	
 	private List<Guest> gList;
+	private GuestMapper dao = new GuestMapperImpl();
 	
 	public pGuestMgn() {
 		initComponents();
@@ -52,14 +55,15 @@ public class pGuestMgn extends JPanel {
 		pGuestMgnBtn pBtn = new pGuestMgnBtn();
 		panel.add(pBtn);
 	}
+	
+	public void clearList() {
+		gList = dao.selectGuestByAll();
+	}
 
 	public void reloadData() {
 		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
-
-		// 부서번호, 부서명은 가운데 정렬
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-		// 부서번호, 부서명, 위치 의 폭을 (100, 200, 70)으로 가능하면 설정
-		tableSetWidth(20, 20, 20, 20, 20, 20, 20, 20, 20, 20);
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8);
+		tableSetWidth(20, 20, 50, 50, 80, 50, 50, 50, 100);
 	}
 
 	private Object[][] getRows() {
@@ -71,7 +75,7 @@ public class pGuestMgn extends JPanel {
 	}
 
 	private String[] getColumnNames() {
-		return new String[] { "등급", "손님명", "핸드폰", "주소", "생일", "최근작업목록", "가입일", "포인트", "매출액", "메모" };
+		return new String[] { "번호", "등급", "이름", "전화번호", "이메일", "생일", "가입일", "포인트", "메모" };
 	}
 
 	// 테이블 셀 내용의 정렬

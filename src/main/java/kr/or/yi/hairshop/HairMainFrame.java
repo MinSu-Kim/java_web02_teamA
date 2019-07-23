@@ -21,9 +21,11 @@ import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn;
-import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
 import kr.or.yi.hairshop.ui.panel.home.pDesignerForm;
+import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
+import kr.or.yi.hairshop.ui.panel.reserve.pReservationMgn;
 
+@SuppressWarnings("serial")
 public class HairMainFrame extends JFrame implements ActionListener {
 
 	private static HairMainFrame mainFrame;
@@ -54,7 +56,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	private void initComponents() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 1024, 760);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,10 +101,12 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		revalidate();
 		repaint();
 
-		JPanel ReservationMgn = new JPanel();
+		pReservationMgn ReservationMgn = new pReservationMgn();
 		tabbedPane.addTab("예약 관리", null, ReservationMgn, null);
 
 		pGuestMgn GuestMgn = new pGuestMgn();
+		GuestMgn.clearList();
+		GuestMgn.reloadData();
 		tabbedPane.addTab("고객 관리", null, GuestMgn, null);
 
 		pProductMgn ProductMgn = new pProductMgn();

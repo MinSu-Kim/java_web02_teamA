@@ -45,7 +45,7 @@ public class Product {
 	}
 
 	public Object[] toArray() {
-		return new Object[] { pPrice, pName, pDivision };
+		return new Object[] { pDivision, pName, pPrice };
 	}
 
 }

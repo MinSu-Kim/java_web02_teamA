@@ -1,5 +1,6 @@
 package kr.or.yi.hairshop.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WorkDialog {
@@ -73,9 +74,14 @@ public class WorkDialog {
 
 	@Override
 	public String toString() {
-		return String.format("WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wEName=%s, wDNo=%s, wGNo=%s]", wNo,
-				wWrokTime, wReservTime, wEName, wDNo, wGNo);
+		return String.format("WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wEName=%s, wDNo=%s, wGNo=%s]", wNo,	wWrokTime, wReservTime, wEName, wDNo, wGNo);
 	}
+	
+
+	public Object[] toArray() {
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		return new Object[] { wNo,	wWrokTime, wReservTime, wEName, wDNo, wGNo };
+	}	
 	
 	
 }
