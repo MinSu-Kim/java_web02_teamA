@@ -12,6 +12,7 @@ import java.util.List;
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.daoImpl.DesignerMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
+import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.PanelDesignerScheduleBlock;
 import javax.swing.JLabel;
 import kr.or.yi.hairshop.panel.PanelDesignerSecheduleForm;
@@ -19,7 +20,7 @@ import kr.or.yi.hairshop.panel.PanelDesignerSecheduleForm;
 public class FrameMain extends JFrame {
 
 	private JPanel contentPane;
-	private List<Designer> d_List;
+	private List<Designer> dList;
 	private PanelDesignerSecheduleForm panelSection;
 
 	/**
@@ -32,6 +33,7 @@ public class FrameMain extends JFrame {
 					FrameMain frame = new FrameMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
+					
 					e.printStackTrace();
 				}
 			}
@@ -50,10 +52,10 @@ public class FrameMain extends JFrame {
 		contentPane.setLayout(null);
 		
 		DesignerMapper d_Dao=new DesignerMapperImpl();
-		d_List = d_Dao.selectDesignerByAll();
+		dList = d_Dao.selectDesignerByAll();
 		
 		panelSection = new PanelDesignerSecheduleForm();
-		panelSection.setD_List(d_List);
+		panelSection.setDList(dList);
 		panelSection.refresh();
 		panelSection.setBounds(0, 74, 983, 487);
 		contentPane.add(panelSection);

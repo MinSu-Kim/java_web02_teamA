@@ -1,8 +1,8 @@
 
 use hairshop;
 
-INSERT INTO hairshop.grade
-(g_grade, g_sale)
+INSERT INTO hairshop.Level
+(l_grade, l_sale)
 values
 ('브론즈', 5),
 ('실버',10),
@@ -28,7 +28,7 @@ values
 
 
 INSERT INTO hairshop.guest
-(g_no, g_grade, g_name, g_tel, g_email, g_birth, g_join, g_point, g_memo)
+(g_no, g_l_grade, g_name, g_tel, g_email, g_birth, g_join, g_point, g_memo)
 values
 (null, '골드', '김남호', '010-0000-0000', 'klr@naver.com', '1994-01-13', '2000-01-01', 0, null),
 (null, '실버', '권영각', '010-0000-0000', 'klr@naver.com', '1994-01-13', '2000-01-01', 1000, null),
@@ -55,7 +55,7 @@ values
 
 delete from hairshop.workdialog;
 INSERT INTO hairshop.workdialog
-(w_wrokTime, w_reservTime, w_e_Name, w_d_No, w_c_No)
+(w_wrokTime, w_reservTime, w_e_Name, w_d_No, w_g_No)
 values
 ('2019-07-01', '2019-07-01', null, 1, 1),
 (null, '2019-08-15', '광복절', 2, 2),
@@ -72,3 +72,11 @@ select * from grade;
 select * from product;
 select * from tax;
 select * from workdialog;
+
+select * from designer;
+select * from workdialog
+where w_d_No=1 and
+w_reservTime='2019-07-01'
+;
+
+

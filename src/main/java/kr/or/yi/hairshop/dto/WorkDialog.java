@@ -3,63 +3,63 @@ package kr.or.yi.hairshop.dto;
 import java.util.Date;
 
 public class WorkDialog {
-	private int wNo;
-	private Date wWrokTime;
-	private Date wReservTime;
-	private String wEName;
-	private int wDNo;
-	private int wCNo;
+	private int w_no;
+	private Date w_wrokTime;
+	private Date w_reservTime;
+	private Event w_e_name;
+	private Designer w_d_no;
+	private Choice w_c_no;
 	public WorkDialog() {
 		// TODO Auto-generated constructor stub
 	}
-	public WorkDialog(int wNo, Date wWrokTime, Date wReservTime, String wEName, int wDNo, int wCNo) {
-		this.wNo = wNo;
-		this.wWrokTime = wWrokTime;
-		this.wReservTime = wReservTime;
-		this.wEName = wEName;
-		this.wDNo = wDNo;
-		this.wCNo = wCNo;
+	public WorkDialog(int w_no, Date w_wrokTime, Date w_reservTime, Event w_e_name, Designer w_d_no, Choice w_c_no) {
+		this.w_no = w_no;
+		this.w_wrokTime = w_wrokTime;
+		this.w_reservTime = w_reservTime;
+		this.w_e_name = w_e_name;
+		this.w_d_no = w_d_no;
+		this.w_c_no = w_c_no;
 	}
-	public int getwNo() {
-		return wNo;
+	public int getW_no() {
+		return w_no;
 	}
-	public void setwNo(int wNo) {
-		this.wNo = wNo;
+	public void setW_no(int w_no) {
+		this.w_no = w_no;
 	}
-	public Date getwWrokTime() {
-		return wWrokTime;
+	public Date getW_wrokTime() {
+		return w_wrokTime;
 	}
-	public void setwWrokTime(Date wWrokTime) {
-		this.wWrokTime = wWrokTime;
+	public void setW_wrokTime(Date w_wrokTime) {
+		this.w_wrokTime = w_wrokTime;
 	}
-	public Date getwReservTime() {
-		return wReservTime;
+	public Date getW_reservTime() {
+		return w_reservTime;
 	}
-	public void setwReservTime(Date wReservTime) {
-		this.wReservTime = wReservTime;
+	public void setW_reservTime(Date w_reservTime) {
+		this.w_reservTime = w_reservTime;
 	}
-	public String getwEName() {
-		return wEName;
+	public Event getW_e_name() {
+		return w_e_name;
 	}
-	public void setwEName(String wEName) {
-		this.wEName = wEName;
+	public void setW_e_name(Event w_e_name) {
+		this.w_e_name = w_e_name;
 	}
-	public int getwDNo() {
-		return wDNo;
+	public Designer getW_d_no() {
+		return w_d_no;
 	}
-	public void setwDNo(int wDNo) {
-		this.wDNo = wDNo;
+	public void setW_d_no(Designer w_d_no) {
+		this.w_d_no = w_d_no;
 	}
-	public int getwCNo() {
-		return wCNo;
+	public Choice getW_c_no() {
+		return w_c_no;
 	}
-	public void setwCNo(int wCNo) {
-		this.wCNo = wCNo;
+	public void setW_c_no(Choice w_c_no) {
+		this.w_c_no = w_c_no;
 	}
 	@Override
 	public String toString() {
-		return String.format("WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wEName=%s, wDNo=%s, wCNo=%s]", wNo,
-				wWrokTime, wReservTime, wEName, wDNo, wCNo);
+		return String.format("WorkDialog [w_no=%s, w_wrokTime=%s, w_reservTime=%s, w_e_name=%s, w_d_no=%s, w_c_no=%s]",
+				w_no, w_wrokTime, w_reservTime, w_e_name, w_d_no, w_c_no);
 	}
 	
 	

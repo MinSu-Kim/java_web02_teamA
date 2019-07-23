@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.hairshop.dao.WorkDialogMapper">
+	<select id="selectDListByNo" resultType="WorkDialog" parameterType="int">
+		select * from workdialog where w_d_No=#{dNo};
+	</select>
+</mapper>

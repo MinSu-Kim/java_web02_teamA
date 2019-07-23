@@ -4,4 +4,9 @@
 	<select id="selectDesignerByAll" resultType="Designer">
 		select * from Designer
 	</select>
+	<select id="selectByLimit" resultType="Designer">
+		select *
+		from Designer
+		order by d_no asc limit #{startRow},#{size}
+	</select>
 </mapper>
