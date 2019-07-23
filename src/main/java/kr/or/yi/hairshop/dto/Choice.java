@@ -1,25 +1,25 @@
 package kr.or.yi.hairshop.dto;
 
 public class Choice {
-	private int cWNo;
-	private String cPName;
+	private WorkDialog cWNo;
+	private Product cPName;
 	public Choice() {
 		// TODO Auto-generated constructor stub
 	}
-	public Choice(int cWNo, String cPName) {
+	public Choice(WorkDialog cWNo, Product cPName) {
 		this.cWNo = cWNo;
 		this.cPName = cPName;
 	}
-	public int getcWNo() {
+	public WorkDialog getcWNo() {
 		return cWNo;
 	}
-	public void setcWNo(int cWNo) {
+	public void setcWNo(WorkDialog cWNo) {
 		this.cWNo = cWNo;
 	}
-	public String getcPName() {
+	public Product getcPName() {
 		return cPName;
 	}
-	public void setcPName(String cPName) {
+	public void setcPName(Product cPName) {
 		this.cPName = cPName;
 	}
 	@Override

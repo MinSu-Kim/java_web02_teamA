@@ -1,41 +1,39 @@
 package kr.or.yi.hairshop.dto;
 
 public class Level {
-	private String l_grade;
-	private int l_sale;
+	private String lGrade;
+	private int lSale;
 
 	public Level() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Level(String l_grade, int l_sale) {
-		this.l_grade = l_grade;
-		this.l_sale = l_sale;
+	public Level(String lGrade, int lSale) {
+		this.lGrade = lGrade;
+		this.lSale = lSale;
 	}
 
-	public String getL_grade() {
-		return l_grade;
+	public String getlGrade() {
+		return lGrade;
 	}
 
-	public void setL_grade(String l_grade) {
-		this.l_grade = l_grade;
+	public void setlGrade(String lGrade) {
+		this.lGrade = lGrade;
 	}
 
-	public int getL_sale() {
-		return l_sale;
+	public int getlSale() {
+		return lSale;
 	}
 
-	public void setL_sale(int l_sale) {
-		this.l_sale = l_sale;
+	public void setlSale(int lSale) {
+		this.lSale = lSale;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Level [%s, %s]", l_grade, l_sale);
+		return String.format("Level [lGrade=%s, lSale=%s]", lGrade, lSale);
 	}
 
-	public Object[] toArray() {
-		return new Object[] { l_grade, l_sale };
-	}
+	
 
 }

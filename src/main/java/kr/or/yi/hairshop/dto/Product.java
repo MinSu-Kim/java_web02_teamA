@@ -35,5 +35,9 @@ public class Product {
 		return String.format("Product [pPrice=%s, pName=%s, pDivision=%s]", pPrice, pName, pDivision);
 	}
 	
+
+	public Object[] toArray() {
+		return new Object[] { pPrice, pName, pDivision };
+	}
 	
 }

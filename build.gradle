@@ -33,11 +33,13 @@ dependencies {
 	
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    
+    compile files('libs/jcalendar-1.4.jar')
 }
 
 jar{
     version = 1.0
-    mainClassName = 'kr.or.yi.hairshop.HairMain'
+    mainClassName = 'kr.or.yi.hairshop.HairMainFrame'
     baseName = 'Erp'
     appendix = 'bin'
     

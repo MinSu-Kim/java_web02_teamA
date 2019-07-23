@@ -7,15 +7,13 @@ public class Tax {
 	private String tName;
 	private int tPrice;
 	private Date tDate;
-	private String tPName; // 프로덕트로 바꿀 예정입니다.
-
-	
+	private Product tPName;
 	
 	public Tax() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tax(int tNo, String tName, int tPrice, Date tDate, String tPName) {
+	public Tax(int tNo, String tName, int tPrice, Date tDate, Product tPName) {
 		this.tNo = tNo;
 		this.tName = tName;
 		this.tPrice = tPrice;
@@ -55,18 +53,21 @@ public class Tax {
 		this.tDate = tDate;
 	}
 
-	public String gettPName() {
+	public Product gettPName() {
 		return tPName;
 	}
 
-	public void settPName(String tPName) {
+	public void settPName(Product tPName) {
 		this.tPName = tPName;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Tax [tNo=%s, tName=%s, tPrice=%s, tDate=%s, tPName=%s]", tNo, tName, tPrice, tDate,
-				tPName);
+		return String.format("Tax [tNo=%s, tName=%s, tPrice=%s, tDate=%s, tPName=%s]", tNo, tName, tPrice, tDate, tPName);
 	}
 
+	public Object[] toArray() {
+		return new Object[] { tNo, tName, tPrice, tDate, tPName };
+	}
+	
 }

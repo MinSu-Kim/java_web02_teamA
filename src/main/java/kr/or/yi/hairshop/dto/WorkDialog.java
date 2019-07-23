@@ -6,60 +6,75 @@ public class WorkDialog {
 	private int wNo;
 	private Date wWrokTime;
 	private Date wReservTime;
-	private String wEName;
-	private int wDNo;
-	private int wCNo;
+	private Event wEName;
+	private Designer wDNo;
+	private Guest wGNo;
+
 	public WorkDialog() {
 		// TODO Auto-generated constructor stub
 	}
-	public WorkDialog(int wNo, Date wWrokTime, Date wReservTime, String wEName, int wDNo, int wCNo) {
+
+	public WorkDialog(int wNo, Date wWrokTime, Date wReservTime, Event wEName, Designer wDNo, Guest wGNo) {
 		this.wNo = wNo;
 		this.wWrokTime = wWrokTime;
 		this.wReservTime = wReservTime;
 		this.wEName = wEName;
 		this.wDNo = wDNo;
-		this.wCNo = wCNo;
+		this.wGNo = wGNo;
 	}
+
 	public int getwNo() {
 		return wNo;
 	}
+
 	public void setwNo(int wNo) {
 		this.wNo = wNo;
 	}
+
 	public Date getwWrokTime() {
 		return wWrokTime;
 	}
+
 	public void setwWrokTime(Date wWrokTime) {
 		this.wWrokTime = wWrokTime;
 	}
+
 	public Date getwReservTime() {
 		return wReservTime;
 	}
+
 	public void setwReservTime(Date wReservTime) {
 		this.wReservTime = wReservTime;
 	}
-	public String getwEName() {
+
+	public Event getwEName() {
 		return wEName;
 	}
-	public void setwEName(String wEName) {
+
+	public void setwEName(Event wEName) {
 		this.wEName = wEName;
 	}
-	public int getwDNo() {
+
+	public Designer getwDNo() {
 		return wDNo;
 	}
-	public void setwDNo(int wDNo) {
+
+	public void setwDNo(Designer wDNo) {
 		this.wDNo = wDNo;
 	}
-	public int getwCNo() {
-		return wCNo;
+
+	public Guest getwGNo() {
+		return wGNo;
 	}
-	public void setwCNo(int wCNo) {
-		this.wCNo = wCNo;
+
+	public void setwGNo(Guest wGNo) {
+		this.wGNo = wGNo;
 	}
+
 	@Override
 	public String toString() {
-		return String.format("WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wEName=%s, wDNo=%s, wCNo=%s]", wNo,
-				wWrokTime, wReservTime, wEName, wDNo, wCNo);
+		return String.format("WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wEName=%s, wDNo=%s, wGNo=%s]", wNo,
+				wWrokTime, wReservTime, wEName, wDNo, wGNo);
 	}
 	
 	
