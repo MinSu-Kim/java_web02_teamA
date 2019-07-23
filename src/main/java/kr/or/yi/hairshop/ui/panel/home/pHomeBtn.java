@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.UI.Panel;
+package kr.or.yi.hairshop.ui.panel.home;
 
 import java.awt.GridLayout;
 
@@ -7,9 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class pGuestMgnBtn extends JPanel {
+public class pHomeBtn extends JPanel {
 
-	public pGuestMgnBtn() {
+	public pHomeBtn() {
 		setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JPanel pLeft = new JPanel();
@@ -23,27 +23,27 @@ public class pGuestMgnBtn extends JPanel {
 		pCenter.add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel("");
-		panel_5.add(lblNewLabel);
+		JLabel lblNewLabel_1 = new JLabel("");
+		panel_5.add(lblNewLabel_1);
 		
-		JLabel label = new JLabel("고객 관리");
+		JLabel label = new JLabel("홈");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_5.add(label);
 		
-		JLabel label_1 = new JLabel("");
-		panel_5.add(label_1);
+		JLabel lblNewLabel = new JLabel("");
+		panel_5.add(lblNewLabel);
 		
 		JPanel panel_3 = new JPanel();
 		pCenter.add(panel_3);
 		panel_3.setLayout(new GridLayout(0, 1, 0, 20));
 		
-		JButton btnAdd = new JButton("등록");
+		JButton btnAdd = new JButton("\uB4F1 \uB85D");
 		panel_3.add(btnAdd);
 		
-		JButton btnUpdate = new JButton("수정");
+		JButton btnUpdate = new JButton("\uC218 \uC815");
 		panel_3.add(btnUpdate);
 		
-		JButton btnDel = new JButton("삭제");
+		JButton btnDel = new JButton("\uC0AD \uC81C");
 		panel_3.add(btnDel);
 		
 		JPanel panel_4 = new JPanel();

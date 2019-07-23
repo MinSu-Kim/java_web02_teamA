@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.UI.Panel;
+package kr.or.yi.hairshop.ui.panel.guest;
 
 import java.awt.GridLayout;
 
@@ -7,9 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class pReservationMgnBtn extends JPanel {
+public class pGuestMgnBtn extends JPanel {
 
-	public pReservationMgnBtn() {
+	public pGuestMgnBtn() {
 		setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JPanel pLeft = new JPanel();
@@ -23,15 +23,15 @@ public class pReservationMgnBtn extends JPanel {
 		pCenter.add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		panel_5.add(lblNewLabel_1);
+		JLabel lblNewLabel = new JLabel("");
+		panel_5.add(lblNewLabel);
 		
-		JLabel label = new JLabel("예약 화면");
+		JLabel label = new JLabel("고객 관리");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_5.add(label);
 		
-		JLabel lblNewLabel = new JLabel("");
-		panel_5.add(lblNewLabel);
+		JLabel label_1 = new JLabel("");
+		panel_5.add(label_1);
 		
 		JPanel panel_3 = new JPanel();
 		pCenter.add(panel_3);

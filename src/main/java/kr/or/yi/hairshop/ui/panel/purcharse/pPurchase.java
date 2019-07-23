@@ -1,77 +1,79 @@
-package kr.or.yi.hairshop.UI.Panel;
+package kr.or.yi.hairshop.ui.panel.purcharse;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import kr.or.yi.hairshop.UI.pCalendar;
-import kr.or.yi.hairshop.dto.Guest;
+import kr.or.yi.hairshop.dto.Tax;
 
-@SuppressWarnings("serial")
-public class pGuestMgn extends JPanel {
+public class pPurchase extends JPanel {
 
 	private JTable table;	
-	private List<Guest> gList;
+	private List<Tax> tList;
 	
-	public pGuestMgn() {
+	public pPurchase() {
+
 		initComponents();
 	}
-	
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
 		
-		JPanel pGuestMain = new JPanel();
-		pGuestMain.setBorder(new TitledBorder(null, "고객관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		add(pGuestMain);
-		pGuestMain.setLayout(new BorderLayout(0, 0));
-
+		JPanel panel = new JPanel();
+		add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1, BorderLayout.NORTH);
+		
+		JSpinner spStart = new JSpinner();
+		spStart.setModel(new SpinnerDateModel(new Date(1563721200000L), null, null, Calendar.DAY_OF_YEAR));
+		panel_1.add(spStart);
+		
+		JSpinner spEnd = new JSpinner();
+		spEnd.setModel(new SpinnerDateModel(new Date(1563721200000L), null, null, Calendar.DAY_OF_YEAR));
+		panel_1.add(spEnd);
+		
+		JPanel pList = new JPanel();
+		panel.add(pList);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		pGuestMain.add(scrollPane);
-
+		panel.add(scrollPane);
+		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		scrollPane.setSize(200, 200);
 		
-		
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.EAST);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		pCalendar pCalendar = new pCalendar();
-		panel.add(pCalendar);
-		
-		pGuestMgnBtn pBtn = new pGuestMgnBtn();
-		panel.add(pBtn);
 	}
-
 	public void reloadData() {
 		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
 
 		// 부서번호, 부서명은 가운데 정렬
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3);
 		// 부서번호, 부서명, 위치 의 폭을 (100, 200, 70)으로 가능하면 설정
-		tableSetWidth(20, 20, 20, 20, 20, 20, 20, 20, 20, 20);
+		tableSetWidth(20, 20, 20, 20);
 	}
 
 	private Object[][] getRows() {
-		Object[][] rows = new Object[gList.size()][];
-		for (int i = 0; i < gList.size(); i++) {
-			rows[i] = gList.get(i).toArray();
+		Object[][] rows = new Object[tList.size()][];
+		for (int i = 0; i < tList.size(); i++) {
+			rows[i] = tList.get(i).toArray();
 		}
 		return rows;
 	}
 
 	private String[] getColumnNames() {
-		return new String[] { "등급", "손님명", "핸드폰", "주소", "생일", "최근작업목록", "가입일", "포인트", "매출액", "메모" };
+		return new String[] { "번호", "제품명", "단가", "구매일"};
 	}
 
 	// 테이블 셀 내용의 정렬
@@ -93,6 +95,4 @@ public class pGuestMgn extends JPanel {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
 	}	
-	
-	
 }

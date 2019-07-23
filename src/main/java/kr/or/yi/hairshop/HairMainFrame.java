@@ -16,8 +16,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.yi.hairshop.UI.Panel.pGuestMgn;
-import kr.or.yi.hairshop.UI.Panel.pProductMgn;
+import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn;
+import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
 
 public class HairMainFrame extends JFrame implements ActionListener {
 
