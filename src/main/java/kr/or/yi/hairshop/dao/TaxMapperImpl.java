@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.hairshop.dao.TaxMapper;
 import kr.or.yi.hairshop.dto.Tax;
 import kr.or.yi.hairshop.jdbc.MyBatisSqlSessionFactory;
 

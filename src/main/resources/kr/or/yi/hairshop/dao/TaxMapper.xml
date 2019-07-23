@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.hairshop.dao.TaxMapper">
+	<resultMap type="Tax" id="">
+		<result property="tNo" column="tNo" />
+		<result property="tName" column="tName" />
+		<result property="tPrice" column="tPrice" />
+		<result property="tDate" column="tDate" />
+		<result property="tPName.pName" column="tPName" />
+	</resultMap>
 
 
+	<select id="selectTaxByAll" resultType="tax">
+		select t_name,t_price,t_date,t_p_name from tax
+	</select>
+	
+	<insert id="insertTax" parameterType="Tax">
+		INSERT INTO hairshop.tax
+		(t_name, t_price, t_date, t_p_name)
+		VALUES(#{tName}, #{tPrice}, #{tDate}, #{tPName.pName})
+	</insert>
 </mapper>

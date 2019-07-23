@@ -30,6 +30,7 @@ public class ProductMapperTest extends AbstractTest {
 	public void test01selectProductByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		List<Product> list = dao.selectProductByAll();
+		System.out.println(list);
 		log.debug(list.toString());
 		Assert.assertNotNull(list);
 	}
