@@ -68,7 +68,7 @@ values
 select * from guest;
 select * from designer;
 select * from event;
-select * from grade;
+select * from level;
 select * from product;
 select * from tax;
 select * from workdialog;
