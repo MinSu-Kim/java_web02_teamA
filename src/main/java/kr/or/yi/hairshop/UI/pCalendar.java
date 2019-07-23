@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.UI.Panel;
+package kr.or.yi.hairshop.UI;
 
 import javax.swing.JPanel;
 

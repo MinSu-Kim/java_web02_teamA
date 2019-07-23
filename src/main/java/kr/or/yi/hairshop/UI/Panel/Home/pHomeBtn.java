@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.UI.Panel;
+package kr.or.yi.hairshop.UI.Panel.Home;
 
 import java.awt.GridLayout;
 
@@ -7,9 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class pRightBtn extends JPanel {
+public class pHomeBtn extends JPanel {
 
-	public pRightBtn() {
+	public pHomeBtn() {
 		setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JPanel pLeft = new JPanel();
