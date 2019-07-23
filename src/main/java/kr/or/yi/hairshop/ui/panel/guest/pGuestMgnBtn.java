@@ -7,7 +7,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class pGuestMgnBtn extends JPanel {
+import kr.or.yi.hairshop.ui.frame.guest.GuestFrame;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class pGuestMgnBtn extends JPanel implements ActionListener {
+	private JButton btnAdd;
 
 	public pGuestMgnBtn() {
 		setLayout(new GridLayout(0, 3, 0, 0));
@@ -37,7 +43,8 @@ public class pGuestMgnBtn extends JPanel {
 		pCenter.add(panel_3);
 		panel_3.setLayout(new GridLayout(0, 1, 0, 20));
 		
-		JButton btnAdd = new JButton("등록");
+		btnAdd = new JButton("등록");
+		btnAdd.addActionListener(this);
 		panel_3.add(btnAdd);
 		
 		JButton btnUpdate = new JButton("수정");
@@ -54,4 +61,13 @@ public class pGuestMgnBtn extends JPanel {
 
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAdd) {
+			actionPerformedBtnAddJButton(e);
+		}
+	}
+	protected void actionPerformedBtnAddJButton(ActionEvent e) {
+		GuestFrame gusetFrame = new GuestFrame();
+		gusetFrame.setVisible(true);
+	}
 }
