@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.hairshop.dao.GuestMapper">
+	<select id="selectGuestByAll" resultType="Guest">
+		select g_no, g_l_grade,
+		g_name, g_tel, g_email, g_birth, g_join, g_point, g_memo
+		from
+		hairshop.guest;
+	</select>
+
+	<insert id="insertGuest" parameterType="Guest">
+		insert into
+		hairshop.guest
+		(g_l_grade, g_name, g_tel, g_email, g_birth, g_join, g_point, g_memo)
+		values(#{gLGrade.lGrade}, #{gName}, #{gTel}, #{gEmail}, #{gBirth}, #{gJoin}, 0, #{gMemo});
+	</insert>
+	
+	<resultMap type="Guest" id="Guest">
+		<result property="gNo" column="gNo" />
+		<result property="gLGrade.lGrade" column="gLGrade" />
+		<result property="gName" column="gName" />
+		<result property="gTel" column="gTel" />
+		<result property="gEmail" column="gEmail" />
+		<result property="gBirth" column="gBirth" />
+		<result property="gJoin" column="gJoin" />
+		<result property="gPoint" column="gPoint" />
+		<result property="gMemo" column="gMemo" />
+
+	</resultMap>
+</mapper>
