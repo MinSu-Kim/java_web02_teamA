@@ -104,6 +104,9 @@ public class Designer {
 				d_no, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo);
 	}
 	
+	public Object[] toArray() {
+		return new Object[] { d_no, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo };
+	}	
 	
 	
 }

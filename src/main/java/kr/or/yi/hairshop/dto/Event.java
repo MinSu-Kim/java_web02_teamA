@@ -45,6 +45,8 @@ public class Event {
 		return String.format("Event [eName=%s, eStartDay=%s, eEndDay=%s, eSale=%s]", eName, eStartDay, eEndDay, eSale);
 	}
 	
-	
+	public Object[] toArray() {
+		return new Object[] { eName, eStartDay, eEndDay, eSale };
+	}
 
 }
