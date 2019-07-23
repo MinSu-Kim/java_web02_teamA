@@ -27,9 +27,9 @@ CREATE TABLE hairshop.WorkDialog (
 	w_no         INT         NOT NULL COMMENT '일정번호', -- 일정번호
 	w_wrokTime   DATE        NULL     COMMENT '작업날짜', -- 작업날짜
 	w_reservTime DATE        NULL     COMMENT '예약날짜', -- 예약날짜
-	w_e_Name     VARCHAR(20) NULL     COMMENT '이벤트명', -- 이벤트명
-	w_d_No       INT         NULL     COMMENT '디자이너', -- 디자이너
-	w_c_No       INT         NULL     COMMENT '손님' -- 손님
+	w_e_name     VARCHAR(20) NULL     COMMENT '이벤트명', -- 이벤트명
+	w_d_no       INT         NULL     COMMENT '디자이너', -- 디자이너
+	w_g_no       INT         NULL     COMMENT '손님' -- 손님
 )
 COMMENT '작업일지';
 
@@ -122,15 +122,15 @@ ALTER TABLE hairshop.Designer
 
 -- 손님
 CREATE TABLE hairshop.Guest (
-	g_no    INT          NOT NULL COMMENT '번호', -- 번호
-	g_grade VARCHAR(10)  NULL     COMMENT '등급', -- 등급
-	g_name  VARCHAR(10)  NULL     COMMENT '이름', -- 이름
-	g_tel   VARCHAR(15)  NULL     COMMENT '연락처', -- 연락처
-	g_email VARCHAR(50)  NULL     COMMENT '이메일', -- 이메일
-	g_birth DATE         NULL     COMMENT '생일', -- 생일
-	g_join  DATE         NULL     COMMENT '가입일', -- 가입일
-	g_point INT          NULL     COMMENT '적립포인트', -- 적립포인트
-	g_memo  VARCHAR(100) NULL     COMMENT '메모' -- 메모
+	g_no      INT          NOT NULL COMMENT '번호', -- 번호
+	g_l_grade VARCHAR(10)  NULL     COMMENT '등급', -- 등급
+	g_name    VARCHAR(10)  NULL     COMMENT '이름', -- 이름
+	g_tel     VARCHAR(15)  NULL     COMMENT '연락처', -- 연락처
+	g_email   VARCHAR(50)  NULL     COMMENT '이메일', -- 이메일
+	g_birth   DATE         NULL     COMMENT '생일', -- 생일
+	g_join    DATE         NULL     COMMENT '가입일', -- 가입일
+	g_point   INT          NULL     COMMENT '적립포인트', -- 적립포인트
+	g_memo    VARCHAR(100) NULL     COMMENT '메모' -- 메모
 )
 COMMENT '손님';
 
@@ -145,24 +145,24 @@ ALTER TABLE hairshop.Guest
 	MODIFY COLUMN g_no INT NOT NULL AUTO_INCREMENT COMMENT '번호';
 
 -- 등급
-CREATE TABLE hairshop.Grade (
-	g_grade VARCHAR(10) NOT NULL COMMENT '등급', -- 등급
-	g_sale  INT         NULL     COMMENT '할인율' -- 할인율
+CREATE TABLE hairshop.Level (
+	l_grade VARCHAR(10) NOT NULL COMMENT '등급', -- 등급
+	l_sale  INT         NULL     COMMENT '할인율' -- 할인율
 )
 COMMENT '등급';
 
 -- 등급
-ALTER TABLE hairshop.Grade
-	ADD CONSTRAINT PK_Grade -- 등급 기본키
+ALTER TABLE hairshop.Level
+	ADD CONSTRAINT PK_Level -- 등급 기본키
 		PRIMARY KEY (
-			g_grade -- 등급
+			l_grade -- 등급
 		);
 
 -- 작업일지
 ALTER TABLE hairshop.WorkDialog
 	ADD CONSTRAINT FK_Event_TO_WorkDialog -- 이벤트 -> 작업일지
 		FOREIGN KEY (
-			w_e_Name -- 이벤트명
+			w_e_name -- 이벤트명
 		)
 		REFERENCES hairshop.Event ( -- 이벤트
 			e_name -- 이벤트명
@@ -172,7 +172,7 @@ ALTER TABLE hairshop.WorkDialog
 ALTER TABLE hairshop.WorkDialog
 	ADD CONSTRAINT FK_Designer_TO_WorkDialog -- 디자이너 -> 작업일지
 		FOREIGN KEY (
-			w_d_No -- 디자이너
+			w_d_no -- 디자이너
 		)
 		REFERENCES hairshop.Designer ( -- 디자이너
 			d_no -- 번호
@@ -182,7 +182,7 @@ ALTER TABLE hairshop.WorkDialog
 ALTER TABLE hairshop.WorkDialog
 	ADD CONSTRAINT FK_Guest_TO_WorkDialog -- 손님 -> 작업일지
 		FOREIGN KEY (
-			w_c_No -- 손님
+			w_g_no -- 손님
 		)
 		REFERENCES hairshop.Guest ( -- 손님
 			g_no -- 번호
@@ -220,10 +220,10 @@ ALTER TABLE hairshop.Choice
 
 -- 손님
 ALTER TABLE hairshop.Guest
-	ADD CONSTRAINT FK_Grade_TO_Guest -- 등급 -> 손님
+	ADD CONSTRAINT FK_Level_TO_Guest -- 등급 -> 손님
 		FOREIGN KEY (
-			g_grade -- 등급
+			g_l_grade -- 등급
 		)
-		REFERENCES hairshop.Grade ( -- 등급
-			g_grade -- 등급
+		REFERENCES hairshop.Level ( -- 등급
+			l_grade -- 등급
 		);

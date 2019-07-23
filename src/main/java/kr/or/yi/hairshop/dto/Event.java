@@ -3,57 +3,60 @@ package kr.or.yi.hairshop.dto;
 import java.util.Date;
 
 public class Event {
-	private String eName;
-	private Date eStartDay;
-	private Date eEndDay;
-	private int eSale;
+	private String e_name;
+	private Date e_startDay;
+	private Date e_endDay;
+	private int e_sale;
 
 	public Event() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Event(String eName, Date eStartDay, Date eEndDay, int eSale) {
-		this.eName = eName;
-		this.eStartDay = eStartDay;
-		this.eEndDay = eEndDay;
-		this.eSale = eSale;
+	public Event(String e_name, Date e_startDay, Date e_endDay, int e_sale) {
+		this.e_name = e_name;
+		this.e_startDay = e_startDay;
+		this.e_endDay = e_endDay;
+		this.e_sale = e_sale;
 	}
 
-	public String geteName() {
-		return eName;
+	public String getE_name() {
+		return e_name;
 	}
 
-	public void seteName(String eName) {
-		this.eName = eName;
+	public void setE_name(String e_name) {
+		this.e_name = e_name;
 	}
 
-	public Date geteStartDay() {
-		return eStartDay;
+	public Date getE_startDay() {
+		return e_startDay;
 	}
 
-	public void seteStartDay(Date eStartDay) {
-		this.eStartDay = eStartDay;
+	public void setE_startDay(Date e_startDay) {
+		this.e_startDay = e_startDay;
 	}
 
-	public Date geteEndDay() {
-		return eEndDay;
+	public Date getE_endDay() {
+		return e_endDay;
 	}
 
-	public void seteEndDay(Date eEndDay) {
-		this.eEndDay = eEndDay;
+	public void setE_endDay(Date e_endDay) {
+		this.e_endDay = e_endDay;
 	}
 
-	public int geteSale() {
-		return eSale;
+	public int getE_sale() {
+		return e_sale;
 	}
 
-	public void seteSale(int eSale) {
-		this.eSale = eSale;
+	public void setE_sale(int e_sale) {
+		this.e_sale = e_sale;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Event [eName=%s, eStartDay=%s, eEndDay=%s, eSale=%s]", eName, eStartDay, eEndDay, eSale);
+		return String.format("Event [%s, %s, %s, %s]", e_name, e_startDay, e_endDay, e_sale);
 	}
 
+	public Object[] toArray() {
+		return new Object[] { e_name, e_startDay, e_endDay, e_sale };
+	}
 }

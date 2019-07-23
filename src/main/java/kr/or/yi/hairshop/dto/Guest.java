@@ -3,114 +3,112 @@ package kr.or.yi.hairshop.dto;
 import java.util.Date;
 
 public class Guest {
-	private int gNo;
-	private String gGrade;
-	private String gName;
-	private String gTel;
-	private String gEmail;
-	private Date gBirth;
-	private Date gJoin;
-	private int gPoint;
-	private String gMemo;
+	private int g_no;
+	private Level g_l_grade;
+	private String g_Name;
+	private String g_tel;
+	private String g_email;
+	private Date g_birth;
+	private Date g_join;
+	private int g_point;
+	private String g_memo;
 
 	public Guest() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Guest(int gNo, String gGrade, String gName, String gTel, String gEmail, Date gBirth, Date gJoin, int gPoint,
-			String gMemo) {
-		this.gNo = gNo;
-		this.gGrade = gGrade;
-		this.gName = gName;
-		this.gTel = gTel;
-		this.gEmail = gEmail;
-		this.gBirth = gBirth;
-		this.gJoin = gJoin;
-		this.gPoint = gPoint;
-		this.gMemo = gMemo;
+	public Guest(int g_no, Level g_l_grade, String g_Name, String g_tel, String g_email, Date g_birth, Date g_join,
+			int g_point, String g_memo) {
+		this.g_no = g_no;
+		this.g_l_grade = g_l_grade;
+		this.g_Name = g_Name;
+		this.g_tel = g_tel;
+		this.g_email = g_email;
+		this.g_birth = g_birth;
+		this.g_join = g_join;
+		this.g_point = g_point;
+		this.g_memo = g_memo;
 	}
 
-	public int getgNo() {
-		return gNo;
+	public int getG_no() {
+		return g_no;
 	}
 
-	public void setgNo(int gNo) {
-		this.gNo = gNo;
+	public void setG_no(int g_no) {
+		this.g_no = g_no;
 	}
 
-	public String getgGrade() {
-		return gGrade;
+	public Level getG_l_grade() {
+		return g_l_grade;
 	}
 
-	public void setgGrade(String gGrade) {
-		this.gGrade = gGrade;
+	public void setG_l_grade(Level g_l_grade) {
+		this.g_l_grade = g_l_grade;
 	}
 
-	public String getgName() {
-		return gName;
+	public String getG_Name() {
+		return g_Name;
 	}
 
-	public void setgName(String gName) {
-		this.gName = gName;
+	public void setG_Name(String g_Name) {
+		this.g_Name = g_Name;
 	}
 
-	public String getgTel() {
-		return gTel;
+	public String getG_tel() {
+		return g_tel;
 	}
 
-	public void setgTel(String gTel) {
-		this.gTel = gTel;
+	public void setG_tel(String g_tel) {
+		this.g_tel = g_tel;
 	}
 
-	public String getgEmail() {
-		return gEmail;
+	public String getG_email() {
+		return g_email;
 	}
 
-	public void setgEmail(String gEmail) {
-		this.gEmail = gEmail;
+	public void setG_email(String g_email) {
+		this.g_email = g_email;
 	}
 
-	public Date getgBirth() {
-		return gBirth;
+	public Date getG_birth() {
+		return g_birth;
 	}
 
-	public void setgBirth(Date gBirth) {
-		this.gBirth = gBirth;
+	public void setG_birth(Date g_birth) {
+		this.g_birth = g_birth;
 	}
 
-	public Date getgJoin() {
-		return gJoin;
+	public Date getG_join() {
+		return g_join;
 	}
 
-	public void setgJoin(Date gJoin) {
-		this.gJoin = gJoin;
+	public void setG_join(Date g_join) {
+		this.g_join = g_join;
 	}
 
-	public int getgPoint() {
-		return gPoint;
+	public int getG_point() {
+		return g_point;
 	}
 
-	public void setgPoint(int gPoint) {
-		this.gPoint = gPoint;
+	public void setG_point(int g_point) {
+		this.g_point = g_point;
 	}
 
-	public String getgMemo() {
-		return gMemo;
+	public String getG_memo() {
+		return g_memo;
 	}
 
-	public void setgMemo(String gMemo) {
-		this.gMemo = gMemo;
+	public void setG_memo(String g_memo) {
+		this.g_memo = g_memo;
 	}
 
 	@Override
 	public String toString() {
-		return String.format(
-				"Guest [gNo=%s, gGrade=%s, gName=%s, gTel=%s, gEmail=%s, gBirth=%s, gJoin=%s, gPoint=%s, gMemo=%s]",
-				gNo, gGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo);
+		return String.format("Guest [%s, %s, %s, %s, %s, %s, %s, %s, %s]", g_no, g_l_grade, g_Name, g_tel, g_email,
+				g_birth, g_join, g_point, g_memo);
 	}
 
 	public Object[] toArray() {
-		return new Object[] { gNo, gGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo };
+		return new Object[] { g_no, g_l_grade, g_Name, g_tel, g_email, g_birth, g_join, g_point, g_memo };
 	}
-
 }

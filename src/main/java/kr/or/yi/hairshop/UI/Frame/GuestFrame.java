@@ -12,9 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import kr.or.yi.hairshop.UI.List.GuestList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class GuestFrame extends JFrame {
+public class GuestFrame extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -25,6 +27,7 @@ public class GuestFrame extends JFrame {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	private JButton btnOK;
 
 	
 	public GuestFrame() {
@@ -117,11 +120,20 @@ public class GuestFrame extends JFrame {
 		JPanel panel_4 = new JPanel();
 		panel_2.add(panel_4);
 		
-		JButton btnOK = new JButton("확인");
+		btnOK = new JButton("확인");
+		btnOK.addActionListener(this);
 		panel_4.add(btnOK);
 		
 		GuestList panel_3 = new GuestList();
 		panel_1.add(panel_3);
 	}
 
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnOK) {
+			actionPerformedBtnOKJButton(arg0);
+		}
+	}
+	protected void actionPerformedBtnOKJButton(ActionEvent arg0) {
+		
+	}
 }

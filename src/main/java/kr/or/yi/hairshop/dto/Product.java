@@ -1,39 +1,51 @@
 package kr.or.yi.hairshop.dto;
 
 public class Product {
-	private int pPrice;
-	private String pName;
-	private String pDivision;
+	private int p_Price;
+	private String p_name;
+	private String p_division;
+
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
-	public Product(int pPrice, String pName, String pDivision) {
-		this.pPrice = pPrice;
-		this.pName = pName;
-		this.pDivision = pDivision;
+
+	public Product(int p_Price, String p_name, String p_division) {
+		this.p_Price = p_Price;
+		this.p_name = p_name;
+		this.p_division = p_division;
 	}
-	public int getpPrice() {
-		return pPrice;
+
+	public int getP_Price() {
+		return p_Price;
 	}
-	public void setpPrice(int pPrice) {
-		this.pPrice = pPrice;
+
+	public void setP_Price(int p_Price) {
+		this.p_Price = p_Price;
 	}
-	public String getpName() {
-		return pName;
+
+	public String getP_name() {
+		return p_name;
 	}
-	public void setpName(String pName) {
-		this.pName = pName;
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
-	public String getpDivision() {
-		return pDivision;
+
+	public String getP_division() {
+		return p_division;
 	}
-	public void setpDivision(String pDivision) {
-		this.pDivision = pDivision;
+
+	public void setP_division(String p_division) {
+		this.p_division = p_division;
 	}
+
 	@Override
 	public String toString() {
-		return String.format("Product [pPrice=%s, pName=%s, pDivision=%s]", pPrice, pName, pDivision);
+		return String.format("Product [%s, %s, %s]", p_Price, p_name, p_division);
 	}
-	
-	
+
+	public Object[] toArray() {
+		return new Object[] { p_Price, p_name, p_division };
+	}
+
 }
