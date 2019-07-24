@@ -84,12 +84,11 @@ public class WorkDialog {
 	}
 
 	@Override
-	public String toString() {
-		return String.format(
-				"WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wPriceTotal=%s, wEName=%s, wDNo=%s, wGNo=%s]", wNo, wWrokTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo);
+	public String toString() {	//쓸일있어서 toString 변경햇어용-나모
+		return String.format("%s", wGNo);
 	}
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { wNo, date.format(wWrokTime), date.format(wReservTime), wPriceTotal, wEName, wDNo, wGNo };
+		return new Object[] { wNo, wWrokTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo };
 	}
 }

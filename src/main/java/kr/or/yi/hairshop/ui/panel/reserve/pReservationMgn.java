@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.SpinnerDateModel;
@@ -61,8 +62,13 @@ public class pReservationMgn extends JPanel {
 		JPanel pR = new JPanel();
 		add(pR, BorderLayout.EAST);
 		pR.setLayout(new GridLayout(0, 1, 0, 0));
+		pList.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		pList.add(scrollPane);
+
 		table = new JTable();
-		pList.add(table);
+		scrollPane.setViewportView(table);
 		
 		pCalendar pCalendar = new pCalendar();
 		pR.add(pCalendar);
@@ -84,7 +90,7 @@ public class pReservationMgn extends JPanel {
 	private Object[][] getRows() {
 		Object[][] rows = new Object[workList.size()][];
 		for (int i = 0; i < workList.size(); i++) {
-//			rows[i] = workList.get(i).toArray();
+			rows[i] = workList.get(i).toArray();
 		}
 		return rows;
 	}
