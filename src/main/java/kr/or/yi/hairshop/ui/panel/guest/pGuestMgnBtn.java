@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import kr.or.yi.hairshop.ui.frame.guest.GuestFrame;
+import kr.or.yi.hairshop.ui.frame.GuestFrame;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

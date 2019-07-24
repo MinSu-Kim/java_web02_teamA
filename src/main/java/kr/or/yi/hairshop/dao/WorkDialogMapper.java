@@ -5,5 +5,6 @@ import java.util.List;
 import kr.or.yi.hairshop.dto.WorkDialog;
 
 public interface WorkDialogMapper {
-	List<WorkDialog> selectDListByNo(int dNo);
+	public List<WorkDialog> selectDListByNo(int dNo);
+	public List<WorkDialog> selectByAll();
 }

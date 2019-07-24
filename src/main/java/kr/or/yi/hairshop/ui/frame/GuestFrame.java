@@ -1,8 +1,7 @@
-package kr.or.yi.hairshop.ui.frame.guest;
+package kr.or.yi.hairshop.ui.frame;
 
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +33,7 @@ public class GuestFrame extends JFrame implements ActionListener{
 	
 	public GuestFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 600, 599);
+		setBounds(100, 100, 420, 599);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -124,7 +123,6 @@ public class GuestFrame extends JFrame implements ActionListener{
 		
 		btnOK = new JButton("확인");
 		btnOK.addActionListener((ActionListener) this);
-		panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panel_4.add(btnOK);
 		
 		GuestList panel_3 = new GuestList();
