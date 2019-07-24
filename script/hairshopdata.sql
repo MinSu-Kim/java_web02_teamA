@@ -61,7 +61,8 @@ values
 ('2019-07-01', '2019-07-01-11-00', null, 1, 1),
 (null, '2019-08-15-12-00', '광복절', 2, 2),
 (null, '2019-09-12-13-00', '추석', 3, 2),
-(null, '2019-09-15-14-00', '추석', 3, 2)
+(null, '2019-09-15-14-00', '추석', 3, 2),
+(null, '2019-09-15-14-00', '추석', 4, 4)
 ;
 
 
@@ -75,7 +76,7 @@ select * from tax;
 select * from workdialog;
 
 select * from designer;
-select * from workdialog
+select * from workdialog;
 where w_d_No=1 and
 w_reservTime='2019-07-01'
 ;
