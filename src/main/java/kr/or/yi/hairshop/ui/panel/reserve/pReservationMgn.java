@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -50,13 +51,18 @@ public class pReservationMgn extends JPanel {
 		spEnd.setModel(new SpinnerDateModel(new Date(1563807600000L), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
 		pNorth.add(spEnd);
 		
+		JButton btnSearch = new JButton("검색");
+		pNorth.add(btnSearch);
+		
 		JPanel pList = new JPanel();
-		pList.setBorder(new TitledBorder(null, "\uC608\uC57D \uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pList.setBorder(new TitledBorder(null, "예약정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(pList);
 		
 		JPanel pR = new JPanel();
 		add(pR, BorderLayout.EAST);
 		pR.setLayout(new GridLayout(0, 1, 0, 0));
+		table = new JTable();
+		pList.add(table);
 		
 		pCalendar pCalendar = new pCalendar();
 		pR.add(pCalendar);
@@ -64,16 +70,15 @@ public class pReservationMgn extends JPanel {
 		pReservationMgnBtn pBtn = new pReservationMgnBtn();
 		pR.add(pBtn);
 	}
-
 	
 	public void clearList() {
-
+		workList = dao.selectByAll();
 	}
 
 	public void reloadData() {
 		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8);
-		tableSetWidth(20, 20, 50, 50, 80, 50, 50, 50, 100);
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6);
+		tableSetWidth(20, 20, 50, 50, 80, 50, 50);
 	}
 
 	private Object[][] getRows() {
@@ -85,7 +90,7 @@ public class pReservationMgn extends JPanel {
 	}
 
 	private String[] getColumnNames() {
-		return new String[] { "번호", "등급", "이름", "전화번호", "이메일", "생일", "가입일", "포인트", "메모" };
+		return new String[] { "번호", "등급", "이름", "전화번호", "이메일", "생일", "확인"};
 	}
 
 	// 테이블 셀 내용의 정렬
@@ -106,7 +111,22 @@ public class pReservationMgn extends JPanel {
 		for (int i = 0; i < width.length; i++) {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
-	}	
-	
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
