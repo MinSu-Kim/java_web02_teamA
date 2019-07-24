@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.hairshop.dto.Choice;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.jdbc.MyBatisSqlSessionFactory;
 
@@ -25,9 +26,10 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	}
 
 	@Override
-	public List<WorkDialog> selectByReserve() {
-		
-		return null;
+	public List<Choice> selectByReserve() {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectByReserve");
+		}
 	}
 
 

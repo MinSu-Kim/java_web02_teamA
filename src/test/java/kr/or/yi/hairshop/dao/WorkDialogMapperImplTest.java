@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.yi.hairshop.AbstractTest;
+import kr.or.yi.hairshop.dto.Choice;
 import kr.or.yi.hairshop.dto.WorkDialog;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -40,8 +41,8 @@ public class WorkDialogMapperImplTest extends AbstractTest {
 	@Test
 	public void test02selectByReserve() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		List<WorkDialog> list = dao.selectByReserve();
-		log.debug(list.toString());
+		List<Choice> list = dao.selectByReserve();
+		System.out.println(list);
 		Assert.assertNotNull(list);
 	}	
 	
