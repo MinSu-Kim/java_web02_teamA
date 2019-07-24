@@ -31,6 +31,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	private static HairMainFrame mainFrame;
 	private JPanel contentPane;
 	private List<Designer> dList;
+	private pHomeDesignerForm home;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -94,12 +95,10 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 		DesignerMapper d_Dao=new DesignerMapperImpl();
 		dList = d_Dao.selectDesignerByAll();
-		pHomeDesignerForm home = new pHomeDesignerForm();
+		home = new pHomeDesignerForm();
 		home.setDList(dList);
-		home.refresh();
+		home.refresh(0);
 		tabbedPane.addTab("홈", null, home, "홈");
-		revalidate();
-		repaint();
 
 		pReservationMgn ReservationMgn = new pReservationMgn();
 		ReservationMgn.clearList();
@@ -129,5 +128,6 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 
 	}
+	
 
 }

@@ -29,32 +29,33 @@ public class pHomeDesignerBlock extends JPanel implements MouseListener {
 	private JLabel lblDesigner;
 	private Designer designer;
 	private List<WorkDialog> wList;
-	
+	private DefaultTableModel model;
+	private final String[] columns = { "시간", "작업명"};
+	private String[][] data = { 
+			{ "08:00", ""}, 
+			{ "09:00", ""}, 
+			{ "10:00", ""}, 
+			{ "11:00", ""},
+			{ "12:00", ""},
+			{ "13:00", ""},
+			{ "14:00", ""},
+			{ "15:00", ""},
+			{ "16:00", ""},
+			{ "17:00", ""},
+			{ "18:00", ""},
+			{ "19:00", ""},
+			{ "20:00", ""},
+			{ "21:00", ""},
+			{ "22:00", ""},
+			{ "23:00", ""},
+			{ "24:00", ""},
+	};
 	public pHomeDesignerBlock() {
 		
 		setLayout(new BorderLayout());
-		final String[] columns = { "시간", "작업명"};
-		String[][] data = { 
-				{ "08:00", ""}, 
-				{ "09:00", ""}, 
-				{ "10:00", ""}, 
-				{ "11:00", ""},
-				{ "12:00", ""},
-				{ "13:00", ""},
-				{ "14:00", ""},
-				{ "15:00", ""},
-				{ "16:00", ""},
-				{ "17:00", ""},
-				{ "18:00", ""},
-				{ "19:00", ""},
-				{ "20:00", ""},
-				{ "21:00", ""},
-				{ "22:00", ""},
-				{ "23:00", ""},
-				{ "24:00", ""},
-		};
+		
 
-		DefaultTableModel model = new DefaultTableModel(data, columns);
+		model = new DefaultTableModel(data, columns);
 
 		jtable = new JTable(model);
 
@@ -102,6 +103,7 @@ public class pHomeDesignerBlock extends JPanel implements MouseListener {
 	}
 
 	public void setTable(List<WorkDialog> wList) {
+		
 		lblDesigner.setText(designer.getdName());
 		Iterator<WorkDialog> workDialog = wList.iterator();
 		while (workDialog.hasNext()) {
@@ -123,10 +125,15 @@ public class pHomeDesignerBlock extends JPanel implements MouseListener {
 	public void setDisigner(Designer designer) {
 		this.designer=designer;
 	}
+	
 	public void setWorkDialog(List<WorkDialog> wList) {
 		this.wList=wList;
 	}
 	
+	public void clearTable() {
+		lblDesigner.setText(" ");
+		jtable.setModel(new DefaultTableModel(data,columns));
+	}
 	
 //	private Object[][] getRows() {
 //		if(wList==null) {
