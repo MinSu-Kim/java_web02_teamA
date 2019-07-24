@@ -69,7 +69,7 @@ public class pGuestMgn extends JPanel {
 	private Object[][] getRows() {
 		Object[][] rows = new Object[gList.size()][];
 		for (int i = 0; i < gList.size(); i++) {
-			rows[i] = gList.get(i).toArray();
+//			rows[i] = gList.get(i).toArray();
 		}
 		return rows;
 	}

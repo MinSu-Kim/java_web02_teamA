@@ -5,8 +5,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,6 +22,7 @@ import javax.swing.table.TableColumnModel;
 
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.WorkDialog;
+import kr.or.yi.hairshop.ui.frame.WorkDialogFrame;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,6 +33,7 @@ public class pHomeDesignerBlock extends JPanel implements MouseListener {
 	private Designer designer;
 	private List<WorkDialog> wList;
 	private DefaultTableModel model;
+	private Map<Integer, WorkDialog> list=new HashMap<Integer, WorkDialog>();
 	private final String[] columns = { "시간", "작업명"};
 	private String[][] data = { 
 			{ "08:00", ""}, 
@@ -86,6 +90,11 @@ public class pHomeDesignerBlock extends JPanel implements MouseListener {
 		int column = jtable.getSelectedColumn();
 		System.out.println(lblDesigner.getText());
 		System.out.println(row + "행, " + column + "열 : " + jtable.getValueAt(row, column) + " 선택했음");
+//		System.out.println(list.get(jtable.getValueAt(row, 0)));
+		WorkDialog work = list.get(row);
+		WorkDialogFrame frame = new WorkDialogFrame();
+		frame.setWorkTf(work);
+		frame.setVisible(true);
 		
 	}
 
@@ -113,6 +122,7 @@ public class pHomeDesignerBlock extends JPanel implements MouseListener {
 //	        //column 갯수
 //	        System.out.println(jtable.getColumnCount());
 		    jtable.setValueAt(work,  work.getwReservTime().getHours()-8, 1);
+		    list.put(work.getwReservTime().getHours()-8, work);
 		    
 		}
 

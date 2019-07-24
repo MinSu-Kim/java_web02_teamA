@@ -5,6 +5,8 @@ import java.util.Date;
 public class Designer {
 	private int dNo;
 	private String dGrade;
+	private String dId;
+	private String dPassword;
 	private String dName;
 	private String dTel;
 	private String dTel2;
@@ -17,10 +19,12 @@ public class Designer {
 	public Designer() {
 		// TODO Auto-generated constructor stub
 	}
-	public Designer(int dNo, String dGrade, String dName, String dTel, String dTel2, String dAddr, String dAddr2,
-			String dAddr3, Date dBirth, Date dJoin, String dMemo) {
+	public Designer(int dNo, String dGrade, String dId, String dPassword, String dName, String dTel, String dTel2,
+			String dAddr, String dAddr2, String dAddr3, Date dBirth, Date dJoin, String dMemo) {
 		this.dNo = dNo;
 		this.dGrade = dGrade;
+		this.dId = dId;
+		this.dPassword = dPassword;
 		this.dName = dName;
 		this.dTel = dTel;
 		this.dTel2 = dTel2;
@@ -42,6 +46,18 @@ public class Designer {
 	}
 	public void setdGrade(String dGrade) {
 		this.dGrade = dGrade;
+	}
+	public String getdId() {
+		return dId;
+	}
+	public void setdId(String dId) {
+		this.dId = dId;
+	}
+	public String getdPassword() {
+		return dPassword;
+	}
+	public void setdPassword(String dPassword) {
+		this.dPassword = dPassword;
 	}
 	public String getdName() {
 		return dName;
@@ -100,13 +116,11 @@ public class Designer {
 	@Override
 	public String toString() {
 		return String.format(
-				"Designer [dNo=%s, dGrade=%s, dName=%s, dTel=%s, dTel2=%s, dAddr=%s, dAddr2=%s, dAddr3=%s, dBirth=%s, dJoin=%s, dMemo=%s]",
-				dNo, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo);
+				"Designer [dNo=%s, dGrade=%s, dId=%s, dPassword=%s, dName=%s, dTel=%s, dTel2=%s, dAddr=%s, dAddr2=%s, dAddr3=%s, dBirth=%s, dJoin=%s, dMemo=%s]",
+				dNo, dGrade, dId, dPassword, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo);
 	}
 	
-	public Object[] toArray() {
-		return new Object[] { dNo, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo };
-	}	
+	
 	
 	
 }

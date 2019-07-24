@@ -22,8 +22,9 @@ ALTER TABLE hairshop.Product
 -- 작업일지
 CREATE TABLE hairshop.WorkDialog (
 	w_no         INT         NOT NULL COMMENT '일정번호', -- 일정번호
-	w_wrokTime   DATETIME        NULL     COMMENT '작업날짜', -- 작업날짜
-	w_reservTime DATETIME        NULL     COMMENT '예약날짜', -- 예약날짜
+	w_workTime   DATE        NULL     COMMENT '작업완료일', -- 작업완료일
+	w_reservTime DATE        NULL     COMMENT '작업일예약', -- 작업일예약
+	w_priceTotal INT         NULL     COMMENT '가격(총합)', -- 가격(총합)
 	w_e_name     VARCHAR(20) NULL     COMMENT '이벤트명', -- 이벤트명
 	w_d_no       INT         NULL     COMMENT '디자이너', -- 디자이너
 	w_g_no       INT         NULL     COMMENT '손님' -- 손님
@@ -43,8 +44,8 @@ ALTER TABLE hairshop.WorkDialog
 -- 이벤트
 CREATE TABLE hairshop.Event (
 	e_name     VARCHAR(20) NOT NULL COMMENT '자동등록', -- 이벤트명
-	e_startDay DATETIME        NULL     COMMENT '시작일', -- 시작일
-	e_endDay   DATETIME        NULL     COMMENT '종료일', -- 종료일
+	e_startDay DATE        NULL     COMMENT '시작일', -- 시작일
+	e_endDay   DATE        NULL     COMMENT '종료일', -- 종료일
 	e_sale     INT         NULL     COMMENT '할인율' -- 할인율
 )
 COMMENT '이벤트';
@@ -61,7 +62,7 @@ CREATE TABLE hairshop.Tax (
 	t_no     INT         NOT NULL COMMENT '지출번호', -- 지출번호
 	t_name   VARCHAR(20) NULL     COMMENT '이름', -- 이름
 	t_price  INT         NULL     COMMENT '가격', -- 가격
-	t_date   DATETIME        NULL     COMMENT '날짜', -- 날짜
+	t_date   DATE        NULL     COMMENT '날짜', -- 날짜
 	t_p_name VARCHAR(20) NULL     COMMENT '작업명' -- 작업명
 )
 COMMENT '고정비';
@@ -93,17 +94,19 @@ ALTER TABLE hairshop.Choice
 
 -- 디자이너
 CREATE TABLE hairshop.Designer (
-	d_no    INT          NOT NULL COMMENT '번호', -- 번호
-	d_grade VARCHAR(10)  NULL     COMMENT '직책', -- 직책
-	d_name  VARCHAR(10)  NOT NULL COMMENT '이름', -- 이름
-	d_tel   VARCHAR(15)  NOT NULL COMMENT '연락처', -- 연락처
-	d_tel2  VARCHAR(15)  NULL     COMMENT '비상연락', -- 비상연락
-	d_addr  VARCHAR(10)  NULL     COMMENT '우편번호', -- 우편번호
-	d_addr2 VARCHAR(50)  NULL     COMMENT '주소', -- 주소
-	d_addr3 VARCHAR(50)  NULL     COMMENT '상세주소', -- 상세주소
-	d_birth DATETIME         NULL     COMMENT '생일', -- 생일
-	d_join  DATETIME         NULL     COMMENT '입사일', -- 입사일
-	d_memo  VARCHAR(100) NULL     COMMENT '메모' -- 메모
+	d_no       INT          NOT NULL COMMENT '번호', -- 번호
+	d_id       VARCHAR(20)  NULL     COMMENT '아이디', -- 아이디
+	d_password VARCHAR(50)  NULL     COMMENT '비밀번호', -- 비밀번호
+	d_grade    VARCHAR(10)  NULL     COMMENT '직책', -- 직책
+	d_name     VARCHAR(10)  NOT NULL COMMENT '이름', -- 이름
+	d_tel      VARCHAR(15)  NOT NULL COMMENT '연락처', -- 연락처
+	d_tel2     VARCHAR(15)  NULL     COMMENT '비상연락', -- 비상연락
+	d_addr     VARCHAR(10)  NULL     COMMENT '우편번호', -- 우편번호
+	d_addr2    VARCHAR(50)  NULL     COMMENT '주소', -- 주소
+	d_addr3    VARCHAR(50)  NULL     COMMENT '상세주소', -- 상세주소
+	d_birth    DATE         NULL     COMMENT '생일', -- 생일
+	d_join     DATE         NULL     COMMENT '입사일', -- 입사일
+	d_memo     VARCHAR(100) NULL     COMMENT '메모' -- 메모
 )
 COMMENT '디자이너';
 
@@ -119,15 +122,17 @@ ALTER TABLE hairshop.Designer
 
 -- 손님
 CREATE TABLE hairshop.Guest (
-	g_no      INT          NOT NULL COMMENT '번호', -- 번호
-	g_l_grade VARCHAR(10)  NULL     COMMENT '등급', -- 등급
-	g_name    VARCHAR(10)  NULL     COMMENT '이름', -- 이름
-	g_tel     VARCHAR(15)  NULL     COMMENT '연락처', -- 연락처
-	g_email   VARCHAR(50)  NULL     COMMENT '이메일', -- 이메일
-	g_birth   DATETIME         NULL     COMMENT '생일', -- 생일
-	g_join    DATETIME         NULL     COMMENT '가입일', -- 가입일
-	g_point   INT          NULL     COMMENT '적립포인트', -- 적립포인트
-	g_memo    VARCHAR(100) NULL     COMMENT '메모' -- 메모
+	g_no       INT          NOT NULL COMMENT '번호', -- 번호
+	g_id       VARCHAR(20)  NULL     COMMENT '아이디', -- 아이디
+	g_password VARCHAR(50)  NULL     COMMENT '비밀번호', -- 비밀번호
+	g_l_grade  VARCHAR(10)  NULL     COMMENT '등급', -- 등급
+	g_name     VARCHAR(10)  NULL     COMMENT '이름', -- 이름
+	g_tel      VARCHAR(15)  NULL     COMMENT '연락처', -- 연락처
+	g_email    VARCHAR(50)  NULL     COMMENT '이메일', -- 이메일
+	g_birth    DATE         NULL     COMMENT '생일', -- 생일
+	g_join     DATE         NULL     COMMENT '가입일', -- 가입일
+	g_point    INT          NULL     COMMENT '적립포인트', -- 적립포인트
+	g_memo     VARCHAR(100) NULL     COMMENT '메모' -- 메모
 )
 COMMENT '손님';
 

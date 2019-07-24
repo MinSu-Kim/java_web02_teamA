@@ -145,7 +145,7 @@ public class pProductMgn extends JPanel {
 	private Object[][] getRowsWoker() {
 		Object[][] rows = new Object[workerList.size()][];
 		for (int i = 0; i < workerList.size(); i++) {
-			rows[i] = workerList.get(i).toArray();
+//			rows[i] = workerList.get(i).toArray();
 		}
 		return rows;
 	}
