@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.hairshop.dao.WorkDialogMapper">
-
 	
 	<resultMap type="Guest" id="resultGuest">
 		<result property="gNo" column="w_g_no" />
@@ -10,12 +9,59 @@
 	
 	<resultMap type="WorkDialog" id="resultWorkDialog">
 		<result property="wNo" column="w_no" />
-		<result property="wWrokTime" column="w_workTime" />
+		<result property="wWrokTime" column="w_wrokTime" />
 		<result property="wReservTime" column="w_reservTime" />
 		<result property="wEName.eName" column="w_e_name" />
 		<result property="wDNo.dNo" column="w_d_no" />
-		<collection property="wGNo" resultMap="resultGuest"/>		
+		<collection property="wGNo" resultMap="resultGuest"/>
 	</resultMap>
+	
+	<resultMap type="Guest" id="resultGuestAll">
+		<result property="gNo" column="w_g_no" />
+		<result property="gLGrade" column="g_l_grade" />
+		<result property="gName" column="g_name" />
+		<result property="gTel" column="g_tel" />
+		<result property="gEmail" column="g_email" />
+		<!-- <result property="gBirth" column="g_birth" /> -->
+		<!-- <result property="gJoin" column="g_join" /> -->
+		<result property="gPoint" column="g_point" />
+		<result property="gMemo" column="g_memo" />
+	</resultMap>
+	<select id="selectByReserve" resultMap="resultWorkDialogAll">
+		select
+		w_no,
+		w_workTime,
+		w_reservTime,
+		w_e_name,
+		w_d_no,
+		w_g_no,
+		c_w_no,
+		c_p_name,
+		g_no,
+		g_l_grade,
+		g_name,
+		g_tel,
+		g_point,
+		g_memo
+		from workdialog w left join choice c 
+		on w.w_no=c.c_w_no
+		left join guest g
+		on w.w_g_no=g.g_no
+	</select>
+	<resultMap type="Choice" id="resultChoise">
+		<result property="cPName" column="g_name" />
+		<collection property="cWNo" resultMap="resultWorkDialogAll"/>
+	</resultMap>
+
+	<resultMap type="WorkDialog" id="resultWorkDialogAll">
+		<result property="wNo" column="w_no" />		
+		<result property="wWrokTime" column="w_wrokTime" />
+		<result property="wReservTime" column="w_reservTime" />
+		<result property="wPriceTotal" column="w_priceTotal" />
+		<result property="wEName.eName" column="w_e_name" />
+		<result property="wGNo.gNo" column="w_g_no" />
+		<collection property="wGNo" resultMap="resultGuestAll"/>
+	</resultMap>		
 
 	<select id="selectDListByNo" parameterType="int" resultMap="resultWorkDialog">
 		select 
@@ -31,17 +77,5 @@
 		on w.w_d_no=#{dNo} and w.w_g_no=g.g_no;
 	</select>
 	
-	<select id="selectByAll" resultMap="resultWorkDialog">
-		select 
-		w_no,
-		w_workTime,
-		w_reservTime,
-		w_e_name,
-		w_d_no,
-		w_g_no,
-		g.g_name
-		from workdialog w
-		join guest g 
-		on w.w_g_no=g.g_no;
-	</select>
+	
 </mapper>
