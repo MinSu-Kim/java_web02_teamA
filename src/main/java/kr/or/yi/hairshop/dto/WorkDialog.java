@@ -90,6 +90,6 @@ public class WorkDialog {
 	}
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { wNo, date.format(wWrokTime), date.format(wReservTime), wPriceTotal, wEName, wDNo, wGNo };
+		return new Object[] { wNo, wWrokTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo };
 	}
 }
