@@ -22,8 +22,8 @@ ALTER TABLE hairshop.Product
 -- 작업일지
 CREATE TABLE hairshop.WorkDialog (
 	w_no         INT         NOT NULL COMMENT '일정번호', -- 일정번호
-	w_workTime   DATE        NULL     COMMENT '작업완료일', -- 작업완료일
-	w_reservTime DATE        NULL     COMMENT '작업일예약', -- 작업일예약
+	w_workTime   DATETIME    NULL     COMMENT '작업완료일', -- 작업완료일
+	w_reservTime DATETIME    NULL     COMMENT '작업일예약', -- 작업일예약
 	w_priceTotal INT         NULL     COMMENT '가격(총합)', -- 가격(총합)
 	w_e_name     VARCHAR(20) NULL     COMMENT '이벤트명', -- 이벤트명
 	w_d_no       INT         NULL     COMMENT '디자이너', -- 디자이너

@@ -130,6 +130,9 @@ public class Guest {
 				gNo, gId, gPassword, gLGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo);
 	}
 	
-	
+	public Object[] toArray() {
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		return new Object[] { gNo, gId, gPassword, gLGrade, gName, gTel, gEmail, date.format(gBirth), date.format(gJoin), gPoint, gMemo };
+	}
 
 }

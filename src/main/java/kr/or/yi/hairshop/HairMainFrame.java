@@ -92,7 +92,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		pMain.add(tabbedPane);
-
+		
 		DesignerMapper d_Dao=new DesignerMapperImpl();
 		dList = d_Dao.selectDesignerByAll();
 		home = new pHomeDesignerForm();

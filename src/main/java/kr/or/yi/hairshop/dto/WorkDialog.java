@@ -86,9 +86,10 @@ public class WorkDialog {
 	@Override
 	public String toString() {
 		return String.format(
-				"WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wPriceTotal=%s, wEName=%s, wDNo=%s, wGNo=%s]", wNo,
-				wWrokTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo);
+				"WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wPriceTotal=%s, wEName=%s, wDNo=%s, wGNo=%s]", wNo, wWrokTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo);
 	}
-
-	
+	public Object[] toArray() {
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		return new Object[] { wNo, date.format(wWrokTime), date.format(wReservTime), wPriceTotal, wEName, wDNo, wGNo };
+	}
 }
