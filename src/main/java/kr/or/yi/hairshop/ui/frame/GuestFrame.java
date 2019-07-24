@@ -20,20 +20,21 @@ import kr.or.yi.hairshop.ui.list.guest.GuestList;
 public class GuestFrame extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField tfRating;
+	private JTextField tfName;
+	private JTextField tfTel;
+	private JTextField tfAddr;
+	private JTextField tfBirth;
+	private JTextField tfJoinD;
+	private JTextField tfPoint;
+	private JTextField tfMemo;
 	private JButton btnOK;
+	private JButton btnCancel;
 
 	
 	public GuestFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 420, 599);
+		setBounds(100, 100, 600, 599);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -58,84 +59,101 @@ public class GuestFrame extends JFrame implements ActionListener{
 		lblRating.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_2.add(lblRating);
 		
-		textField = new JTextField();
-		panel_2.add(textField);
-		textField.setColumns(10);
+		tfRating = new JTextField();
+		panel_2.add(tfRating);
+		tfRating.setColumns(10);
 		
 		JLabel lblName = new JLabel("이름");
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_2.add(lblName);
 		
-		textField_1 = new JTextField();
-		panel_2.add(textField_1);
-		textField_1.setColumns(10);
+		tfName = new JTextField();
+		panel_2.add(tfName);
+		tfName.setColumns(10);
 		
 		JLabel lblTel = new JLabel("전화번호");
 		lblTel.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_2.add(lblTel);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		panel_2.add(textField_2);
+		tfTel = new JTextField();
+		tfTel.setColumns(10);
+		panel_2.add(tfTel);
 		
 		JLabel lblAddress = new JLabel("주소");
 		lblAddress.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_2.add(lblAddress);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		panel_2.add(textField_3);
+		tfAddr = new JTextField();
+		tfAddr.setColumns(10);
+		panel_2.add(tfAddr);
 		
 		JLabel lblBirthday = new JLabel("생일");
 		lblBirthday.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_2.add(lblBirthday);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		panel_2.add(textField_4);
+		tfBirth = new JTextField();
+		tfBirth.setColumns(10);
+		panel_2.add(tfBirth);
 		
 		JLabel lblJoinDate = new JLabel("가입일");
 		lblJoinDate.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_2.add(lblJoinDate);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		panel_2.add(textField_5);
+		tfJoinD = new JTextField();
+		tfJoinD.setColumns(10);
+		panel_2.add(tfJoinD);
 		
 		JLabel lblPoint = new JLabel("포인트");
 		lblPoint.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_2.add(lblPoint);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		panel_2.add(textField_6);
+		tfPoint = new JTextField();
+		tfPoint.setColumns(10);
+		panel_2.add(tfPoint);
 		
 		JLabel lblMemo = new JLabel("메모");
 		lblMemo.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_2.add(lblMemo);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		panel_2.add(textField_7);
+		tfMemo = new JTextField();
+		tfMemo.setColumns(10);
+		panel_2.add(tfMemo);
 		
 		JPanel panel_4 = new JPanel();
 		panel_2.add(panel_4);
 		
-		btnOK = new JButton("확인");
+		btnOK = new JButton("추가");
+		btnOK.setBounds(67, 10, 57, 23);
 		btnOK.addActionListener((ActionListener) this);
+		panel_4.setLayout(null);
 		panel_4.add(btnOK);
+		
+		JPanel panel_5 = new JPanel();
+		panel_2.add(panel_5);
+		panel_5.setLayout(null);
+		
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
+		btnCancel.setBounds(12, 10, 57, 23);
+		panel_5.add(btnCancel);
 		
 		GuestList panel_3 = new GuestList();
 		panel_1.add(panel_3);
 	}
 
-	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == btnOK) {
-			actionPerformedBtnOKJButton(arg0);
+	public void actionPerformed(ActionEvent g) {
+		if (g.getSource() == btnCancel) {
+			actionPerformedBtnCancelJButton(g);
+		}
+		if (g.getSource() == btnOK) {
+			actionPerformedBtnOKJButton(g);
 		}
 	}
 	protected void actionPerformedBtnOKJButton(ActionEvent arg0) {
 		
 	}
-
+	
+	
+	protected void actionPerformedBtnCancelJButton(ActionEvent g) {
+	}
 }
