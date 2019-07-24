@@ -7,4 +7,6 @@ import kr.or.yi.hairshop.dto.Guest;
 public interface GuestMapper {
 	List<Guest> selectGuestByAll();
 	int insertGuest(Guest guest);
+	int updateGuest(Guest guest);
+	int deleteGuest(Guest guest);
 }

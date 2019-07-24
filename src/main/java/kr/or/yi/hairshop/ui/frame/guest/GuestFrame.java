@@ -131,9 +131,9 @@ public class GuestFrame extends JFrame implements ActionListener{
 		panel_1.add(panel_3);
 	}
 
-	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == btnOK) {
-			actionPerformedBtnOKJButton(arg0);
+	public void actionPerformed(ActionEvent g) {
+		if (g.getSource() == btnOK) {
+			actionPerformedBtnOKJButton(g);
 		}
 	}
 	protected void actionPerformedBtnOKJButton(ActionEvent arg0) {

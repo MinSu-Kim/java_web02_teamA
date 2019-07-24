@@ -46,6 +46,20 @@ private static GuestMapper guestDao;
 		log.debug(guest.toString());
 		Assert.assertEquals(1, res);
 	}
-
+	@Test
+	public void test03UpdateGuest() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Guest guest = new Guest();
+		guest.setgNo(5);
+		guest.setgName("구구까까1");
+		guest.setgTel("010-1111-1111");
+		guest.setgEmail("dkdkdk@zlzl.com");
+		guest.setgBirth(new Date());
+		guest.setgJoin(new Date());
+		guest.setgMemo("hhhhhh");
+		
+		int res = guestDao.updateGuest(guest);
+		Assert.assertEquals(1, res);
+	}
 
 }

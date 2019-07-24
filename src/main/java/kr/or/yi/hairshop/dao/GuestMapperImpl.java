@@ -26,4 +26,21 @@ public class GuestMapperImpl implements GuestMapper {
 		}
 	}
 
+	@Override
+	public int updateGuest(Guest guest) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateGuest", guest);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int deleteGuest(Guest guest) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".deleteGuest", guest);
+			sqlSession.commit();
+			return res;
+		}
+	}
 }
