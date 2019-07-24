@@ -69,7 +69,7 @@
 		join guest g 
 		on w.w_d_no=#{dNo} and w.w_g_no=g.g_no;
 	</select>
-	<select id="selectByReserve" resultMap="resultWorkDialogAll">
+	<select id="selectByReserve" resultMap="resultChoise">
 		select
 		w_no,
 		w_workTime,

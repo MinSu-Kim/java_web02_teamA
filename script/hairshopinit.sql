@@ -229,6 +229,21 @@ ALTER TABLE hairshop.Guest
 		REFERENCES hairshop.Level ( -- 등급
 			l_grade -- 등급
 		);
+
+insert into choice
+values
+(1,'파마'),
+(1,'염색'),
+(2,'파마'),
+(2,'염색'),
+(2,'커트'),
+(3,'파마'),
+(4,'파마'),
+(4,'커트'),
+(5,'커트')
+;
+
+	
 	
 	
 grant all privileges 
