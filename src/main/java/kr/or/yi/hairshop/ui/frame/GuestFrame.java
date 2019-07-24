@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.ui.frame.guest;
+package kr.or.yi.hairshop.ui.frame;
 
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
