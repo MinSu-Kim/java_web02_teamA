@@ -8,7 +8,6 @@ values
 ('실버',10),
 ('골드',15);
 
-
 INSERT INTO hairshop.event
 (e_name, e_startDay, e_endDay, e_sale)
 values

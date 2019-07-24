@@ -3,7 +3,7 @@
 <mapper namespace="kr.or.yi.hairshop.dao.EventMapper">
 
 	<select id="selectEventByAll" resultType="Event">
-		select * from event
+		select * from event where e_startDay is not null
 	</select>
 
 </mapper>
