@@ -17,5 +17,32 @@ public class DesignerMapperImpl implements DesignerMapper{
 			return sqlSession.selectList(namespace+".selectDesignerByAll");
 		}
 	}
+	
+	@Override
+	public int insertDesigner(Designer ds) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			int res = sqlSession.insert(namespace+".insertDesigner", ds);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int deleteDesigner(int dNo) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			int res = sqlSession.insert(namespace+".deleteDesigner", dNo);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int updateDesigner(Designer ds) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			int res = sqlSession.insert(namespace+".updateDesigner", ds);
+			sqlSession.commit();
+			return res;
+		}
+	}
 
 }

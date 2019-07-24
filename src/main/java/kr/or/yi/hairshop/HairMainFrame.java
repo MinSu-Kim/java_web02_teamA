@@ -101,6 +101,8 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		tabbedPane.addTab("홈", null, home, "홈");
 
 		pReservationMgn ReservationMgn = new pReservationMgn();
+		ReservationMgn.clearList();
+		ReservationMgn.reloadData();
 		tabbedPane.addTab("예약 관리", null, ReservationMgn, null);
 
 		pGuestMgn GuestMgn = new pGuestMgn();
