@@ -54,7 +54,7 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return String.format("Event [eName=%s, eStartDay=%s, eEndDay=%s, eSale=%s]", eName, eStartDay, eEndDay, eSale);
+		return String.format("%s(%s)", eName, eSale);
 	}
 
 	public Object[] toArray() {

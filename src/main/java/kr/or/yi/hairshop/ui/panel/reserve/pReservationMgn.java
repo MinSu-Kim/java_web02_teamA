@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -78,34 +79,32 @@ public class pReservationMgn extends JPanel {
 	}
 	
 	public void clearList() {
-//		workList = dao.selectByAll();
+		workList = dao.selectByReserve();
 	}
 
 	public void reloadData() {
 		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6);
-		tableSetWidth(20, 20, 50, 50, 80, 50, 50);
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+		tableSetWidth(20, 20, 50, 50, 80, 50, 50, 50, 50, 50);
+
 	}
 
 	private Object[][] getRows() {
-//		Object[][] rows = new Object[workList.size()][];
-//		for (int i = 0; i < workList.size(); i++) {
-//			rows[i] = workList.get(i).toArray();
-//		}
-//		return rows;
-		
-		return null;
+		Object[][] rows = new Object[workList.size()][];
+		for (int i = 0; i < workList.size(); i++) {
+			rows[i] = workList.get(i).toArray();
+		}
+		return rows;
 	}
 
 	private String[] getColumnNames() {
-		return new String[] { "번호", "등급", "이름", "전화번호", "이메일", "생일", "확인"};
+		return new String[] { "번호", "등급", "이름", "전화번호", "이메일", "생일", "확인", "확인", "확인", "확인"};
 	}
 
 	// 테이블 셀 내용의 정렬
 	protected void tableCellAlignment(int align, int... idx) {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(align);
-
 		TableColumnModel model = table.getColumnModel();
 		for (int i = 0; i < idx.length; i++) {
 			model.getColumn(idx[i]).setCellRenderer(dtcr);
@@ -115,7 +114,6 @@ public class pReservationMgn extends JPanel {
 	// 테이블 셀의 폭 설정
 	protected void tableSetWidth(int... width) {
 		TableColumnModel cModel = table.getColumnModel();
-
 		for (int i = 0; i < width.length; i++) {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
