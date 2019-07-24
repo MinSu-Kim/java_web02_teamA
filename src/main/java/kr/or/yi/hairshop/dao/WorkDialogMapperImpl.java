@@ -24,5 +24,11 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 		}
 	}
 
+	@Override
+	public List<WorkDialog> selectByReserve() {
+		
+		return null;
+	}
+
 
 }

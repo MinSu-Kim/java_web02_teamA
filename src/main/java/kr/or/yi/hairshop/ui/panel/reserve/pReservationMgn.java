@@ -78,7 +78,7 @@ public class pReservationMgn extends JPanel {
 	}
 	
 	public void clearList() {
-		workList = dao.selectByAll();
+//		workList = dao.selectByAll();
 	}
 
 	public void reloadData() {
@@ -88,11 +88,13 @@ public class pReservationMgn extends JPanel {
 	}
 
 	private Object[][] getRows() {
-		Object[][] rows = new Object[workList.size()][];
-		for (int i = 0; i < workList.size(); i++) {
-			rows[i] = workList.get(i).toArray();
-		}
-		return rows;
+//		Object[][] rows = new Object[workList.size()][];
+//		for (int i = 0; i < workList.size(); i++) {
+//			rows[i] = workList.get(i).toArray();
+//		}
+//		return rows;
+		
+		return null;
 	}
 
 	private String[] getColumnNames() {
