@@ -21,7 +21,7 @@ import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn;
-import kr.or.yi.hairshop.ui.panel.home.pDesignerForm;
+import kr.or.yi.hairshop.ui.panel.home.pHomeDesignerForm;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
 import kr.or.yi.hairshop.ui.panel.reserve.pReservationMgn;
 
@@ -94,7 +94,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 		DesignerMapper d_Dao=new DesignerMapperImpl();
 		dList = d_Dao.selectDesignerByAll();
-		pDesignerForm home = new pDesignerForm();
+		pHomeDesignerForm home = new pHomeDesignerForm();
 		home.setDList(dList);
 		home.refresh();
 		tabbedPane.addTab("홈", null, home, "홈");

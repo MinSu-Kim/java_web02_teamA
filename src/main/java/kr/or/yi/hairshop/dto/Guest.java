@@ -17,6 +17,12 @@ public class Guest {
 	public Guest() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Guest(int gNo, String gName) {
+		super();
+		this.gNo = gNo;
+		this.gName = gName;
+	}
 
 	public Guest(int gNo, Level gLGrade, String gName, String gTel, String gEmail, Date gBirth, Date gJoin, int gPoint,
 			String gMemo) {
@@ -104,10 +110,8 @@ public class Guest {
 	}
 
 	@Override
-	public String toString() {
-		return String.format(
-				"Guest [gNo=%s, gLGrade=%s, gName=%s, gTel=%s, gEmail=%s, gBirth=%s, gJoin=%s, gPoint=%s, gMemo=%s]",
-				gNo, gLGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo);
+	public String toString() { //제가 필요에 의해서 바꾸엇습니다.-나모
+		return String.format("%s",gName);
 	}
 
 	public Object[] toArray() {
