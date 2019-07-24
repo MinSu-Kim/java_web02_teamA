@@ -124,15 +124,14 @@ public class Guest {
 	}
 
 	@Override
-	public String toString() {
-		return String.format(
-				"Guest [gNo=%s, gId=%s, gPassword=%s, gLGrade=%s, gName=%s, gTel=%s, gEmail=%s, gBirth=%s, gJoin=%s, gPoint=%s, gMemo=%s]",
-				gNo, gId, gPassword, gLGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo);
+	public String toString() { //제가 필요에 의해서 바꾸엇습니다.-나모
+		return String.format("%s",gName);
 	}
-	
+
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { gNo, gId, gPassword, gLGrade, gName, gTel, gEmail, date.format(gBirth), date.format(gJoin), gPoint, gMemo };
+		return new Object[] { gNo, gLGrade, gName, gTel, gEmail, date.format(gBirth), date.format(gJoin), gPoint,
+				gMemo };
 	}
 
 }
