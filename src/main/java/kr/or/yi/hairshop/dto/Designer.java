@@ -146,12 +146,11 @@ public class Designer {
 	@Override
 	public String toString() {
 		return String.format(
-				"Designer [dNo=%s, dGrade=%s, dId=%s, dPassword=%s, dName=%s, dTel=%s, dTel2=%s, dAddr=%s, dAddr2=%s, dAddr3=%s, dBirth=%s, dJoin=%s, dMemo=%s]",
-				dNo, dGrade, dId, dPassword, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo);
+				"Designer [dNo=%s, dGrade=%s, dName=%s, dTel=%s, dTel2=%s, dAddr=%s, dAddr2=%s, dAddr3=%s, dBirth=%s, dJoin=%s, dMemo=%s]",
+				dNo, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo);
 	}
-
+	
 	public Object[] toArray() {
-		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { dNo, dGrade, dId, dPassword, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, date.format(dBirth), date.format(dJoin), dMemo };
+		return new Object[] { dNo, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo };
 	}
 }
