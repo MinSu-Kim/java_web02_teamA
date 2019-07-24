@@ -34,6 +34,8 @@ public class Level {
 		return String.format("Level [lGrade=%s, lSale=%s]", lGrade, lSale);
 	}
 
-	
+	public Object[] toArray() {
+		return new Object[] { lGrade, lSale };
+	}
 
 }

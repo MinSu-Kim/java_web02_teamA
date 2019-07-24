@@ -9,7 +9,7 @@
 	</resultMap>
 	<resultMap type="WorkDialog" id="resultWorkDialog">
 		<result property="wNo" column="w_no" />
-		<result property="wWrokTime" column="w_wrokTime" />
+		<result property="wWrokTime" column="w_workTime" />
 		<result property="wReservTime" column="w_reservTime" />
 		<result property="wEName.eName" column="w_e_name" />
 		<result property="wDNo.dNo" column="w_d_no" />
@@ -19,7 +19,7 @@
 	<select id="selectDListByNo" parameterType="int" resultMap="resultWorkDialog">
 		select 
 		w_no,
-		w_wrokTime,
+		w_workTime,
 		w_reservTime,
 		w_e_name,
 		w_d_no,
@@ -33,7 +33,7 @@
 	<select id="selectByAll" resultMap="resultWorkDialog">
 		select 
 		w_no,
-		w_wrokTime,
+		w_workTime,
 		w_reservTime,
 		w_e_name,
 		w_d_no,

@@ -7,6 +7,7 @@ public class WorkDialog {
 	private int wNo;
 	private Date wWrokTime;
 	private Date wReservTime;
+	private int wPriceTotal;
 	private Event wEName;
 	private Designer wDNo;
 	private Guest wGNo;
@@ -15,10 +16,12 @@ public class WorkDialog {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WorkDialog(int wNo, Date wWrokTime, Date wReservTime, Event wEName, Designer wDNo, Guest wGNo) {
+	public WorkDialog(int wNo, Date wWrokTime, Date wReservTime, int wPriceTotal, Event wEName, Designer wDNo,
+			Guest wGNo) {
 		this.wNo = wNo;
 		this.wWrokTime = wWrokTime;
 		this.wReservTime = wReservTime;
+		this.wPriceTotal = wPriceTotal;
 		this.wEName = wEName;
 		this.wDNo = wDNo;
 		this.wGNo = wGNo;
@@ -48,6 +51,14 @@ public class WorkDialog {
 		this.wReservTime = wReservTime;
 	}
 
+	public int getwPriceTotal() {
+		return wPriceTotal;
+	}
+
+	public void setwPriceTotal(int wPriceTotal) {
+		this.wPriceTotal = wPriceTotal;
+	}
+
 	public Event getwEName() {
 		return wEName;
 	}
@@ -73,14 +84,12 @@ public class WorkDialog {
 	}
 
 	@Override
-	public String toString() {	//쓸일있어서 toString 변경햇어용-나모
-		return String.format("%s", wGNo);
+	public String toString() {
+		return String.format(
+				"WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wPriceTotal=%s, wEName=%s, wDNo=%s, wGNo=%s]", wNo, wWrokTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo);
 	}
-
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { wNo,	wWrokTime, wReservTime, wEName, wDNo, wGNo };
-	}	
-	
-	
+		return new Object[] { wNo, date.format(wWrokTime), date.format(wReservTime), wPriceTotal, wEName, wDNo, wGNo };
+	}
 }

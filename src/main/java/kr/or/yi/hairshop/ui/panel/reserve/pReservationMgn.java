@@ -84,7 +84,7 @@ public class pReservationMgn extends JPanel {
 	private Object[][] getRows() {
 		Object[][] rows = new Object[workList.size()][];
 		for (int i = 0; i < workList.size(); i++) {
-			rows[i] = workList.get(i).toArray();
+//			rows[i] = workList.get(i).toArray();
 		}
 		return rows;
 	}

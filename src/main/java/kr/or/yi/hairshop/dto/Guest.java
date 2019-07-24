@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class Guest {
 	private int gNo;
+	private String gId;
+	private String gPassword;
 	private Level gLGrade;
 	private String gName;
 	private String gTel;
@@ -17,16 +19,12 @@ public class Guest {
 	public Guest() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Guest(int gNo, String gName) {
-		super();
-		this.gNo = gNo;
-		this.gName = gName;
-	}
 
-	public Guest(int gNo, Level gLGrade, String gName, String gTel, String gEmail, Date gBirth, Date gJoin, int gPoint,
-			String gMemo) {
+	public Guest(int gNo, String gId, String gPassword, Level gLGrade, String gName, String gTel, String gEmail,
+			Date gBirth, Date gJoin, int gPoint, String gMemo) {
 		this.gNo = gNo;
+		this.gId = gId;
+		this.gPassword = gPassword;
 		this.gLGrade = gLGrade;
 		this.gName = gName;
 		this.gTel = gTel;
@@ -43,6 +41,22 @@ public class Guest {
 
 	public void setgNo(int gNo) {
 		this.gNo = gNo;
+	}
+
+	public String getgId() {
+		return gId;
+	}
+
+	public void setgId(String gId) {
+		this.gId = gId;
+	}
+
+	public String getgPassword() {
+		return gPassword;
+	}
+
+	public void setgPassword(String gPassword) {
+		this.gPassword = gPassword;
 	}
 
 	public Level getgLGrade() {
@@ -110,14 +124,15 @@ public class Guest {
 	}
 
 	@Override
-	public String toString() { //제가 필요에 의해서 바꾸엇습니다.-나모
-		return String.format("%s",gName);
+	public String toString() {
+		return String.format(
+				"Guest [gNo=%s, gId=%s, gPassword=%s, gLGrade=%s, gName=%s, gTel=%s, gEmail=%s, gBirth=%s, gJoin=%s, gPoint=%s, gMemo=%s]",
+				gNo, gId, gPassword, gLGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo);
 	}
-
+	
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { gNo, gLGrade, gName, gTel, gEmail, date.format(gBirth), date.format(gJoin), gPoint,
-				gMemo };
+		return new Object[] { gNo, gId, gPassword, gLGrade, gName, gTel, gEmail, date.format(gBirth), date.format(gJoin), gPoint, gMemo };
 	}
 
 }
