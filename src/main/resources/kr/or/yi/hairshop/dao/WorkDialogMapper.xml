@@ -26,24 +26,25 @@
 		<result property="gJoin" column="g_join" />
 		<result property="gPoint" column="g_point" />
 		<result property="gMemo" column="g_memo" />
-		<collection property="gLGrade" resultMap="resultGrade"/>
+		<collection property="gLGrade" resultMap="resultLevel"/>
 	</resultMap>
 	
 		
-	<resultMap type="Level" id="resultGrade">
-		<result property="lGrade" column="lGrade" />
+	<resultMap type="Level" id="resultLevel">
+		<result property="lGrade" column="g_l_grade" />
 		<result property="lSale" column="lSale" />
 	</resultMap>
 	
 	
 	<resultMap type="Product" id="resultProduct">
-		<result property="pPrice" column="pPrice" />
-		<result property="pName" column="pName" />
-		<result property="pDivision" column="pDivision" />
+		<result property="pPrice" column="p_price" />
+		<result property="pName" column="c_p_name" />
+		<result property="pDivision" column="p_Division" />
 	</resultMap>
 	
 	<resultMap type="Choice" id="resultChoise">
 		<collection property="cWNo" resultMap="resultWorkDialogAll"/>
+		<collection property="cPName" resultMap="resultProduct"/>
 	</resultMap>
 
 	<resultMap type="WorkDialog" id="resultWorkDialogAll">
@@ -81,6 +82,8 @@
 		c_p_name,
 		g_no,
 		g_l_grade,
+		g_email,
+		g_birth,
 		g_name,
 		g_tel,
 		g_point,

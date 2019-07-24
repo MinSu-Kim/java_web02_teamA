@@ -26,6 +26,20 @@ public class Choice {
 	public String toString() {
 		return String.format("Choice [cWNo=%s, cPName=%s]", cWNo, cPName);
 	}
+	public Object[] toArray() {
+		return new Object[] {
+				cWNo.getwNo(),
+				cWNo.getwGNo().getgLGrade().getlGrade(),
+				cWNo.getwGNo().getgName(),
+				cWNo.getwGNo().getgTel(),
+				cWNo.getwGNo().getgEmail(),
+				cWNo.getwGNo().getgBirth(),
+				"dd",
+				"dd",
+				"dd",
+				"dd"
+		};
+	}
 	
 	
 }

@@ -21,13 +21,14 @@ import javax.swing.table.TableColumnModel;
 
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
+import kr.or.yi.hairshop.dto.Choice;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.pCalendar;
 
 @SuppressWarnings("serial")
 public class pReservationMgn extends JPanel {
 	
-	private List<WorkDialog> workList;
+	private List<Choice> workList;
 	private WorkDialogMapper dao = new WorkDialogMapperImpl();
 	private JTable table;
 	
@@ -92,6 +93,7 @@ public class pReservationMgn extends JPanel {
 	private Object[][] getRows() {
 		Object[][] rows = new Object[workList.size()][];
 		for (int i = 0; i < workList.size(); i++) {
+			System.out.println(workList.get(i));
 			rows[i] = workList.get(i).toArray();
 		}
 		return rows;
