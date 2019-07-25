@@ -24,5 +24,12 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 		}
 	}
 
+	@Override
+	public List<WorkDialog> selectWDGECPjoinByNo(int wNo) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectWDGECPjoinByNo",wNo);
+		}
+	}
+
 
 }

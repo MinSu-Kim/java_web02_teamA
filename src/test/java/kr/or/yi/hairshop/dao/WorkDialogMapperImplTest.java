@@ -34,6 +34,14 @@ public class WorkDialogMapperImplTest extends AbstractTest {
 		System.out.println(list);
 		Assert.assertNotNull(list);
 	}
+	@Test
+	public void test02selectWDGECPjoinByNo() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		int no = 1;
+		List<WorkDialog> list = dao.selectWDGECPjoinByNo(no);
+		System.out.println(list);
+		Assert.assertNotNull(list);
+	}
 
 
 }

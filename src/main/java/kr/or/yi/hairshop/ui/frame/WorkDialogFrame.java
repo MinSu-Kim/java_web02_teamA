@@ -9,13 +9,21 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import kr.or.yi.hairshop.dao.WorkDialogMapper;
+import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class WorkDialogFrame extends JFrame implements ActionListener {
@@ -30,7 +38,12 @@ public class WorkDialogFrame extends JFrame implements ActionListener {
 	private JTextField tfpPrice;
 	private JTextField tfdMemo;
 	private JButton btnOk;
-	
+
+	private WorkDialogMapper dao;
+
+	private List<WorkDialog> workList;
+
+	private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");;
 
 	public WorkDialogFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -83,6 +96,9 @@ public class WorkDialogFrame extends JFrame implements ActionListener {
 		tfwWorkTime.setColumns(10);
 		panel_4.add(tfwWorkTime);
 		
+		JSpinner spStart = new JSpinner();
+		spStart.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
+		
 		JLabel lblwReservTime = new JLabel("작업일예약");
 		lblwReservTime.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lblwReservTime);
@@ -129,22 +145,27 @@ public class WorkDialogFrame extends JFrame implements ActionListener {
 		panel_1.add(panel_3);
 	}
 
-	public void setOpen(WorkDialog work) {
-		if(work!=null) {
+	public void setOpen(int wNo) {
+		if(wNo>-1) {
 			btnOk.setText("수정");
-			
+			dao = new WorkDialogMapperImpl();
+			workList = dao.selectWDGECPjoinByNo(wNo);
+			setTfOne(workList.get(0));
 		}else {
 			btnOk.setText("추가");
 		}
 	}
-	public void setTf(WorkDialog work) {
-		tfgDname.setText(work.getwGNo().getgName());;
-//		tfdName.setText(t);;
-//		tfwWorkTime.setText(t);;
-//		tfwReservTime.setText(t);;
-//		tfeName.setText(t);;
-//		tfpPrice.setText(t);;
-//		tfdMemo.setText(t);;
+	public void setTfOne(WorkDialog work) {
+		tfgDname.setText(work.getwGNo().getgName());
+		tfdName.setText(work.getwDNo().getdName());
+		
+		if(work.getwWorkTime()!=null)
+			tfwWorkTime.setText(sf.format(work.getwWorkTime()));
+		tfwReservTime.setText(sf.format(work.getwReservTime()));
+		if(work.getwEName()!=null)
+			tfeName.setText(work.getwEName().geteName());
+		tfpPrice.setText(work.getwPriceTotal()+"");
+		tfdMemo.setText(work.getwDNo().getdMemo());
 	}
 	public WorkDialog getTf() {
 		WorkDialog workDialog = new WorkDialog();

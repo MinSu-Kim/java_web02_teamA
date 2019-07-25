@@ -45,11 +45,11 @@ public class pReservationMgn extends JPanel {
 		panel.add(pNorth, BorderLayout.NORTH);
 		
 		JSpinner spStart = new JSpinner();
-		spStart.setModel(new SpinnerDateModel(new Date(1563807600000L), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
+		spStart.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
 		pNorth.add(spStart);
 		
 		JSpinner spEnd = new JSpinner();
-		spEnd.setModel(new SpinnerDateModel(new Date(1563807600000L), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
+		spEnd.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
 		pNorth.add(spEnd);
 		
 		JButton btnSearch = new JButton("검색");

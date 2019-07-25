@@ -26,6 +26,56 @@ public class Event {
 
 	
 	
+	public String geteName() {
+		return eName;
+	}
+
+
+	public void seteName(String eName) {
+		this.eName = eName;
+	}
+
+
+	public Date geteStartDay() {
+		return eStartDay;
+	}
+
+
+	public void seteStartDay(Date eStartDay) {
+		this.eStartDay = eStartDay;
+	}
+
+
+	public Date geteEndDay() {
+		return eEndDay;
+	}
+
+
+	public void seteEndDay(Date eEndDay) {
+		this.eEndDay = eEndDay;
+	}
+
+
+	public int geteSale() {
+		return eSale;
+	}
+
+
+	public void seteSale(int eSale) {
+		this.eSale = eSale;
+	}
+
+
+	public List<WorkDialog> getWorkDialogList() {
+		return workDialogList;
+	}
+
+
+	public void setWorkDialogList(List<WorkDialog> workDialogList) {
+		this.workDialogList = workDialogList;
+	}
+
+
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		return new Object[] { eName, date.format(eStartDay), date.format(eEndDay), eSale };

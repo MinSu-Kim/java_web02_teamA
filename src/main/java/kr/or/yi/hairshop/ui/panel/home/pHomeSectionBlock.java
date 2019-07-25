@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.yi.hairshop.dao.WorkDialogMapper;
+import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.ui.frame.WorkDialogFrame;
@@ -35,6 +37,8 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 	private DefaultTableModel model;
 	private Map<Integer, WorkDialog> list=new HashMap<Integer, WorkDialog>();
 	private final String[] columns = { "시간", "작업명"};
+	private WorkDialogMapper dao = new WorkDialogMapperImpl();
+	private WorkDialogFrame frame;
 	private String[][] data = { 
 			{ "08:00", ""}, 
 			{ "09:00", ""}, 
@@ -54,6 +58,7 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 			{ "23:00", ""},
 			{ "24:00", ""},
 	};
+	
 	public pHomeSectionBlock() {
 		
 		setLayout(new BorderLayout());
@@ -92,8 +97,13 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 		System.out.println(row + "행, " + column + "열 : " + jtable.getValueAt(row, column) + " 선택했음");
 //		System.out.println(list.get(jtable.getValueAt(row, 0)));
 		WorkDialog work = list.get(row);
-		WorkDialogFrame frame = new WorkDialogFrame();
-		frame.setOpen(work);
+		if(work!=null) {
+			frame = new WorkDialogFrame();
+			frame.setOpen(work.getwNo());
+		}else {
+			frame = new WorkDialogFrame();
+			frame.setOpen(-1);
+		}
 		frame.setVisible(true);
 		
 	}
