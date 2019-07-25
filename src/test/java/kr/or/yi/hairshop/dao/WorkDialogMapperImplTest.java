@@ -36,16 +36,5 @@ public class WorkDialogMapperImplTest extends AbstractTest {
 		Assert.assertNotNull(list);
 	}
 
-	
-	
-	@Test
-	public void test02selectByReserve() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		List<Choice> list = dao.selectByReserve();
-		System.out.println(list);
-		Assert.assertNotNull(list);
-	}	
-	
-	
 
 }
