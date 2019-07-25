@@ -18,13 +18,13 @@
 		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.basicGuest" />
 	</resultMap>
 	
-	<resultMap type="" id="" extends="basicWorkDialog">
+<!-- 	<resultMap type="" id="" extends="basicWorkDialog">
 		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.extendsDesigner"/>
 		<association property="wEName" resultMap="kr.or.yi.hairshop.dao.EventMapper.basicEvent"/>
 		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.basicGuest" />
-	</resultMap>
+	</resultMap> -->
 	
-	<select id="selectWDGECPjoinAll" resultMap="">
+<!-- 	<select id="selectWDGECPjoinAll" resultMap="">
 		SELECT *
 		FROM workdialog w
 		left join designer d
@@ -37,7 +37,7 @@
 		on c.c_p_name=p.p_name
 		left join guest g
 		on w_g_no=g.g_no
-	</select>
+	</select> -->
 	<select id="selectDListByNo" parameterType="int" resultMap="resultWorkDialog">
 		select
 		w_no,
