@@ -43,7 +43,9 @@ public class WorkDialogFrame extends JFrame implements ActionListener {
 
 	private List<WorkDialog> workList;
 
-	private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");;
+	private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");
+
+	private JSpinner jSpinwWorkTime;;
 
 	public WorkDialogFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -92,12 +94,13 @@ public class WorkDialogFrame extends JFrame implements ActionListener {
 		lblwWorkTime.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lblwWorkTime);
 		
-		tfwWorkTime = new JTextField();
-		tfwWorkTime.setColumns(10);
-		panel_4.add(tfwWorkTime);
+//		tfwWorkTime = new JTextField();
+//		tfwWorkTime.setColumns(10);
+//		panel_4.add(tfwWorkTime);
 		
-		JSpinner spStart = new JSpinner();
-		spStart.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
+		jSpinwWorkTime = new JSpinner();
+		jSpinwWorkTime.setModel(new SpinnerDateModel(new Date(1564055994890L), null, null, Calendar.HOUR_OF_DAY));
+		panel_4.add(jSpinwWorkTime);
 		
 		JLabel lblwReservTime = new JLabel("작업일예약");
 		lblwReservTime.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -160,7 +163,12 @@ public class WorkDialogFrame extends JFrame implements ActionListener {
 		tfdName.setText(work.getwDNo().getdName());
 		
 		if(work.getwWorkTime()!=null)
-			tfwWorkTime.setText(sf.format(work.getwWorkTime()));
+			
+//			jSpinwWorkTime.setModel(new SpinnerDateModel(work.getwWorkTime()));
+			jSpinwWorkTime.setModel(new SpinnerDateModel(work.getwWorkTime(), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
+		
+//			tfwWorkTime.setText(sf.format(work.getwWorkTime()));
+		
 		tfwReservTime.setText(sf.format(work.getwReservTime()));
 		if(work.getwEName()!=null)
 			tfeName.setText(work.getwEName().geteName());
