@@ -18,13 +18,16 @@
 		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.basicGuest" />
 	</resultMap>
 	
-<!-- 	<resultMap type="" id="" extends="basicWorkDialog">
-		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.extendsDesigner"/>
+
+	<resultMap type="WorkDialog" id="selectWDGECPjoinByNo" extends="basicWorkDialog">
+		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.basicDesigner"/>
 		<association property="wEName" resultMap="kr.or.yi.hairshop.dao.EventMapper.basicEvent"/>
-		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.basicGuest" />
-	</resultMap> -->
+		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.basicGuest"/>
+		<collection property="productList" resultMap="kr.or.yi.hairshop.dao.ProductMapper.basicProduct"/>
+	</resultMap>
 	
-<!-- 	<select id="selectWDGECPjoinAll" resultMap="">
+
+	<select id="selectWDGECPjoinByNo" resultMap="selectWDGECPjoinByNo">
 		SELECT *
 		FROM workdialog w
 		left join designer d
@@ -37,7 +40,8 @@
 		on c.c_p_name=p.p_name
 		left join guest g
 		on w_g_no=g.g_no
-	</select> -->
+		where w.w_no=#{wNo}
+	</select>
 	<select id="selectDListByNo" parameterType="int" resultMap="resultWorkDialog">
 		select
 		w_no,

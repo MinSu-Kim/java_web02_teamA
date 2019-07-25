@@ -230,7 +230,10 @@ ALTER TABLE hairshop.Guest
 			l_grade -- 등급
 		);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/KNH
 	
 	
 grant all privileges 
