@@ -8,7 +8,7 @@
 		<result property="tPrice" column="t_price" />
 		<result property="tDate" column="t_date" />
 	</resultMap>
-	<resultMap type="Tax" id="extendsTax" extends="basicTax">
+	<!-- <resultMap type="Tax" id="extendsTax" extends="basicTax">
 		<association property="tPName" resultMap="kr.or.yi.hairshop.dao.ProductMapper.resultProduct"/>
-	</resultMap>
+	</resultMap> -->
 </mapper>

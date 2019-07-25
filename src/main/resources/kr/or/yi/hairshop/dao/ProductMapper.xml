@@ -3,7 +3,7 @@
 <mapper namespace="kr.or.yi.hairshop.dao.ProductMapper">
 	
 	
-	<resultMap type="Product" id="resultProduct">
+	<resultMap type="Product" id="basicProduct">
 		<result property="pPrice" column="p_price" />
 		<result property="pName" column="p_name" />
 		<result property="pDivision" column="p_division" />

@@ -8,9 +8,9 @@
 		<result property="eEndDay" column="e_endDay" />
 		<result property="eSale" column="e_sale" />
 	</resultMap>
-	<resultMap type="Event" id="extendsEvent" extends="basicEvent">
+	<!-- <resultMap type="Event" id="extendsEvent" extends="basicEvent">
 		<collection property="workDialogList" resultMap="kr.or.yi.hairshop.dao.WorkDialogMapper.extendsWorkDialog" />
-	</resultMap>
+	</resultMap> -->
 	<select id="selectEventByAll" resultType="Event">
 		select * from event where e_startDay is not null
 	</select>
