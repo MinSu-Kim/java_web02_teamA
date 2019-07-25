@@ -18,10 +18,6 @@ public class WorkDialog {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
-
-
 	public WorkDialog(int wNo, Date wReservTime, Date wWorkTime, int wPriceTotal, Event wEName, Designer wDNo,
 			Guest wGNo, List<Product> productList) {
 		this.wNo = wNo;
@@ -33,8 +29,6 @@ public class WorkDialog {
 		this.wGNo = wGNo;
 		this.productList = productList;
 	}
-
-
 
 	public int getwNo() {
 		return wNo;
@@ -48,12 +42,9 @@ public class WorkDialog {
 		return wWorkTime;
 	}
 
-
-
 	public void setwWorkTime(Date wWorkTime) {
 		this.wWorkTime = wWorkTime;
 	}
-
 
 	public Date getwReservTime() {
 		return wReservTime;
