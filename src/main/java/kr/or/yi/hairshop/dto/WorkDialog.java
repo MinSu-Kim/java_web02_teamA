@@ -6,8 +6,8 @@ import java.util.List;
 
 public class WorkDialog {
 	private int wNo;
-	private Date wWrokTime;
 	private Date wReservTime;
+	private Date wWorkTime;
 	private int wPriceTotal;
 	private Event wEName;
 	private Designer wDNo;
@@ -18,17 +18,23 @@ public class WorkDialog {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WorkDialog(int wNo, Date wWrokTime, Date wReservTime, int wPriceTotal, Event wEName, Designer wDNo,
+	
+
+
+
+	public WorkDialog(int wNo, Date wReservTime, Date wWorkTime, int wPriceTotal, Event wEName, Designer wDNo,
 			Guest wGNo, List<Product> productList) {
 		this.wNo = wNo;
-		this.wWrokTime = wWrokTime;
 		this.wReservTime = wReservTime;
+		this.wWorkTime = wWorkTime;
 		this.wPriceTotal = wPriceTotal;
 		this.wEName = wEName;
 		this.wDNo = wDNo;
 		this.wGNo = wGNo;
 		this.productList = productList;
 	}
+
+
 
 	public int getwNo() {
 		return wNo;
@@ -38,13 +44,16 @@ public class WorkDialog {
 		this.wNo = wNo;
 	}
 
-	public Date getwWrokTime() {
-		return wWrokTime;
+	public Date getwWorkTime() {
+		return wWorkTime;
 	}
 
-	public void setwWrokTime(Date wWrokTime) {
-		this.wWrokTime = wWrokTime;
+
+
+	public void setwWorkTime(Date wWorkTime) {
+		this.wWorkTime = wWorkTime;
 	}
+
 
 	public Date getwReservTime() {
 		return wReservTime;
@@ -96,11 +105,13 @@ public class WorkDialog {
 
 	@Override
 	public String toString() {
-		return String.format("WorkDialog %s",wDNo);
+		return String.format(
+				"WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wPriceTotal=%s, wEName=%s, wDNo=%s, wGNo=%s, productList=%s]",
+				wNo, wWorkTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo, productList);
 	}
 
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { wNo, wWrokTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo };
+		return new Object[] { wNo, wWorkTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo };
 	}
 }
