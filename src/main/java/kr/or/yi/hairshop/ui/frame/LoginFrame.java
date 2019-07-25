@@ -107,7 +107,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		Designer designer = dao.selelctDesignerById(id);
 		
-		if(password.equals(designer.getdPassword()) == true) {
+		if(designer != null && password.equals(designer.getdPassword()) == true ) {
 			String dGrade = designer.getdGrade();
 			String dId = designer.getdId();
 			String dName = designer.getdName();
@@ -118,6 +118,9 @@ public class LoginFrame extends JFrame implements ActionListener {
 			tfPassWord.setText("");
 			JOptionPane.showMessageDialog(null, "로그인 되었습니다");
 			dispose();
+			
+		}else {
+			JOptionPane.showMessageDialog(null, "아이디, 비밀번호를 잘못 입력하였습니다");
 		}
 
 		
