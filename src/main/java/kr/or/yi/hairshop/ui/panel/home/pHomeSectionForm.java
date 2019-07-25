@@ -18,17 +18,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class pHomeDesignerForm extends JPanel implements ActionListener {
+public class pHomeSectionForm extends JPanel implements ActionListener {
 	private List<Designer> dList=new ArrayList<Designer>();
 	private WorkDialogMapper workDialog=new WorkDialogMapperImpl();
 	private List<WorkDialog> wList=new ArrayList<WorkDialog>();
-	private pHomeDesignerBlock[] panelList= new pHomeDesignerBlock[5];
+	private pHomeSectionBlock[] panelList= new pHomeSectionBlock[5];
 	private JButton btnLeft;
 	private JButton btnRight;
 	int start=0;
 	
 	
-	public pHomeDesignerForm() {
+	public pHomeSectionForm() {
 		init();
 	}
 	public void init(){
@@ -81,7 +81,7 @@ public class pHomeDesignerForm extends JPanel implements ActionListener {
 		
 		
 		for(int i=0; i<3; i++) {
-			panelList[i] = new pHomeDesignerBlock();
+			panelList[i] = new pHomeSectionBlock();
 			panelListForm.add(panelList[i]);
 		}
 		

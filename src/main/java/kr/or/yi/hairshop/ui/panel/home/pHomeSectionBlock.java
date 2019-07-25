@@ -27,7 +27,7 @@ import kr.or.yi.hairshop.ui.frame.WorkDialogFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class pHomeDesignerBlock extends JPanel implements MouseListener {
+public class pHomeSectionBlock extends JPanel implements MouseListener {
 	JTable jtable;
 	private JLabel lblDesigner;
 	private Designer designer;
@@ -54,7 +54,7 @@ public class pHomeDesignerBlock extends JPanel implements MouseListener {
 			{ "23:00", ""},
 			{ "24:00", ""},
 	};
-	public pHomeDesignerBlock() {
+	public pHomeSectionBlock() {
 		
 		setLayout(new BorderLayout());
 		
