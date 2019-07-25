@@ -1,6 +1,5 @@
 package kr.or.yi.hairshop.dto;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +25,14 @@ public class Designer {
 		// TODO Auto-generated constructor stub
 	}
 	
+
+
+	public Designer(String dGrade, String dId, String dName) {
+		this.dGrade = dGrade;
+		this.dId = dId;
+		this.dName = dName;
+	}
+
 
 
 	public Designer(int dNo, String dGrade, String dId, String dPassword, String dName, String dTel, String dTel2,

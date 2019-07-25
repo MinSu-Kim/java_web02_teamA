@@ -48,3 +48,7 @@ on w.w_no=c.c_w_no
 left join guest g
 on w.w_g_no=g.g_no;
 
+
+select * from Designer
+where d_id = 'user1';
+

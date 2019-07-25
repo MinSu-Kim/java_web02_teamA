@@ -5,9 +5,14 @@ import java.util.List;
 import kr.or.yi.hairshop.dto.Designer;
 
 public interface DesignerMapper {
-	List<Designer> selectDesignerByAll();
-	int insertDesigner(Designer ds);
-	int deleteDesigner(int dNo);
-	int updateDesigner(Designer ds);
-	List<Designer> selectDesignerByNo(int dNo);
+	public List<Designer> selectDesignerByAll();
+	public List<Designer> selectDesignerByNo(int dNo);
+	
+	public Designer selelctDesignerById(String id); // 로그인
+	
+	public int insertDesigner(Designer ds);
+	public int deleteDesigner(int dNo);
+	public int updateDesigner(Designer ds);
+
+
 }

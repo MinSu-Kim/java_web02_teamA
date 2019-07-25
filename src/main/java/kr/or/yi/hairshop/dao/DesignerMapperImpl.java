@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.jdbc.MyBatisSqlSessionFactory;
 
@@ -49,6 +48,13 @@ public class DesignerMapperImpl implements DesignerMapper{
 	public List<Designer> selectDesignerByNo(int dNo) {
 		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
 			return sqlSession.selectList(namespace+".selectDesignerByNo",dNo);
+		}
+	}
+
+	@Override
+	public Designer selelctDesignerById(String id) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectOne(namespace+".selelctDesignerById",id);
 		}
 	}
 

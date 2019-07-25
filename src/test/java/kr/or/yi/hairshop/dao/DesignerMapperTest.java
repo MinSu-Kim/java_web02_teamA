@@ -43,6 +43,16 @@ public class DesignerMapperTest extends AbstractTest {
 		log.debug(designer.toString());
 		Assert.assertNotNull(designer);
 	}
+	
+	
+	@Test
+	public void Test03selelctDesignerById() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Designer designer = dsDao.selelctDesignerById("user1");
+		log.debug(designer.toString());
+		Assert.assertNotNull(designer);
+	}
+	
 	/*
 	 * @Test public void test02insertDesigner() {
 	 * log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
