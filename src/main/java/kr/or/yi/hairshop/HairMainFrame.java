@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
@@ -20,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
+import kr.or.yi.hairshop.ui.frame.LoginFrame;
 import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn;
 import kr.or.yi.hairshop.ui.panel.home.pHomeSectionForm;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
@@ -29,9 +31,12 @@ import kr.or.yi.hairshop.ui.panel.reserve.pReservationMgn;
 public class HairMainFrame extends JFrame implements ActionListener {
 
 	private static HairMainFrame mainFrame;
+	private static LoginFrame LoginFrame;
 	private JPanel contentPane;
 	private List<Designer> dList;
 	private pHomeSectionForm home;
+	private JButton btnLogin;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -83,7 +88,12 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		fl_LoginBtn.setAlignment(FlowLayout.RIGHT);
 		TopLogo.add(LoginBtn, BorderLayout.EAST);
 
-		JButton btnLogin = new JButton("로그인");
+		btnLogin = new JButton("로그인");
+		btnLogin.addActionListener(this);
+		
+		JLabel lblLogin = new JLabel("");
+		LoginBtn.add(lblLogin);
+		lblLogin.setHorizontalAlignment(SwingConstants.LEFT);
 		LoginBtn.add(btnLogin);
 
 		JPanel pMain = new JPanel();
@@ -125,9 +135,17 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnLogin) {
+			actionPerformedBtnLogin(arg0);
+		}
 		// TODO Auto-generated method stub
 
 	}
 	
 
+	protected void actionPerformedBtnLogin(ActionEvent arg0) {
+		//로그인 버튼
+		LoginFrame = new LoginFrame();
+		LoginFrame.setVisible(true);
+	}
 }
