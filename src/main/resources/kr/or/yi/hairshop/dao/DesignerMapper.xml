@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.hairshop.dao.DesignerMapper">
 
-	<resultMap type="Designer" id="resultDesigner">
+	<resultMap type="Designer" id="basicDesigner">
 		<result property="dNo" column="d_no" />
 		<result property="dGrade" column="d_grade" />
 		<result property="dId" column="d_id" />
@@ -16,9 +16,12 @@
 		<result property="dBirth" column="d_birth" />
 		<result property="dJoin" column="d_join" />
 		<result property="dMemo" column="d_memo" />
-		<collection property="workDialogList" resultMap="kr.or.yi.hairshop.dao.WorkDialogMapper.resultWorkDialog"/>
 	</resultMap>
-
+	<resultMap type="Designer" id="extendsDesigner" extends="basicDesigner">
+		<collection property="workDialogList" resultMap="kr.or.yi.hairshop.dao.WorkDialogMapper.extendsWorkDialog"/>
+	</resultMap>
+	
+	
 	<select id="selectDesignerByAll" resultType="Designer">
 		select * 
 		from

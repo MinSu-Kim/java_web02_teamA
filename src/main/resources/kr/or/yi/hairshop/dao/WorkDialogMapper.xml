@@ -8,9 +8,15 @@
 		<result property="wWorkTime" column="w_workTime" />
 		<result property="wReservTime" column="w_reservTime" />
 		<result property="wPriceTotal" column="w_priceTotal" />
-		<!-- <association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.resultDesigner"/>
+		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.resultDesigner"/>
 		<association property="wEName" resultMap="kr.or.yi.hairshop.dao.EventMapper.resultEvent"/>
-		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.resultGuest" /> -->
+		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.resultGuest" />
+	</resultMap>
+	<resultMap type="WorkDialog" id="resultWorkDialogCollection">
+		<result property="wNo" column="w_no"/>
+		<result property="wWorkTime" column="w_workTime" />
+		<result property="wReservTime" column="w_reservTime" />
+		<result property="wPriceTotal" column="w_priceTotal" />
 	</resultMap>
 
 
