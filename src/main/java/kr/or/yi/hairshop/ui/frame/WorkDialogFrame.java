@@ -73,7 +73,7 @@ public class WorkDialogFrame extends JFrame {
 		panel_4.add(tfdName);
 		tfdName.setColumns(10);
 		
-		JLabel lblwWorkTime = new JLabel("작업날짜");
+		JLabel lblwWorkTime = new JLabel("작업완료일");
 		lblwWorkTime.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lblwWorkTime);
 		
@@ -81,7 +81,7 @@ public class WorkDialogFrame extends JFrame {
 		tfwWorkTime.setColumns(10);
 		panel_4.add(tfwWorkTime);
 		
-		JLabel lblwReservTime = new JLabel("예약날짜");
+		JLabel lblwReservTime = new JLabel("작업일예약");
 		lblwReservTime.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lblwReservTime);
 		
