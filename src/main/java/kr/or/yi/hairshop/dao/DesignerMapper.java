@@ -13,6 +13,6 @@ public interface DesignerMapper {
 	public int insertDesigner(Designer ds);
 	public int deleteDesigner(int dNo);
 	public int updateDesigner(Designer ds);
-
+	List<Designer> selectDesignerByMgn();
 
 }

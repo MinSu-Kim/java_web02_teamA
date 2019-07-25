@@ -57,5 +57,12 @@ public class DesignerMapperImpl implements DesignerMapper{
 			return sqlSession.selectOne(namespace+".selelctDesignerById",id);
 		}
 	}
+	
+	@Override
+	public List<Designer> selectDesignerByMgn() {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectDesignerByMgn");
+		}
+	}
 
 }

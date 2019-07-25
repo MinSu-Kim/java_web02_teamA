@@ -237,4 +237,8 @@ public class Designer {
 	public Object[] toArray() {
 		return new Object[] { dNo, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo };
 	}
+	
+	public Object[] toArrayMgn() {
+		return new Object[] { dGrade, dName, dTel, dTel2 };
+	}
 }

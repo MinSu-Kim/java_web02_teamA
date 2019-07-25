@@ -60,5 +60,11 @@
 		d_join=#{dJoin}, d_memo=#{dMemo}
 		WHERE d_no=#{dNo}
 	</update>
+	
+	<select id="selectDesignerByMgn" resultType="Designer">
+		SELECT d_grade, d_name, d_tel, d_tel2
+		FROM designer;
+	</select>
+	
 
 </mapper>

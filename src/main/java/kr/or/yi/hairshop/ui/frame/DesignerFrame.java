@@ -2,20 +2,25 @@ package kr.or.yi.hairshop.ui.frame;
 
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
+import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
+import kr.or.yi.hairshop.dto.Designer;
+import kr.or.yi.hairshop.panel.DesignerPanel;
 
 @SuppressWarnings("serial")
 public class DesignerFrame extends JFrame implements ActionListener {
@@ -33,7 +38,22 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private JTextField tfdMemo;
 	private JButton btnConfirm;
 	private DesignerMapper dsmapper;
+	private JTable tableDesigner;
+	private List<Designer> DesignList;
 	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DesignerFrame frame = new DesignerFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+	}
 
 	public DesignerFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -141,10 +161,16 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		btnConfirm.addActionListener(this);
 		panel_5.add(btnConfirm);
 		
-		JPanel panel_3 = new JPanel();
+		DesignerPanel panel_3 = new DesignerPanel();
 		panel_1.add(panel_3);
-	}
+		
+		panel_3.clearList();
+		panel_3.reloadData();
 	
+		
+	}
+
+		
 	public void clearTextField() { //TextField를 비움
 		tfdGrade.setText("");
 		tfdName.setText("");
