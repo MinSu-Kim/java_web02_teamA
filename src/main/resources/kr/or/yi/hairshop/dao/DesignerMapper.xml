@@ -17,9 +17,9 @@
 		<result property="dJoin" column="d_join" />
 		<result property="dMemo" column="d_memo" />
 	</resultMap>
-	<!-- <resultMap type="Designer" id="extendsDesigner" extends="basicDesigner">
+	<resultMap type="Designer" id="extendsDesigner" extends="basicDesigner">
 		<collection property="workDialogList" resultMap="kr.or.yi.hairshop.dao.WorkDialogMapper.resultWorkDialog"/>
-	</resultMap> -->
+	</resultMap>
 	
 	
 	<select id="selectDesignerByAll" resultType="Designer">
