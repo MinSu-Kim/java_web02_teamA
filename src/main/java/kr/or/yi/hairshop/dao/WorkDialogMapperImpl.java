@@ -25,12 +25,5 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 		}
 	}
 
-	@Override
-	public List<Choice> selectByReserve() {
-		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
-			return sqlSession.selectList(namespace+".selectByReserve");
-		}
-	}
-
 
 }

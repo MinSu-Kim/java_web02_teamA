@@ -19,6 +19,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.yi.hairshop.dao.ChoiceMapper;
+import kr.or.yi.hairshop.dao.ChoiceMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Choice;
@@ -29,7 +31,7 @@ import kr.or.yi.hairshop.panel.pCalendar;
 public class pReservationMgn extends JPanel {
 	
 	private List<Choice> workList;
-	private WorkDialogMapper dao = new WorkDialogMapperImpl();
+	private ChoiceMapper dao = new ChoiceMapperImpl();
 	private JTable table;
 	
 	public pReservationMgn() {
@@ -80,7 +82,7 @@ public class pReservationMgn extends JPanel {
 	}
 	
 	public void clearList() {
-		workList = dao.selectByReserve();
+		workList = dao.selectByAll();
 	}
 
 	public void reloadData() {
