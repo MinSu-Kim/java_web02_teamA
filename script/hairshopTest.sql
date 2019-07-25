@@ -49,6 +49,7 @@ left join guest g
 on w.w_g_no=g.g_no;
 
 
+<<<<<<< HEAD
 
 SELECT *
 FROM workdialog w
@@ -64,3 +65,8 @@ left join guest g
 on w_g_no=g.g_no
 ;
 select * from workdialog;
+=======
+select * from Designer
+where d_id = 'user1';
+
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web02_teamA.git

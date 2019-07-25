@@ -32,11 +32,14 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 	private static HairMainFrame mainFrame;
 	private static LoginFrame LoginFrame;
+	private static Designer Auth = null;
+	
 	private JPanel contentPane;
 	private List<Designer> dList;
 	private pHomeSectionForm home;
 	private JButton btnLogin;
-	
+	private JLabel lblLogin;
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -91,7 +94,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		btnLogin = new JButton("로그인");
 		btnLogin.addActionListener(this);
 		
-		JLabel lblLogin = new JLabel("");
+		lblLogin = new JLabel("");
 		LoginBtn.add(lblLogin);
 		lblLogin.setHorizontalAlignment(SwingConstants.LEFT);
 		LoginBtn.add(btnLogin);
@@ -145,9 +148,24 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 	protected void actionPerformedBtnLogin(ActionEvent arg0) {
 		//로그인 버튼
-		LoginFrame = new LoginFrame();
-		LoginFrame.setVisible(true);
+		if(LoginFrame == null) {
+			LoginFrame = new LoginFrame();
+			LoginFrame.setParent(HairMainFrame.this);
+			LoginFrame.setVisible(true);
+		}else {
+			LoginFrame.clearAuth();
+			btnLogin.setText("로그인");
+			lblLogin.setText("");
+			LoginFrame.setVisible(true);
+		}
 	}
 	
+
+	public void Login(Designer designer) {
+		Auth = designer;
+		btnLogin.setText("로그아웃");
+		lblLogin.setText(Auth.getdName()+"님 반갑습니다");
+		
+	}
 	
 }
