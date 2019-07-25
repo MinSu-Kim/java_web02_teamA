@@ -2,6 +2,7 @@ package kr.or.yi.hairshop.dto;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Guest {
 	private int gNo;
@@ -15,13 +16,14 @@ public class Guest {
 	private Date gJoin;
 	private int gPoint;
 	private String gMemo;
+	private List<WorkDialog> workDialogList;
 
 	public Guest() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Guest(int gNo, String gId, String gPassword, Level gLGrade, String gName, String gTel, String gEmail,
-			Date gBirth, Date gJoin, int gPoint, String gMemo) {
+			Date gBirth, Date gJoin, int gPoint, String gMemo, List<WorkDialog> workDialogList) {
 		this.gNo = gNo;
 		this.gId = gId;
 		this.gPassword = gPassword;
@@ -33,6 +35,7 @@ public class Guest {
 		this.gJoin = gJoin;
 		this.gPoint = gPoint;
 		this.gMemo = gMemo;
+		this.workDialogList = workDialogList;
 	}
 
 	public int getgNo() {
@@ -123,9 +126,21 @@ public class Guest {
 		this.gMemo = gMemo;
 	}
 
+	public List<WorkDialog> getWorkDialogList() {
+		return workDialogList;
+	}
+
+	public void setWorkDialogList(List<WorkDialog> workDialogList) {
+		this.workDialogList = workDialogList;
+	}
+
+	
+	
 	@Override
-	public String toString() { //제가 필요에 의해서 바꾸엇습니다.-나모
-		return String.format("%s",gName);
+	public String toString() {
+		return String.format(
+				"Guest [gNo=%s, gId=%s, gPassword=%s, gLGrade=%s, gName=%s, gTel=%s, gEmail=%s, gBirth=%s, gJoin=%s, gPoint=%s, gMemo=%s, workDialogList=%s]",
+				gNo, gId, gPassword, gLGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo, workDialogList);
 	}
 
 	public Object[] toArray() {

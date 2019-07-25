@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.hairshop.dao.WorkDialogMapper">
-	
-	<resultMap type="Guest" id="resultGuest">
-		<result property="gNo" column="w_g_no" />
-		<result property="gName" column="g_name" />
-	</resultMap>
-	
+
 	<resultMap type="WorkDialog" id="resultWorkDialog">
-		<result property="wNo" column="w_no" />
+		<result property="wNo" column="w_no"/>
 		<result property="wWrokTime" column="w_wrokTime" />
 		<result property="wReservTime" column="w_reservTime" />
-		<result property="wEName.eName" column="w_e_name" />
-		<result property="wDNo.dNo" column="w_d_no" />
-		<collection property="wGNo" resultMap="resultGuest"/>
+		<result property="wPriceTotal" column="w_priceTotal" />
+		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.resultDesigner"/>
+		<association property="wEName" resultMap="kr.or.yi.hairshop.dao.EventMapper.resultEvent"/>
+		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.resultGuest" />
 	</resultMap>
-	
+
+
 	<select id="selectDListByNo" parameterType="int" resultMap="resultWorkDialog">
-		select 
+		select
 		w_no,
 		w_workTime,
 		w_reservTime,
@@ -26,9 +23,34 @@
 		w_g_no,
 		g.g_name
 		from workdialog w
-		join guest g 
+		join guest g
 		on w.w_d_no=#{dNo} and w.w_g_no=g.g_no;
 	</select>
 	
-	
+	<select id="selectByAll" resultType="WorkDialog">
+		select
+		w_no,
+		w_workTime,
+		w_reservTime,
+		w_e_name,
+		w_d_no,
+		w_g_no,
+		c_w_no,
+		c_p_name,
+		g_no,
+		g_l_grade,
+		g_email,
+		g_birth,
+		g_name,
+		g_tel,
+		g_point,
+		g_memo
+		from workdialog w
+		left join
+		choice c
+		on w.w_no=c.c_w_no
+		left join guest g
+		on w.w_g_no=g.g_no
+	</select>
+
 </mapper>

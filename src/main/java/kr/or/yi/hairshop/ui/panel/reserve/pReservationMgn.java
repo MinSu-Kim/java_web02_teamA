@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -19,19 +18,16 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import kr.or.yi.hairshop.dao.ChoiceMapper;
-import kr.or.yi.hairshop.dao.ChoiceMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
-import kr.or.yi.hairshop.dto.Choice;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.pCalendar;
 
 @SuppressWarnings("serial")
 public class pReservationMgn extends JPanel {
 	
-	private List<Choice> workList;
-	private ChoiceMapper dao = new ChoiceMapperImpl();
+	private List<WorkDialog> workList;
+	private WorkDialogMapper dao = new WorkDialogMapperImpl();
 	private JTable table;
 	
 	public pReservationMgn() {

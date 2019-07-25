@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.yi.hairshop.AbstractTest;
-import kr.or.yi.hairshop.dto.Choice;
 import kr.or.yi.hairshop.dto.WorkDialog;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

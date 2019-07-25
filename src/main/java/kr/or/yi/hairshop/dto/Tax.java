@@ -8,7 +8,7 @@ public class Tax {
 	private int tPrice;
 	private Date tDate;
 	private Product tPName;
-	
+
 	public Tax() {
 		// TODO Auto-generated constructor stub
 	}
@@ -63,11 +63,12 @@ public class Tax {
 
 	@Override
 	public String toString() {
-		return String.format("Tax [tNo=%s, tName=%s, tPrice=%s, tDate=%s, tPName=%s]", tNo, tName, tPrice, tDate, tPName);
+		return String.format("Tax [tNo=%s, tName=%s, tPrice=%s, tDate=%s, tPName=%s]", tNo, tName, tPrice, tDate,
+				tPName);
 	}
 
 	public Object[] toArray() {
 		return new Object[] { tNo, tName, tPrice, tDate, tPName };
 	}
-	
+
 }

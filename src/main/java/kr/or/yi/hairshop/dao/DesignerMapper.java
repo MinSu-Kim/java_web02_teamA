@@ -9,5 +9,5 @@ public interface DesignerMapper {
 	int insertDesigner(Designer ds);
 	int deleteDesigner(int dNo);
 	int updateDesigner(Designer ds);
-	
+	List<Designer> selectDesignerByNo(int dNo);
 }

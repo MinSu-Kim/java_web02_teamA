@@ -45,4 +45,11 @@ public class DesignerMapperImpl implements DesignerMapper{
 		}
 	}
 
+	@Override
+	public List<Designer> selectDesignerByNo(int dNo) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectDesignerByNo",dNo);
+		}
+	}
+
 }

@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.hairshop.dao.GuestMapper">
+
+	<resultMap type="Guest" id="resultGuest">
+		<result property="gNo" column="g_no" />
+		<result property="gId" column="g_id" />
+		<result property="gPassword" column="g_password" />
+		<result property="gName" column="g_name" />
+		<result property="gTel" column="g_tel" />
+		<result property="gEmail" column="g_email" />
+		<result property="gBirth" column="g_nirth" />
+		<result property="gJoin" column="g_join" />
+		<result property="gPoint" column="g_point" />
+		<result property="gMemo" column="g_memo" />
+		<association property="gLGrade" resultMap="kr.or.yi.hairshop.dao.LevelMapper.resultLevel"/>
+	</resultMap>
+	
+	
+	
+
 	<select id="selectGuestByAll" resultType="Guest">
 		select g_no, g_l_grade,
 		g_name, g_tel, g_email, g_birth, g_join, g_point, g_memo
 		from
 		hairshop.guest;
 	</select>
-
+	
 	<insert id="insertGuest" parameterType="Guest">
 		insert into
 		hairshop.guest
@@ -30,16 +48,4 @@
 		DELETE FROM hairshop.guest
 		WHERE g_no=#{gNo};
 	</delete>
-	<resultMap type="Guest" id="Guest">
-		<result property="gNo" column="gNo" />
-		<result property="gLGrade.lGrade" column="gLGrade" />
-		<result property="gName" column="gName" />
-		<result property="gTel" column="gTel" />
-		<result property="gEmail" column="gEmail" />
-		<result property="gBirth" column="gBirth" />
-		<result property="gJoin" column="gJoin" />
-		<result property="gPoint" column="gPoint" />
-		<result property="gMemo" column="gMemo" />
-
-	</resultMap>
 </mapper>

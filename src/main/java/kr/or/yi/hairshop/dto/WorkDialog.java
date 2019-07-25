@@ -2,6 +2,7 @@ package kr.or.yi.hairshop.dto;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class WorkDialog {
 	private int wNo;
@@ -11,13 +12,14 @@ public class WorkDialog {
 	private Event wEName;
 	private Designer wDNo;
 	private Guest wGNo;
+	private List<Product> productList;
 
 	public WorkDialog() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public WorkDialog(int wNo, Date wWrokTime, Date wReservTime, int wPriceTotal, Event wEName, Designer wDNo,
-			Guest wGNo) {
+			Guest wGNo, List<Product> productList) {
 		this.wNo = wNo;
 		this.wWrokTime = wWrokTime;
 		this.wReservTime = wReservTime;
@@ -25,6 +27,7 @@ public class WorkDialog {
 		this.wEName = wEName;
 		this.wDNo = wDNo;
 		this.wGNo = wGNo;
+		this.productList = productList;
 	}
 
 	public int getwNo() {
@@ -83,10 +86,19 @@ public class WorkDialog {
 		this.wGNo = wGNo;
 	}
 
-	@Override
-	public String toString() {	//쓸일있어서 toString 변경햇어용-나모
-		return String.format("%s", wGNo);
+	public List<Product> getProductList() {
+		return productList;
 	}
+
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("WorkDialog %s",wDNo);
+	}
+
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		return new Object[] { wNo, wWrokTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo };

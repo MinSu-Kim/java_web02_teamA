@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.yi.hairshop.dto.Choice;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.jdbc.MyBatisSqlSessionFactory;
 

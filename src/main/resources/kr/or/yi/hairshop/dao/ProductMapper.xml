@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.hairshop.dao.ProductMapper">
 	
+	
+	<resultMap type="Product" id="resultProduct">
+		<result property="pPrice" column="p_price" />
+		<result property="pName" column="p_name" />
+		<result property="pDivision" column="p_division" />
+	</resultMap>
+	
+	
 	<select id="selectProductByAll" resultType="Product">
 		select * from product
 	</select>
