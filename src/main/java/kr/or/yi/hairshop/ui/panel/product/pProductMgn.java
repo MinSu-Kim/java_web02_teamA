@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.yi.hairshop.dao.DesignerMapper;
+import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dao.EventMapper;
 import kr.or.yi.hairshop.dao.EventMapperImpl;
 import kr.or.yi.hairshop.dao.ProductMapper;
@@ -30,7 +32,7 @@ public class pProductMgn extends JPanel {
 	
 	private JTable tableProduct;
 	private JTable tableEvent;
-	private JTable tableWoker;
+	private JTable tableWorker;
 	
 	private List<Product> proList;
 	private List<Event> eventList;
@@ -38,10 +40,12 @@ public class pProductMgn extends JPanel {
 	
 	private ProductMapper pdao = new ProductMapperImpl();
 	private EventMapper edao = new EventMapperImpl();
+	private DesignerMapper wdao = new DesignerMapperImpl();
 	private JPanel panel;
 	private JPanel Section;
 	private pCalendar pCalandar;
 	private pProductMgnBtn pBtn;
+
 	
 	public pProductMgn() {
 		initComponents();
@@ -82,8 +86,8 @@ public class pProductMgn extends JPanel {
 		JScrollPane scrollPaneWorker = new JScrollPane();
 		
 		pWorker.add(scrollPaneWorker);
-		tableWoker = new JTable();
-		scrollPaneWorker.setViewportView(tableWoker);		
+		tableWorker = new JTable();
+		scrollPaneWorker.setViewportView(tableWorker);		
 		
 		pEvent.add(scrollPaneEvent);
 		tableEvent = new JTable();
@@ -104,7 +108,7 @@ public class pProductMgn extends JPanel {
 	public void clearList() {
 		proList = pdao.selectProductByAll();
 		eventList = edao.selectEventByAll();
-		//workerList = dao.selectWorkerByAll();
+		workerList = wdao.selectDesignerByMgn();
 	}
 	
 	public void setProductList(List<Product> proList) {
@@ -120,9 +124,9 @@ public class pProductMgn extends JPanel {
 		tableCellAlignmentEvent(SwingConstants.CENTER, 0, 1, 2, 3);
 		tableSetWidthEvent(100, 100, 100, 100);
 		
-//		tableWorker.setModel(new DefaultTableModel(getRowsWoker(), getColumnNamesWoker()));
-//		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
-//		tableSetWidth(100, 100, 100);
+		tableWorker.setModel(new DefaultTableModel(getRowsWoker(), getColumnNamesWoker()));
+		tableCellAlignmentWoker(SwingConstants.CENTER, 0, 1, 2, 3);
+		tableSetWidthWoker(80, 80, 120, 120);
 
 	}
 
@@ -145,7 +149,7 @@ public class pProductMgn extends JPanel {
 	private Object[][] getRowsWoker() {
 		Object[][] rows = new Object[workerList.size()][];
 		for (int i = 0; i < workerList.size(); i++) {
-//			rows[i] = workerList.get(i).toArray();
+			rows[i] = workerList.get(i).toArrayMgn();
 		}
 		return rows;
 	}
@@ -159,7 +163,7 @@ public class pProductMgn extends JPanel {
 	}
 	
 	private String[] getColumnNamesWoker() {
-		return new String[] { "이름", "가격", "분류" };
+		return new String[] { "직급", "이름", "전화번호", "비상연락망" };
 	}
 	
 	// 테이블 셀 내용의 정렬
@@ -185,7 +189,7 @@ public class pProductMgn extends JPanel {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(align);
 
-		TableColumnModel model = tableWoker.getColumnModel();
+		TableColumnModel model = tableWorker.getColumnModel();
 		for (int i = 0; i < idx.length; i++) {
 			model.getColumn(idx[i]).setCellRenderer(dtcr);
 		}
@@ -209,7 +213,7 @@ public class pProductMgn extends JPanel {
 	}
 	
 	protected void tableSetWidthWoker(int... width) {
-		TableColumnModel cModel = tableWoker.getColumnModel();
+		TableColumnModel cModel = tableWorker.getColumnModel();
 
 		for (int i = 0; i < width.length; i++) {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
