@@ -15,8 +15,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.hairshop.dto.WorkDialog;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class WorkDialogFrame extends JFrame {
+public class WorkDialogFrame extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 
@@ -27,7 +29,7 @@ public class WorkDialogFrame extends JFrame {
 	private JTextField tfeName;
 	private JTextField tfpPrice;
 	private JTextField tfdMemo;
-	private JButton btnConfirm;
+	private JButton btnOk;
 	
 
 	public WorkDialogFrame() {
@@ -116,15 +118,45 @@ public class WorkDialogFrame extends JFrame {
 		JPanel panel_5 = new JPanel();
 		panel_2.add(panel_5, BorderLayout.SOUTH);
 		
-		btnConfirm = new JButton("확인");
-		panel_5.add(btnConfirm);
+		btnOk = new JButton("확인");
+		btnOk.addActionListener(this);
+		panel_5.add(btnOk);
+		
+		JButton btnCancel = new JButton("취소");
+		panel_5.add(btnCancel);
 		
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3);
 	}
 
-	public void setWorkTf(WorkDialog work) {
+	public void setOpen(WorkDialog work) {
+		if(work!=null) {
+			btnOk.setText("수정");
+			
+		}else {
+			btnOk.setText("추가");
+		}
+	}
+	public void setTf(WorkDialog work) {
+		tfgDname.setText(work.getwGNo().getgName());;
+//		tfdName.setText(t);;
+//		tfwWorkTime.setText(t);;
+//		tfwReservTime.setText(t);;
+//		tfeName.setText(t);;
+//		tfpPrice.setText(t);;
+//		tfdMemo.setText(t);;
+	}
+	public WorkDialog getTf() {
+		WorkDialog workDialog = new WorkDialog();
+		return workDialog;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnOk) {
+			actionPerformedBtnConfirm(e);
+		}
+	}
+	protected void actionPerformedBtnConfirm(ActionEvent e) {
 		
 	}
-
 }

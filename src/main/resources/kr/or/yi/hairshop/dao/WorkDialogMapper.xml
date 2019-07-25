@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.hairshop.dao.WorkDialogMapper">
-
+	<resultMap type="WorkDialog" id="basicWorkDialog">
+		<result property="wNo" column="w_no"/>
+		<result property="wWorkTime" column="w_workTime" />
+		<result property="wReservTime" column="w_reservTime" />
+		<result property="wPriceTotal" column="w_priceTotal" />
+	</resultMap>
 
 	<resultMap type="WorkDialog" id="resultWorkDialog">
 		<result property="wNo" column="w_no"/>
@@ -12,14 +17,27 @@
 		<association property="wEName" resultMap="kr.or.yi.hairshop.dao.EventMapper.basicEvent"/>
 		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.basicGuest" />
 	</resultMap>
-	<resultMap type="WorkDialog" id="basicWorkDialog">
-		<result property="wNo" column="w_no"/>
-		<result property="wWorkTime" column="w_workTime" />
-		<result property="wReservTime" column="w_reservTime" />
-		<result property="wPriceTotal" column="w_priceTotal" />
+	
+	<resultMap type="" id="" extends="basicWorkDialog">
+		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.extendsDesigner"/>
+		<association property="wEName" resultMap="kr.or.yi.hairshop.dao.EventMapper.basicEvent"/>
+		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.basicGuest" />
 	</resultMap>
-
-
+	
+	<select id="selectWDGECPjoinAll" resultMap="">
+		SELECT *
+		FROM workdialog w
+		left join designer d
+		on w.w_d_no=d.d_no
+		left join event e
+		on w.w_e_name=e.e_name
+		left join choice c
+		on w.w_no=c.c_w_no
+		left join product p
+		on c.c_p_name=p.p_name
+		left join guest g
+		on w_g_no=g.g_no
+	</select>
 	<select id="selectDListByNo" parameterType="int" resultMap="resultWorkDialog">
 		select
 		w_no,

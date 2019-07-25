@@ -95,10 +95,9 @@ public class WorkDialog {
 	}
 
 	@Override
-	public String toString() {
+	public String toString() { //나모가 바꿈요
 		return String.format(
-				"WorkDialog [wNo=%s, wWrokTime=%s, wReservTime=%s, wPriceTotal=%s, wEName=%s, wDNo=%s, wGNo=%s, productList=%s]",
-				wNo, wWorkTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo, productList);
+				"%s",wGNo);
 	}
 
 	public Object[] toArray() {

@@ -137,10 +137,9 @@ public class Guest {
 	
 	
 	@Override
-	public String toString() {
+	public String toString() { //나모가 바꿈
 		return String.format(
-				"Guest [gNo=%s, gId=%s, gPassword=%s, gLGrade=%s, gName=%s, gTel=%s, gEmail=%s, gBirth=%s, gJoin=%s, gPoint=%s, gMemo=%s, workDialogList=%s]",
-				gNo, gId, gPassword, gLGrade, gName, gTel, gEmail, gBirth, gJoin, gPoint, gMemo, workDialogList);
+				"%s",gName);
 	}
 
 	public Object[] toArray() {

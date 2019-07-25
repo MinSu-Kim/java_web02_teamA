@@ -93,7 +93,7 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 //		System.out.println(list.get(jtable.getValueAt(row, 0)));
 		WorkDialog work = list.get(row);
 		WorkDialogFrame frame = new WorkDialogFrame();
-		frame.setWorkTf(work);
+		frame.setOpen(work);
 		frame.setVisible(true);
 		
 	}

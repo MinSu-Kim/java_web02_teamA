@@ -148,4 +148,6 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		LoginFrame = new LoginFrame();
 		LoginFrame.setVisible(true);
 	}
+	
+	
 }

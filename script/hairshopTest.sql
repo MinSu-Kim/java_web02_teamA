@@ -48,3 +48,19 @@ on w.w_no=c.c_w_no
 left join guest g
 on w.w_g_no=g.g_no;
 
+
+
+SELECT *
+FROM workdialog w
+left join designer d
+on w.w_d_no=d.d_no
+left join event e
+on w.w_e_name=e.e_name
+left join choice c
+on w.w_no=c.c_w_no
+left join product p
+on c.c_p_name=p.p_name
+left join guest g
+on w_g_no=g.g_no
+;
+select * from workdialog;
