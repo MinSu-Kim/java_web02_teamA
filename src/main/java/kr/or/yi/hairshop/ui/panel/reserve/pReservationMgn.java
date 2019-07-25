@@ -1,12 +1,13 @@
 package kr.or.yi.hairshop.ui.panel.reserve;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -61,7 +62,6 @@ public class pReservationMgn extends JPanel {
 		
 		JPanel pR = new JPanel();
 		add(pR, BorderLayout.EAST);
-		pR.setLayout(new GridLayout(0, 1, 0, 0));
 		pList.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -69,12 +69,17 @@ public class pReservationMgn extends JPanel {
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		pR.setLayout(new BorderLayout(0, 0));
 		
 		pCalendar pCalendar = new pCalendar();
-		pR.add(pCalendar);
+		pR.add(pCalendar, BorderLayout.NORTH);
 		
-		pReservationMgnBtn pBtn = new pReservationMgnBtn();
-		pR.add(pBtn);
+		JPanel panel_1 = new JPanel();
+		pR.add(panel_1);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
+		panel_1.add(lblNewLabel);
 	}
 	
 	public void clearList() {

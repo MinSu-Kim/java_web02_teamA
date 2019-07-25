@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -52,7 +53,6 @@ public class pProductMgn extends JPanel {
 	private JPanel panel;
 	private JPanel Section;
 	private pCalendar pCalandar;
-	private pProductMgnBtn pBtn;
 	private JPanel pTop;
 	private JPanel panel_1;
 	private JLabel lblName;
@@ -70,6 +70,8 @@ public class pProductMgn extends JPanel {
 	private JSpinner spStartDate;
 	private JSpinner spEndDate;
 	private JSpinner spinner;
+	private JPanel panel_4;
+	private JLabel lblNewLabel;
 
 	public pProductMgn() {
 		initComponents();
@@ -179,13 +181,17 @@ public class pProductMgn extends JPanel {
 
 		panel = new JPanel();
 		add(panel, BorderLayout.EAST);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		panel.setLayout(new BorderLayout(0, 0));
 
 		pCalandar = new pCalendar();
-		panel.add(pCalandar);
-
-		pBtn = new pProductMgnBtn();
-		panel.add(pBtn);
+		panel.add(pCalandar, BorderLayout.NORTH);
+		
+		panel_4 = new JPanel();
+		panel.add(panel_4);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
+		panel_4.add(lblNewLabel);
 
 	}
 

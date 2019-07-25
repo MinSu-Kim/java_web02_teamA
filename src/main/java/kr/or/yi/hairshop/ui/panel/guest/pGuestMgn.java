@@ -1,9 +1,10 @@
 package kr.or.yi.hairshop.ui.panel.guest;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -47,13 +48,17 @@ public class pGuestMgn extends JPanel {
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.EAST);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		panel.setLayout(new BorderLayout(0, 0));
 		
 		pCalendar pCalendar = new pCalendar();
-		panel.add(pCalendar);
+		panel.add(pCalendar, BorderLayout.NORTH);
 		
-		pGuestMgnBtn pBtn = new pGuestMgnBtn();
-		panel.add(pBtn);
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
+		panel_1.add(lblNewLabel);
 	}
 	
 	public void clearList() {
