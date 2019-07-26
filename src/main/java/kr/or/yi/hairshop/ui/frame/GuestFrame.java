@@ -41,12 +41,6 @@ public class GuestFrame extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
-		
-		JLabel lblGM = new JLabel("고객관리");
-		panel.add(lblGM);
-		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
@@ -124,7 +118,7 @@ public class GuestFrame extends JFrame implements ActionListener{
 		panel_2.add(panel_4);
 		
 		btnOK = new JButton("추가");
-		btnOK.setBounds(67, 10, 57, 23);
+		btnOK.setBounds(222, 10, 57, 23);
 		btnOK.addActionListener((ActionListener) this);
 		panel_4.setLayout(null);
 		panel_4.add(btnOK);
@@ -137,9 +131,6 @@ public class GuestFrame extends JFrame implements ActionListener{
 		btnCancel.addActionListener(this);
 		btnCancel.setBounds(12, 10, 57, 23);
 		panel_5.add(btnCancel);
-		
-		GuestList panel_3 = new GuestList();
-		panel_1.add(panel_3);
 	}
 
 	public void actionPerformed(ActionEvent g) {

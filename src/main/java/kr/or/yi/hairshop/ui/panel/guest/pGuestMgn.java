@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -18,6 +20,9 @@ import kr.or.yi.hairshop.dao.GuestMapper;
 import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.panel.pCalendar;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class pGuestMgn extends JPanel {
@@ -25,6 +30,10 @@ public class pGuestMgn extends JPanel {
 	private JTable table;	
 	private List<Guest> gList;
 	private GuestMapper dao = new GuestMapperImpl();
+	
+	private JPopupMenu popupMenu;
+	private JMenuItem mntmUpdate;
+	private JMenuItem mntmDelete;
 	
 	public pGuestMgn() {
 		initComponents();
@@ -36,14 +45,19 @@ public class pGuestMgn extends JPanel {
 		JPanel pGuestMain = new JPanel();
 		pGuestMain.setBorder(new TitledBorder(null, "고객관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		add(pGuestMain);
-		pGuestMain.setLayout(new BorderLayout(0, 0));
-
-		JScrollPane scrollPane = new JScrollPane();
-		pGuestMain.add(scrollPane);
-
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		scrollPane.setSize(200, 200);
+		pGuestMain.setLayout(new GridLayout(0, 1, 0, 0));
+		
+				JScrollPane scrollPane = new JScrollPane();
+				pGuestMain.add(scrollPane);
+				
+						table = new JTable();
+						scrollPane.setViewportView(table);
+						scrollPane.setSize(200, 200);
+						
+				
+		GuestPanel panel_2 = new GuestPanel();
+		pGuestMain.add(panel_2);
+		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
 		
 		JPanel panel = new JPanel();
