@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -19,13 +18,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.hairshop.HairMainFrame;
 import kr.or.yi.hairshop.dao.DesignerMapper;
@@ -75,8 +75,6 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private JButton btnEvent;
 	private JLabel lblNewLabel_1;
 	private JLabel label_3;
-	private JSpinner spEventStartDate;
-	private JSpinner spEventEndDate;
 	private JSpinner spEventSale;
 	private JPanel panel_4;
 	private JLabel lblNewLabel;
@@ -107,6 +105,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
 	private JTextField tfDivision;
+	private JDateChooser dcEventStartDate;
+	private JDateChooser dcEventEndDate;
 
 	public pProductMgn() {
 		initComponents();
@@ -148,18 +148,16 @@ public class pProductMgn extends JPanel implements ActionListener {
 		lblEventStartDate = new JLabel("시작일");
 		lblEventStartDate.setHorizontalAlignment(SwingConstants.CENTER);
 		pEventTF.add(lblEventStartDate);
-
-		spEventStartDate = new JSpinner();
-		spEventStartDate.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_YEAR));
-		pEventTF.add(spEventStartDate);
+		
+		dcEventStartDate = new JDateChooser();
+		pEventTF.add(dcEventStartDate);
 
 		lblEventEndDate = new JLabel("종료일");
 		lblEventEndDate.setHorizontalAlignment(SwingConstants.CENTER);
 		pEventTF.add(lblEventEndDate);
-
-		spEventEndDate = new JSpinner();
-		spEventEndDate.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_YEAR));
-		pEventTF.add(spEventEndDate);
+		
+		dcEventEndDate = new JDateChooser();
+		pEventTF.add(dcEventEndDate);
 
 		lblEventSale = new JLabel("할인율");
 		lblEventSale.setHorizontalAlignment(SwingConstants.CENTER);
@@ -419,8 +417,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 	protected void actionPerformedBtnEvent(ActionEvent e) {
 		if (btnEvent.getText().equals("수정")) {
 			String eName = tfEventName.getText();
-			Date eStartDay = (Date) spEventStartDate.getValue();
-			Date eEndDay = (Date) spEventEndDate.getValue();
+			Date eStartDay = dcEventStartDate.getDate();
+			Date eEndDay = dcEventEndDate.getDate();
 			int eSale = (int) spEventSale.getValue();
 
 			Event event = new Event(eName, eStartDay, eEndDay, eSale);
@@ -432,8 +430,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 		} else {
 			String eName = tfEventName.getText();
-			Date eStartDay = (Date) spEventStartDate.getValue();
-			Date eEndDay = (Date) spEventEndDate.getValue();
+			Date eStartDay = dcEventStartDate.getDate();
+			Date eEndDay = dcEventEndDate.getDate();
 			int eSale = (int) spEventSale.getValue();
 
 			Event event = new Event(eName, eStartDay, eEndDay, eSale);
@@ -478,16 +476,16 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 	private void setEventTf(Event e) {
 		tfEventName.setText(e.geteName());
-		spEventStartDate.setValue(e.geteStartDay());
-		spEventEndDate.setValue(e.geteEndDay());
+		dcEventStartDate.setDate(e.geteStartDay());
+		dcEventEndDate.setDate(e.geteEndDay());
 		spEventSale.setValue(e.geteSale());
 
 	}
 
 	private void clearEventTf() {
 		tfEventName.setText("");
-		spEventStartDate.setValue(new Date());
-		spEventEndDate.setValue(new Date());
+		dcEventStartDate.setDate(new Date());
+		dcEventEndDate.setDate(new Date());
 		spEventSale.setValue(0);
 	}
 
