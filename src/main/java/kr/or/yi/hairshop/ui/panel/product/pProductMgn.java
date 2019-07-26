@@ -2,6 +2,8 @@ package kr.or.yi.hairshop.ui.panel.product;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +11,10 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -73,6 +78,11 @@ public class pProductMgn extends JPanel {
 	private JPanel panel_4;
 	private JLabel lblNewLabel;
 
+	private JPopupMenu popupMenu;
+	private JMenuItem mntmPopUpdate;
+	private JMenuItem mntmPopDelete;
+	private JMenuItem mntmPopAdd;
+	
 	public pProductMgn() {
 		initComponents();
 	}
@@ -193,8 +203,38 @@ public class pProductMgn extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
 		panel_4.add(lblNewLabel);
 
-	}
+		popupMenu = new JPopupMenu();
+		
+		mntmPopAdd = new JMenuItem("등록");
+		popupMenu.add(mntmPopAdd);
+		
+		mntmPopUpdate = new JMenuItem("수정");
+		//mntmPopUpdate.addActionListener(this);
+		popupMenu.add(mntmPopUpdate);
 
+		mntmPopDelete = new JMenuItem("삭제");
+		//mntmPopDelete.addActionListener(this);
+		popupMenu.add(mntmPopDelete);
+		
+		tableEvent.setComponentPopupMenu(popupMenu);
+		scrollPaneEvent.setComponentPopupMenu(popupMenu);
+	}
+	
+	public void actionPerformed(ActionEvent e) throws SQLException {
+		if (e.getSource() == mntmPopAdd) {
+			JOptionPane.showMessageDialog(null, "등록");
+			//updateUIa();
+		}		
+		if (e.getSource() == mntmPopUpdate) {
+			JOptionPane.showMessageDialog(null, "수정");
+			//updateUIa();
+		}
+		if (e.getSource() == mntmPopDelete) {
+			JOptionPane.showMessageDialog(null, "삭제");
+			//deleteUI();
+		}
+	}
+	
 	public void clearList() {
 		proList = pdao.selectProductByAll();
 		eventList = edao.selectEventByAll();
