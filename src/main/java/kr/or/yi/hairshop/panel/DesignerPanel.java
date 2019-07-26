@@ -16,13 +16,13 @@ import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
-import kr.or.yi.hairshop.dto.Designer;
+import kr.or.yi.hairshop.dto.WorkDialog;
 
 
 @SuppressWarnings("serial")
 public class DesignerPanel extends JPanel {
 	private JTable table;	
-	private List<Designer> dList;
+	private List<WorkDialog> dList;
 	private DesignerMapper dao = new DesignerMapperImpl();
 	private WorkDialogMapper wdao = new WorkDialogMapperImpl();
 	
@@ -47,7 +47,7 @@ public class DesignerPanel extends JPanel {
 	}
 	
 	public void clearList() {
-		dList = dao.selectDesignerByMgn();	
+		dList = wdao.selectByfivejoinMap();
 	}
 
 	public void reloadData() {
@@ -59,7 +59,7 @@ public class DesignerPanel extends JPanel {
 	private Object[][] getRows() {
 		Object[][] rows = new Object[dList.size()][];
 		for (int i = 0; i < dList.size(); i++) {
-			rows[i] = dList.get(i).toArrayMgn();
+			rows[i] = dList.get(i).toArrayFiveJoinMap();
 		}
 		return rows;
 	}

@@ -104,4 +104,38 @@ public class WorkDialog {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		return new Object[] { wNo, wWorkTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo };
 	}
+	
+	public Object[] toArrayFiveJoinMap() { //다영
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+			
+		String pName="";
+		String pPrice="";
+		for(int i=0; i<productList.size();i++) {
+			System.out.println(productList.get(i).getpPrice());
+			System.out.println(productList.get(i).getpName());
+			if(i!=productList.size()-1) {				
+				pName+=productList.get(i).getpName()+",";
+				pPrice+=productList.get(i).getpPrice()+",";
+			}else {
+				pName+=productList.get(i).getpName();
+				pPrice+=productList.get(i).getpPrice();
+			}
+		}
+		
+		return new Object[] { wWorkTime, pName, wGNo.getgName(),  pPrice};
+	}
+	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
