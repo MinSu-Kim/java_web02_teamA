@@ -8,4 +8,9 @@ public interface ProductMapper {
 
 	public List<Product> selectProductByAll();
 	
+	public Product selectByName(String name);
+	public int insert(Product pro);
+	public int updateByName(Product pro);
+	public int deleteByName(String name);
+	
 }

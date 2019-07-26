@@ -13,5 +13,22 @@
 	<select id="selectProductByAll" resultType="Product">
 		select * from product
 	</select>
+	
+	<insert id="insert" parameterType="Product">
+		insert into product
+		(p_name, p_price, p_division)
+		values(#{pName}, #{pPrice}, #{pDivision})
+	</insert>
+	
+	<update id="updateByName">
+		update product
+		set p_price=#{pPrice}, p_division=#{pDivision}
+		where p_name=#{pName}
+		
+	</update>
+	
+	<delete id="deleteByName">
+		delete from product where p_name=#{param1}
+	</delete>
 
 </mapper>
