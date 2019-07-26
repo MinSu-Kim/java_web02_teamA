@@ -1,8 +1,6 @@
 package kr.or.yi.hairshop.ui.panel.reserve;
 
 import java.awt.BorderLayout;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -10,14 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
 import javax.swing.JTable;
-import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import com.toedter.calendar.JCalendar;
 
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
@@ -45,13 +43,11 @@ public class pReservationMgn extends JPanel {
 		JPanel pNorth = new JPanel();
 		panel.add(pNorth, BorderLayout.NORTH);
 		
-		JSpinner spStart = new JSpinner();
-		spStart.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
-		pNorth.add(spStart);
+		JCalendar calStart = new JCalendar();
+		pNorth.add(calStart);
 		
-		JSpinner spEnd = new JSpinner();
-		spEnd.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_WEEK_IN_MONTH));
-		pNorth.add(spEnd);
+		JCalendar calEnd = new JCalendar();
+		pNorth.add(calEnd);
 		
 		JButton btnSearch = new JButton("검색");
 		pNorth.add(btnSearch);
@@ -83,7 +79,7 @@ public class pReservationMgn extends JPanel {
 	}
 	
 	public void clearList() {
-		workList = dao.selectByAll();
+		workList = dao.selectReservDetail();
 	}
 
 	public void reloadData() {
@@ -96,14 +92,16 @@ public class pReservationMgn extends JPanel {
 	private Object[][] getRows() {
 		Object[][] rows = new Object[workList.size()][];
 		for (int i = 0; i < workList.size(); i++) {
-			System.out.println(workList.get(i));
-			rows[i] = workList.get(i).toArray();
+			
+			/* oooooooooooooooooooooooooooo 포기 oooooooooooooooooooooooooooo */
+			//rows[i] = workList.get(i).toArray();
+			//rows[i] = workList.get(i).toArrayReservDetail();
 		}
 		return rows;
 	}
 
 	private String[] getColumnNames() {
-		return new String[] { "번호", "등급", "이름", "전화번호", "이메일", "생일", "확인", "확인", "확인", "확인"};
+		return new String[] { "번호", "예약일시", "디자이너", "직책", "손님명", "손님등급", "작업명", "이벤트", "가격", "완료일시"};
 	}
 
 	// 테이블 셀 내용의 정렬

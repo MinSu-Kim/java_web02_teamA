@@ -158,18 +158,66 @@ select * from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-
 select * from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
 and left(right(`w_reservTime`,8),2) between 8 and 21;
 
-
-
-
-
-
-
 select * from workdialog;
-
-
 
 insert into event (e_name, e_startday, e_endday, e_sale)
 values("임시", '2019-06-30', '2019-07-15', 10);
+
+SELECT g_name, w_workTime, p_name, p_price
+FROM workdialog w
+left join designer d
+on w.w_d_no=d.d_no
+left join choice c
+on w.w_no=c.c_w_no
+left join product p
+on c.c_p_name=p.p_name
+left join guest g
+on w_g_no=g.g_no;
+
+
+INSERT into choice
+(c_w_no, c_p_name)
+values
+(1, '염색'),
+(2, '커트'),
+(3, '커트'),
+(4, '파마'),
+(5, '고오급염색'),
+(7, '염색'),
+(8, '파마'),
+(9, '커트'),
+(10, '염색'),
+(11, '고오급파마')
+;
+
+
+
+select 
+w_no as '번호', w_reservTime as '예약일시', d.d_name as '디자이너', d.d_grade as '직책', g.g_name as '손님명',
+g.g_l_grade as '손님등급', p.p_name as '작업명', w_e_name as '이벤트', w_priceTotal as '가격', w_workTime as '완료일시'
+from workdialog w
+left join designer d
+on w.w_d_no = d.d_no
+left join guest g
+on w.w_g_no = g.g_no
+left join choice c
+on w.w_g_no = c.c_w_no
+left join product p
+on c.c_p_name = p.p_name
+left join tax t
+on p.p_name=t.t_name
+order by w_reservTime desc
+;
+
+
+
+
+
+
+
+
+
+
 
 
 

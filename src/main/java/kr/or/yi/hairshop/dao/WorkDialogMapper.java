@@ -9,4 +9,6 @@ public interface WorkDialogMapper {
 	public List<WorkDialog> selectByAll();
 	public List<WorkDialog> selectByfivejoinMap();
 	public List<WorkDialog> selectWDGECPjoinByNo(int no);
+	
+	public List<WorkDialog> selectReservDetail();
 }

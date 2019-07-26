@@ -101,6 +101,23 @@
 		left join guest g
 		on w_g_no=g.g_no;
 	</select>
+	
+	<select id="selectReservDetail" resultMap="resultWorkDialogfivejoin">
+		select 
+		w_no , w_reservTime , d.d_name, d.d_grade, g.g_name, g.g_l_grade, p.p_name, w_e_name, w_priceTotal, w_workTime
+		from workdialog w
+		left join designer d
+		on w.w_d_no = d.d_no
+		left join guest g
+		on w.w_g_no = g.g_no
+		left join choice c
+		on w.w_g_no = c.c_w_no
+		left join product p
+		on c.c_p_name = p.p_name
+		left join tax t
+		on p.p_name=t.t_name
+		order by w_reservTime desc		
+	</select>
 </mapper>
 
 
