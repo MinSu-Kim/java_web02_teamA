@@ -8,14 +8,16 @@ public class Product {
 	private String pDivision;
 	private List<WorkDialog> workDialogList;
 	private List<Tax> taxList;
-	
-	
 
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	public Product(int pPrice, String pName, String pDivision) {
+		this.pPrice = pPrice;
+		this.pName = pName;
+		this.pDivision = pDivision;
+	}
 
 	public Product(int pPrice, String pName, String pDivision, List<WorkDialog> workDialogList, List<Tax> taxList) {
 		this.pPrice = pPrice;
@@ -25,67 +27,45 @@ public class Product {
 		this.taxList = taxList;
 	}
 
-	
-
 	public int getpPrice() {
 		return pPrice;
 	}
-
-
 
 	public void setpPrice(int pPrice) {
 		this.pPrice = pPrice;
 	}
 
-
-
 	public String getpName() {
 		return pName;
 	}
-
-
 
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
 
-
-
 	public String getpDivision() {
 		return pDivision;
 	}
-
-
 
 	public void setpDivision(String pDivision) {
 		this.pDivision = pDivision;
 	}
 
-
-
 	public List<WorkDialog> getWorkDialogList() {
 		return workDialogList;
 	}
-
-
 
 	public void setWorkDialogList(List<WorkDialog> workDialogList) {
 		this.workDialogList = workDialogList;
 	}
 
-
-
 	public List<Tax> getTaxList() {
 		return taxList;
 	}
 
-
-
 	public void setTaxList(List<Tax> taxList) {
 		this.taxList = taxList;
 	}
-
-	
 
 	@Override
 	public String toString() {
@@ -93,10 +73,8 @@ public class Product {
 				pName, pDivision, workDialogList, taxList);
 	}
 
-
-
 	public Object[] toArray() {
-		return new Object[] { pDivision, pName, pPrice };
+		return new Object[] { pName, pPrice, pDivision };
 	}
 
 }

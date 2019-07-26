@@ -42,7 +42,7 @@ import kr.or.yi.hairshop.panel.pCalendar;
 public class pProductMgn extends JPanel implements ActionListener {
 
 	public pProductMgn ProductMgn;
-	
+
 	private JPanel pWorker;
 	private JPanel pEvent;
 	private JPanel pProduct;
@@ -54,9 +54,9 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private List<Product> proList;
 	private List<Event> eventList;
 	private List<Designer> workerList;
-		
+
 	private HairMainFrame parent;
-	
+
 	private ProductMapper pdao = new ProductMapperImpl();
 	private EventMapper edao = new EventMapperImpl();
 	private DesignerMapper wdao = new DesignerMapperImpl();
@@ -65,26 +65,48 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private pCalendar pCalandar;
 	private JPanel pTop;
 	private JPanel panel_1;
-	private JLabel lblName;
+	private JLabel lblEventName;
 	private JTextField tfEventName;
-	private JLabel lblStartDate;
-	private JLabel lblEndDate;
-	private JLabel label_2;
-	private JPanel pEventtf;
+	private JLabel lblEventStartDate;
+	private JLabel lblEventEndDate;
+	private JLabel lblEventSale;
+	private JPanel pEventTF;
 	private JPanel panel_3;
-	private JButton btnProduct;
+	private JButton btnEvent;
 	private JLabel lblNewLabel_1;
 	private JLabel label_3;
 	private JSpinner spEventStartDate;
 	private JSpinner spEventEndDate;
-	private JSpinner spEventRate;
+	private JSpinner spEventSale;
 	private JPanel panel_4;
 	private JLabel lblNewLabel;
 
-	private JPopupMenu popupMenu;
-	private JMenuItem mntmPopUpdate;
-	private JMenuItem mntmPopDelete;
-	private JMenuItem mntmPopAdd;
+	private JPopupMenu popupMenuEvent;
+	private JPopupMenu popupMenuProduct;
+	private JPopupMenu popupMenuWorker;
+
+	private JMenuItem mntmPopEventUpdate;
+	private JMenuItem mntmPopEventDelete;
+	private JMenuItem mntmPopEventAdd;
+
+	private JMenuItem mntmPopProductUpdate;
+	private JMenuItem mntmPopProductDelete;
+	private JMenuItem mntmPopProductAdd;
+
+	private JPanel pProductTF;
+	private JLabel lblNewLabel_2;
+	private JTextField tfProductName;
+	private JLabel label;
+	private JSpinner spProductPrice;
+	private JLabel label_1;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
+	private JPanel panel_2;
+	private JPanel panel_5;
+	private JButton btnProduct;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
+	private JTextField tfDivision;
 
 	public pProductMgn() {
 		initComponents();
@@ -111,41 +133,41 @@ public class pProductMgn extends JPanel implements ActionListener {
 		pEvent.add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(new BorderLayout(0, 0));
 
-		pEventtf = new JPanel();
-		panel_1.add(pEventtf);
-		pEventtf.setLayout(new GridLayout(0, 2, 0, 0));
+		pEventTF = new JPanel();
+		panel_1.add(pEventTF);
+		pEventTF.setLayout(new GridLayout(0, 2, 0, 0));
 
-		lblName = new JLabel("이벤트 제목");
-		lblName.setHorizontalAlignment(SwingConstants.CENTER);
-		pEventtf.add(lblName);
+		lblEventName = new JLabel("이벤트 제목");
+		lblEventName.setHorizontalAlignment(SwingConstants.CENTER);
+		pEventTF.add(lblEventName);
 
 		tfEventName = new JTextField();
-		pEventtf.add(tfEventName);
+		pEventTF.add(tfEventName);
 		tfEventName.setColumns(10);
 
-		lblStartDate = new JLabel("시작일");
-		lblStartDate.setHorizontalAlignment(SwingConstants.CENTER);
-		pEventtf.add(lblStartDate);
+		lblEventStartDate = new JLabel("시작일");
+		lblEventStartDate.setHorizontalAlignment(SwingConstants.CENTER);
+		pEventTF.add(lblEventStartDate);
 
 		spEventStartDate = new JSpinner();
 		spEventStartDate.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_YEAR));
-		pEventtf.add(spEventStartDate);
+		pEventTF.add(spEventStartDate);
 
-		lblEndDate = new JLabel("종료일");
-		lblEndDate.setHorizontalAlignment(SwingConstants.CENTER);
-		pEventtf.add(lblEndDate);
+		lblEventEndDate = new JLabel("종료일");
+		lblEventEndDate.setHorizontalAlignment(SwingConstants.CENTER);
+		pEventTF.add(lblEventEndDate);
 
 		spEventEndDate = new JSpinner();
 		spEventEndDate.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_YEAR));
-		pEventtf.add(spEventEndDate);
+		pEventTF.add(spEventEndDate);
 
-		label_2 = new JLabel("할인율");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		pEventtf.add(label_2);
+		lblEventSale = new JLabel("할인율");
+		lblEventSale.setHorizontalAlignment(SwingConstants.CENTER);
+		pEventTF.add(lblEventSale);
 
-		spEventRate = new JSpinner();
-		spEventRate.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-		pEventtf.add(spEventRate);
+		spEventSale = new JSpinner();
+		spEventSale.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
+		pEventTF.add(spEventSale);
 
 		panel_3 = new JPanel();
 		panel_1.add(panel_3, BorderLayout.EAST);
@@ -154,9 +176,9 @@ public class pProductMgn extends JPanel implements ActionListener {
 		label_3 = new JLabel("");
 		panel_3.add(label_3);
 
-		btnProduct = new JButton("등 록");
-		btnProduct.addActionListener(this);
-		panel_3.add(btnProduct);
+		btnEvent = new JButton("등 록");
+		btnEvent.addActionListener(this);
+		panel_3.add(btnEvent);
 
 		lblNewLabel_1 = new JLabel("");
 		panel_3.add(lblNewLabel_1);
@@ -171,11 +193,63 @@ public class pProductMgn extends JPanel implements ActionListener {
 		pProduct.setBorder(new TitledBorder(null, "작업 관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pProduct.setLayout(new BorderLayout(0, 0));
 
-		JScrollPane scrollPaneWork = new JScrollPane();
+		JScrollPane scrollPaneProduct = new JScrollPane();
 
-		pProduct.add(scrollPaneWork);
+		pProduct.add(scrollPaneProduct);
 		tableProduct = new JTable();
-		scrollPaneWork.setViewportView(tableProduct);
+		scrollPaneProduct.setViewportView(tableProduct);
+
+		panel_2 = new JPanel();
+		pProduct.add(panel_2, BorderLayout.NORTH);
+		panel_2.setLayout(new BorderLayout(0, 0));
+
+		pProductTF = new JPanel();
+		panel_2.add(pProductTF, BorderLayout.CENTER);
+		pProductTF.setLayout(new GridLayout(0, 2, 0, 0));
+
+		lblNewLabel_3 = new JLabel("");
+		pProductTF.add(lblNewLabel_3);
+
+		lblNewLabel_4 = new JLabel("");
+		pProductTF.add(lblNewLabel_4);
+
+		lblNewLabel_2 = new JLabel("이름");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		pProductTF.add(lblNewLabel_2);
+
+		tfProductName = new JTextField();
+		pProductTF.add(tfProductName);
+		tfProductName.setColumns(10);
+
+		label = new JLabel("가격");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		pProductTF.add(label);
+
+		spProductPrice = new JSpinner();
+		spProductPrice.setModel(new SpinnerNumberModel(new Integer(5000), null, null, new Integer(5000)));
+		pProductTF.add(spProductPrice);
+
+		label_1 = new JLabel("분류");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		pProductTF.add(label_1);
+
+		tfDivision = new JTextField();
+		pProductTF.add(tfDivision);
+		tfDivision.setColumns(10);
+
+		panel_5 = new JPanel();
+		panel_2.add(panel_5, BorderLayout.EAST);
+		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
+
+		lblNewLabel_6 = new JLabel("");
+		panel_5.add(lblNewLabel_6);
+
+		btnProduct = new JButton("등 록");
+		btnProduct.addActionListener(this);
+		panel_5.add(btnProduct);
+
+		lblNewLabel_5 = new JLabel("");
+		panel_5.add(lblNewLabel_5);
 
 		pWorker = new JPanel();
 		Section.add(pWorker);
@@ -201,114 +275,220 @@ public class pProductMgn extends JPanel implements ActionListener {
 		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
 		panel_4.add(lblNewLabel);
 
-		popupMenu = new JPopupMenu();
+		popupMenuEventInit(scrollPaneEvent);
+		popupMenuProductInit(scrollPaneProduct);
+		// popupMenuProductInit(scrollPaneWorker);
 
-		mntmPopAdd = new JMenuItem("등록");
-		mntmPopAdd.addActionListener(this);
-		popupMenu.add(mntmPopAdd);
-
-		mntmPopUpdate = new JMenuItem("수정");
-		mntmPopUpdate.addActionListener(this);
-		popupMenu.add(mntmPopUpdate);
-
-		mntmPopDelete = new JMenuItem("삭제");
-		mntmPopDelete.addActionListener(this);
-		popupMenu.add(mntmPopDelete);
-
-		tableEvent.setComponentPopupMenu(popupMenu);
-		scrollPaneEvent.setComponentPopupMenu(popupMenu);
 	}
-	
+
+	private void popupMenuProductInit(JScrollPane scrollPaneProduct) {
+		popupMenuProduct = new JPopupMenu();
+
+		mntmPopProductAdd = new JMenuItem("등록");
+		mntmPopProductAdd.addActionListener(this);
+		popupMenuProduct.add(mntmPopProductAdd);
+
+		mntmPopProductUpdate = new JMenuItem("수정");
+		mntmPopProductUpdate.addActionListener(this);
+		popupMenuProduct.add(mntmPopProductUpdate);
+
+		mntmPopProductDelete = new JMenuItem("삭제");
+		mntmPopProductDelete.addActionListener(this);
+		popupMenuProduct.add(mntmPopProductDelete);
+
+		tableProduct.setComponentPopupMenu(popupMenuProduct);
+		scrollPaneProduct.setComponentPopupMenu(popupMenuProduct);
+
+	}
+
+	public void popupMenuEventInit(JScrollPane scrollPaneEvent) {
+		popupMenuEvent = new JPopupMenu();
+
+		mntmPopEventAdd = new JMenuItem("등록");
+		mntmPopEventAdd.addActionListener(this);
+		popupMenuEvent.add(mntmPopEventAdd);
+
+		mntmPopEventUpdate = new JMenuItem("수정");
+		mntmPopEventUpdate.addActionListener(this);
+		popupMenuEvent.add(mntmPopEventUpdate);
+
+		mntmPopEventDelete = new JMenuItem("삭제");
+		mntmPopEventDelete.addActionListener(this);
+		popupMenuEvent.add(mntmPopEventDelete);
+
+		tableEvent.setComponentPopupMenu(popupMenuEvent);
+		scrollPaneEvent.setComponentPopupMenu(popupMenuEvent);
+	}
+
 	public void setParent(HairMainFrame HairMainFrame) {
 		this.parent = HairMainFrame;
-	}	
-	
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnProduct) {
 			actionPerformedBtnProduct(e);
 		}
-		if (e.getSource() == mntmPopAdd) {
+		if (e.getSource() == btnEvent) {
+			actionPerformedBtnEvent(e);
+		}
+
+		if (e.getSource() == mntmPopEventAdd) {
 			clearEventTf();
 		}
-		if (e.getSource() == mntmPopUpdate) {
-			
+		if (e.getSource() == mntmPopEventUpdate) {
+
 			int i = tableEvent.getSelectedRow();
 			Event selectEvent = eventList.get(i);
 			setEventTf(selectEvent);
-			tfEventName.setEditable(false);
-			btnProduct.setText("수정");
-			
+			btnEvent.setText("수정");
+
 		}
-		if (e.getSource() == mntmPopDelete) {
-			deleteUI();
+		if (e.getSource() == mntmPopEventDelete) {
+			deleteEventUI();
+		}
+
+		if (e.getSource() == mntmPopProductAdd) {
+			clearProductTf();
+		}
+		if (e.getSource() == mntmPopProductUpdate) {
+
+			int i = tableProduct.getSelectedRow();
+			Product selectProduct = proList.get(i);
+			setProductTf(selectProduct);
+			btnProduct.setText("수정");
+
+		}
+		if (e.getSource() == mntmPopProductDelete) {
+			deleteProductUI();
 		}
 	}
 
-	private void deleteUI() {
+	private void deleteProductUI() {
 		int result = JOptionPane.showConfirmDialog(null, "삭제 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
-		
-		if(result == JOptionPane.CLOSED_OPTION) {
-			//취소 선택
-			
-		}else if(result == JOptionPane.YES_OPTION) {
-			//예 선택
+
+		if (result == JOptionPane.CLOSED_OPTION) {
+			// 취소 선택
+
+		} else if (result == JOptionPane.YES_OPTION) {
+			// 예 선택
+			int i = tableProduct.getSelectedRow();
+			Product selectProduct = proList.get(i);
+			pdao.deleteByName(selectProduct.getpName());
+			clearEventTf();
+			clearList();
+			reloadData();
+		} else {
+			// 아니오 선택
+		}
+
+	}
+
+	private void actionPerformedBtnProduct(ActionEvent e) {
+		if (btnProduct.getText().equals("수정")) {
+
+			String pName = tfProductName.getText();
+			int pPrice = (int) spProductPrice.getValue();
+			String pDivision = tfDivision.getText();
+
+			Product pro = new Product(pPrice, pName, pDivision);
+
+			pdao.updateByName(pro);
+
+			btnProduct.setText("등록");
+			clearProductTf();
+			clearList();
+			reloadData();
+
+		} else {
+
+			if (tfProductName.getText() != null) {
+				String pName = tfProductName.getText();
+				int pPrice = (int) spProductPrice.getValue();
+				String pDivision = tfDivision.getText();
+				Product pro = new Product(pPrice, pName, pDivision);
+				pdao.insert(pro);
+				clearProductTf();
+				clearList();
+				reloadData();
+			}
+			JOptionPane.showMessageDialog(null, "모두 입력하세요");
+		}
+
+	}
+
+	protected void actionPerformedBtnEvent(ActionEvent e) {
+		if (btnEvent.getText().equals("수정")) {
+			String eName = tfEventName.getText();
+			Date eStartDay = (Date) spEventStartDate.getValue();
+			Date eEndDay = (Date) spEventEndDate.getValue();
+			int eSale = (int) spEventSale.getValue();
+
+			Event event = new Event(eName, eStartDay, eEndDay, eSale);
+			edao.updateByName(event);
+			btnEvent.setText("등록");
+			clearEventTf();
+			clearList();
+			reloadData();
+
+		} else {
+			String eName = tfEventName.getText();
+			Date eStartDay = (Date) spEventStartDate.getValue();
+			Date eEndDay = (Date) spEventEndDate.getValue();
+			int eSale = (int) spEventSale.getValue();
+
+			Event event = new Event(eName, eStartDay, eEndDay, eSale);
+			edao.insert(event);
+			clearEventTf();
+			clearList();
+			reloadData();			
+		}
+	}
+
+	private void setProductTf(Product selectProduct) {
+		tfProductName.setText(selectProduct.getpName());
+		spProductPrice.setValue(selectProduct.getpPrice());
+		tfDivision.setText(selectProduct.getpDivision());
+	}
+
+	private void clearProductTf() {
+		tfProductName.setText("");
+		spProductPrice.setValue(0);
+		tfDivision.setText("");
+	}
+
+	private void deleteEventUI() {
+		int result = JOptionPane.showConfirmDialog(null, "삭제 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+		if (result == JOptionPane.CLOSED_OPTION) {
+			// 취소 선택
+
+		} else if (result == JOptionPane.YES_OPTION) {
+			// 예 선택
 			int i = tableEvent.getSelectedRow();
 			Event selectEvent = eventList.get(i);
 			edao.deleteByName(selectEvent.geteName());
 			clearEventTf();
 			clearList();
 			reloadData();
-		}else {
-			//아니오 선택
+		} else {
+			// 아니오 선택
 		}
-			
-		
-	}
 
-	protected void actionPerformedBtnProduct(ActionEvent e) {
-		if(btnProduct.getText().equals("수정")) {
-
-			String eName = tfEventName.getText();
-			Date eStartDay = (Date) spEventStartDate.getValue();
-			Date eEndDay = (Date) spEventEndDate.getValue();
-			int eSale = (int) spEventRate.getValue();
-			
-			Event event = new Event(eName, eStartDay, eEndDay, eSale);
-
-			edao.updateByName(event);
-			tfEventName.setEditable(true);
-			btnProduct.setText("등록");
-			clearEventTf();
-			clearList();
-			reloadData();
-			
-		}else {
-			String eName = tfEventName.getText();
-			Date eStartDay = (Date) spEventStartDate.getValue();
-			Date eEndDay = (Date) spEventEndDate.getValue();
-			int eSale = (int) spEventRate.getValue();	
-			
-			Event event = new Event(eName, eStartDay, eEndDay, eSale);
-			edao.insert(event);
-			clearEventTf();
-			clearList();
-			reloadData();		
-		}
 	}
 
 	private void setEventTf(Event e) {
 		tfEventName.setText(e.geteName());
 		spEventStartDate.setValue(e.geteStartDay());
 		spEventEndDate.setValue(e.geteEndDay());
-		spEventRate.setValue(e.geteSale());
-		
+		spEventSale.setValue(e.geteSale());
+
 	}
-	
+
 	private void clearEventTf() {
 		tfEventName.setText("");
 		spEventStartDate.setValue(new Date());
 		spEventEndDate.setValue(new Date());
-		spEventRate.setValue(0);
+		spEventSale.setValue(0);
 	}
 
 	public void clearList() {
@@ -362,7 +542,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 	}
 
 	private String[] getColumnNamesProduct() {
-		return new String[] { "이름", "가격", "분류" };
+		return new String[] { "이름", "가격", "소모품 사영여부" };
 	}
 
 	private String[] getColumnNamesEvent() {
