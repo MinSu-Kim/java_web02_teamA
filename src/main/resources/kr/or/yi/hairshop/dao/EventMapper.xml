@@ -4,15 +4,31 @@
 
 	<resultMap type="Event" id="basicEvent">
 		<result property="eName" column="e_name" />
-		<result property="eStartDay" column="e_startDay" />
-		<result property="eEndDay" column="e_endDay" />
+		<result property="eStartDay" column="e_startday" />
+		<result property="eEndDay" column="e_endday" />
 		<result property="eSale" column="e_sale" />
 	</resultMap>
 	<!-- <resultMap type="Event" id="extendsEvent" extends="basicEvent">
 		<collection property="workDialogList" resultMap="kr.or.yi.hairshop.dao.WorkDialogMapper.extendsWorkDialog" />
 	</resultMap> -->
+	
 	<select id="selectEventByAll" resultType="Event">
 		select * from event where e_startDay is not null
 	</select>
+	
+	<insert id="insert" parameterType="Guest">
+		insert into event (e_name, e_startday, e_endday, e_sale)
+		values(#{eName}, #{eStartDay}, #{eEndDay}, #{eSale})
+	</insert>
+	
+	<update id="updateByName">
+		update event
+		set e_startday=#{eStartDay}, e_endday=#{eEndDay}, e_sale=#{eSale}
+		where e_name=#{eName}
+	</update>
+	
+	<delete id="deleteByName">
+		delete from event where e_name=#{eName}
+	</delete>
 
 </mapper>
