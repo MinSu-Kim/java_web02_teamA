@@ -15,7 +15,9 @@ import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.pCalendar;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class pHomeSectionForm extends JPanel implements ActionListener {
@@ -76,8 +78,19 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		panel_3.add(panelListForm);
 		panelListForm.setLayout(new BoxLayout(panelListForm, BoxLayout.X_AXIS));
 		
+		JPanel panelFooter = new JPanel();
+		panel_3.add(panelFooter);
+		panelFooter.setLayout(new BorderLayout(0, 0));
+		
+		
 		JPanel panel_4 = new JPanel();
-		panel_3.add(panel_4);
+		panelFooter.add(panel_4, BorderLayout.NORTH);
+		
+		JComboBox comboBox = new JComboBox();
+		panel_4.add(comboBox);
+		
+		phomeFooterDesigner panelDesignerel = new phomeFooterDesigner();
+		panelFooter.add(panelDesignerel, BorderLayout.CENTER);
 		
 		
 		for(int i=0; i<3; i++) {
@@ -93,12 +106,14 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		this.dList=dList;
 	}
 	
+	
+	
 	public void refresh(int start) {
 		for(int i=0; i<3; i++) {
 			if(dList.size()>i+start) {
 				System.out.println(i+start);
 				panelList[i].setDisigner(dList.get(i+start));
-				wList=workDialog.selectDListByNo(dList.get(i+start).getdNo());
+				wList=workDialog.selectWDGECPjoinByWDNo(dList.get(i+start).getdNo());
 				panelList[i].setWorkDialog(wList);
 				panelList[i].setTable(wList);
 			}
