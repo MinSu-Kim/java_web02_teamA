@@ -148,7 +148,12 @@ select * from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-
 
 /* 특정날자 사이값중에  특정 시간 사이값만 출력 */
 select * from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
-and left(right(`w_reservTime`,8),2) between 8 and 22;
+and left(right(`w_reservTime`,8),2) between 8 and 21;
+
+delete from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
+and left(right(`w_reservTime`,8),2) between 0 and 7;
+delete from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
+and left(right(`w_reservTime`,8),2) between 22 and 24;
 
 
 
