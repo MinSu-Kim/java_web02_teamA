@@ -167,3 +167,21 @@ and left(right(`w_reservTime`,8),2) between 8 and 21;
 select * from workdialog;
 
 
+
+insert into event (e_name, e_startday, e_endday, e_sale)
+values("임시", '2019-06-30', '2019-07-15', 10);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
