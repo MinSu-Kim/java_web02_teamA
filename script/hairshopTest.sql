@@ -98,13 +98,13 @@ INSERT INTO hairshop.workdialog
 ( `w_reservTime`,`w_workTime`, `w_priceTotal`, w_e_name, w_d_no, w_g_no)
 values
 (@w_reservTime:=(SELECT FROM_UNIXTIME(RAND() * (@end - @start) + @start) as the_date),
-if(UNIX_TIMESTAMP(@w_reservTime) > UNIX_TIMESTAMP(now()), FROM_UNIXTIME(RAND() * (select UNIX_TIMESTAMP(now()) - @start) + @start),null),
+if(UNIX_TIMESTAMP(@w_reservTime) < UNIX_TIMESTAMP(now()), FROM_UNIXTIME(RAND() * (select UNIX_TIMESTAMP(now()) - @start) + @start),null),
 10000,
 (select e_name from event order by rand() limit 1),
 (select d_no from designer order by rand() limit 1),
 (select g_no from guest order by rand() limit 1))
 ;
-
+(select g_no from guest order by rand() limit 1);
 delete from workdialog;
 select * from workdialog;
 
