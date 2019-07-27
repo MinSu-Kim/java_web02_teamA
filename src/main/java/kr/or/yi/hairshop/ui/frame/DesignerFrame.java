@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import kr.or.yi.hairshop.HairMainFrame;
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
@@ -40,6 +41,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private DesignerMapper dsmapper;
 	private JTable tableDesigner;
 	private List<Designer> DesignList;
+	private HairMainFrame parent;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -170,8 +172,11 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 	}
 
-		
-	public void clearTextField() { //TextField를 비움
+	public void setParent(HairMainFrame HairMainFrame) {
+		this.parent = HairMainFrame;
+	}
+	
+	public void clearTextField() {
 		tfdGrade.setText("");
 		tfdName.setText("");
 		tfdTel.setText("");
@@ -191,7 +196,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		}
 	}
 	
-	protected void actionPerformedBtnConfirm(ActionEvent arg0) { //확인버튼
+	protected void actionPerformedBtnConfirm(ActionEvent arg0) { 
 		
 			
 	}

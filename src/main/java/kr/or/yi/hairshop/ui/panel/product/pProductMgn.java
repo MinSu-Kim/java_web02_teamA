@@ -1,6 +1,7 @@
 package kr.or.yi.hairshop.ui.panel.product;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +39,8 @@ import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.Event;
 import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.panel.pCalendar;
+import kr.or.yi.hairshop.ui.frame.DesignerFrame;
+import kr.or.yi.hairshop.ui.frame.LoginFrame;
 
 public class pProductMgn extends JPanel implements ActionListener {
 
@@ -107,6 +110,18 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private JTextField tfDivision;
 	private JDateChooser dcEventStartDate;
 	private JDateChooser dcEventEndDate;
+
+	private JButton btnWorker;
+
+	private JMenuItem mntmPopWorkerAdd;
+
+	private JMenuItem mntmPopWorkerUpdate;
+
+	private JMenuItem mntmPopWorkerDelete;
+
+	private DesignerFrame DesignerFrame;
+	
+	private HairMainFrame HairMainFrame;
 
 	public pProductMgn() {
 		initComponents();
@@ -249,7 +264,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 		lblNewLabel_5 = new JLabel("");
 		panel_5.add(lblNewLabel_5);
 
-		pWorker = new JPanel();
+		pWorker = new JPanel(); //디자이너 
 		Section.add(pWorker);
 		pWorker.setBorder(new TitledBorder(null, "디자이너 관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pWorker.setLayout(new BorderLayout(0, 0));
@@ -272,10 +287,11 @@ public class pProductMgn extends JPanel implements ActionListener {
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
 		panel_4.add(lblNewLabel);
+		
 
 		popupMenuEventInit(scrollPaneEvent);
 		popupMenuProductInit(scrollPaneProduct);
-		// popupMenuProductInit(scrollPaneWorker);
+		popupMenuWorkerInit(scrollPaneWorker);
 
 	}
 
@@ -317,7 +333,26 @@ public class pProductMgn extends JPanel implements ActionListener {
 		tableEvent.setComponentPopupMenu(popupMenuEvent);
 		scrollPaneEvent.setComponentPopupMenu(popupMenuEvent);
 	}
+	
+	public void popupMenuWorkerInit(JScrollPane scrollPaneWorker) { 
+		popupMenuWorker = new JPopupMenu();
 
+		mntmPopWorkerAdd = new JMenuItem("등록");
+		mntmPopWorkerAdd.addActionListener(this);
+		popupMenuWorker.add(mntmPopWorkerAdd);
+
+		mntmPopWorkerUpdate = new JMenuItem("수정");
+		mntmPopWorkerUpdate.addActionListener(this);
+		popupMenuWorker.add(mntmPopWorkerUpdate);
+
+		mntmPopWorkerDelete = new JMenuItem("삭제");
+		mntmPopWorkerDelete.addActionListener(this);
+		popupMenuWorker.add(mntmPopWorkerDelete);
+
+		tableWorker.setComponentPopupMenu(popupMenuWorker);
+		scrollPaneWorker.setComponentPopupMenu(popupMenuWorker);
+	}
+	
 	public void setParent(HairMainFrame HairMainFrame) {
 		this.parent = HairMainFrame;
 	}
@@ -339,8 +374,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 			Event selectEvent = eventList.get(i);
 			setEventTf(selectEvent);
 			btnEvent.setText("수정");
-
 		}
+		
 		if (e.getSource() == mntmPopEventDelete) {
 			deleteEventUI();
 		}
@@ -356,9 +391,71 @@ public class pProductMgn extends JPanel implements ActionListener {
 			btnProduct.setText("수정");
 
 		}
-		if (e.getSource() == mntmPopProductDelete) {
-			deleteProductUI();
+		///////////저 아직 하고 있어요,,,, 다영
+		if (e.getSource() == mntmPopWorkerDelete) { //디자이너 삭제할때
+			deleteDesigner(); //
 		}
+		
+		if (e.getSource() == mntmPopWorkerAdd) { //디자이너 등록할때
+			System.out.println("등록버튼 눌렀네");
+					
+			if(DesignerFrame == null) {
+				DesignerFrameView();
+			}else {
+				DesignerFrameView();
+			}
+			
+		}
+		
+		
+		if (e.getSource() == mntmPopWorkerUpdate) { //디자이너 수정할때
+			DesignerFrameView();
+			
+			
+			int i = tableWorker.getSelectedRow();
+			Designer worker = workerList.get(i);
+			setWorkerTf(worker); //setWorkerTf get, set달기
+			btnWorker.setText("수정");
+
+		}
+		
+		
+		
+		
+	}
+
+	private void DesignerFrameView() {
+		DesignerFrame = new DesignerFrame();
+		DesignerFrame.setParent(HairMainFrame);
+		DesignerFrame.setVisible(true);
+	}
+
+	private void setWorkerTf(Designer worker) {
+		System.out.println("set을 눌렀꾼");
+		
+	}
+
+	private void deleteDesigner() { //디자이너테이블에서 삭제 누르면
+		System.out.println("delete을 눌렀꾼");	
+		int result = JOptionPane.showConfirmDialog(null, "삭제 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+		if (result == JOptionPane.CLOSED_OPTION) {
+			// 취소 선택
+
+		} else if (result == JOptionPane.YES_OPTION) {
+			// 예 선택
+			int i = tableWorker.getSelectedRow();
+			Designer designer = workerList.get(i); //workerList에서는 d_no를 받아오지 못함.
+			System.out.println(designer);
+			System.out.println(wdao);
+			wdao.deleteDesigner(designer.getdNo());
+			clearList();
+			reloadData();
+		} else {
+			// 아니오 선택
+		}
+		
+			
 	}
 
 	private void deleteProductUI() {
