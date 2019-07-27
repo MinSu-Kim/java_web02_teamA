@@ -45,7 +45,7 @@ public class WorkDialogFrame extends JFrame implements ActionListener {
 
 	private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");
 
-	private JSpinner jSpinwWorkTime;;
+	private JSpinner jSpinwWorkTime;
 
 	public WorkDialogFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -152,7 +152,7 @@ public class WorkDialogFrame extends JFrame implements ActionListener {
 		if(wNo>-1) {
 			btnOk.setText("수정");
 			dao = new WorkDialogMapperImpl();
-			workList = dao.selectWDGECPjoinByNo(wNo);
+			workList = dao.selectWDGECPjoinByWNo(wNo);
 			setTfOne(workList.get(0));
 		}else {
 			btnOk.setText("추가");

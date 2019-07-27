@@ -22,6 +22,18 @@ public class Guest {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public Guest(int gNo) {
+		this.gNo = gNo;
+	}
+
+
+	public Guest(int gNo, String gName) {
+		this.gNo = gNo;
+		this.gName = gName;
+	}
+
+
 	public Guest(int gNo, String gId, String gPassword, Level gLGrade, String gName, String gTel, String gEmail,
 			Date gBirth, Date gJoin, int gPoint, String gMemo, List<WorkDialog> workDialogList) {
 		this.gNo = gNo;

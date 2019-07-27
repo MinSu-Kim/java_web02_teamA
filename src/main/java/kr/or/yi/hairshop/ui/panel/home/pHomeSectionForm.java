@@ -4,28 +4,38 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
+import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.pCalendar;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
 public class pHomeSectionForm extends JPanel implements ActionListener {
 	private List<Designer> dList=new ArrayList<Designer>();
-	private WorkDialogMapper workDialog=new WorkDialogMapperImpl();
+	private WorkDialogMapper wdao=new WorkDialogMapperImpl();
 	private List<WorkDialog> wList=new ArrayList<WorkDialog>();
 	private pHomeSectionBlock[] panelList= new pHomeSectionBlock[5];
 	private JButton btnLeft;
 	private JButton btnRight;
 	int start=0;
+	
+	private JPopupMenu popupMenuList=new JPopupMenu();
+	private phomeFooterDesigner panelDesignerel;
+	
 	
 	
 	public pHomeSectionForm() {
@@ -70,20 +80,30 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		pSection.add(panel_3, BorderLayout.CENTER);
 		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
 		
-
+		
 		
 		JPanel panelListForm = new JPanel();
 		panel_3.add(panelListForm);
 		panelListForm.setLayout(new BoxLayout(panelListForm, BoxLayout.X_AXIS));
 		
+		JPanel panelFooter = new JPanel();
+		panel_3.add(panelFooter);
+		panelFooter.setLayout(new BorderLayout(0, 0));
+		
+		
 		JPanel panel_4 = new JPanel();
-		panel_3.add(panel_4);
+		panelFooter.add(panel_4, BorderLayout.NORTH);
+		
+		panelDesignerel = new phomeFooterDesigner();
+		panelFooter.add(panelDesignerel, BorderLayout.CENTER);
 		
 		
 		for(int i=0; i<3; i++) {
 			panelList[i] = new pHomeSectionBlock();
 			panelListForm.add(panelList[i]);
+			panelList[i].setPopupMenu(popupMenuList);
 		}
+		
 		
 		
 		
@@ -93,14 +113,17 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		this.dList=dList;
 	}
 	
+	
+	
 	public void refresh(int start) {
 		for(int i=0; i<3; i++) {
 			if(dList.size()>i+start) {
-				System.out.println(i+start);
+				panelList[i].setParent(this);
 				panelList[i].setDisigner(dList.get(i+start));
-				wList=workDialog.selectDListByNo(dList.get(i+start).getdNo());
-				panelList[i].setWorkDialog(wList);
+				wList=wdao.selectWDGECPjoinByWDNo(dList.get(i+start).getdNo());
 				panelList[i].setTable(wList);
+				
+				
 			}
 		}
 	}
@@ -139,5 +162,13 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		revalidate();
 		repaint();
 		
+	}
+	public JPopupMenu getMenuPopup() {
+		return popupMenuList;
+	}
+	public void test1() {
+	}
+	public void setWorkDate(WorkDialog workDialog) {
+		panelDesignerel.setWorkDate(workDialog);
 	}
 }
