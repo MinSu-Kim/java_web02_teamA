@@ -22,17 +22,14 @@ public class Guest {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public Guest(int gNo) {
 		this.gNo = gNo;
 	}
-
 
 	public Guest(int gNo, String gName) {
 		this.gNo = gNo;
 		this.gName = gName;
 	}
-
 
 	public Guest(int gNo, String gId, String gPassword, Level gLGrade, String gName, String gTel, String gEmail,
 			Date gBirth, Date gJoin, int gPoint, String gMemo, List<WorkDialog> workDialogList) {
@@ -146,18 +143,15 @@ public class Guest {
 		this.workDialogList = workDialogList;
 	}
 
-	
-	
 	@Override
-	public String toString() { //나모가 바꿈
-		return String.format(
-				"%s",gName);
+	public String toString() { // 나모가 바꿈
+		return String.format("%s", gName);
 	}
 
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { gNo, gLGrade, gName, gTel, gEmail, date.format(gBirth), date.format(gJoin), gPoint,
-				gMemo };
+		return new Object[] { gNo, gLGrade.getlGrade(), gName, gTel, gEmail, date.format(gBirth), date.format(gJoin),
+				gPoint, gMemo };
 	}
 
 }
