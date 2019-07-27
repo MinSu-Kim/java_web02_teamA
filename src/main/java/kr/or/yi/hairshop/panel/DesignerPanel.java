@@ -53,7 +53,7 @@ public class DesignerPanel extends JPanel {
 	public void reloadData() {
 		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3);
-		tableSetWidth(50, 50, 50, 50);
+		tableSetWidth(60, 50, 40, 50);
 	}
 
 	private Object[][] getRows() {

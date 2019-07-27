@@ -107,7 +107,10 @@ public class WorkDialog {
 	
 	public Object[] toArrayFiveJoinMap() { //다영
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-			
+		String worktime="";
+		if(wWorkTime!=null) //예외처리: 널이 아닐때만 일하라구
+			worktime = date.format(wWorkTime);
+		
 		String pName="";
 		String pPrice="";
 		for(int i=0; i<productList.size();i++) {
@@ -122,7 +125,7 @@ public class WorkDialog {
 			}
 		}
 		
-		return new Object[] { wWorkTime, pName, wGNo.getgName(),  pPrice};
+		return new Object[] { worktime, pName, wGNo.getgName(),  pPrice};
 	}
 	
 	public Object[] toArrayReservDetail() {
@@ -147,6 +150,11 @@ public class WorkDialog {
 		
 		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade(), pName, pPrice, wEName.geteName(), date.format(wWorkTime) };
 		
+	}
+	
+	public Object[] toArrayPriceTotal() { //다영:디자이너프레임에 작업횟수 어떻게 나오게 해?
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		return new Object[] { wNo, wPriceTotal };
 	}
 }
 
