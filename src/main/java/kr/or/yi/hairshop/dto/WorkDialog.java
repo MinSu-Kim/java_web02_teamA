@@ -101,8 +101,8 @@ public class WorkDialog {
 	}
 
 	public Object[] toArray() {
-		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { wNo, wWorkTime, wReservTime, wPriceTotal, wEName, wDNo, wGNo };
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		return new Object[] { wNo, date.format(wWorkTime), date.format(wReservTime), wPriceTotal, wEName, wDNo, wGNo };
 	}
 	
 	public Object[] toArrayFiveJoinMap() { //다영
@@ -125,7 +125,29 @@ public class WorkDialog {
 		return new Object[] { wWorkTime, pName, wGNo.getgName(),  pPrice};
 	}
 	
+	public Object[] toArrayReservDetail() {
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		
+		String pName="";
+		String pPrice="";
+		System.out.println(productList);
+		for(int i=0;i<productList.size();i++) {
+			if(i!=productList.size()-1) {				
+				pName+=productList.get(i).getpName()+",";
+				pPrice+=productList.get(i).getpPrice()+",";
+			}else {
+				pName+=productList.get(i).getpName();
+				pPrice+=productList.get(i).getpPrice();
+			}			
+			System.out.println("가격"+productList.get(i).getpPrice());
+			System.out.println("이름"+productList.get(i).getpName());
+		}
 
+
+		
+		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade(), pName, pPrice, wEName.geteName(), date.format(wWorkTime) };
+		
+	}
 }
 
 

@@ -14,16 +14,15 @@
 		<result property="gName" column="g_name" />
 		<result property="gTel" column="g_tel" />
 		<result property="gEmail" column="g_email" />
-		<result property="gBirth" column="g_nirth" />
+		<result property="gBirth" column="g_birth" />
 		<result property="gJoin" column="g_join" />
 		<result property="gPoint" column="g_point" />
 		<result property="gMemo" column="g_memo" />
 	</resultMap>
 	
 
-	<select id="selectGuestByAll" resultType="Guest">
-		select g_no, g_l_grade,
-		g_name, g_tel, g_email, g_birth, g_join, g_point, g_memo
+	<select id="selectGuestByAll" resultType="Guest" resultMap="extendsGuest">
+		select g_no, g_l_grade as gLGrade, g_name, g_tel, g_email, g_birth, g_join, g_point, g_memo
 		from
 		hairshop.guest;
 	</select>

@@ -90,8 +90,11 @@ select if(UNIX_TIMESTAMP(@w_reservTime) > UNIX_TIMESTAMP(now()), FROM_UNIXTIME(R
 select @w_reservTime,@w_workTime;
 
 /* 1.시작~끝 시간 설정 */
+
 set @start=UNIX_TIMESTAMP('2019-07-01 00:00:00');
 set @end=UNIX_TIMESTAMP('2019-08-31 23:59:59');
+set @start=UNIX_TIMESTAMP(concat(left(curdate(),10),' 00:00:00'));
+set @end=UNIX_TIMESTAMP(concat(left(curdate(),10),' 23:59:59'));
  
 select @start,@end;
 
@@ -100,13 +103,15 @@ select @start,@end;
 INSERT INTO hairshop.workdialog
 ( `w_reservTime`,`w_workTime`, `w_priceTotal`, w_e_name, w_d_no, w_g_no)
 values
-(@w_reservTime:=(SELECT FROM_UNIXTIME(RAND() * (@end - @start) + @start) as the_date),
+(@w_reservTime:=(SELECT FROM_UNIXTIME(RAND() * (@end - @start) + @start)),
 if(UNIX_TIMESTAMP(@w_reservTime) < UNIX_TIMESTAMP(now()), FROM_UNIXTIME(RAND() * (select UNIX_TIMESTAMP(now()) - @start) + @start),null),
 10000,
 (select e_name from event order by rand() limit 1),
 (select d_no from designer order by rand() limit 1),
 (select g_no from guest order by rand() limit 1))
 ;
+
+
 /* 3.불필요 데이터 삭제 */
 delete from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
 and left(right(`w_reservTime`,8),2) between 0 and 7;
@@ -158,19 +163,56 @@ select * from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-
 select * from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
 and left(right(`w_reservTime`,8),2) between 8 and 21;
 
-
-
-
-
-
-
 select * from workdialog;
-
-
 
 insert into event (e_name, e_startday, e_endday, e_sale)
 values("임시", '2019-06-30', '2019-07-15', 10);
 
+SELECT g_name, w_workTime, p_name, p_price
+FROM workdialog w
+left join designer d
+on w.w_d_no=d.d_no
+left join choice c
+on w.w_no=c.c_w_no
+left join product p
+on c.c_p_name=p.p_name
+left join guest g
+on w_g_no=g.g_no;
+
+
+INSERT into choice
+(c_w_no, c_p_name)
+values
+(1, '염색'),
+(2, '커트'),
+(3, '커트'),
+(4, '파마'),
+(5, '고오급염색'),
+(7, '염색'),
+(8, '파마'),
+(9, '커트'),
+(10, '염색'),
+(11, '고오급파마')
+;
+
+
+
+select 
+w_no as '번호', w_reservTime as '예약일시', d.d_name as '디자이너', d.d_grade as '직책', g.g_name as '손님명',
+g.g_l_grade as '손님등급', p.p_name as '작업명', w_e_name as '이벤트', w_priceTotal as '가격', w_workTime as '완료일시'
+from workdialog w
+left join designer d
+on w.w_d_no = d.d_no
+left join guest g
+on w.w_g_no = g.g_no
+left join choice c
+on w.w_g_no = c.c_w_no
+left join product p
+on c.c_p_name = p.p_name
+left join tax t
+on p.p_name=t.t_name
+order by w_reservTime desc
+;
 
 
 
@@ -181,6 +223,43 @@ values("임시", '2019-06-30', '2019-07-15', 10);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT *
+		FROM workdialog w
+		left join designer d
+		on w.w_d_no=d.d_no
+		left join event e
+		on w.w_e_name=e.e_name
+		left join choice c
+		on w.w_no=c.c_w_no
+		left join product p
+		on c.c_p_name=p.p_name
+		left join guest g
+		on w_g_no=g.g_no
+		where w.w_d_no=1;
 
 
 
