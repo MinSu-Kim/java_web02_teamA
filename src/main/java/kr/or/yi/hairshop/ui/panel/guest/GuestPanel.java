@@ -162,7 +162,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_4.setLayout(new BorderLayout(0, 0));
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\lenovo\\Desktop\\ppp.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("images\\ppp.jpg"));
 		panel_4.add(lblNewLabel);
 
 		JPanel panel_2 = new JPanel();
