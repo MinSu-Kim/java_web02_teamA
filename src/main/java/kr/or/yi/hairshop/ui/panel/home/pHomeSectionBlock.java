@@ -1,8 +1,11 @@
 package kr.or.yi.hairshop.ui.panel.home;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,6 +16,7 @@ import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -29,20 +33,22 @@ import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.ui.frame.WorkDialogFrame;
 
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
-public class pHomeSectionBlock extends JPanel implements MouseListener {
+public class pHomeSectionBlock extends JPanel implements MouseListener,ActionListener {
 	JTable jtable;
 	private JLabel lblDesigner;
 	private Designer designer;
-	private List<WorkDialog> wList;
 	private DefaultTableModel model;
 	private Map<Integer, WorkDialog> list=new HashMap<Integer, WorkDialog>();
-	private Map<Integer,Map<Integer,Guest>> dWorkList=new HashMap<Integer, Map<Integer,Guest>>();
+	
+	
+	private Map<Integer,Map<Integer,WorkDialog>> dWorkList=new HashMap<Integer, Map<Integer,WorkDialog>>();
 	private final String[] columns = { "시간", "손님"};
 	
 	private WorkDialogMapper dao = new WorkDialogMapperImpl();
@@ -68,6 +74,11 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 	private JPanel panelRight;
 	private JPanel panelCenter;
 	
+
+	private JScrollPane spane;
+	private pHomeSectionForm parent;
+	private JMenuItem menuItemList;
+	
 	
 	public pHomeSectionBlock() {
 		setBorder(null);
@@ -82,9 +93,11 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 		jtable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// 단일선택
 		jtable.addMouseListener(this);
 		tableSetWidth(10, 100);
-		JScrollPane spane = new JScrollPane(jtable);
+		spane = new JScrollPane(jtable);
+		
 		
 		JPanel panelNorth = new JPanel();
+		
 		add(panelNorth, BorderLayout.NORTH);
 		lblDesigner = new JLabel("디자이너이름");
 		
@@ -97,8 +110,9 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 		panelCenter.setBorder(null);
 		panelCenter.setLayout(new BorderLayout(0, 0));
 		panelCenter.add(spane);
-		add(panelCenter, BorderLayout.CENTER);
 		
+		
+		add(panelCenter, BorderLayout.CENTER);
 		
 		
 		
@@ -129,36 +143,59 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 	public void mouseReleased(MouseEvent e) {
 	}
 	public void mouseClicked(MouseEvent me) {
+		
 		Iterator<Integer> map1 = dWorkList.keySet().iterator();
-		System.out.println(map1);
         while( map1.hasNext() ){
         	int key1 = map1.next();
         	Iterator<Integer> map2=dWorkList.get(key1).keySet().iterator();
         	while(map2.hasNext()) {
         		int key2=map2.next();
-        		System.out.println(String.format("key=%s,value=%s", key2, dWorkList.get(key1).get(key2)));
+        		System.out.println(String.format("key1=%s, key2=%s,value=%s",key1, key2, dWorkList.get(key1).get(key2)));
+        		WorkDialog workDialog=dWorkList.get(key1).get(key2);
         	}
         	
         }
 		
+		
 		int row = jtable.getSelectedRow();
 		int column = jtable.getSelectedColumn();
+		parent.getMenuPopup().removeAll();
+		if(dWorkList.get(row)!=null) {
+		Iterator<Integer> map = dWorkList.get(row).keySet().iterator();
+		while(map.hasNext()) {
+			int key=map.next();
+			WorkDialog workDialog=dWorkList.get(row).get(key);
+			SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
+			menuItemList=new JMenuItem(String.format("%s %s", workDialog.getwGNo().getgName() , sf.format(workDialog.getwReservTime())));
+			menuItemList.addActionListener(this);
+			parent.getMenuPopup().add(menuItemList);
+			
+		}
+		
+			
+		}
+		parent.test1();
+		
+		
+		
+		
 //		System.out.println(lblDesigner.getText());
 //		System.out.println(row + "행, " + column + "열 : " + jtable.getValueAt(row, column) + " 선택했음");
 //		System.out.println(list.get(jtable.getValueAt(row, 0)));
-		WorkDialog work = list.get(row);
-		if(work!=null) {
+		
+		
+		
+//		if(work!=null) {
 //			frame = new WorkDialogFrame();
-			frame.setOpen(work.getwNo());
-		}else {
+//			frame.setOpen(work.getwNo());
+//		}else {
 //			frame = new WorkDialogFrame();
-			frame.setOpen(-1);
-		}
-		frame.setVisible(true);
+//			frame.setOpen(-1);
+//		}
+//		frame.setVisible(true);
 		
 	}
 	public void setTable(List<WorkDialog> wList) {
-		System.out.println(wList);
 		lblDesigner.setText(designer.getdName());
 		Iterator<WorkDialog> workDialog = wList.iterator();
 		while (workDialog.hasNext()) {
@@ -168,14 +205,18 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 //	        //column 갯수
 //	        System.out.println(jtable.getColumnCount());
 		    
-		    //Map<시간,Map<순서,Guest>>
+		    //Map<시간,Map<순서(분),Guest>>
+		   
 		    
-		    Map<Integer,Guest> timeList=new HashMap<Integer, Guest>();
-		    Guest guest = new Guest(work.getwGNo().getgNo(), work.getwGNo().getgName());
-		    timeList.put(work.getwReservTime().getMinutes(), guest);
-		    
-		    dWorkList.put(work.getwReservTime().getHours()-8,timeList);
-		    list.put(work.getwReservTime().getHours()-8, work);
+		    int index=work.getwReservTime().getHours()-8;
+		    if(dWorkList.get(index)!=null)
+		    	dWorkList.get(index).put(work.getwReservTime().getMinutes(), work);
+		    else {
+		    	Map<Integer,WorkDialog> timeList=new HashMap<Integer, WorkDialog>();//2번쨰map
+		    	timeList.put(work.getwReservTime().getMinutes(), work);
+		    	dWorkList.put(work.getwReservTime().getHours()-8,timeList);//1번쨰풋
+		    	
+		    }
 		    
 		    
 //		    jtable.setValueAt(work,  work.getwReservTime().getHours()-8, 1);
@@ -185,23 +226,21 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 		    }else {
 		    	 jtable.setValueAt(text+","+work.getwGNo().getgName(), work.getwReservTime().getHours()-8, 1);
 		    }
-		    	
+		    
 		}
 		
-
+		
 	}
 //	public void refresh() {
 //		jtable.setModel(new DefaultTableModel(getRows(), new String[] {"시간","작업명"}));
 //		jtable.setValueAt("가나다라", 1 , 1);
 //	}
 	
+
 	public void setDisigner(Designer designer) {
 		this.designer=designer;
 	}
 	
-	public void setWorkDialog(List<WorkDialog> wList) {
-		this.wList=wList;
-	}
 	
 	public void clearTable() {
 		lblDesigner.setText(" ");
@@ -251,5 +290,26 @@ public class pHomeSectionBlock extends JPanel implements MouseListener {
 			for (int i = 0; i < width.length; i++) {
 				cModel.getColumn(i).setPreferredWidth(width[i]);
 			}
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String str=e.getActionCommand();
+			
+			str=str.substring(str.length()-5, str.length());
+			int h=Integer.parseInt(str.substring(0, 2));
+			int m=Integer.parseInt(str.substring(3));
+			
+			parent.setWorkDate(dWorkList.get(h-8).get(m));
+			
+		}
+
+		public void setPopupMenu(JPopupMenu popupMenuList) {
+			
+			jtable.setComponentPopupMenu(popupMenuList);
+		}
+
+		public void setParent(pHomeSectionForm pHomeSectionForm) {
+			parent = pHomeSectionForm;
 		}
 }

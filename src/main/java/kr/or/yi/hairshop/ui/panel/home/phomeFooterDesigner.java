@@ -11,11 +11,15 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
+
+import kr.or.yi.hairshop.dto.WorkDialog;
+
 import java.awt.GridLayout;
+import java.text.SimpleDateFormat;
 
 public class phomeFooterDesigner extends JPanel {
 
-	private JTextField tfgDname;
+	private JTextField tfgName;
 	private JTextField tfdName;
 	private JTextField tfwReservTime;
 	private JTextField tfeName;
@@ -45,9 +49,9 @@ public class phomeFooterDesigner extends JPanel {
 		panelData.add(lblgDname);
 		lblgDname.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tfgDname = new JTextField();
-		panelData.add(tfgDname);
-		tfgDname.setColumns(10);
+		tfgName = new JTextField();
+		panelData.add(tfgName);
+		tfgName.setColumns(10);
 		
 		JLabel lbldName = new JLabel("디자이너");
 		panelData.add(lbldName);
@@ -119,6 +123,15 @@ public class phomeFooterDesigner extends JPanel {
 	}
 	
 	public void setTable() {
+		
+	}
+	public void setWorkDate(WorkDialog workDialog) {
+		tfdName.setText(workDialog.getwDNo().getdName());
+		tfeName.setText(workDialog.getwEName().geteName());
+		tfgName.setText(workDialog.getwGNo().getgName());
+		tfpPrice.setText(workDialog.getwPriceTotal()+"");
+		SimpleDateFormat sf = new SimpleDateFormat();
+		tfwReservTime.setText(sf.format(workDialog.getwReservTime()));
 		
 	}
 	
