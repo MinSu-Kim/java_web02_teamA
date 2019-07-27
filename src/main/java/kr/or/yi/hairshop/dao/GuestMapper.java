@@ -9,4 +9,5 @@ public interface GuestMapper {
 	int insertGuest(Guest guest);
 	int updateGuest(Guest guest);
 	int deleteGuest(Guest guest);
+	void deleteGuest(int getgNo);
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -16,65 +17,88 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.yi.hairshop.HairMainFrame;
 import kr.or.yi.hairshop.dao.GuestMapper;
 import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.panel.pCalendar;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
-public class pGuestMgn extends JPanel {
+public class pGuestMgn extends JPanel implements ActionListener {
 
-	private JTable table;	
+	private JTable table;
 	private List<Guest> gList;
 	private GuestMapper dao = new GuestMapperImpl();
-	
+
 	private JPopupMenu popupMenu;
 	private JMenuItem mntmUpdate;
 	private JMenuItem mntmDelete;
-	
+	private JMenuItem mntmAdd;
+	private GuestPanel pInfomation;
+
 	public pGuestMgn() {
 		initComponents();
 	}
-	
+
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel pGuestMain = new JPanel();
 		pGuestMain.setBorder(new TitledBorder(null, "고객관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		add(pGuestMain);
 		pGuestMain.setLayout(new GridLayout(0, 1, 0, 0));
-		
-				JScrollPane scrollPane = new JScrollPane();
-				pGuestMain.add(scrollPane);
-				
-						table = new JTable();
-						scrollPane.setViewportView(table);
-						scrollPane.setSize(200, 200);
-						
-				
-		GuestPanel panel_2 = new GuestPanel();
-		pGuestMain.add(panel_2);
-		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		
-		
+
+		JPanel pList = new JPanel();
+		pGuestMain.add(pList);
+		pList.setLayout(new BorderLayout(0, 0));
+
+		JScrollPane scrollPane = new JScrollPane();
+		pList.add(scrollPane);
+
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		scrollPane.setSize(200, 200);
+
+		pInfomation = new GuestPanel();
+		pInfomation.setParent(pGuestMgn.this);
+		pGuestMain.add(pInfomation);
+
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		pCalendar pCalendar = new pCalendar();
 		panel.add(pCalendar, BorderLayout.NORTH);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
 		panel_1.add(lblNewLabel);
+		
+		popupMenu = new JPopupMenu();
+		
+		mntmAdd = new JMenuItem("등록");
+		mntmAdd.addActionListener(this);
+		popupMenu.add(mntmAdd);
+		
+		mntmUpdate = new JMenuItem("수정");
+		mntmUpdate.addActionListener(this);
+		popupMenu.add(mntmUpdate);
+		
+		mntmDelete = new JMenuItem("삭제");
+		mntmDelete.addActionListener(this);
+		popupMenu.add(mntmDelete);
+		
+		table.setComponentPopupMenu(popupMenu);
+		scrollPane.setComponentPopupMenu(popupMenu);
 	}
-	
+
 	public void clearList() {
 		gList = dao.selectGuestByAll();
 	}
@@ -83,6 +107,43 @@ public class pGuestMgn extends JPanel {
 		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8);
 		tableSetWidth(20, 20, 50, 50, 80, 50, 50, 50, 100);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mntmAdd) {
+			pInfomation.clear();
+		}
+		if (e.getSource() == mntmUpdate) {
+			int i = table.getSelectedRow();
+			Guest selectGuest = gList.get(i);
+			pInfomation.setGuestTf(selectGuest);
+			pInfomation.setBtn();
+			
+		}		
+		if (e.getSource() == mntmDelete) {
+			deleteGuestUI();
+		}		
+	}
+	
+	
+	
+	
+	private void deleteGuestUI() {
+		int result = JOptionPane.showConfirmDialog(null, "삭제하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+		
+		if(result == JOptionPane.CLOSED_OPTION) {
+			// 취소선택
+		}else if (result == JOptionPane.YES_OPTION) {
+			//예 선택
+			int i = table.getSelectedRow();
+			Guest selectGuest = gList.get(i);
+			dao.deleteGuest(selectGuest.getgNo());
+			pInfomation.clearGuestTf();
+			clearList();
+			reloadData();
+		}else {
+			//아니오 선택
+		}
 	}
 
 	private Object[][] getRows() {
@@ -115,7 +176,6 @@ public class pGuestMgn extends JPanel {
 		for (int i = 0; i < width.length; i++) {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
-	}	
-	
-	
+	}
+
 }

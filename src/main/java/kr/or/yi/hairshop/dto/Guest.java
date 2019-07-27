@@ -134,12 +134,9 @@ public class Guest {
 		this.workDialogList = workDialogList;
 	}
 
-	
-	
 	@Override
-	public String toString() { //나모가 바꿈
-		return String.format(
-				"%s",gName);
+	public String toString() { // 나모가 바꿈
+		return String.format("%s", gName);
 	}
 
 	public Object[] toArray() {

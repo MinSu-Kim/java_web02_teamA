@@ -12,6 +12,12 @@ public class Level {
 	}
 
 
+	public Level(String lGrade) {
+		super();
+		this.lGrade = lGrade;
+	}
+
+
 	public Level(String lGrade, int lSale, List<Guest> guestList) {
 		this.lGrade = lGrade;
 		this.lSale = lSale;

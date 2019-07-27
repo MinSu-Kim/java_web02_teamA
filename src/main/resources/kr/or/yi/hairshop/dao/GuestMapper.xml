@@ -20,8 +20,6 @@
 		<result property="gMemo" column="g_memo" />
 	</resultMap>
 	
-	
-	
 
 	<select id="selectGuestByAll" resultType="Guest">
 		select g_no, g_l_grade,
