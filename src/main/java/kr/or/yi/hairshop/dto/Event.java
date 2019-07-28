@@ -80,9 +80,33 @@ public class Event {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((eName == null) ? 0 : eName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Event other = (Event) obj;
+		if (eName == null) {
+			if (other.eName != null)
+				return false;
+		} else if (!eName.equals(other.eName))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		return String.format("Event [eName=%s, eStartDay=%s, eEndDay=%s, eSale=%s, workDialogList=%s]", eName,
-				eStartDay, eEndDay, eSale, workDialogList);
+		return String.format("%s", eName);
 	}
 
 }

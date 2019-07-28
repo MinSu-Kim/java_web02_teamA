@@ -40,83 +40,70 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
-public class pHomeSectionBlock extends JPanel implements MouseListener,ActionListener {
+public class pHomeSectionBlock extends JPanel implements MouseListener, ActionListener {
 	JTable jtable;
 	private JLabel lblDesigner;
 	private Designer designer;
 	private DefaultTableModel model;
 //	private Map<Integer, WorkDialog> list=new HashMap<Integer, WorkDialog>();
-	
-	
-	private Map<Integer,Map<Integer,WorkDialog>> dWorkList=new HashMap<Integer, Map<Integer,WorkDialog>>();
-	private final String[] columns = { "시간", "손님"};
-	
+
+	private Map<Integer, Map<Integer, WorkDialog>> dWorkList = new HashMap<Integer, Map<Integer, WorkDialog>>();
+	private final String[] columns = {"손님" };
+
 	private WorkDialogMapper dao = new WorkDialogMapperImpl();
 	private WorkDialogFrame frame;
 	private String[][] data = { 
-			{ "8", "",}, 
-			{ "9", ""}, 
-			{ "10", ""}, 
-			{ "11", ""},
-			{ "12", ""},
-			{ "13", ""},
-			{ "14", ""},
-			{ "15", ""},
-			{ "16", ""},
-			{ "17", ""},
-			{ "18", ""},
-			{ "19", ""},
-			{ "20", ""},
-			{ "21", ""},
-			{ "22", ""},
-			{ "23", ""},
-	};
+			{""},
+			{""},
+			{""},
+			{""},
+			{""},
+			{""},			
+			{""},
+			{""}, 
+			{""}, 
+			{""}, 
+			{""}, 
+			{""}, 
+			{""},
+			{""}, 
+			{""}, 
+			{""}};
 	private JPanel panelRight;
 	private JPanel panelCenter;
-	
 
 	private JScrollPane spane;
 	private pHomeSectionForm parent;
 	private JMenuItem menuItemList;
-	
-	
+
 	public pHomeSectionBlock() {
 		setBorder(null);
-		
+
 		setLayout(new BorderLayout());
-		
-		
+
 		model = new DefaultTableModel(data, columns);
 
 		jtable = new JTable(model);
-		
+
 		jtable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// 단일선택
 		jtable.addMouseListener(this);
-		tableSetWidth(10, 100);
+		tableSetWidth(100);
 		spane = new JScrollPane(jtable);
-		
-		
+
 		JPanel panelNorth = new JPanel();
-		
+
 		add(panelNorth, BorderLayout.NORTH);
 		lblDesigner = new JLabel("디자이너이름");
-		
-		
+
 		panelNorth.add(lblDesigner);
-		
-		
-		
+
 		panelCenter = new JPanel();
 		panelCenter.setBorder(null);
 		panelCenter.setLayout(new BorderLayout(0, 0));
 		panelCenter.add(spane);
-		
-		
+
 		add(panelCenter, BorderLayout.CENTER);
-		
-		
-		
-		
+
 	}
 
 //	public static void main(String[] args) {
@@ -127,8 +114,6 @@ public class pHomeSectionBlock extends JPanel implements MouseListener,ActionLis
 //		f.setSize(300, 200);
 //		f.setVisible(true);
 //	}
-
-	
 
 	public void mouseEntered(MouseEvent e) {
 	}
@@ -142,49 +127,43 @@ public class pHomeSectionBlock extends JPanel implements MouseListener,ActionLis
 
 	public void mouseReleased(MouseEvent e) {
 	}
+
 	public void mouseClicked(MouseEvent me) {
-		
+
 		Iterator<Integer> map1 = dWorkList.keySet().iterator();
-        while( map1.hasNext() ){
-        	int key1 = map1.next();
-        	Iterator<Integer> map2=dWorkList.get(key1).keySet().iterator();
-        	while(map2.hasNext()) {
-        		int key2=map2.next();
-        		System.out.println(String.format("key1=%s, key2=%s,value=%s",key1, key2, dWorkList.get(key1).get(key2)));
-        		WorkDialog workDialog=dWorkList.get(key1).get(key2);
-        	}
-        	
-        }
-		
-		
+		while (map1.hasNext()) {
+			int key1 = map1.next();
+			Iterator<Integer> map2 = dWorkList.get(key1).keySet().iterator();
+			while (map2.hasNext()) {
+				int key2 = map2.next();
+//				System.out.println(String.format("key1=%s, key2=%s,value=%s", key1, key2, dWorkList.get(key1).get(key2)));
+//				WorkDialog workDialog = dWorkList.get(key1).get(key2);
+			}
+
+		}
+
 		int row = jtable.getSelectedRow();
-		int column = jtable.getSelectedColumn();
 		parent.getMenuPopup().removeAll();
-		if(dWorkList.get(row)!=null) {
-		Iterator<Integer> map = dWorkList.get(row).keySet().iterator();
-		while(map.hasNext()) {
-			int key=map.next();
-			WorkDialog workDialog=dWorkList.get(row).get(key);
-			SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
-			menuItemList=new JMenuItem(String.format("%s %s", workDialog.getwGNo().getgName() , sf.format(workDialog.getwReservTime())));
-			menuItemList.addActionListener(this);
-			parent.getMenuPopup().add(menuItemList);
-			
+		
+		if (dWorkList.get(row) != null) {
+			Iterator<Integer> map = dWorkList.get(row).keySet().iterator();
+			while (map.hasNext()) {
+				int key = map.next();
+				WorkDialog workDialog = dWorkList.get(row).get(key);
+				SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
+				menuItemList = new JMenuItem(String.format("%s %s", workDialog.getwGNo().getgName(),
+						sf.format(workDialog.getwReserveTime())));
+				menuItemList.addActionListener(this);
+				parent.getMenuPopup().add(menuItemList);
+
+			}
+
 		}
-		
-			
-		}
-		parent.test1();
-		
-		
-		
-		
+
 //		System.out.println(lblDesigner.getText());
 //		System.out.println(row + "행, " + column + "열 : " + jtable.getValueAt(row, column) + " 선택했음");
 //		System.out.println(list.get(jtable.getValueAt(row, 0)));
-		
-		
-		
+
 //		if(work!=null) {
 //			frame = new WorkDialogFrame();
 //			frame.setOpen(work.getwNo());
@@ -193,56 +172,52 @@ public class pHomeSectionBlock extends JPanel implements MouseListener,ActionLis
 //			frame.setOpen(-1);
 //		}
 //		frame.setVisible(true);
-		
+
 	}
+
 	public void setTable(List<WorkDialog> wList) {
 		dWorkList.clear();
 		lblDesigner.setText(designer.getdName());
 		Iterator<WorkDialog> workDialog = wList.iterator();
 		while (workDialog.hasNext()) {
-		    WorkDialog work=workDialog.next();
-		    
-		    //Map<시간,Map<순서(분),Guest>>
-		   
-		    
-		    int index=work.getwReservTime().getHours()-8;
-		    if(dWorkList.get(index)!=null)
-		    	dWorkList.get(index).put(work.getwReservTime().getMinutes(), work);
-		    else {
-		    	Map<Integer,WorkDialog> timeList=new HashMap<Integer, WorkDialog>();//2번쨰map
-		    	timeList.put(work.getwReservTime().getMinutes(), work);
-		    	dWorkList.put(work.getwReservTime().getHours()-8,timeList);//1번쨰풋
-		    	
-		    }
-		    
-		    
-		    String text=jtable.getValueAt(work.getwReservTime().getHours()-8, 1).toString();
-		    if(text.equals("")) {
-		    	 jtable.setValueAt(work.getwGNo().getgName(), work.getwReservTime().getHours()-8, 1);
-		    }else {
-		    	 jtable.setValueAt(text+","+work.getwGNo().getgName(), work.getwReservTime().getHours()-8, 1);
-		    }
-		    
+			WorkDialog work = workDialog.next();
+
+			// Map<시간,Map<순서(분),Guest>>
+
+			int index = work.getwReserveTime().getHours() - 8;
+			String text = jtable.getValueAt(index, 0).toString();
+			if (dWorkList.get(index) != null) {
+				dWorkList.get(index).put(work.getwReserveTime().getMinutes(), work);
+				
+				jtable.setValueAt(text + "," + work.getwGNo().getgName(), index, 0);
+			}
+			else {
+				Map<Integer, WorkDialog> timeList = new HashMap<Integer, WorkDialog>();// 2번쨰map
+				timeList.put(work.getwReserveTime().getMinutes(), work);
+				dWorkList.put(index, timeList);// 1번쨰풋
+				
+				jtable.setValueAt(work.getwGNo().getgName(), index, 0);
+			}
+			
+			if(index==6)
+				System.out.println(jtable.getValueAt(index, 0).toString());
 		}
-		
-		
+
 	}
 //	public void refresh() {
 //		jtable.setModel(new DefaultTableModel(getRows(), new String[] {"시간","작업명"}));
 //		jtable.setValueAt("가나다라", 1 , 1);
 //	}
-	
 
 	public void setDisigner(Designer designer) {
-		this.designer=designer;
+		this.designer = designer;
 	}
-	
-	
+
 	public void clearTable() {
 		lblDesigner.setText(" ");
-		jtable.setModel(new DefaultTableModel(data,columns));
+		jtable.setModel(new DefaultTableModel(data, columns));
 	}
-	
+
 //	private Object[][] getRows() {
 //		if(wList==null) {
 //			wList=new ArrayList<>();
@@ -253,21 +228,12 @@ public class pHomeSectionBlock extends JPanel implements MouseListener,ActionLis
 //		}
 //		return rows;
 //	}
-	
-	
+
 //	public void reloadData() {
 //		jtable.setModel(new DefaultTableModel(getRows(), new String[] {"시간","작업명"}));
 ////		tableAlignmentAndWidth();
 //	}
-	
-	protected void tableAlignmentAndWidth() {
-		// 사원번호(0),사원명(1),급여(2),부서(3),성별(4),입사일(5),직책(6) 가운데 정렬
-		tableCellAlignment(SwingConstants.LEFT, 2);
-		// 직책번호, 직책명의 폭을 (100, 200)으로 가능하면 설정
-		tableSetWidth(100, 150);
-	}
-	
-	
+
 	// 테이블 셀 내용의 정렬
 	protected void tableCellAlignment(int align, int... idx) {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
@@ -278,34 +244,34 @@ public class pHomeSectionBlock extends JPanel implements MouseListener,ActionLis
 			model.getColumn(idx[i]).setCellRenderer(dtcr);
 		}
 	}
-	
+
 	// 테이블 셀의 폭 설정
-		protected void tableSetWidth(int... width) {
-			TableColumnModel cModel = jtable.getColumnModel();
+	protected void tableSetWidth(int... width) {
+		TableColumnModel cModel = jtable.getColumnModel();
 
-			for (int i = 0; i < width.length; i++) {
-				cModel.getColumn(i).setPreferredWidth(width[i]);
-			}
+		for (int i = 0; i < width.length; i++) {
+			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
+	}
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String str=e.getActionCommand();
-			
-			str=str.substring(str.length()-5, str.length());
-			int h=Integer.parseInt(str.substring(0, 2));
-			int m=Integer.parseInt(str.substring(3));
-			
-			parent.setWorkDate(dWorkList.get(h-8).get(m));
-			
-		}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String str = e.getActionCommand();
+		
+		str = str.substring(str.length() - 5, str.length());
+		int h = Integer.parseInt(str.substring(0, 2));
+		int m = Integer.parseInt(str.substring(3));
 
-		public void setPopupMenu(JPopupMenu popupMenuList) {
-			
-			jtable.setComponentPopupMenu(popupMenuList);
-		}
+		parent.setWorkDate(dWorkList.get(h - 8).get(m));
 
-		public void setParent(pHomeSectionForm pHomeSectionForm) {
-			parent = pHomeSectionForm;
-		}
+	}
+
+	public void setPopupMenu(JPopupMenu popupMenuList) {
+
+		jtable.setComponentPopupMenu(popupMenuList);
+	}
+
+	public void setParent(pHomeSectionForm pHomeSectionForm) {
+		parent = pHomeSectionForm;
+	}
 }

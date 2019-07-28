@@ -20,15 +20,22 @@ public class Designer {
 	private List<WorkDialog> workDialogList;
 
 	public Designer() {
-		// TODO Auto-generated constructor stub
 	}
+
+	
+
+	public Designer(int dNo) {
+		this.dNo = dNo;
+	}
+
+
 
 	public Designer(String dGrade, String dId, String dName) {
 		this.dGrade = dGrade;
 		this.dId = dId;
 		this.dName = dName;
 	}
-
+	
 	public Designer(int dNo, String dGrade, String dId, String dPassword, String dName, String dTel, String dTel2,
 			String dAddr, String dAddr2, String dAddr3, Date dBirth, Date dJoin, String dMemo,
 			List<WorkDialog> workDialogList) {
@@ -46,6 +53,10 @@ public class Designer {
 		this.dJoin = dJoin;
 		this.dMemo = dMemo;
 		this.workDialogList = workDialogList;
+	}
+
+	public Designer(Designer getwDNo) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getdNo() {
@@ -160,12 +171,38 @@ public class Designer {
 		this.workDialogList = workDialogList;
 	}
 
+	
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + dNo;
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Designer other = (Designer) obj;
+		if (dNo != other.dNo)
+			return false;
+		return true;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return String.format(
-				"Designer [dNo=%s, dGrade=%s, dId=%s, dPassword=%s, dName=%s, dTel=%s, dTel2=%s, dAddr=%s, dAddr2=%s, dAddr3=%s, dBirth=%s, dJoin=%s, dMemo=%s, workDialogList=%s]",
-				dNo, dGrade, dId, dPassword, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo,
-				workDialogList);
+		return String.format("%s",dName);
 	}
 
 	public Object[] toArray() {

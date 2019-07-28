@@ -46,7 +46,7 @@ public class WorkDialog {
 		this.wWorkTime = wWorkTime;
 	}
 
-	public Date getwReservTime() {
+	public Date getwReserveTime() {
 		return wReservTime;
 	}
 

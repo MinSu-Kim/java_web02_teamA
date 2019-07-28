@@ -169,7 +169,7 @@ public class WorkDialogFrame extends JFrame implements ActionListener {
 		
 //			tfwWorkTime.setText(sf.format(work.getwWorkTime()));
 		
-		tfwReservTime.setText(sf.format(work.getwReservTime()));
+		tfwReservTime.setText(sf.format(work.getwReserveTime()));
 		if(work.getwEName()!=null)
 			tfeName.setText(work.getwEName().geteName());
 		tfpPrice.setText(work.getwPriceTotal()+"");

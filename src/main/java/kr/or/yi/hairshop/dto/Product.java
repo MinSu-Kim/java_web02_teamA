@@ -1,5 +1,6 @@
 package kr.or.yi.hairshop.dto;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Product {
@@ -69,12 +70,12 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return String.format("Product [pPrice=%s, pName=%s, pDivision=%s, workDialogList=%s, taxList=%s]", pPrice,
-				pName, pDivision, workDialogList, taxList);
+		return String.format("%s",pName);
 	}
 
 	public Object[] toArray() {
-		return new Object[] { pName, pPrice, pDivision };
+		DecimalFormat df=new DecimalFormat("###,###");
+		return new Object[] { pName, df.format(pPrice)+"원", pDivision };
 	}
 
 }
