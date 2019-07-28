@@ -45,7 +45,7 @@ public class pHomeSectionBlock extends JPanel implements MouseListener,ActionLis
 	private JLabel lblDesigner;
 	private Designer designer;
 	private DefaultTableModel model;
-	private Map<Integer, WorkDialog> list=new HashMap<Integer, WorkDialog>();
+//	private Map<Integer, WorkDialog> list=new HashMap<Integer, WorkDialog>();
 	
 	
 	private Map<Integer,Map<Integer,WorkDialog>> dWorkList=new HashMap<Integer, Map<Integer,WorkDialog>>();
@@ -196,14 +196,11 @@ public class pHomeSectionBlock extends JPanel implements MouseListener,ActionLis
 		
 	}
 	public void setTable(List<WorkDialog> wList) {
+		dWorkList.clear();
 		lblDesigner.setText(designer.getdName());
 		Iterator<WorkDialog> workDialog = wList.iterator();
 		while (workDialog.hasNext()) {
 		    WorkDialog work=workDialog.next();
-//		      //row 갯수
-//	        System.out.println(jtable.getRowCount());
-//	        //column 갯수
-//	        System.out.println(jtable.getColumnCount());
 		    
 		    //Map<시간,Map<순서(분),Guest>>
 		   
@@ -219,7 +216,6 @@ public class pHomeSectionBlock extends JPanel implements MouseListener,ActionLis
 		    }
 		    
 		    
-//		    jtable.setValueAt(work,  work.getwReservTime().getHours()-8, 1);
 		    String text=jtable.getValueAt(work.getwReservTime().getHours()-8, 1).toString();
 		    if(text.equals("")) {
 		    	 jtable.setValueAt(work.getwGNo().getgName(), work.getwReservTime().getHours()-8, 1);

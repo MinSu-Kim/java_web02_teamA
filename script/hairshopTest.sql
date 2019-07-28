@@ -90,9 +90,10 @@ select if(UNIX_TIMESTAMP(@w_reservTime) > UNIX_TIMESTAMP(now()), FROM_UNIXTIME(R
 select @w_reservTime,@w_workTime;
 
 /* 1.시작~끝 시간 설정 */
-
+/* 7/1~8/31셋팅 */
 set @start=UNIX_TIMESTAMP('2019-07-01 00:00:00');
 set @end=UNIX_TIMESTAMP('2019-08-31 23:59:59');
+/* 당일데이터만 삽입 */
 set @start=UNIX_TIMESTAMP(concat(left(curdate(),10),' 00:00:00'));
 set @end=UNIX_TIMESTAMP(concat(left(curdate(),10),' 23:59:59'));
  

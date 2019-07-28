@@ -121,9 +121,12 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 				panelList[i].setParent(this);
 				panelList[i].setDisigner(dList.get(i+start));
 				wList=wdao.selectWDGECPjoinByWDNo(dList.get(i+start).getdNo());
+				panelList[i].clearTable();
 				panelList[i].setTable(wList);
 				
 				
+			}else {
+				panelList[i].clearTable();
 			}
 		}
 	}
