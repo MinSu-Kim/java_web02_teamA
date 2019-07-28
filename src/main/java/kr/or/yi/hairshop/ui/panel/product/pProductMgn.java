@@ -392,15 +392,17 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 		}
 		///////////저 아직 하고 있어요,,,, 다영
-		if (e.getSource() == mntmPopWorkerDelete) { //디자이너 삭제할때
-			deleteDesigner(); //
+		if (e.getSource() == mntmPopWorkerDelete) { //디자이너 삭제
+			deleteDesigner(); 
 		}
 		
-		if (e.getSource() == mntmPopWorkerAdd) { //디자이너 등록할때
+		if (e.getSource() == mntmPopWorkerAdd) { //디자이너 등록
 			System.out.println("등록버튼 눌렀네");
 					
 			if(DesignerFrame == null) {
-				DesignerFrameView();
+				DesignerFrameView(); //프레임보이기만 함
+				
+				
 			}else {
 				DesignerFrameView();
 			}
@@ -408,14 +410,15 @@ public class pProductMgn extends JPanel implements ActionListener {
 		}
 		
 		
-		if (e.getSource() == mntmPopWorkerUpdate) { //디자이너 수정할때
-			DesignerFrameView();
-			
+		if (e.getSource() == mntmPopWorkerUpdate) { //디자이너 수정
+//			DesignerFrameView();
+			//클릭한 사람 정보가 실려서 올라와야함. get 
+			//확인버튼 누르면 수정하시겠습니까? 
 			
 			int i = tableWorker.getSelectedRow();
 			Designer worker = workerList.get(i);
 			setWorkerTf(worker); //setWorkerTf get, set달기
-			btnWorker.setText("수정");
+			
 
 		}
 		
@@ -424,10 +427,12 @@ public class pProductMgn extends JPanel implements ActionListener {
 		
 	}
 
-	private void DesignerFrameView() {
+	private void DesignerFrameView() { //등록프레임
+		System.out.println("등록프레임할꺼야");
 		DesignerFrame = new DesignerFrame();
 		DesignerFrame.setParent(HairMainFrame);
 		DesignerFrame.setVisible(true);
+		
 	}
 
 	private void setWorkerTf(Designer worker) {
