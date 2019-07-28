@@ -6,6 +6,12 @@ import javax.swing.table.DefaultTableModel;
 import kr.or.yi.hairshop.dto.Product;
 
 public class pHomeProductTable extends AbstractPanelTable<Product> {
+	
+	
+	
+	public pHomeProductTable() {
+		
+	}
 
 	@Override
 	protected void reloadData() {

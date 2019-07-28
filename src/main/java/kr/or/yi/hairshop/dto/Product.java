@@ -77,5 +77,9 @@ public class Product {
 		DecimalFormat df=new DecimalFormat("###,###");
 		return new Object[] { pName, df.format(pPrice)+"원", pDivision };
 	}
+	public Object[] toArray2() {
+		DecimalFormat df=new DecimalFormat("###,###");
+		return new Object[] { pName, df.format(pPrice)+"원", pDivision };
+	}
 
 }

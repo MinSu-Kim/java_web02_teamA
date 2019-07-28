@@ -38,7 +38,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 	private JTextField tfgName;
 	private JTextField tfwReservTime;
 	private JTextField tfpPrice;
-	private JTextField tfpName;
 	private JButton btnUpdate;
 	private JSpinner jSpinwWorkTime;
 	private final String[] columns = { "작업일", "작업명","금액"};
@@ -177,10 +176,16 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 		panelProductList.setBorder(new TitledBorder(null, "상품 리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelProductList.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		JPanel panel_3 = new JPanel();
+		panel_2.add(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		
 		panelWorkProduct = new pHomeWorkProductTable();
-		panelWorkProduct.setBorder(new TitledBorder(null, "작업리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.add(panelWorkProduct);
-		panelWorkProduct.setLayout(new GridLayout(0, 1, 0, 0));
+		panelWorkProduct.reloadData();
+		panel_3.add(panelWorkProduct, BorderLayout.CENTER);
+		
+		JPanel panel_4 = new JPanel();
+		panel_3.add(panel_4, BorderLayout.SOUTH);
 	}
 	
 	public void setBaseTf(List<Event> event,List<Designer> designer,List<Product> product) {
@@ -198,11 +203,12 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 	public void cearTf() {
 		tfgName.setText("");
 		tfpPrice.setText("");
-		
 		jSpinwReserveTime.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
 		jSpinwWorkTime.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
-		tfpName.setText("");
-		
+		cmbDesigner.setSelectedIndex(-1);
+		cmbEvent.setSelectedIndex(-1);
+		revalidate();
+		repaint();
 	}
 	public void setTfWork(WorkDialog workDialog) {
 		cmbDesigner.setSelectedItem(new Designer(workDialog.getwDNo().getdNo()));
@@ -212,8 +218,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 		tfpPrice.setText(workDialog.getwPriceTotal()+"");
 		
 		panelWorkProduct.setItemList(workDialog.getProductList());	
-		
-		
+		panelWorkProduct.reloadData();
 		panelWorkProduct.setBorder(new TitledBorder(null, workDialog.getwGNo().getgName()+"님의 작업리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		Date date= new Date(new Date().getYear(),0,1);

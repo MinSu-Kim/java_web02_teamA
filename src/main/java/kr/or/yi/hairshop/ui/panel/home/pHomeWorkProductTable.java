@@ -4,8 +4,15 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import kr.or.yi.hairshop.dto.Product;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class pHomeWorkProductTable extends AbstractPanelTable<Product> {
+	public pHomeWorkProductTable() {
+		initComponents();
+	}
+	private void initComponents() {
+	}
 
 	@Override
 	protected void reloadData() {
@@ -21,7 +28,7 @@ public class pHomeWorkProductTable extends AbstractPanelTable<Product> {
 
 	@Override
 	protected Object[] toArray(int i) {
-		return itemList.get(i).toArray();
+		return itemList.get(i).toArray2();
 	}
 	
 }
