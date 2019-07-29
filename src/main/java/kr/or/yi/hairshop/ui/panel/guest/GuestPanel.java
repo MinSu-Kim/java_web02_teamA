@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -154,6 +153,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		btnAdd.addActionListener(this);
 		panel.add(btnAdd);
 
+		
 		JButton btnCancel = new JButton("취소");
 		panel.add(btnCancel);
 
@@ -172,8 +172,14 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAdd) {
-			actionPerformedBtnAddJButton(e);
+			if(e.getActionCommand().equals("등록")) {
+				actionPerformedBtnAddJButton(e);
+			}
+			if(e.getActionCommand().equals("수정")) {
+				actionPerformedBtnAddJButton(e);
+			}
 		}
+		
 	}
 
 	protected void actionPerformedBtnAddJButton(ActionEvent e) {
@@ -182,11 +188,19 @@ public class GuestPanel extends JPanel implements ActionListener {
 		} else {
 			updateGuest();
 		}
-
 	}
 
+	protected void actionPerformedBtnUPJButton(ActionEvent e) {
+		if (btnAdd.getText() == "수정") {
+			updateGuest();
+		} else {
+			MakeGuest();
+		}
+	}
+	
 	private void updateGuest() {
 		Guest modifyguest = new Guest();
+		int gno = modifyguest.getgNo();
 		Level level = new Level(tfGrade.getText());
 		String name = tfName.getText();
 		String id = tfId.getText();
@@ -198,6 +212,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		int point = (int) spPoint.getValue();
 		String memo = tfMemo.getText();
 
+		modifyguest.setgNo(gno);
 		modifyguest.setgLGrade(level);
 		modifyguest.setgName(name);
 		modifyguest.setgId(id);
@@ -208,12 +223,11 @@ public class GuestPanel extends JPanel implements ActionListener {
 		modifyguest.setgJoin(join);
 		modifyguest.setgPoint(point);
 		modifyguest.setgMemo(memo);
-		
+
 		dao.updateGuest(modifyguest);
 
 		parent.clearList();
-		parent.reloadData();		
-		
+		parent.reloadData();
 
 	}
 
@@ -247,20 +261,6 @@ public class GuestPanel extends JPanel implements ActionListener {
 		parent.reloadData();
 	}
 
-	public void clear() {
-		tfGrade.setText("");
-		tfName.setText("");
-		tfId.setText("");
-		tfPassword.setText("");
-		tfTel.setText("");
-		tfEmail.setText("");
-		dcBirth.setDate(new Date());
-		dcJoin.setDate(new Date());
-		spPoint.setValue("");
-		tfMemo.setText("");
-
-	}
-
 	public void setBtn() {
 		if (btnAdd.getText() == "등록") {
 			btnAdd.setText("수정");
@@ -271,7 +271,6 @@ public class GuestPanel extends JPanel implements ActionListener {
 	}
 
 	public void setGuestTf(Guest g) {
-		JOptionPane.showMessageDialog(null, g.getgLGrade());
 		tfGrade.setText(g.getgLGrade().getlGrade());
 		tfName.setText(g.getgName());
 		tfId.setText(g.getgId());
@@ -285,7 +284,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	}
 
-	public void clearGuestTf() {
+	public void clear() {
 		tfGrade.setText("");
 		tfName.setText("");
 		tfId.setText("");
@@ -296,5 +295,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		dcJoin.setDate(new Date());
 		spPoint.setValue(0);
 		tfMemo.setText("");
+
 	}
+
 }

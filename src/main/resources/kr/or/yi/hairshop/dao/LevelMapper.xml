@@ -3,7 +3,7 @@
 <mapper namespace="kr.or.yi.hairshop.dao.LevelMapper">
 
 	<resultMap type="Level" id="basicLevel">
-		<result property="lGrade" column="gLGrade" />
+		<result property="lGrade" column="l_grade" />
 		<result property="lSale" column="l_sale" />
 	</resultMap>
 	

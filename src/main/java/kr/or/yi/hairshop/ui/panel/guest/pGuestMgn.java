@@ -138,7 +138,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			int i = table.getSelectedRow();
 			Guest selectGuest = gList.get(i);
 			dao.deleteGuest(selectGuest.getgNo());
-			pInfomation.clearGuestTf();
+			pInfomation.clear();
 			clearList();
 			reloadData();
 		}else {
