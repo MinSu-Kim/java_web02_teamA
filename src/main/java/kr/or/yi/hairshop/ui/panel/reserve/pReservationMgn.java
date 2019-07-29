@@ -64,6 +64,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		panel.add(pNorth, BorderLayout.NORTH);
 		
 		calStart = new JCalendar();
+		pNorth.add(calStart);
 		calStart.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent e) {
@@ -77,15 +78,14 @@ public class pReservationMgn extends JPanel implements ActionListener {
 				map.put("start", oneDay);
 				map.put("end", endDay);
 				
-				//workList = dao.selectReservDetailByDate(map);
+				workList = dao.selectReservDetailByDate(map);
 				reloadData();
 				
 			}
 		});
 		
-		pNorth.add(calStart);
-		
 		calEnd = new JCalendar();
+		pNorth.add(calEnd);
 		calEnd.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent e) {
@@ -99,13 +99,11 @@ public class pReservationMgn extends JPanel implements ActionListener {
 				map.put("start", oneDay);
 				map.put("end", endDay);
 				
-				//workList = dao.selectReservDetailByDate(map);
+				workList = dao.selectReservDetailByDate(map);
 				reloadData();
 				
 			}
 		});		
-		
-		pNorth.add(calEnd);
 		
 		btnSearch = new JButton("검색");
 		btnSearch.addActionListener(this);
@@ -166,7 +164,6 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 		tableSetWidth(20, 80, 40, 40, 40, 40, 40, 40, 40, 80);
-
 	}
 
 	private Object[][] getRows() {
@@ -227,13 +224,13 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		map.put("start", sDay);
 		map.put("end", eDay);
 		
-		//workList = dao.selectReservDetailByDate(map);
-		reloadData();
-		
+		workList = dao.selectReservDetailByDate(map);
+		reloadData();		
 	}
 	protected void actionPerformedBtnAllSearch(ActionEvent arg0) {
 		clearList();
 		reloadData();
+		
 	}
 
 }

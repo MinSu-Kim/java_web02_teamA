@@ -1,6 +1,7 @@
 package kr.or.yi.hairshop.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -55,6 +56,13 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	public List<WorkDialog> selectReservDetail() {
 		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
 			return sqlSession.selectList(namespace+".selectReservDetail");
+		}
+	}
+
+	@Override
+	public List<WorkDialog> selectReservDetailByDate(Map<String, String> map) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectReservDetailByDate", map);
 		}
 	}
 
