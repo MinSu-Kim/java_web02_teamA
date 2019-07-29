@@ -47,7 +47,7 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 	private DefaultTableModel model;
 //	private Map<Integer, WorkDialog> list=new HashMap<Integer, WorkDialog>();
 
-	private Map<Integer, Map<Integer, WorkDialog>> dWorkList = new HashMap<Integer, Map<Integer, WorkDialog>>();
+	private Map<Integer, ArrayList<WorkDialog>> dWorkList = new HashMap<Integer,ArrayList<WorkDialog>>();
 	private final String[] columns = {"손님" };
 
 	private WorkDialogMapper dao = new WorkDialogMapperImpl();
@@ -69,7 +69,6 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 			{""}, 
 			{""}, 
 			{""}};
-	private JPanel panelRight;
 	private JPanel panelCenter;
 
 	private JScrollPane spane;
@@ -130,28 +129,27 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 
 	public void mouseClicked(MouseEvent me) {
 
-		Iterator<Integer> map1 = dWorkList.keySet().iterator();
-		while (map1.hasNext()) {
-			int key1 = map1.next();
-			Iterator<Integer> map2 = dWorkList.get(key1).keySet().iterator();
-			while (map2.hasNext()) {
-				int key2 = map2.next();
-//				System.out.println(String.format("key1=%s, key2=%s,value=%s", key1, key2, dWorkList.get(key1).get(key2)));
-//				WorkDialog workDialog = dWorkList.get(key1).get(key2);
-			}
-
-		}
+//		Iterator<Integer> map1 = dWorkList.keySet().iterator();
+//		while (map1.hasNext()) {
+//			int key1 = map1.next();
+//			Iterator<Integer> map2 = dWorkList.get(key1).keySet().iterator();
+//			while (map2.hasNext()) {
+//				int key2 = map2.next();
+////				System.out.println(String.format("key1=%s, key2=%s,value=%s", key1, key2, dWorkList.get(key1).get(key2)));
+////				WorkDialog workDialog = dWorkList.get(key1).get(key2);
+//			}
+//
+//		}
 
 		int row = jtable.getSelectedRow();
 		parent.getMenuPopup().removeAll();
 		
 		if (dWorkList.get(row) != null) {
-			Iterator<Integer> map = dWorkList.get(row).keySet().iterator();
-			while (map.hasNext()) {
-				int key = map.next();
-				WorkDialog workDialog = dWorkList.get(row).get(key);
+//			Iterator<Integer> map = dWorkList.get(row).keySet().iterator();
+			for(int i=0; i<dWorkList.get(row).size(); i++) {
+				WorkDialog workDialog = dWorkList.get(row).get(i);
 				SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
-				menuItemList = new JMenuItem(String.format("%s %s", workDialog.getwGNo().getgName(),
+				menuItemList = new JMenuItem(String.format("%s. %s %s",i+1, workDialog.getwGNo().getgName(),
 						sf.format(workDialog.getwReserveTime())));
 				menuItemList.addActionListener(this);
 				parent.getMenuPopup().add(menuItemList);
@@ -187,15 +185,14 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 			int index = work.getwReserveTime().getHours() - 8;
 			String text = jtable.getValueAt(index, 0).toString();
 			if (dWorkList.get(index) != null) {
-				dWorkList.get(index).put(work.getwReserveTime().getMinutes(), work);
+				dWorkList.get(index).add(work);
 				
 				jtable.setValueAt(text + "," + work.getwGNo().getgName(), index, 0);
 			}
 			else {
-				Map<Integer, WorkDialog> timeList = new HashMap<Integer, WorkDialog>();// 2번쨰map
-				timeList.put(work.getwReserveTime().getMinutes(), work);
+				ArrayList<WorkDialog> timeList = new ArrayList<WorkDialog>();// 2번쨰map
+				timeList.add(work);
 				dWorkList.put(index, timeList);// 1번쨰풋
-				
 				jtable.setValueAt(work.getwGNo().getgName(), index, 0);
 			}
 			
@@ -257,12 +254,14 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String str = e.getActionCommand();
-		
+		int index=Integer.parseInt(str.substring(0, str.indexOf(".")));
+		System.out.println(index);
 		str = str.substring(str.length() - 5, str.length());
 		int h = Integer.parseInt(str.substring(0, 2));
 		int m = Integer.parseInt(str.substring(3));
-
-		parent.setWorkDate(dWorkList.get(h - 8).get(m));
+		
+		
+		parent.setWorkDate(dWorkList.get(h - 8).get(index-1));
 
 	}
 

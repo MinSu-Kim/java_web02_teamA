@@ -32,6 +32,8 @@ import java.awt.event.ItemEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class pHomeFooterDesigner extends JPanel implements ActionListener{
 
@@ -54,8 +56,11 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 	private List<JLabel> productLabel=new ArrayList<JLabel>();
 	List<JButton> btnList = new ArrayList<JButton>();
 	private JTable table;
-	private pHomeProductTable panelProductList;
+	private pHomeProductTable panelProduct;
 	private pHomeWorkProductTable panelWorkProduct;
+	private List<Product> productList;
+	private JLabel lblPriceList;
+	private JLabel lblProductList;
 	
 	
 	
@@ -157,7 +162,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 		panelBtn.add(panel_5, BorderLayout.SOUTH);
 		panel_5.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		btnUpdate = new JButton("수정");
+		btnUpdate = new JButton("추가");
 		btnUpdate.addActionListener(this);
 		panel_5.add(btnUpdate);
 		
@@ -167,40 +172,73 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 		
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2, BorderLayout.EAST);
-		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_6 = new JPanel();
+		panel_2.add(panel_6);
+		panel_6.setLayout(new GridLayout(0, 1, 0, 0));
 		
 	
 		
-		panelProductList = new pHomeProductTable();
-		panel_2.add(panelProductList);
-		panelProductList.setBorder(new TitledBorder(null, "상품 리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelProductList.setLayout(new GridLayout(0, 1, 0, 0));
+		panelProduct = new pHomeProductTable();
+		panel_6.add(panelProduct);
+		panelProduct.setParent(this);
+		panelProduct.setBorder(new TitledBorder(null, "상품 리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelProduct.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		JPanel panelWorkProduct2 = new JPanel();
+		panel_6.add(panelWorkProduct2);
+		panelWorkProduct2.setLayout(new BorderLayout(0, 0));
 		
 		panelWorkProduct = new pHomeWorkProductTable();
+		panelWorkProduct.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC791\uC5C5\uB9AC\uC2A4\uD2B8", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelWorkProduct.reloadData();
-		panel_3.add(panelWorkProduct, BorderLayout.CENTER);
+		panelWorkProduct2.add(panelWorkProduct, BorderLayout.CENTER);
+		
+		JPanel panel_3 = new JPanel();
+		panel_2.add(panel_3, BorderLayout.SOUTH);
+		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JPanel panel_4 = new JPanel();
-		panel_3.add(panel_4, BorderLayout.SOUTH);
+		panel_3.add(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblProduct = new JLabel("상품 :");
+		panel_4.add(lblProduct, BorderLayout.WEST);
+		
+		lblProductList = new JLabel("");
+		panel_4.add(lblProductList);
+		
+		JPanel panel_7 = new JPanel();
+		panel_3.add(panel_7);
+		panel_7.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel lblPrice = new JLabel("총액 :");
+		lblPrice.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_7.add(lblPrice);
+		
+		lblPriceList = new JLabel("0");
+		panel_7.add(lblPriceList);
 	}
 	
 	public void setBaseTf(List<Event> event,List<Designer> designer,List<Product> product) {
+		
 		cmbEventModel=new DefaultComboBoxModel<Event>(new Vector<Event>(event));
 		cmbEvent.setModel(cmbEventModel);
 		cmbDesignerModel=new DefaultComboBoxModel<Designer>(new Vector<Designer>(designer));
 		cmbDesigner.setModel(cmbDesignerModel);
 		
-		panelProductList.setItemList(product);
-		panelProductList.reloadData();
+		panelProduct.setItemList(product);
+		panelProduct.reloadData();
 		revalidate();
 		repaint();
 	}
 	
 	public void cearTf() {
+		lblPriceList.setText("0");
+		lblProductList.setText("");
+		tfgName.setEnabled(true);
+		btnUpdate.setText("추가");
 		tfgName.setText("");
 		tfpPrice.setText("");
 		jSpinwReserveTime.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
@@ -211,6 +249,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 		repaint();
 	}
 	public void setTfWork(WorkDialog workDialog) {
+		btnUpdate.setText("수정");
 		cmbDesigner.setSelectedItem(new Designer(workDialog.getwDNo().getdNo()));
 		cmbEvent.setSelectedItem(new Event(workDialog.getwEName().geteName()));
 		tfgName.setText(workDialog.getwGNo().getgName());
@@ -268,5 +307,25 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 		String pName=e.getItem().toString();
 		JLabel label=new JLabel(pName);
 		JButton btn = new JButton("x");
+	}
+	public void setWorkProduct(Product product) {
+		panelWorkProduct.addProduct(product);
+		setPriceSub();
+	}
+	public void setPriceSub() {
+		productList = panelWorkProduct.getProductList();
+		int price=0;
+		String product="";
+		
+		for(int i=0; i<productList.size(); i++) {
+			if(i==0)
+				product=productList.get(i).getpName();
+			else {
+				product+=","+productList.get(i).getpName();
+			}
+			price+=productList.get(i).getpPrice();
+		}
+		lblPriceList.setText(price+"");
+		lblProductList.setText(product);
 	}
 }

@@ -19,7 +19,7 @@ import java.awt.BorderLayout;
 public abstract class AbstractPanelTable<T> extends JPanel {
 	protected JTable table;
 	protected List<T> itemList;
-
+	protected pHomeFooterDesigner parent;
 	public AbstractPanelTable() {
 		initComponents();
 	}
@@ -41,10 +41,11 @@ public abstract class AbstractPanelTable<T> extends JPanel {
 
 	}
 
-	public void setItemList(List<T> itemList) {
+	protected void setItemList(List<T> itemList) {
 		this.itemList = itemList;
 
 	}
+	
 
 	protected abstract void reloadData();
 
@@ -63,7 +64,11 @@ public abstract class AbstractPanelTable<T> extends JPanel {
 		return rows;
 
 	}
-
+	public void setParent(pHomeFooterDesigner parent) {
+		this.parent=parent;
+	}
+	
+	
 	protected abstract Object[] toArray(int i);
 
 	// 테이블 셀 내용의 정렬
@@ -85,4 +90,5 @@ public abstract class AbstractPanelTable<T> extends JPanel {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
 	}
+	
 }

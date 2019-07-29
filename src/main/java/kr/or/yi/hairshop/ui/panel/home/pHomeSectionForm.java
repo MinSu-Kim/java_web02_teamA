@@ -54,7 +54,8 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 	private JButton btnRight;
 	int start=0;
 	
-	private JPopupMenu popupMenuList=new JPopupMenu();
+	private JPopupMenu popupMenuTime=new JPopupMenu();
+	
 	private pHomeFooterDesigner panelFooterTf;
 	private final String[] columns = {"시간"};
 	private String[][] data = { 
@@ -109,12 +110,23 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		
 		JPanel pLeft = new JPanel();
 		pSection.add(pLeft, BorderLayout.WEST);
-		pLeft.setLayout(new BoxLayout(pLeft, BoxLayout.X_AXIS));
+		pLeft.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JPanel panel_8 = new JPanel();
+		pLeft.add(panel_8);
+		panel_8.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panel_9 = new JPanel();
+		panel_8.add(panel_9);
+		panel_9.setLayout(new BoxLayout(panel_9, BoxLayout.X_AXIS));
 		
 		btnLeft = new JButton("<");
+		panel_9.add(btnLeft);
 		btnLeft.addActionListener(this);
 		btnLeft.setEnabled(false);
-		pLeft.add(btnLeft);
+		
+		JPanel panel_10 = new JPanel();
+		panel_8.add(panel_10);
 		
 		JPanel ptimeTable = new JPanel();
 		pLeft.add(ptimeTable);
@@ -188,7 +200,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		for(int i=0; i<3; i++) {
 			panelList[i] = new pHomeSectionBlock();
 			panelListForm.add(panelList[i]);
-			panelList[i].setPopupMenu(popupMenuList);
+			panelList[i].setPopupMenu(popupMenuTime);
 		}
 		
 		
@@ -254,7 +266,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		
 	}
 	public JPopupMenu getMenuPopup() {
-		return popupMenuList;
+		return popupMenuTime;
 	}
 	public void setWorkDate(WorkDialog workDialog) {
 		panelFooterTf.setTfWork(workDialog);
