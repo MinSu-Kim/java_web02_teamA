@@ -165,4 +165,11 @@ public class Guest {
 				gPoint, gMemo };
 	}
 
+	public Object[] toArray2() {
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		
+		return new Object[] {gName,date.format(gBirth),gId,gLGrade.getlGrade()};
+	}
+	
+	
 }

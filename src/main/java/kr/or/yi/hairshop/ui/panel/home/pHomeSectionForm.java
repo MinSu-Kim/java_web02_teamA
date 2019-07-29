@@ -120,6 +120,9 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		panel_8.add(panel_9);
 		panel_9.setLayout(new BoxLayout(panel_9, BoxLayout.X_AXIS));
 		
+		JPanel panel_14 = new JPanel();
+		panel_9.add(panel_14);
+		
 		btnLeft = new JButton("<");
 		panel_9.add(btnLeft);
 		btnLeft.addActionListener(this);
@@ -134,8 +137,12 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 
 		DefaultTableModel model= new DefaultTableModel(data, columns);
 		
+		JPanel panel_13 = new JPanel();
+		ptimeTable.add(panel_13);
+		panel_13.setLayout(new BorderLayout(0, 0));
+		
 		JPanel panel_5 = new JPanel();
-		ptimeTable.add(panel_5);
+		panel_13.add(panel_5, BorderLayout.NORTH);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
 		
@@ -153,23 +160,30 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		
 		JLabel lblNewLabel = new JLabel(" ");
 		panel_7.add(lblNewLabel);
+		TableColumnModel columnModel = timeTable.getColumnModel();
 		
 		JPanel panel_6 = new JPanel();
 		ptimeTable.add(panel_6);
 		
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER);
-		TableColumnModel columnModel = timeTable.getColumnModel();
 		columnModel.getColumn(0).setCellRenderer(dtcr);
 		
 		
 		JPanel pRight = new JPanel();
 		pSection.add(pRight, BorderLayout.EAST);
-		pRight.setLayout(new BoxLayout(pRight, BoxLayout.X_AXIS));
+		pRight.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panel_11 = new JPanel();
+		pRight.add(panel_11);
+		panel_11.setLayout(new BoxLayout(panel_11, BoxLayout.X_AXIS));
 		
 		btnRight = new JButton(">");
+		panel_11.add(btnRight);
 		btnRight.addActionListener(this);
-		pRight.add(btnRight);
+		
+		JPanel panel_12 = new JPanel();
+		pRight.add(panel_12);
 		
 		JPanel panel_3 = new JPanel();
 		pSection.add(panel_3, BorderLayout.CENTER);

@@ -36,7 +36,13 @@ public class Event {
 
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { eName, date.format(eStartDay), date.format(eEndDay), eSale };
+		String start="";
+		String end="";
+		if(eStartDay!=null)
+			start=date.format(eStartDay);
+		if(eEndDay!=null)
+			end=date.format(eStartDay);
+		return new Object[] { eName, start, end, eSale };
 	}
 
 	public String geteName() {
