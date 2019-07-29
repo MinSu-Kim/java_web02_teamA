@@ -2,11 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.hairshop.dao.GuestMapper">
 
-	<resultMap type="Guest" id="extendsGuest" extends="basicGuest">
-		<association property="gLGrade" resultMap="kr.or.yi.hairshop.dao.LevelMapper.basicLevel"/>
-		<collection property="workDialogList" resultMap="kr.or.yi.hairshop.dao.WorkDialogMapper.basicWorkDialog"/>
+	<resultMap type="Guest" id="extendsGuest"
+		extends="basicGuest">
+		<association property="gLGrade"
+			resultMap="kr.or.yi.hairshop.dao.LevelMapper.basicLevel" />
+		<collection property="workDialogList"
+			resultMap="kr.or.yi.hairshop.dao.WorkDialogMapper.basicWorkDialog" />
 	</resultMap>
-	
+
 	<resultMap type="Guest" id="basicGuest">
 		<result property="gNo" column="g_no" />
 		<result property="gId" column="g_id" />
@@ -19,14 +22,16 @@
 		<result property="gPoint" column="g_point" />
 		<result property="gMemo" column="g_memo" />
 	</resultMap>
-	
 
-	<select id="selectGuestByAll" resultType="Guest" resultMap="extendsGuest">
-		select g_no, g_l_grade as gLGrade, g_name, g_tel, g_email, g_birth, g_join, g_point, g_memo
+
+	<select id="selectGuestByAll" resultType="Guest"
+		resultMap="extendsGuest">
+		select g_no, g_l_grade as gLGrade, g_name, g_tel, g_email,
+		g_birth, g_join, g_point, g_memo
 		from
 		hairshop.guest;
 	</select>
-	
+
 	<insert id="insertGuest" parameterType="Guest">
 		insert into
 		hairshop.guest
@@ -38,10 +43,8 @@
 
 	<update id="updateGuest">
 		UPDATE hairshop.guest
-		SET g_l_grade=#{gLGrade},
-		g_name=#{gName}, g_tel=#{gTel}, g_email=#{gEmail}, g_birth=#{gBirth},
-		g_join=#{gJoin},
-		g_point=0, g_memo=#{gMemo}
+		SET g_id=#{gId}, g_password=#{gPassword}, g_l_grade=#{gLGrade.lGrade}, g_name=#{gName}, g_tel=#{gTel},
+		g_email=#{gEmail}, g_birth=#{gBirth}, g_join=#{gJoin}, g_point=#{gPoint}, g_memo=#{gMemo}
 		WHERE g_no=#{gNo};
 	</update>
 

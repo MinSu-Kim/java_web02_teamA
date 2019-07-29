@@ -272,7 +272,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	public void setGuestTf(Guest g) {
 		JOptionPane.showMessageDialog(null, g.getgLGrade());
-//		tfGrade.setText(g.getgLGrade().getlGrade());
+		tfGrade.setText(g.getgLGrade().getlGrade());
 		tfName.setText(g.getgName());
 		tfId.setText(g.getgId());
 		tfPassword.setText(g.getgPassword());
