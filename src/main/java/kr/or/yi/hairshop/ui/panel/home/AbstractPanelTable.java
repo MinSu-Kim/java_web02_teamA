@@ -43,7 +43,6 @@ public abstract class AbstractPanelTable<T> extends JPanel {
 
 	protected void setItemList(List<T> itemList) {
 		this.itemList = itemList;
-
 	}
 	
 

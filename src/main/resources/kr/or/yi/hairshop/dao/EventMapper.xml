@@ -13,7 +13,7 @@
 	</resultMap> -->
 	
 	<select id="selectEventByAll" resultType="Event">
-		select * from event where e_startDay is not null
+		select * from event
 	</select>
 	
 	<insert id="insert" parameterType="Guest">

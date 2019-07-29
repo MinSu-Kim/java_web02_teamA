@@ -11,6 +11,7 @@ values
 INSERT INTO hairshop.event
 (e_name, e_startDay, e_endDay, e_sale)
 values
+('일반', null,null, 0),
 ('생일', null,null, 10),
 ('광복절', '2019-8-15','2019-8-15',10 ),
 ('추석', '2019-9-12','2019-9-15', 10),

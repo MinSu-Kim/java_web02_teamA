@@ -31,7 +31,15 @@
 		g_birth, g_join, g_point, g_memo
 		FROM hairshop.guest;
 	</select>
-
+	
+	<select id="selectGuestBygName" resultMap="extendsGuest">
+		SELECT g_no, g_id, g_l_grade as l_grade, g_name,
+		g_tel, g_email,
+		g_birth, g_join, g_point, g_memo
+		FROM guest
+		where g_name like CONCAT('%',#{gName},'%')
+	</select>
+	
 	<insert id="insertGuest" parameterType="Guest">
 		INSERT INTO
 		hairshop.guest

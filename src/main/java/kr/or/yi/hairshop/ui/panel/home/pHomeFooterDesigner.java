@@ -1,10 +1,13 @@
 package kr.or.yi.hairshop.ui.panel.home;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,32 +23,25 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
-
-import com.toedter.calendar.JDateChooser;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
 
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.Event;
+import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.dto.WorkDialog;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-import java.awt.Color;
+import kr.or.yi.hairshop.dao.GuestMapper;
+import kr.or.yi.hairshop.dao.GuestMapperImpl;
+import kr.or.yi.hairshop.dao.pHomeTfgNameTable;
 
-public class pHomeFooterDesigner extends JPanel implements ActionListener{
+public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyListener {
 
 	private JTextField tfgName;
-	private JTextField tfwReservTime;
 	private JTextField tfpPrice;
 	private JButton btnUpdate;
 	private JSpinner jSpinwWorkTime;
-	private final String[] columns = { "작업일", "작업명","금액"};
 	private JSpinner jSpinwReserveTime;
-	private JDateChooser dchWorkTime;
-	private JDateChooser dchReserveTime;
 	private JButton btnCancel;
 
 	private JComboBox<Event> cmbEvent;
@@ -53,51 +49,106 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 	private DefaultComboBoxModel<Event> cmbEventModel;
 	private DefaultComboBoxModel<Designer> cmbDesignerModel;
 
-	private List<JLabel> productLabel=new ArrayList<JLabel>();
 	List<JButton> btnList = new ArrayList<JButton>();
-	private JTable table;
 	private pHomeProductTable panelProduct;
 	private pHomeWorkProductTable panelWorkProduct;
-	private List<Product> productList;
+	private List<Product> workProductList;
 	private JLabel lblPriceList;
 	private JLabel lblProductList;
-
-
-
+	private int wNo;
+	private pHomeTfgNameTable panelTfgNameTable;
+	private JTextField tfgTel;
 
 	public pHomeFooterDesigner() {
 
 		initComponents();
 	}
+
 	private void initComponents() {
-
-
-
+		setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panel_1 = new JPanel();
 		add(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		panel_1.setLayout(new GridLayout(0, 3, 10, 0));
+
+		JPanel panel_2 = new JPanel();
+		panel_1.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+
+		JPanel panel_6 = new JPanel();
+		panel_2.add(panel_6);
+		panel_6.setLayout(new GridLayout(0, 1, 0, 0));
+
+		panelProduct = new pHomeProductTable();
+		panel_6.add(panelProduct);
+		panelProduct.setParent(this);
+		panelProduct.setBorder(new TitledBorder(null, "상품 리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelProduct.setLayout(new GridLayout(0, 1, 0, 0));
+
+		JPanel panelWorkProduct2 = new JPanel();
+		panel_6.add(panelWorkProduct2);
+		panelWorkProduct2.setLayout(new BorderLayout(0, 0));
+
+		panelWorkProduct = new pHomeWorkProductTable();
+		panelWorkProduct.setParent(this);
+		panelWorkProduct.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),
+				"\uC791\uC5C5\uB9AC\uC2A4\uD2B8", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelWorkProduct.reloadData();
+		panelWorkProduct2.add(panelWorkProduct, BorderLayout.CENTER);
+
+		JPanel panel_3 = new JPanel();
+		panel_2.add(panel_3, BorderLayout.SOUTH);
+		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
+
+		JPanel panel_4 = new JPanel();
+		panel_3.add(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
+
+		JLabel lblProduct = new JLabel("상품 :");
+		panel_4.add(lblProduct, BorderLayout.WEST);
+
+		lblProductList = new JLabel("");
+		panel_4.add(lblProductList);
+
+		JPanel panel_7 = new JPanel();
+		panel_3.add(panel_7);
+		panel_7.setLayout(new GridLayout(0, 2, 0, 0));
+
+		JLabel lblPrice = new JLabel("총액 :");
+		lblPrice.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_7.add(lblPrice);
+
+		lblPriceList = new JLabel("0");
+		panel_7.add(lblPriceList);
 
 		JPanel panel = new JPanel();
-		panel_1.add(panel, BorderLayout.CENTER);
+		panel_1.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 
 		JPanel panelData = new JPanel();
-		panel.add(panelData, BorderLayout.NORTH);
-		panelData.setLayout(new GridLayout(0, 2, 0, 0));
+		panel.add(panelData, BorderLayout.CENTER);
+		panelData.setLayout(new GridLayout(0, 2, 0, 20));
 
 		JLabel lblgDname = new JLabel("손님");
 		panelData.add(lblgDname);
 		lblgDname.setHorizontalAlignment(SwingConstants.CENTER);
 
 		tfgName = new JTextField();
+		tfgName.addKeyListener(this);
 		panelData.add(tfgName);
 		tfgName.setColumns(10);
+		
+		
+		JLabel lblgTel = new JLabel("전화번호");
+		panelData.add(lblgTel);
+		lblgTel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		tfgTel = new JTextField();
+		panelData.add(tfgTel);
 
 		JLabel lbldName = new JLabel("디자이너");
 		panelData.add(lbldName);
 		lbldName.setHorizontalAlignment(SwingConstants.CENTER);
-
 
 		cmbDesigner = new JComboBox<Designer>();
 		panelData.add(cmbDesigner);
@@ -130,14 +181,12 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 		panelData.add(jSpinwReserveTime);
 		jSpinwReserveTime.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
 
-
 		JLabel lbleName = new JLabel("이벤트명");
 		panelData.add(lbleName);
 		lbleName.setHorizontalAlignment(SwingConstants.CENTER);
 
 		cmbEvent = new JComboBox<Event>();
 		panelData.add(cmbEvent);
-
 
 		JLabel lblpPrice = new JLabel("가격");
 		panelData.add(lblpPrice);
@@ -169,72 +218,34 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		panel_5.add(btnCancel);
-
-		JPanel panel_2 = new JPanel();
-		panel_1.add(panel_2, BorderLayout.EAST);
-		panel_2.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_6 = new JPanel();
-		panel_2.add(panel_6);
-		panel_6.setLayout(new GridLayout(0, 1, 0, 0));
-
-
-
-		panelProduct = new pHomeProductTable();
-		panel_6.add(panelProduct);
-		panelProduct.setParent(this);
-		panelProduct.setBorder(new TitledBorder(null, "상품 리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelProduct.setLayout(new GridLayout(0, 1, 0, 0));
-
-		JPanel panelWorkProduct2 = new JPanel();
-		panel_6.add(panelWorkProduct2);
-		panelWorkProduct2.setLayout(new BorderLayout(0, 0));
-
-		panelWorkProduct = new pHomeWorkProductTable();
-		panelWorkProduct.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC791\uC5C5\uB9AC\uC2A4\uD2B8", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelWorkProduct.reloadData();
-		panelWorkProduct2.add(panelWorkProduct, BorderLayout.CENTER);
-
-		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3, BorderLayout.SOUTH);
-		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
-
-		JPanel panel_4 = new JPanel();
-		panel_3.add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
-
-		JLabel lblProduct = new JLabel("상품 :");
-		panel_4.add(lblProduct, BorderLayout.WEST);
-
-		lblProductList = new JLabel("");
-		panel_4.add(lblProductList);
-
-		JPanel panel_7 = new JPanel();
-		panel_3.add(panel_7);
-		panel_7.setLayout(new GridLayout(0, 2, 0, 0));
-
-		JLabel lblPrice = new JLabel("총액 :");
-		lblPrice.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_7.add(lblPrice);
-
-		lblPriceList = new JLabel("0");
-		panel_7.add(lblPriceList);
+		
+		JPanel panel_8 = new JPanel();
+		panel_1.add(panel_8);
+		panel_8.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		panelTfgNameTable = new pHomeTfgNameTable();
+		panelTfgNameTable.setParent(this);
+		panel_8.add(panelTfgNameTable);
+		
+		JPanel panel_9 = new JPanel();
+		panel_8.add(panel_9);
 	}
 
-	public void setBaseTf(List<Event> event,List<Designer> designer,List<Product> product) {
-
-		cmbEventModel=new DefaultComboBoxModel<Event>(new Vector<Event>(event));
+	public void setBaseTf(List<Event> event, List<Designer> designer, List<Product> product) {
+		
+		cmbEventModel = new DefaultComboBoxModel<Event>(new Vector<Event>(event));
+		
 		cmbEvent.setModel(cmbEventModel);
-		cmbDesignerModel=new DefaultComboBoxModel<Designer>(new Vector<Designer>(designer));
+		cmbDesignerModel = new DefaultComboBoxModel<Designer>(new Vector<Designer>(designer));
 		cmbDesigner.setModel(cmbDesignerModel);
 
 		panelProduct.setItemList(product);
 		panelProduct.reloadData();
-		revalidate();
-		repaint();
 	}
 
 	public void cearTf() {
+		tfgTel.setEnabled(true);
+		tfgTel.setText("");
 		lblPriceList.setText("0");
 		lblProductList.setText("");
 		tfgName.setEnabled(true);
@@ -248,84 +259,132 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener{
 		revalidate();
 		repaint();
 	}
+
 	public void setTfWork(WorkDialog workDialog) {
+		
 		btnUpdate.setText("수정");
+		tfgTel.setText(workDialog.getwGNo().getgTel());
+		tfgTel.setEnabled(false);
 		cmbDesigner.setSelectedItem(new Designer(workDialog.getwDNo().getdNo()));
 		cmbEvent.setSelectedItem(new Event(workDialog.getwEName().geteName()));
 		tfgName.setText(workDialog.getwGNo().getgName());
 		tfgName.setEnabled(false);
-		tfpPrice.setText(workDialog.getwPriceTotal()+"");
+		tfpPrice.setText(workDialog.getwPriceTotal() + "");
 
-		panelWorkProduct.setItemList(workDialog.getProductList());	
+		panelWorkProduct.setItemList(workDialog.getProductList());
 		panelWorkProduct.reloadData();
-		panelWorkProduct.setBorder(new TitledBorder(null, workDialog.getwGNo().getgName()+"님의 작업리스트", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelWorkProduct.setBorder(new TitledBorder(null, workDialog.getwGNo().getgName() + "님의 작업리스트",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
-		Date date= new Date(new Date().getYear(),0,1);
-
-		if(workDialog.getwReserveTime()!=null)
-			jSpinwReserveTime.setModel(new SpinnerDateModel(workDialog.getwReserveTime(), null, null, Calendar.HOUR_OF_DAY));
-//			dchReserveTime.setDate(workDialog.getwReserveTime());
-		if(workDialog.getwWorkTime()!=null)
+		Date date = new Date();
+		if (workDialog.getwReserveTime() != null)
+			jSpinwReserveTime
+					.setModel(new SpinnerDateModel(workDialog.getwReserveTime(), null, null, Calendar.HOUR_OF_DAY));
+		else {
+			jSpinwReserveTime.setModel(new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY));
+		}
+		if (workDialog.getwWorkTime() != null)
 			jSpinwWorkTime.setModel(new SpinnerDateModel(workDialog.getwWorkTime(), null, null, Calendar.HOUR_OF_DAY));
-//			dchWorkTime.setDate(workDialog.getwWorkTime());
 		else
-			jSpinwWorkTime.setModel(new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY));		
-
+			jSpinwWorkTime.setModel(new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY));
 
 		setTfProductName(workDialog.getProductList());
-
-
 	}
+	public void setTfGuest(Guest guest) {
+		wNo = guest.getgNo();
+		tfgName.setText(guest.getgName());
+		tfgTel.setText(guest.getgTel());
+	}
+		
+
 	public void setTfProductName(List<Product> productList) {
-		String pName="";
-		for(int i=0; i<productList.size(); i++) {
-			if(i!=productList.size()-1) {
-				pName+=productList.get(i).getpName()+",";
+		String pName = "";
+		for (int i = 0; i < productList.size(); i++) {
+			if (i != productList.size() - 1) {
+				pName += productList.get(i).getpName() + ",";
 				continue;
 			}
-			pName+=productList.get(i).getpName();
+			pName += productList.get(i).getpName();
 		}
 //		tfpName.setText(pName);
 	}
-
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}
 		if (e.getSource() == btnUpdate) {
-			actionPerformedBtnUpdate(e);
+			if (e.getActionCommand().equals("추가"))
+				actionPerformedBtnAdd(e);
+			if (e.getActionCommand().equals("수정"))
+				actionPerformedBtnUpdate(e);
 		}
 	}
+
+	protected void actionPerformedBtnAdd(ActionEvent e) {
+		WorkDialog work = getTfWork();
+	}
+
+	private WorkDialog getTfWork() {
+		WorkDialog work = new WorkDialog();
+
+		return work;
+	}
+
 	protected void actionPerformedBtnUpdate(ActionEvent e) {
 
 	}
+
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		cearTf();
 	}
+
 	protected void itemStateChangedCmbProduct(ItemEvent e) {
-		String pName=e.getItem().toString();
-		JLabel label=new JLabel(pName);
+		String pName = e.getItem().toString();
+		JLabel label = new JLabel(pName);
 		JButton btn = new JButton("x");
 	}
+
 	public void setWorkProduct(Product product) {
 		panelWorkProduct.addProduct(product);
 		setPriceSub();
 	}
-	public void setPriceSub() {
-		productList = panelWorkProduct.getProductList();
-		int price=0;
-		String product="";
 
-		for(int i=0; i<productList.size(); i++) {
-			if(i==0)
-				product=productList.get(i).getpName();
+	public void setPriceSub() {
+		workProductList = panelWorkProduct.getProductList();
+		int price = 0;
+		String product = "";
+
+		for (int i = 0; i < workProductList.size(); i++) {
+			if (i == 0)
+				product = workProductList.get(i).getpName();
 			else {
-				product+=","+productList.get(i).getpName();
+				product += "," + workProductList.get(i).getpName();
 			}
-			price+=productList.get(i).getpPrice();
+			price += workProductList.get(i).getpPrice();
 		}
-		lblPriceList.setText(price+"");
+		lblPriceList.setText(price + "");
 		lblProductList.setText(product);
+		tfpPrice.setText(price + "");
 	}
-} 
+
+	public void keyPressed(KeyEvent e) {
+	}
+
+	public void keyReleased(KeyEvent e) {
+	}
+
+	public void keyTyped(KeyEvent e) {
+		if (e.getSource() == tfgName) {
+			keyTypedTfgName(e);
+		}
+	}
+
+	protected void keyTypedTfgName(KeyEvent e) {
+		GuestMapper gDao = new GuestMapperImpl();
+		List<Guest> gList=gDao.selectGuestBygName(tfgName.getText());
+		panelTfgNameTable.setItemList(gList);
+		if(gList!=null)
+			panelTfgNameTable.reloadData();
+	}
+}

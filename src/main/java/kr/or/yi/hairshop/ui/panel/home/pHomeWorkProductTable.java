@@ -5,19 +5,33 @@ import javax.swing.table.DefaultTableModel;
 
 import kr.or.yi.hairshop.dto.Product;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
-public class pHomeWorkProductTable extends AbstractPanelTable<Product> implements MouseListener {
+public class pHomeWorkProductTable extends AbstractPanelTable<Product> implements MouseListener,ActionListener {
+	private JPopupMenu popupMenuProduct=new JPopupMenu();
+	private JMenuItem popupItemProduct=null;
+	private int choiceRow;
+	
 	public pHomeWorkProductTable() {
 		initComponents();
 	}
 	private void initComponents() {
-		itemList=new ArrayList<Product>();
 		table.addMouseListener(this);
+		popupItemProduct=new JMenuItem("삭제");
+		popupItemProduct.addActionListener(this);
+		popupMenuProduct.add(popupItemProduct);
+		itemList=new ArrayList<Product>();
+		table.setComponentPopupMenu(popupMenuProduct);
 	}
 
 	@Override
@@ -38,6 +52,7 @@ public class pHomeWorkProductTable extends AbstractPanelTable<Product> implement
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		choiceRow = table.getSelectedRow();
 	}
 	public void mouseEntered(MouseEvent e) {
 	}
@@ -50,11 +65,23 @@ public class pHomeWorkProductTable extends AbstractPanelTable<Product> implement
 	}
 	protected void mouseEnteredThisTable(MouseEvent e) {
 	}
+	
 	public void addProduct(Product product) {
-		itemList.add(product);
-		reloadData();
+		if(itemList.contains(product)==false) {
+			itemList.add(product);
+			reloadData();
+		}else {
+			JOptionPane.showMessageDialog(null, "이미 상품이 있습니다.");
+		}
+		
 	}
 	public List<Product> getProductList(){
 		return itemList;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		itemList.remove(choiceRow);
+		parent.setPriceSub();
+		reloadData();
 	}
 }
