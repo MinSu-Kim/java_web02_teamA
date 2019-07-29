@@ -40,6 +40,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	private GuestMapper dao = new GuestMapperImpl();
 	private pGuestMgn parent;
+	private JButton btnCancel;
 
 	public void setParent(pGuestMgn pGuestMgn) {
 		this.parent = pGuestMgn;
@@ -155,7 +156,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 		
 		
 		
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		panel.add(btnCancel);
 
 		JPanel panel_4 = new JPanel();
@@ -172,6 +174,9 @@ public class GuestPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			actionPerformedBtnCancelJButton(e);
+		}
 		if (e.getSource() == btnAdd) {
 			if(e.getActionCommand().equals("등록")) {
 				actionPerformedBtnAddJButton(e);
@@ -295,4 +300,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	}
 
+	protected void actionPerformedBtnCancelJButton(ActionEvent e) {
+		clear();
+	}
 }

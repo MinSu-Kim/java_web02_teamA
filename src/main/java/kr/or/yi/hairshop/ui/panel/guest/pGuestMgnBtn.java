@@ -12,6 +12,7 @@ import kr.or.yi.hairshop.ui.frame.GuestFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class pGuestMgnBtn extends JPanel implements ActionListener {
 	private JButton btnAdd;
 
