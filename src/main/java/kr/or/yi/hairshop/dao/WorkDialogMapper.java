@@ -16,4 +16,7 @@ public interface WorkDialogMapper {
 	public List<WorkDialog> selectWDGECPjoinByWDNoDate(Map<String, String> map);
 	
 	public List<WorkDialog> selectReservDetailByDate(Map<String, String> map);
+	
+	public int insertWorkDialog(WorkDialog workDialog);
+	public int insertChoice(String pName);
 }

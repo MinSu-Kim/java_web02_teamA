@@ -11,13 +11,16 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -28,6 +31,8 @@ import javax.swing.border.TitledBorder;
 
 import kr.or.yi.hairshop.dao.GuestMapper;
 import kr.or.yi.hairshop.dao.GuestMapperImpl;
+import kr.or.yi.hairshop.dao.WorkDialogMapper;
+import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.Event;
 import kr.or.yi.hairshop.dto.Guest;
@@ -54,10 +59,11 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	private List<Product> workProductList;
 	private JLabel lblPriceList;
 	private JLabel lblProductList;
-	private int dNo;
+	private int gNo;
 	private pHomeTfgNameTable panelTfgNameTable;
 	private JTextField tfgTel;
-
+	WorkDialogMapper wDao=new WorkDialogMapperImpl();
+	
 	public pHomeFooterDesigner() {
 
 		initComponents();
@@ -233,7 +239,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	public void setBaseTf(List<Event> event, List<Designer> designer, List<Product> product) {
 		
 		cmbEventModel = new DefaultComboBoxModel<Event>(new Vector<Event>(event));
-		
 		cmbEvent.setModel(cmbEventModel);
 		cmbDesignerModel = new DefaultComboBoxModel<Designer>(new Vector<Designer>(designer));
 		cmbDesigner.setModel(cmbDesignerModel);
@@ -243,7 +248,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 
 	public void cearTf() {
-		dNo=0;
+		gNo=0;
 		tfgTel.setEnabled(true);
 
 		tfgTel.setText("");
@@ -263,7 +268,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 
 	public void setTfWork(WorkDialog workDialog) {
 		
-		dNo=workDialog.getwGNo().getgNo();
+		gNo=workDialog.getwGNo().getgNo();
 		btnUpdate.setText("수정");
 		tfgTel.setText(workDialog.getwGNo().getgTel());
 		tfgTel.setEditable(false);
@@ -293,7 +298,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		setTfProductName(workDialog.getProductList());
 	}
 	public void setTfGuest(Guest guest) {
-		dNo = guest.getgNo();
+		gNo = guest.getgNo();
 		tfgName.setText(guest.getgName());
 		tfgTel.setText(guest.getgTel());
 		tfgTel.setEnabled(false);
@@ -329,16 +334,30 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		WorkDialog work = getTfWork();
 		
-		Designer designer=new Designer(dNo);
+		Designer designer=(Designer)cmbDesigner.getSelectedItem();
+		Guest guest = new Guest(gNo);
 		Event event = new Event(cmbEvent.getSelectedItem()+"");
 		
 		
-		work.setwPriceTotal(Integer.parseInt(tfpPrice.getText()));
-		
+		work.setwReservTime((Date)jSpinwReserveTime.getValue());
+		work.setwWorkTime((Date)jSpinwWorkTime.getValue());
+		if(!tfpPrice.getText().equals(""))
+			work.setwPriceTotal(Integer.parseInt(tfpPrice.getText()));
 		work.setwDNo(designer);
+		work.setwGNo(guest);
 		work.setwEName(event);
+		String test = "파마";
+		
+		int result=wDao.insertWorkDialog(work);
+		int result2=0;
+		
+		if(result==1)
+			result2=wDao.insertChoice(test);
+		System.out.println(result2);
+		JOptionPane.showMessageDialog(null, "dd");
 		
 		
+				
 	}
 
 	private WorkDialog getTfWork() {
