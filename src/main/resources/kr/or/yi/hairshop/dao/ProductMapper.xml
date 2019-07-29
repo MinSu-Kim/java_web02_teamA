@@ -11,7 +11,7 @@
 	
 	
 	<select id="selectProductByAll" resultType="Product">
-		select * from product
+		select * from product order by p_name
 	</select>
 	
 	<insert id="insert" parameterType="Product">
