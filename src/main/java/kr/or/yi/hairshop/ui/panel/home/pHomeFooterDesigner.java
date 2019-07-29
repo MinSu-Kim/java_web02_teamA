@@ -55,7 +55,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	private List<Product> workProductList;
 	private JLabel lblPriceList;
 	private JLabel lblProductList;
-	private int wNo;
+	private int dNo;
 	private pHomeTfgNameTable panelTfgNameTable;
 	private JTextField tfgTel;
 
@@ -244,6 +244,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 
 	public void cearTf() {
+		dNo=0;
 		tfgTel.setEnabled(true);
 		tfgTel.setText("");
 		lblPriceList.setText("0");
@@ -261,7 +262,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 
 	public void setTfWork(WorkDialog workDialog) {
-		
+		dNo=workDialog.getwGNo().getgNo();
 		btnUpdate.setText("수정");
 		tfgTel.setText(workDialog.getwGNo().getgTel());
 		tfgTel.setEnabled(false);
@@ -291,9 +292,12 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		setTfProductName(workDialog.getProductList());
 	}
 	public void setTfGuest(Guest guest) {
-		wNo = guest.getgNo();
+		dNo = guest.getgNo();
 		tfgName.setText(guest.getgName());
 		tfgTel.setText(guest.getgTel());
+		tfgTel.setEnabled(false);
+		tfgName.setEnabled(false);
+		
 	}
 		
 
@@ -323,6 +327,12 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		WorkDialog work = getTfWork();
+		work.setwPriceTotal(Integer.parseInt(tfpPrice.getText()));
+		Designer designer=new Designer(dNo);
+		work.setwDNo(designer);
+		Event event = new Event(cmbEvent.getSelectedItem()+"");
+		work.setwEName(event);
+		
 	}
 
 	private WorkDialog getTfWork() {

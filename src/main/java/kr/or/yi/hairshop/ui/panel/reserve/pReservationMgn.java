@@ -219,7 +219,6 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		
 		String sDay = date.format(calStart.getDate());
 		String eDay = date.format(calEnd.getDate());
-		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", sDay);
 		map.put("end", eDay);

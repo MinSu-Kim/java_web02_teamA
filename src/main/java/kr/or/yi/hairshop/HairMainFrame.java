@@ -36,7 +36,6 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	private static Designer Auth = null;
 	
 	private JPanel contentPane;
-	private List<Designer> dList;
 	private pHomeSectionForm home;
 	private JButton btnLogin;
 	private JLabel lblLogin;
@@ -114,10 +113,8 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		pMain.add(tabbedPane);
 		
-		DesignerMapper d_Dao=new DesignerMapperImpl();
-		dList = d_Dao.selectDesignerByAll();
+		
 		home = new pHomeSectionForm();
-		home.setDList(dList);
 		home.refresh(0);
 		tabbedPane.addTab("홈", null, home, "홈");
 
@@ -175,5 +172,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		lblLogin.setText(Auth.getdName()+"님 반갑습니다");
 		
 	}
+	
+	
 	
 }
