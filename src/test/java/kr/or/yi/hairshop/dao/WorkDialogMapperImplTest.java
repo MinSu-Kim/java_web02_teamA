@@ -50,11 +50,11 @@ public class WorkDialogMapperImplTest extends AbstractTest {
 		Assert.assertNotNull(work);
 	}
 	
-	@Test
-	public void test04selectByfivejoinMap() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		List<WorkDialog> work = dao.selectByfivejoinMap();
-		Assert.assertNotNull(work);
-	}
+	/*
+	 * @Test public void test04selectByfivejoinMap() {
+	 * log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+	 * List<WorkDialog> work = dao.selectByfivejoinMap();
+	 * Assert.assertNotNull(work); }
+	 */
 
 }

@@ -47,8 +47,8 @@ public class DesignerPanel extends JPanel {
 		scrollPane.setSize(200, 200);	
 	}
 	
-	public void clearList() {
-		dList = wdao.selectByfivejoinMap();
+	public void clearList(int dNo) {
+		dList = wdao.selectByfivejoinMap(dNo);
 	}
 
 	public void reloadData() {

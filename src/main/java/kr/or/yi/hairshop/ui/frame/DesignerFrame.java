@@ -208,7 +208,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		designerPanel = new DesignerPanel();
 		panel_1.add(designerPanel);
 		
-		designerPanel.clearList();
+		designerPanel.clearList(dNo);
 		designerPanel.reloadData();
 	
 		
@@ -281,7 +281,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 		dNo = design.getdNo();
 		
-		List<WorkDialog> workDialog=wdao.selectByfivejoinMap();
+		List<WorkDialog> workDialog=wdao.selectByfivejoinMap(dNo);
 		designerPanel.setWorkdialogList(workDialog);
 		designerPanel.reloadData();
 		
