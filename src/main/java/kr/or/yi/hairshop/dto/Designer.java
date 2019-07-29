@@ -18,27 +18,24 @@ public class Designer {
 	private Date dJoin;
 	private String dMemo;
 	private List<WorkDialog> workDialogList;
+	private boolean dSecession;
 
 	public Designer() {
 	}
 
-	
-
 	public Designer(int dNo) {
 		this.dNo = dNo;
 	}
-
-
 
 	public Designer(String dGrade, String dId, String dName) {
 		this.dGrade = dGrade;
 		this.dId = dId;
 		this.dName = dName;
 	}
-	
+
 	public Designer(int dNo, String dGrade, String dId, String dPassword, String dName, String dTel, String dTel2,
 			String dAddr, String dAddr2, String dAddr3, Date dBirth, Date dJoin, String dMemo,
-			List<WorkDialog> workDialogList) {
+			List<WorkDialog> workDialogList, boolean dSecession) {
 		this.dNo = dNo;
 		this.dGrade = dGrade;
 		this.dId = dId;
@@ -53,6 +50,7 @@ public class Designer {
 		this.dJoin = dJoin;
 		this.dMemo = dMemo;
 		this.workDialogList = workDialogList;
+		this.dSecession = dSecession;
 	}
 
 	public Designer(Designer getwDNo) {
@@ -171,9 +169,14 @@ public class Designer {
 		this.workDialogList = workDialogList;
 	}
 
-	
-	
-	
+	public boolean isdSecession() {
+		return dSecession;
+	}
+
+	public void setdSecession(boolean dSecession) {
+		this.dSecession = dSecession;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -181,8 +184,6 @@ public class Designer {
 		result = prime * result + dNo;
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -198,15 +199,13 @@ public class Designer {
 		return true;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return String.format("%s",dName);
+		return String.format("%s", dName);
 	}
 
 	public Object[] toArray() {
-		return new Object[] { dNo, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo };
+		return new Object[] { dNo, dGrade, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo, dSecession };
 	}
 
 	public Object[] toArrayMgn() {

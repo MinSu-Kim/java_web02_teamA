@@ -16,6 +16,7 @@
 		<result property="dBirth" column="d_birth" />
 		<result property="dJoin" column="d_join" />
 		<result property="dMemo" column="d_memo" />
+		<result property="dSecession" column="d_secession" />
 	</resultMap>
 	<resultMap type="Designer" id="extendsDesigner" extends="basicDesigner">
 		<collection property="workDialogList" resultMap="kr.or.yi.hairshop.dao.WorkDialogMapper.resultWorkDialog"/>
@@ -23,9 +24,7 @@
 	
 	
 	<select id="selectDesignerByAll" resultType="Designer">
-		select * 
-		from
-		Designer
+		select * from designer where d_secession=false
 	</select>
 
 	<select id="selectDesignerByNo" resultMap="extendsDesigner">
@@ -48,22 +47,22 @@
 		#{dAddr3}, #{dBirth}, #{dJoin}, #{dMemo})
 	</insert>
 
-	<delete id="deleteDesigner">
-		delete from designer where d_no=#{dNo}
-	</delete>
+	<update id="deleteDesigner">
+		UPDATE designer
+		SET d_secession = true
+		WHERE d_no=#{dNo}
+	</update>
 
 	<update id="updateDesigner">
 		UPDATE designer
-		SET d_grade=#{dGrade},
-		d_name=#{dName}, d_tel=#{dTel}, d_tel2=#{dTel2}, d_addr=#{dAddr},
-		d_addr2=#{dAddr2}, d_addr3=#{dAddr3}, d_birth=#{dBirth},
-		d_join=#{dJoin}, d_memo=#{dMemo}
+		SET d_grade=#{dGrade}, d_name=#{dName}, d_tel=#{dTel}, d_tel2=#{dTel2}, d_addr=#{dAddr}, d_addr2=#{dAddr2}, d_addr3=#{dAddr3}, d_birth=#{dBirth}, d_join=#{dJoin}, d_memo=#{dMemo}
 		WHERE d_no=#{dNo}
 	</update>
 	
 	<select id="selectDesignerByMgn" resultType="Designer">
 		SELECT *
-		FROM designer;
+		FROM designer
+		where d_secession = false
 	</select>
 	
 
