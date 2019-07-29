@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.dao;
+package kr.or.yi.hairshop.ui.panel.home;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,7 +10,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import kr.or.yi.hairshop.dto.Guest;
-import kr.or.yi.hairshop.ui.panel.home.AbstractPanelTable;
 
 public class pHomeTfgNameTable extends AbstractPanelTable<Guest> implements MouseListener{
 	

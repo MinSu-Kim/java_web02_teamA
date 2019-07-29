@@ -33,7 +33,6 @@ import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.dao.GuestMapper;
 import kr.or.yi.hairshop.dao.GuestMapperImpl;
-import kr.or.yi.hairshop.dao.pHomeTfgNameTable;
 
 public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyListener {
 
