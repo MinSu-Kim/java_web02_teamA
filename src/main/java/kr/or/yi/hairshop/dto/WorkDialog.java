@@ -133,7 +133,6 @@ public class WorkDialog {
 		
 		String pName="";
 		String pPrice="";
-		System.out.println(productList);
 		for(int i=0;i<productList.size();i++) {
 			if(i!=productList.size()-1) {				
 				pName+=productList.get(i).getpName()+",";
@@ -142,13 +141,10 @@ public class WorkDialog {
 				pName+=productList.get(i).getpName();
 				pPrice+=productList.get(i).getpPrice();
 			}			
-			System.out.println("가격"+productList.get(i).getpPrice());
-			System.out.println("이름"+productList.get(i).getpName());
+//			System.out.println("가격"+productList.get(i).getpPrice());
+//			System.out.println("이름"+productList.get(i).getpName());
 		}
-
-
-		
-		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade(), pName, pPrice, wEName.geteName(), date.format(wWorkTime) };
+		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade().getlGrade(), pName, wEName.geteName(), pPrice, wWorkTime };
 		
 	}
 	

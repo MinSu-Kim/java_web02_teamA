@@ -7,7 +7,6 @@
 		<result property="wReservTime" column="w_reservTime" />
 		<result property="wPriceTotal" column="w_priceTotal" />
 	</resultMap>
-
 	<resultMap type="WorkDialog" id="resultWorkDialog">
 		<result property="wNo" column="w_no"/>
 		<result property="wWorkTime" column="w_workTime" />
@@ -30,10 +29,18 @@
 		<result property="wReservTime" column="w_reservTime" />
 		<result property="wPriceTotal" column="w_priceTotal" />
 		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.extendsDesigner"/>
-		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.basicGuest" />
+		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.extendsGuest" />
 		<collection property="productList" resultMap="kr.or.yi.hairshop.dao.ProductMapper.basicProduct"/>
 	</resultMap>
-
+	
+	<!-- 예약현황 검색용 -->
+	<resultMap type="WorkDialog" id="reserveDetail" extends="basicWorkDialog">
+		<association property="wEName" resultMap="kr.or.yi.hairshop.dao.EventMapper.basicEvent"/>
+		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.extendsDesigner"/>
+		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.extendsGuest"/>
+		<collection property="productList" resultMap="kr.or.yi.hairshop.dao.ProductMapper.basicProduct"/>
+	</resultMap>
+	
 <!-- 	<resultMap type="" id="" extends="basicWorkDialog">
 		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.extendsDesigner"/>
 		<association property="wEName" resultMap="kr.or.yi.hairshop.dao.EventMapper.basicEvent"/>
@@ -86,7 +93,6 @@
 		join guest g
 		on w.w_d_no=#{dNo} and w.w_g_no=g.g_no;
 	</select>
-	
 	<select id="selectByAll" resultType="WorkDialog">
 		select
 		w_no,
@@ -112,7 +118,7 @@
 		left join guest g
 		on w.w_g_no=g.g_no
 	</select>
-
+	
 	<select id="selectByfivejoinMap" resultMap="resultWorkDialogfivejoin">
 		SELECT g_name, w_workTime, p_name, p_price
 		FROM workdialog w
@@ -126,29 +132,37 @@
 		on w_g_no=g.g_no;
 	</select>
 	
-	<select id="selectReservDetail" resultMap="resultWorkDialogfivejoin">
-		select 
-		w_no , w_reservTime , d.d_name, d.d_grade, g.g_name, g.g_l_grade, p.p_name, w_e_name, w_priceTotal, w_workTime
+	<select id="selectReservDetail" resultMap="reserveDetail">
+		select
+		w_no, w_reservTime, e_name, w_priceTotal, w_workTime, d_name, d_grade, g_name, l_grade, p_name
 		from workdialog w
-		left join designer d
-		on w.w_d_no = d.d_no
-		left join guest g
-		on w.w_g_no = g.g_no
-		left join choice c
-		on w.w_g_no = c.c_w_no
-		left join product p
-		on c.c_p_name = p.p_name
-		left join tax t
-		on p.p_name=t.t_name
-		order by w_reservTime desc		
+		left join designer d on w.w_d_no = d.d_no
+		left join guest g on w.w_g_no = g.g_no
+		left join event e on w.w_e_name = e.e_name
+		left join level v on g.g_l_grade = v.l_grade
+		left join choice c on w.w_g_no = c.c_w_no
+		left join product p on c.c_p_name = p.p_name
+		left join tax t on p.p_name = t.t_name
+		order by w_no
 	</select>
+	
+	
+	<select id="selectReservDetailByDate" parameterType="map" resultMap="reserveDetail">
+		select
+		w_no, w_reservTime, e_name, w_priceTotal, w_workTime, d_name, d_grade, g_name, l_grade, p_name
+		from workdialog w
+		left join designer d on w.w_d_no = d.d_no
+		left join guest g on w.w_g_no = g.g_no
+		left join event e on w.w_e_name = e.e_name
+		left join level v on g.g_l_grade = v.l_grade
+		left join choice c on w.w_g_no = c.c_w_no
+		left join product p on c.c_p_name = p.p_name
+		left join tax t on p.p_name = t.t_name
+		where w_reservTime between #{start} and #{end}
+		order by w_no
+	</select>
+	
 </mapper>
-
-
-
-
-
-
 
 
 

@@ -43,5 +43,11 @@ public class WorkDialogMapperImplTest extends AbstractTest {
 		Assert.assertNotNull(list);
 	}
 
+	@Test
+	public void test03selestDetail() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<WorkDialog> work = dao.selectReservDetail();
+		Assert.assertNotNull(work);
+	}
 
 }
