@@ -45,11 +45,16 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+					//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+					UIManager.setLookAndFeel ("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+					//UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+					//UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
+					//UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
+					//UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
+					//UIManager.setLookAndFeel("net.infonode.gui.laf.InfoNodeLookAndFeel");
 					mainFrame = new HairMainFrame();
 					mainFrame.setVisible(true);
-
-					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");// LookAndFeel
-																									// Windows 스타일 적용
 					SwingUtilities.updateComponentTreeUI(mainFrame);
 
 				} catch (Exception e) {
