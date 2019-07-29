@@ -148,7 +148,7 @@ public class WorkDialog {
 
 
 		
-		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade(), pName, pPrice, wEName.geteName(), date.format(wWorkTime) };
+		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade(), pName, pPrice, wEName.geteName(), wWorkTime };
 		
 	}
 	

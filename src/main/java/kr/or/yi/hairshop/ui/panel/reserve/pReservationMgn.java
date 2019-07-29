@@ -77,7 +77,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 				map.put("start", oneDay);
 				map.put("end", endDay);
 				
-				workList = dao.selectReservDetailByDate(map);
+				//workList = dao.selectReservDetailByDate(map);
 				reloadData();
 				
 			}
@@ -99,7 +99,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 				map.put("start", oneDay);
 				map.put("end", endDay);
 				
-				workList = dao.selectReservDetailByDate(map);
+				//workList = dao.selectReservDetailByDate(map);
 				reloadData();
 				
 			}
@@ -227,7 +227,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		map.put("start", sDay);
 		map.put("end", eDay);
 		
-		workList = dao.selectReservDetailByDate(map);
+		//workList = dao.selectReservDetailByDate(map);
 		reloadData();
 		
 	}

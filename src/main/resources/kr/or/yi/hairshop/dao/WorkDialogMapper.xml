@@ -36,7 +36,7 @@
 	<!-- 예약현황 검색용 -->
 	<resultMap type="WorkDialog" id="reserveDetail" extends="basicWorkDialog">
 		<association property="wEName" resultMap="kr.or.yi.hairshop.dao.EventMapper.basicEvent"/>
-		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.basicDesigner"/>
+		<association property="wDNo" resultMap="kr.or.yi.hairshop.dao.DesignerMapper.extendsDesigner"/>
 		<association property="wGNo" resultMap="kr.or.yi.hairshop.dao.GuestMapper.extendsGuest"/>
 		<collection property="productList" resultMap="kr.or.yi.hairshop.dao.ProductMapper.basicProduct"/>
 	</resultMap>
