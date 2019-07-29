@@ -1,10 +1,10 @@
 package kr.or.yi.hairshop.ui.panel.product;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,7 +40,6 @@ import kr.or.yi.hairshop.dto.Event;
 import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.panel.pCalendar;
 import kr.or.yi.hairshop.ui.frame.DesignerFrame;
-import kr.or.yi.hairshop.ui.frame.LoginFrame;
 
 public class pProductMgn extends JPanel implements ActionListener {
 
@@ -63,6 +62,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private ProductMapper pdao = new ProductMapperImpl();
 	private EventMapper edao = new EventMapperImpl();
 	private DesignerMapper wdao = new DesignerMapperImpl();
+	
 	private JPanel panel;
 	private JPanel Section;
 	private pCalendar pCalandar;
@@ -112,18 +112,16 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private JDateChooser dcEventEndDate;
 
 	private JButton btnWorker;
-
 	private JMenuItem mntmPopWorkerAdd;
-
 	private JMenuItem mntmPopWorkerUpdate;
-
 	private JMenuItem mntmPopWorkerDelete;
-
 	private DesignerFrame DesignerFrame;
-	
 	private HairMainFrame HairMainFrame;
-
+	
+	
+	
 	public pProductMgn() {
+		DesignerFrame = new DesignerFrame();
 		initComponents();
 	}
 
@@ -392,70 +390,49 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 		}
 		
-		///////////저 아직 하고 있어요,,,, 다영
-		if (e.getSource() == mntmPopWorkerDelete) { //디자이너 삭제
+	
+		if (e.getSource() == mntmPopWorkerDelete) {
 			deleteDesigner(); 
 		}
 		
-		if (e.getSource() == mntmPopWorkerAdd) { //디자이너 등록
-			System.out.println("등록버튼 눌렀네");
-					
-			if(DesignerFrame == null) {
-				DesignerFrameView(); 
-				
-				
-			}else {
-				DesignerFrameView();
-			}
+		if (e.getSource() == mntmPopWorkerAdd) { //디자이너 등록					
+			DesignerFrameView(); 			
 			
 		}
 		
-		
 		if (e.getSource() == mntmPopWorkerUpdate) { //디자이너 수정
-//			DesignerFrameView();
-			//클릭한 사람 정보가 실려서 올라와야함. get 
-			//확인버튼 누르면 수정하시겠습니까? 
 			
 			int i = tableWorker.getSelectedRow();
 			Designer worker = workerList.get(i);
-			setWorker(worker); 
-			
-
-		}
-		
-		
-		
+//			System.out.println("============================================"+i);
+//			System.out.println("============================================"+worker.toString2());
+//		
+			DesignerFrame.setProductMgn(this);
+			DesignerFrame.setText(worker);
+			setWorker(worker);
+		}	
+	
 		
 	}
 
-	private void DesignerFrameView() { //등록프레임
-		System.out.println("등록프레임할꺼야");
-		DesignerFrame = new DesignerFrame();
+	private void DesignerFrameView() { //등록
 		DesignerFrame.setParent(HairMainFrame);
 		DesignerFrame.setBtnText("등록");
-		
-		
+		DesignerFrame.setProductMgn(this);
 		DesignerFrame.setVisible(true);
-		
-		
 	}
 
-	private void setWorker(Designer worker) { //수정프레임
-		System.out.println("set을 눌렀꾼");
-		DesignerFrame = new DesignerFrame();
+	private void setWorker(Designer worker) { //수정
 		DesignerFrame.setParent(HairMainFrame);
 		DesignerFrame.setBtnText("수정");
-		
 		DesignerFrame.setVisible(true);
 	}
 
-	private void deleteDesigner() { //디자이너 삭제
-		System.out.println("delete을 눌렀꾼");	
+	private void deleteDesigner() {
 		int result = JOptionPane.showConfirmDialog(null, "삭제 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
 
 		if (result == JOptionPane.CLOSED_OPTION) {
 			// 취소 
-
 		} else if (result == JOptionPane.YES_OPTION) {
 			// 예
 			int i = tableWorker.getSelectedRow();
@@ -468,26 +445,23 @@ public class pProductMgn extends JPanel implements ActionListener {
 		} else {
 			// 아니오 
 		}
-		
-			
 	}
 
 	private void deleteProductUI() {
 		int result = JOptionPane.showConfirmDialog(null, "삭제 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
 
 		if (result == JOptionPane.CLOSED_OPTION) {
-			// 취소 선택
 
-		} else if (result == JOptionPane.YES_OPTION) {
-			// 예 선택
+		} else if (result == JOptionPane.YES_OPTION) {// 예 
+			
 			int i = tableProduct.getSelectedRow();
 			Product selectProduct = proList.get(i);
 			pdao.deleteByName(selectProduct.getpName());
 			clearEventTf();
 			clearList();
 			reloadData();
-		} else {
-			// 아니오 선택
+		} else {	// 아니오 
+		
 		}
 
 	}
@@ -627,6 +601,9 @@ public class pProductMgn extends JPanel implements ActionListener {
 	}
 
 	private Object[][] getRowsProduct() {
+		if(proList == null) {
+			proList = new ArrayList<Product>();
+		}
 		Object[][] rows = new Object[proList.size()][];
 		for (int i = 0; i < proList.size(); i++) {
 			rows[i] = proList.get(i).toArray();
@@ -635,6 +612,9 @@ public class pProductMgn extends JPanel implements ActionListener {
 	}
 
 	private Object[][] getRowsEvent() {
+		if(eventList == null) {
+			eventList = new ArrayList<Event>();
+		}
 		Object[][] rows = new Object[eventList.size()][];
 		for (int i = 0; i < eventList.size(); i++) {
 			rows[i] = eventList.get(i).toArray();
@@ -642,7 +622,10 @@ public class pProductMgn extends JPanel implements ActionListener {
 		return rows;
 	}
 
-	private Object[][] getRowsWoker() {
+	public Object[][] getRowsWoker() {
+		if(workerList == null) {
+			workerList = new ArrayList<Designer>();
+		}
 		Object[][] rows = new Object[workerList.size()][];
 		for (int i = 0; i < workerList.size(); i++) {
 			rows[i] = workerList.get(i).toArrayMgn();
@@ -716,6 +699,12 @@ public class pProductMgn extends JPanel implements ActionListener {
 		for (int i = 0; i < width.length; i++) {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
+	}
+	
+
+	
+	public void setWorkList(List<Designer> ds) {
+		this.workerList = ds;
 	}
 
 }

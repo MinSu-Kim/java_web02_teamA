@@ -25,20 +25,22 @@ import kr.or.yi.hairshop.HairMainFrame;
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
+import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.panel.DesignerPanel;
+import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class DesignerFrame extends JFrame implements ActionListener {
-	private DesignerMapper ds = new DesignerMapperImpl ();
-	
+	private DesignerMapper ds;
+	private int dNo;
 	private JPanel contentPane;
 	private JTextField tfdName;
 	private JTextField tfdTel;
 	private JTextField tfdTel2;
 	private JTextField tfdAddr;
 	private JTextField tfdAddr2;
-	private JTextField tfdBirth;
-	private JTextField tfdJoin;
 	private JTextField tfdMemo;
 	private JButton button;
 	private DesignerMapper dsmapper;
@@ -46,11 +48,18 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private List<Designer> DesignList;
 	private JTextField textField;
 	private JTextField tfdGrade;
-	private JTextField tfId;
-	private JTextField tfdPassword;
-
 	private JTextField tfdId;
+	private JTextField tfdPassword;
+	
 	private JPanel panel_4;
+
+	private List<Designer> workerList;
+	private JDateChooser dcdBirth;
+	private JDateChooser dcdJoin;
+
+	private pProductMgn pProductMgn;
+	 
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -67,6 +76,8 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	}
 
 	public DesignerFrame() {
+	
+		ds = new DesignerMapperImpl();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 640, 624);
 		contentPane = new JPanel();
@@ -164,17 +175,15 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		lbldBirth.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldBirth);
 		
-		tfdBirth = new JTextField();
-		panel_4.add(tfdBirth);
-		tfdBirth.setColumns(10);
+		dcdBirth = new JDateChooser();
+		panel_4.add(dcdBirth);
 		
 		JLabel lbldJoin = new JLabel("입사일");
 		lbldJoin.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldJoin);
 		
-		tfdJoin = new JTextField();
-		panel_4.add(tfdJoin);
-		tfdJoin.setColumns(10);
+		dcdJoin = new JDateChooser();
+		panel_4.add(dcdJoin);
 		
 		JLabel lbldMemo = new JLabel("메모");
 		lbldMemo.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -210,20 +219,10 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		tfdTel2.setText("");
 		tfdAddr.setText("");
 		tfdAddr2.setText("");
-		tfdBirth.setText("");
-		tfdJoin.setText("");
+		dcdBirth.setDate(new Date());
+		dcdJoin.setDate(new Date());
 		tfdMemo.setText("");	
-//		tfdId.
-//		tfdPassword.
-//		tfdGrade.
-//		tfdName.
-//		tfdTel.
-//		tfdTel2.
-//		tfdAddr.
-//		tfdAddr2.
-//		tfdBirth.
-//		tfdJoin.
-//		tfdMemo.
+
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
@@ -236,17 +235,6 @@ public class DesignerFrame extends JFrame implements ActionListener {
 			}			
 		}
 	}
-
-	/* tfdPassword.
-		tfdGrade.
-		tfdName.
-		tfdTel.
-		tfdTel2.
-		tfdAddr.
-		tfdAddr2.
-		tfdBirth.
-		tfdJoin.
-		tfdMemo. */
 	
 	private void actionPerformedBtnAdd(ActionEvent arg0) { //등록버튼
 		String tfi = tfdId.getText();
@@ -257,8 +245,8 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		String tft2 =tfdTel2.getText();	
 		String tfa =tfdAddr.getText();
 		String tfa2 =tfdAddr2.getText();
-		String tfb =tfdBirth.getText();
-		String tfj =tfdJoin.getText();
+		Date tfb =dcdBirth.getDate();
+		Date tfj =dcdJoin.getDate();
 		String tfm =tfdMemo.getText();		
 				
 		Designer designer = new Designer();
@@ -270,55 +258,56 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		designer.setdTel2(tft2);
 		designer.setdAddr(tfa);
 		designer.setdAddr2(tfa2);
-
-		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-		
-		try {
-			designer.setdBirth(sd.parse(tfb));
-			designer.setdJoin(sd.parse(tfj));
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-		}
+		designer.setdBirth(tfb);
+		designer.setdJoin(tfj);
 		designer.setdMemo(tfm);
 		
 		ds.insertDesigner(designer);
 		JOptionPane.showMessageDialog(null, "입력되었습니다.");
 		clearTextField();
+		pProductMgn.setWorkList(ds.selectDesignerByAll());
+		pProductMgn.reloadData();
+	
+	}
+	
+	public void setText(Designer ds) {
+		dNo = ds.getdNo();
+		tfdId.setText(ds.getdId());
+		tfdPassword.setText(ds.getdPassword());
+		tfdGrade.setText(ds.getdGrade());
+		tfdName.setText(ds.getdName());
+		tfdTel.setText(ds.getdTel());
+		tfdTel2.setText(ds.getdTel2());
+		tfdAddr.setText(ds.getdAddr());
+		tfdAddr2.setText(ds.getdAddr2());
+		dcdBirth.setDate(ds.getdBirth());
+		dcdJoin.setDate(ds.getdJoin());
+		tfdMemo.setText(ds.getdMemo());
 		
 	}
 	
-	private void actionPerformedBtnModify(ActionEvent arg0) { //수정버튼
-		Designer designer = new Designer();
+	public void actionPerformedBtnModify(ActionEvent arg0) { //수정버튼
+		String id = tfdId.getText();
+		String ps = tfdPassword.getText();
+		String grade = tfdGrade.getText();
+		String name = tfdName.getText();
+		String tel = tfdTel.getText();
+		String tel2 = tfdTel2.getText();
+		String addr = tfdAddr.getText();
+		String addr2 = tfdAddr2.getText();
+		Date tfb =dcdBirth.getDate();
+		Date tfj =dcdJoin.getDate();
+		String memo = tfdMemo.getText();
 		
-		String id = designer.getdId();
-		String ps = designer.getdPassword();
-		String grade = designer.getdGrade();
-		String name = designer.getdName();
-		String tel = designer.getdTel();
-		String tel2 = designer.getdTel2();
-		String addr = designer.getdAddr();
-		String addr2 = designer.getdAddr2();
-		Date tfb =designer.getdBirth();
-		Date tfj =designer.getdJoin();		
-		String memo = designer.getdMemo();
 		
-		//텍스트필드에 보이게 뿌리기
-		tfdId.setText(id);
-		tfdPassword.setText(ps);
-		tfdGrade.setText(grade);
-		tfdName.setText(name);
-		tfdTel.setText(tel);
-		tfdTel2.setText(tel2);
-		tfdAddr.setText(addr);
-		tfdAddr2.setText(addr2);
+		Designer designer = new Designer(dNo, grade, id, ps, name, tel, tel2, addr, addr2, tfb, tfj, memo);
+		JOptionPane.showMessageDialog(null, designer.toString2());
+		ds.updateDesigner(designer);
+		pProductMgn.setWorkList(ds.selectDesignerByAll());
+		JOptionPane.showMessageDialog(null, "수정되었습니다.");
+		clearTextField();
+		pProductMgn.reloadData();
 		
-		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");		
-		tfdBirth.setText(sd.format(tfb));
-		tfdJoin.setText(sd.format(tfj));		
-		tfdMemo.setText(memo);	
-		
-		//뿌리고 난다음 입력한 값으로 바껴야 함.
 		
 	}
 
@@ -333,7 +322,9 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		button.setText(string);
 	}
 
-	
+	public void setProductMgn(pProductMgn pP) {
+		this.pProductMgn = pP;
+	}
 	
 }
 
