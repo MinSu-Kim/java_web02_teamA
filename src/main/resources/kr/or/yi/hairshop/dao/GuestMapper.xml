@@ -26,25 +26,28 @@
 
 	<select id="selectGuestByAll" resultType="Guest"
 		resultMap="extendsGuest">
-		select g_no, g_l_grade as gLGrade, g_name, g_tel, g_email,
+		SELECT g_no, g_id, g_password, g_l_grade as l_grade, g_name,
+		g_tel, g_email,
 		g_birth, g_join, g_point, g_memo
-		from
-		hairshop.guest;
+		FROM hairshop.guest;
 	</select>
 
 	<insert id="insertGuest" parameterType="Guest">
-		insert into
+		INSERT INTO
 		hairshop.guest
-		(g_l_grade, g_name, g_tel, g_email, g_birth, g_join,
+		(g_id, g_password, g_l_grade, g_name, g_tel, g_email, g_birth, g_join,
 		g_point, g_memo)
-		values(#{gLGrade.lGrade}, #{gName}, #{gTel},
-		#{gEmail}, #{gBirth}, #{gJoin}, 0, #{gMemo});
+		VALUES(#{gId}, #{gPassword}, #{gLGrade.lGrade}, #{gName}, #{gTel}, #{gEmail}, #{gBirth}, #{gJoin}, 0, #{gMemo});
+
 	</insert>
 
 	<update id="updateGuest">
 		UPDATE hairshop.guest
-		SET g_id=#{gId}, g_password=#{gPassword}, g_l_grade=#{gLGrade.lGrade}, g_name=#{gName}, g_tel=#{gTel},
-		g_email=#{gEmail}, g_birth=#{gBirth}, g_join=#{gJoin}, g_point=#{gPoint}, g_memo=#{gMemo}
+		SET g_id=#{gId},
+		g_password=#{gPassword}, g_l_grade=#{gLGrade.lGrade}, g_name=#{gName},
+		g_tel=#{gTel},
+		g_email=#{gEmail}, g_birth=#{gBirth}, g_join=#{gJoin},
+		g_point=#{gPoint}, g_memo=#{gMemo}
 		WHERE g_no=#{gNo};
 	</update>
 
