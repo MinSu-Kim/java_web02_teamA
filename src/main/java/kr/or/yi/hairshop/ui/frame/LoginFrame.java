@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -24,7 +25,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private static Designer Auth = null;
 	private JPanel contentPane;
 	private JTextField tfId;
-	private JTextField tfPassWord;
+	private JPasswordField tfPassWord;
 	private JButton btnLogin;
 	private HairMainFrame parent;
 	
@@ -70,7 +71,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		lblPassWord.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_4.add(lblPassWord);
 		
-		tfPassWord = new JTextField();
+		tfPassWord = new JPasswordField();
 		panel_4.add(tfPassWord);
 		tfPassWord.setColumns(10);
 		
