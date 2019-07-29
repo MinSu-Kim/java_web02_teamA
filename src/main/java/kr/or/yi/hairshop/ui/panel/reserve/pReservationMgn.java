@@ -152,8 +152,8 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		mntmDelete.addActionListener(this);
 		popupMenu.add(mntmDelete);
 		
-		table.setComponentPopupMenu(popupMenu);
-		scrollPane.setComponentPopupMenu(popupMenu);
+//		table.setComponentPopupMenu(popupMenu);
+//		scrollPane.setComponentPopupMenu(popupMenu);
 	}
 	
 	public void clearList() {
