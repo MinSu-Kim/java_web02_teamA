@@ -11,6 +11,7 @@ values
 INSERT INTO hairshop.event
 (e_name, e_startDay, e_endDay, e_sale)
 values
+('일반', null,null, 0),
 ('생일', null,null, 10),
 ('광복절', '2019-8-15','2019-8-15',10 ),
 ('추석', '2019-9-12','2019-9-15', 10),
@@ -59,7 +60,7 @@ delete from hairshop.workdialog;
 INSERT INTO hairshop.workdialog
 (w_workTime, w_reservTime,w_priceTotal, w_e_Name, w_d_No, w_g_No)
 values
-('2019-07-01', '2019-07-01-11-00',100000, null, 1, 1),
+('2019-07-01', '2019-07-01-11-00',100000, '일반', 1, 1),
 (null, '2019-08-15-12-00',50000, '광복절', 2, 2),
 (null, '2019-09-12-13-00',12000, '추석', 3, 2),
 (null, '2019-09-15-14-00',15000, '추석', 3, 2),

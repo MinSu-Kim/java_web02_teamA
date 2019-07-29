@@ -25,7 +25,7 @@ CREATE TABLE hairshop.WorkDialog (
 	w_workTime   DATETIME    NULL     COMMENT '작업완료일', -- 작업완료일
 	w_reservTime DATETIME    NULL     COMMENT '작업일예약', -- 작업일예약
 	w_priceTotal INT         NULL     COMMENT '가격(총합)', -- 가격(총합)
-	w_e_name     VARCHAR(20) NULL     COMMENT '이벤트명', -- 이벤트명
+	w_e_name     VARCHAR(20) default '일반' NULL     COMMENT '이벤트명', -- 이벤트명
 	w_d_no       INT         NULL     COMMENT '디자이너', -- 디자이너
 	w_g_no       INT         NULL     COMMENT '손님' -- 손님
 )
