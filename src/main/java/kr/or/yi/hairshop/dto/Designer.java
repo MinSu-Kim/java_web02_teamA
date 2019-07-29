@@ -33,6 +33,22 @@ public class Designer {
 		this.dName = dName;
 	}
 
+	public Designer(int dNo, String dGrade, String dId, String dPassword, String dName, String dTel, String dTel2, String dAddr,
+			String dAddr2, Date dBirth, Date dJoin, String dMemo) {
+		this.dNo = dNo;
+		this.dGrade = dGrade;
+		this.dId = dId;
+		this.dPassword = dPassword;
+		this.dName = dName;
+		this.dTel = dTel;
+		this.dTel2 = dTel2;
+		this.dAddr = dAddr;
+		this.dAddr2 = dAddr2;
+		this.dBirth = dBirth;
+		this.dJoin = dJoin;
+		this.dMemo = dMemo;
+	}
+
 	public Designer(int dNo, String dGrade, String dId, String dPassword, String dName, String dTel, String dTel2,
 			String dAddr, String dAddr2, String dAddr3, Date dBirth, Date dJoin, String dMemo,
 			List<WorkDialog> workDialogList, boolean dSecession) {
@@ -202,6 +218,14 @@ public class Designer {
 	@Override
 	public String toString() {
 		return String.format("%s", dName);
+	}
+
+	
+	public String toString2() {
+		return String.format(
+				"Designer [dNo=%s, dGrade=%s, dId=%s, dPassword=%s, dName=%s, dTel=%s, dTel2=%s, dAddr=%s, dAddr2=%s, dAddr3=%s, dBirth=%s, dJoin=%s, dMemo=%s, workDialogList=%s, dSecession=%s]",
+				dNo, dGrade, dId, dPassword, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo,
+				workDialogList, dSecession);
 	}
 
 	public Object[] toArray() {
