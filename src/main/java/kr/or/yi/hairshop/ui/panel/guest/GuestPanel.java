@@ -196,7 +196,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		Date birth = dcBirth.getDate();
 		Date join = dcJoin.getDate();
 		int point = (int) spPoint.getValue();
-		String memo = tfMemo.getText();
+		String memo = tfMemo.getText(); 
 
 		modifyguest.setgLGrade(level);
 		modifyguest.setgName(name);
