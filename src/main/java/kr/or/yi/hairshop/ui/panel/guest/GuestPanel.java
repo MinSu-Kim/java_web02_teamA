@@ -152,7 +152,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 		btnAdd = new JButton("등록");
 		btnAdd.addActionListener(this);
 		panel.add(btnAdd);
-
+		
+		
 		
 		JButton btnCancel = new JButton("취소");
 		panel.add(btnCancel);
@@ -176,7 +177,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 				actionPerformedBtnAddJButton(e);
 			}
 			if(e.getActionCommand().equals("수정")) {
-				actionPerformedBtnAddJButton(e);
+				actionPerformedBtnUPJButton(e);
 			}
 		}
 		
@@ -185,17 +186,13 @@ public class GuestPanel extends JPanel implements ActionListener {
 	protected void actionPerformedBtnAddJButton(ActionEvent e) {
 		if (btnAdd.getText() == "등록") {
 			MakeGuest();
-		} else {
-			updateGuest();
-		}
+		} 
 	}
 
 	protected void actionPerformedBtnUPJButton(ActionEvent e) {
 		if (btnAdd.getText() == "수정") {
 			updateGuest();
-		} else {
-			MakeGuest();
-		}
+		} 
 	}
 	
 	private void updateGuest() {
@@ -264,7 +261,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	public void setBtn() {
 		if (btnAdd.getText() == "등록") {
 			btnAdd.setText("수정");
-		} else {
+		} else if(btnAdd.getText() == "수정"){
 			btnAdd.setText("등록");
 		}
 

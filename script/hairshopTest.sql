@@ -94,10 +94,13 @@ select @w_reservTime,@w_workTime;
 set @start=UNIX_TIMESTAMP('2019-07-01 00:00:00');
 set @end=UNIX_TIMESTAMP('2019-08-31 23:59:59');
 /* 당일데이터만 삽입 */
-set @start=UNIX_TIMESTAMP(concat(left(curdate(),10),' 00:00:00'));
-set @end=UNIX_TIMESTAMP(concat(left(curdate(),10),' 23:59:59'));
+set @start=UNIX_TIMESTAMP(concat(left(curdate(),10),' 08:00:00'));
+set @end=UNIX_TIMESTAMP(concat(left(curdate(),10),' 23:00:00'));
  
 select @start,@end;
+/* set start,end가*/
+/* 당일만이면 2번만 */
+/* 여러날짜면 3번까지 ctrl x하세요 */
 
 
 /* 2.랜덤 workDialog 삽입하기 */
@@ -105,15 +108,25 @@ INSERT INTO hairshop.workdialog
 ( `w_reservTime`,`w_workTime`, `w_priceTotal`, w_e_name, w_d_no, w_g_no)
 values
 (@w_reservTime:=(SELECT FROM_UNIXTIME(RAND() * (@end - @start) + @start)),
-if(UNIX_TIMESTAMP(@w_reservTime) < UNIX_TIMESTAMP(now()), FROM_UNIXTIME(RAND() * (select UNIX_TIMESTAMP(now()) - @start) + @start),null),
+if(UNIX_TIMESTAMP(@w_reservTime) < UNIX_TIMESTAMP(now()), @w_reservTime,null),
 10000,
 (select e_name from event order by rand() limit 1),
 (select d_no from designer order by rand() limit 1),
 (select g_no from guest order by rand() limit 1))
 ;
 
+insert into choice(c_w_no,c_p_name) values
+((select LAST_INSERT_ID()),(select p_name from product order by rand() limit 1))
+;
+
 
 /* 3.불필요 데이터 삭제 */
+
+delete from choice where c_w_no in (select w_no from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
+and left(right(`w_reservTime`,8),2) between 0 and 7);
+delete from choice where c_w_no in (select w_no from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
+and left(right(`w_reservTime`,8),2) between 22 and 24);
+
 delete from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
 and left(right(`w_reservTime`,8),2) between 0 and 7;
 delete from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
@@ -122,6 +135,7 @@ and left(right(`w_reservTime`,8),2) between 22 and 24;
 delete from workdialog;
 select * from workdialog;
 
+/* 여기까지 드래그 */
 
 /* 특정 날자 사이에 랜덤값  */
 set @start=UNIX_TIMESTAMP('2019-07-01 00:00:00');
