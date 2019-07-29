@@ -42,9 +42,9 @@
 
 	<insert id="insertDesigner" parameterType="Designer">
 		insert into designer
-		(d_grade, d_name, d_tel, d_tel2, d_addr, d_addr2, d_addr3, d_birth,
+		(d_id, d_password, d_grade, d_name, d_tel, d_tel2, d_addr, d_addr2, d_addr3, d_birth,
 		d_join, d_memo)
-		values (#{dGrade}, #{dName}, #{dTel}, #{dTel2}, #{dAddr}, #{dAddr2},
+		values (#{dId}, #{dPassword}, #{dGrade}, #{dName}, #{dTel}, #{dTel2}, #{dAddr}, #{dAddr2},
 		#{dAddr3}, #{dBirth}, #{dJoin}, #{dMemo})
 	</insert>
 
@@ -62,7 +62,7 @@
 	</update>
 	
 	<select id="selectDesignerByMgn" resultType="Designer">
-		SELECT d_grade, d_name, d_tel, d_tel2
+		SELECT *
 		FROM designer;
 	</select>
 	

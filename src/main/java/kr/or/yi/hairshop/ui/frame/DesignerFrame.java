@@ -248,40 +248,6 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		tfdJoin.
 		tfdMemo. */
 	
-	private void actionPerformedBtnModify(ActionEvent arg0) { //수정버튼
-		Designer designer = new Designer();
-		
-		String id = designer.getdId();
-		String ps = designer.getdPassword();
-		String grade = designer.getdGrade();
-		String name = designer.getdName();
-		String tel = designer.getdTel();
-		String tel2 = designer.getdTel2();
-		String addr = designer.getdAddr();
-		String addr2 = designer.getdAddr2();
-		Date tfb =designer.getdBirth();
-		Date tfj =designer.getdJoin();		
-		String memo = designer.getdMemo();
-		
-		//텍스트필드에 보이게 뿌리기
-		tfdId.setText(id);
-		tfdPassword.setText(ps);
-		tfdGrade.setText(grade);
-		tfdName.setText(name);
-		tfdTel.setText(tel);
-		tfdTel2.setText(tel2);
-		tfdAddr.setText(addr);
-		tfdAddr2.setText(addr2);
-		
-		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");		
-		tfdBirth.setText(sd.format(tfb));
-		tfdJoin.setText(sd.format(tfj));		
-		tfdMemo.setText(memo);	
-		
-		//뿌리고 난다음 입력한 값으로 바껴야 함.
-		
-	}
-
 	private void actionPerformedBtnAdd(ActionEvent arg0) { //등록버튼
 		String tfi = tfdId.getText();
 		String tfp = tfdPassword.getText();	
@@ -321,14 +287,52 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		clearTextField();
 		
 	}
+	
+	private void actionPerformedBtnModify(ActionEvent arg0) { //수정버튼
+		Designer designer = new Designer();
+		
+		String id = designer.getdId();
+		String ps = designer.getdPassword();
+		String grade = designer.getdGrade();
+		String name = designer.getdName();
+		String tel = designer.getdTel();
+		String tel2 = designer.getdTel2();
+		String addr = designer.getdAddr();
+		String addr2 = designer.getdAddr2();
+		Date tfb =designer.getdBirth();
+		Date tfj =designer.getdJoin();		
+		String memo = designer.getdMemo();
+		
+		//텍스트필드에 보이게 뿌리기
+		tfdId.setText(id);
+		tfdPassword.setText(ps);
+		tfdGrade.setText(grade);
+		tfdName.setText(name);
+		tfdTel.setText(tel);
+		tfdTel2.setText(tel2);
+		tfdAddr.setText(addr);
+		tfdAddr2.setText(addr2);
+		
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");		
+		tfdBirth.setText(sd.format(tfb));
+		tfdJoin.setText(sd.format(tfj));		
+		tfdMemo.setText(memo);	
+		
+		//뿌리고 난다음 입력한 값으로 바껴야 함.
+		
+	}
+
+	
 
 	public void setParent(HairMainFrame hairMainFrame) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	
-	
+	public void setBtnText(String string) {
+		button.setText(string);
+	}
+
 	
 	
 }

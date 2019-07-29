@@ -391,6 +391,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 			btnProduct.setText("수정");
 
 		}
+		
 		///////////저 아직 하고 있어요,,,, 다영
 		if (e.getSource() == mntmPopWorkerDelete) { //디자이너 삭제
 			deleteDesigner(); 
@@ -400,7 +401,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 			System.out.println("등록버튼 눌렀네");
 					
 			if(DesignerFrame == null) {
-				DesignerFrameView(); //프레임보이기만 함
+				DesignerFrameView(); 
 				
 				
 			}else {
@@ -417,7 +418,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 			
 			int i = tableWorker.getSelectedRow();
 			Designer worker = workerList.get(i);
-			setWorkerTf(worker); //setWorkerTf get, set달기
+			setWorker(worker); 
 			
 
 		}
@@ -431,33 +432,41 @@ public class pProductMgn extends JPanel implements ActionListener {
 		System.out.println("등록프레임할꺼야");
 		DesignerFrame = new DesignerFrame();
 		DesignerFrame.setParent(HairMainFrame);
+		DesignerFrame.setBtnText("등록");
+		
+		
 		DesignerFrame.setVisible(true);
 		
-	}
-
-	private void setWorkerTf(Designer worker) {
-		System.out.println("set을 눌렀꾼");
 		
 	}
 
-	private void deleteDesigner() { //디자이너테이블에서 삭제 누르면
+	private void setWorker(Designer worker) { //수정프레임
+		System.out.println("set을 눌렀꾼");
+		DesignerFrame = new DesignerFrame();
+		DesignerFrame.setParent(HairMainFrame);
+		DesignerFrame.setBtnText("수정");
+		
+		DesignerFrame.setVisible(true);
+	}
+
+	private void deleteDesigner() { //디자이너 삭제
 		System.out.println("delete을 눌렀꾼");	
 		int result = JOptionPane.showConfirmDialog(null, "삭제 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
 
 		if (result == JOptionPane.CLOSED_OPTION) {
-			// 취소 선택
+			// 취소 
 
 		} else if (result == JOptionPane.YES_OPTION) {
-			// 예 선택
+			// 예
 			int i = tableWorker.getSelectedRow();
-			Designer designer = workerList.get(i); //workerList에서는 d_no를 받아오지 못함.
+			Designer designer = workerList.get(i);
 			System.out.println(designer);
 			System.out.println(wdao);
 			wdao.deleteDesigner(designer.getdNo());
 			clearList();
 			reloadData();
 		} else {
-			// 아니오 선택
+			// 아니오 
 		}
 		
 			
