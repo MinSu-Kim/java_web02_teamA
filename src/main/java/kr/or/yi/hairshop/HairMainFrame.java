@@ -7,7 +7,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,8 +17,6 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.yi.hairshop.dao.DesignerMapper;
-import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.ui.frame.LoginFrame;
 import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn;
@@ -33,7 +30,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	private static HairMainFrame mainFrame;
 	private static LoginFrame LoginFrame;
 	private static Designer Auth = null;
-	
+
 	private JPanel contentPane;
 	private pHomeSectionForm home;
 	private JButton btnLogin;
@@ -43,13 +40,14 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					//UIManager.setLookAndFeel ("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-					//UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-					//UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-					//UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-					//UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
-					//UIManager.setLookAndFeel("net.infonode.gui.laf.InfoNodeLookAndFeel");
+
+					// UIManager.setLookAndFeel
+					// ("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+					// UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+					// UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
+					// UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
+					// UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
+					// UIManager.setLookAndFeel("net.infonode.gui.laf.InfoNodeLookAndFeel");
 //					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");// LookAndFeel
 					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					// Windows 스타일 적용
@@ -99,7 +97,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 		btnLogin = new JButton("로그인");
 		btnLogin.addActionListener(this);
-		
+
 		lblLogin = new JLabel("");
 		LoginBtn.add(lblLogin);
 		lblLogin.setHorizontalAlignment(SwingConstants.LEFT);
@@ -111,8 +109,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		pMain.add(tabbedPane);
-		
-		
+
 		home = new pHomeSectionForm();
 		home.refresh(0);
 		tabbedPane.addTab("홈", null, home, "홈");
@@ -148,30 +145,26 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		}
 
 	}
-	
 
 	protected void actionPerformedBtnLogin(ActionEvent arg0) {
-		//로그인 버튼
-		if(LoginFrame == null) {
+		// 로그인 버튼
+		if (LoginFrame == null) {
 			LoginFrame = new LoginFrame();
 			LoginFrame.setParent(HairMainFrame.this);
 			LoginFrame.setVisible(true);
-		}else {
+		} else {
 			LoginFrame.clearAuth();
 			btnLogin.setText("로그인");
 			lblLogin.setText("");
 			LoginFrame.setVisible(true);
 		}
 	}
-	
 
 	public void Login(Designer designer) {
 		Auth = designer;
 		btnLogin.setText("로그아웃");
-		lblLogin.setText(Auth.getdName()+"님 반갑습니다");
-		
+		lblLogin.setText(Auth.getdName() + "님 반갑습니다");
+
 	}
-	
-	
-	
+
 }

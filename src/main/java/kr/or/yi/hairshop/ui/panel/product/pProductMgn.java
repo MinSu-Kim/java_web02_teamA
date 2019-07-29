@@ -359,7 +359,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 		if (e.getSource() == btnEvent) {
 			actionPerformedBtnEvent(e);
 		}
-
+		
+		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ event 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopEventAdd) {
 			clearEventTf();
 		}
@@ -369,11 +370,11 @@ public class pProductMgn extends JPanel implements ActionListener {
 			setEventTf(selectEvent);
 			btnEvent.setText("수정");
 		}
-
 		if (e.getSource() == mntmPopEventDelete) {
 			deleteEventUI();
 		}
-
+		
+		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ product 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopProductAdd) {
 			clearProductTf();
 		}
@@ -386,11 +387,11 @@ public class pProductMgn extends JPanel implements ActionListener {
 		if (e.getSource() == mntmPopProductDelete) {
 			deleteProductUI();
 		}
-
 		if (e.getSource() == mntmPopWorkerDelete) {
 			deleteDesigner();
 		}
-
+		
+		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ worker 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopWorkerAdd) { // 디자이너 등록
 			DesignerFrameView();
 		}
@@ -459,8 +460,9 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 	}
 
+	// product 등록 버튼
 	private void actionPerformedBtnProduct(ActionEvent e) {
-		if (tfProductName.getText() == null) {
+		if (tfProductName.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "모두 입력하세요");
 		} else {
 			if (btnProduct.getText().equals("수정")) {
@@ -489,31 +491,36 @@ public class pProductMgn extends JPanel implements ActionListener {
 		}
 	}
 
+	// event 등록 버튼
 	protected void actionPerformedBtnEvent(ActionEvent e) {
-		if (btnEvent.getText().equals("수정")) {
-			String eName = tfEventName.getText();
-			Date eStartDay = dcEventStartDate.getDate();
-			Date eEndDay = dcEventEndDate.getDate();
-			int eSale = (int) spEventSale.getValue();
+		if(tfEventName.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "모두 입력하세요");
+		}else {
+			if (btnEvent.getText().equals("수정")) {
+				String eName = tfEventName.getText();
+				Date eStartDay = dcEventStartDate.getDate();
+				Date eEndDay = dcEventEndDate.getDate();
+				int eSale = (int) spEventSale.getValue();
 
-			Event event = new Event(eName, eStartDay, eEndDay, eSale);
-			edao.updateByName(event);
-			btnEvent.setText("등록");
-			clearEventTf();
-			clearList();
-			reloadData();
+				Event event = new Event(eName, eStartDay, eEndDay, eSale);
+				edao.updateByName(event);
+				btnEvent.setText("등록");
+				clearEventTf();
+				clearList();
+				reloadData();
 
-		} else {
-			String eName = tfEventName.getText();
-			Date eStartDay = dcEventStartDate.getDate();
-			Date eEndDay = dcEventEndDate.getDate();
-			int eSale = (int) spEventSale.getValue();
+			} else {
+				String eName = tfEventName.getText();
+				Date eStartDay = dcEventStartDate.getDate();
+				Date eEndDay = dcEventEndDate.getDate();
+				int eSale = (int) spEventSale.getValue();
 
-			Event event = new Event(eName, eStartDay, eEndDay, eSale);
-			edao.insert(event);
-			clearEventTf();
-			clearList();
-			reloadData();
+				Event event = new Event(eName, eStartDay, eEndDay, eSale);
+				edao.insert(event);
+				clearEventTf();
+				clearList();
+				reloadData();
+			}
 		}
 	}
 
