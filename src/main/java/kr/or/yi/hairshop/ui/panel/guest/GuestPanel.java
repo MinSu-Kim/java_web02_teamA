@@ -26,6 +26,7 @@ import kr.or.yi.hairshop.dto.Level;
 
 @SuppressWarnings("serial")
 public class GuestPanel extends JPanel implements ActionListener {
+	private int gno;
 	private JTextField tfName;
 	private JTextField tfTel;
 	private JTextField tfEmail;
@@ -180,10 +181,12 @@ public class GuestPanel extends JPanel implements ActionListener {
 		if (e.getSource() == btnAdd) {
 			if(e.getActionCommand().equals("등록")) {
 				actionPerformedBtnAddJButton(e);
+			}else if(e.getActionCommand().equals("수정")){
+				updateGuest();
+				clear();
+				setBtn();
 			}
-			if(e.getActionCommand().equals("수정")) {
-				actionPerformedBtnUPJButton(e);
-			}
+			
 		}
 		
 	}
@@ -200,9 +203,9 @@ public class GuestPanel extends JPanel implements ActionListener {
 		} 
 	}
 	
-	private void updateGuest() {
+	protected void updateGuest() {
 		Guest modifyguest = new Guest();
-		int gno = modifyguest.getgNo();
+		
 		Level level = new Level(tfGrade.getText());
 		String name = tfName.getText();
 		String id = tfId.getText();
@@ -227,7 +230,6 @@ public class GuestPanel extends JPanel implements ActionListener {
 		modifyguest.setgMemo(memo);
 
 		dao.updateGuest(modifyguest);
-
 		parent.clearList();
 		parent.reloadData();
 
@@ -235,6 +237,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	private void MakeGuest() {
 		Guest guest = new Guest();
+		
 		Level level = new Level(tfGrade.getText());
 		String name = tfName.getText();
 		String id = tfId.getText();
@@ -258,21 +261,25 @@ public class GuestPanel extends JPanel implements ActionListener {
 		guest.setgMemo(memo);
 
 		dao.insertGuest(guest);
-
+		
 		parent.clearList();
 		parent.reloadData();
 	}
 
 	public void setBtn() {
-		if (btnAdd.getText() == "등록") {
-			btnAdd.setText("수정");
-		} else if(btnAdd.getText() == "수정"){
+		if (btnAdd.getText() == "수정") {
 			btnAdd.setText("등록");
+		} 
+	}
+	
+	public void setBtn2() {
+		if(btnAdd.getText() == "등록"){
+			btnAdd.setText("수정");
 		}
-
 	}
 
 	public void setGuestTf(Guest g) {
+		gno = g.getgNo();
 		tfGrade.setText(g.getgLGrade().getlGrade());
 		tfName.setText(g.getgName());
 		tfId.setText(g.getgId());

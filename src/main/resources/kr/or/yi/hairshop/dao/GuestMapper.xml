@@ -21,6 +21,7 @@
 		<result property="gJoin" column="g_join" />
 		<result property="gPoint" column="g_point" />
 		<result property="gMemo" column="g_memo" />
+		<result property="gSecession" column="g_secession"/>
 	</resultMap>
 
 

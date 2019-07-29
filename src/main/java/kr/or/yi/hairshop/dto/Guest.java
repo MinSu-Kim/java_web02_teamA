@@ -16,6 +16,7 @@ public class Guest {
 	private Date gJoin;
 	private int gPoint;
 	private String gMemo;
+	private boolean gSecession;
 	private List<WorkDialog> workDialogList;
 
 	public Guest() {
@@ -32,7 +33,8 @@ public class Guest {
 	}
 
 	public Guest(int gNo, String gId, String gPassword, Level gLGrade, String gName, String gTel, String gEmail,
-			Date gBirth, Date gJoin, int gPoint, String gMemo, List<WorkDialog> workDialogList) {
+			Date gBirth, Date gJoin, int gPoint, String gMemo, boolean gSecession, List<WorkDialog> workDialogList) {
+		super();
 		this.gNo = gNo;
 		this.gId = gId;
 		this.gPassword = gPassword;
@@ -44,6 +46,7 @@ public class Guest {
 		this.gJoin = gJoin;
 		this.gPoint = gPoint;
 		this.gMemo = gMemo;
+		this.gSecession = gSecession;
 		this.workDialogList = workDialogList;
 	}
 
@@ -141,6 +144,14 @@ public class Guest {
 
 	public void setWorkDialogList(List<WorkDialog> workDialogList) {
 		this.workDialogList = workDialogList;
+	}
+	
+	public boolean getgSecession() {
+		return gSecession;
+	}
+
+	public void setgSecession(boolean gSecession) {
+		this.gSecession = gSecession;
 	}
 
 	@Override

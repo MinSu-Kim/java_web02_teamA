@@ -1,6 +1,9 @@
 package kr.or.yi.hairshop.ui.panel.guest;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -17,15 +20,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import kr.or.yi.hairshop.HairMainFrame;
 import kr.or.yi.hairshop.dao.GuestMapper;
 import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.panel.pCalendar;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class pGuestMgn extends JPanel implements ActionListener {
@@ -112,12 +110,13 @@ public class pGuestMgn extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mntmAdd) {
 			pInfomation.clear();
+			pInfomation.setBtn();
 		}
 		if (e.getSource() == mntmUpdate) {
 			int i = table.getSelectedRow();
 			Guest selectGuest = gList.get(i);
 			pInfomation.setGuestTf(selectGuest);
-			pInfomation.setBtn();
+			pInfomation.setBtn2();
 			
 		}		
 		if (e.getSource() == mntmDelete) {
@@ -145,6 +144,8 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			//아니오 선택
 		}
 	}
+	
+	
 
 	private Object[][] getRows() {
 		Object[][] rows = new Object[gList.size()][];
