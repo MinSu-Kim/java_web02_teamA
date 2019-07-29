@@ -24,8 +24,11 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.hairshop.HairMainFrame;
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
+import kr.or.yi.hairshop.dao.WorkDialogMapper;
+import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.Product;
+import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.DesignerPanel;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
 import com.toedter.calendar.JCalendar;
@@ -34,6 +37,7 @@ import com.toedter.calendar.JDateChooser;
 @SuppressWarnings("serial")
 public class DesignerFrame extends JFrame implements ActionListener {
 	private DesignerMapper ds;
+	private WorkDialogMapper wdao=new WorkDialogMapperImpl();
 	private int dNo;
 	private JPanel contentPane;
 	private JTextField tfdName;
@@ -58,6 +62,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private JDateChooser dcdJoin;
 
 	private pProductMgn pProductMgn;
+	private DesignerPanel designerPanel;
 	 
 	
 	
@@ -200,11 +205,11 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		button.addActionListener(this);
 		panel_5.add(button);
 		
-		DesignerPanel panel_3 = new DesignerPanel();
-		panel_1.add(panel_3);
+		designerPanel = new DesignerPanel();
+		panel_1.add(designerPanel);
 		
-		panel_3.clearList();
-		panel_3.reloadData();
+		designerPanel.clearList();
+		designerPanel.reloadData();
 	
 		
 	}
@@ -270,19 +275,28 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	
 	}
 	
-	public void setText(Designer ds) {
-		dNo = ds.getdNo();
-		tfdId.setText(ds.getdId());
-		tfdPassword.setText(ds.getdPassword());
-		tfdGrade.setText(ds.getdGrade());
-		tfdName.setText(ds.getdName());
-		tfdTel.setText(ds.getdTel());
-		tfdTel2.setText(ds.getdTel2());
-		tfdAddr.setText(ds.getdAddr());
-		tfdAddr2.setText(ds.getdAddr2());
-		dcdBirth.setDate(ds.getdBirth());
-		dcdJoin.setDate(ds.getdJoin());
-		tfdMemo.setText(ds.getdMemo());
+	public void setText(Designer design) {
+		
+		
+		
+		dNo = design.getdNo();
+		
+		List<WorkDialog> workDialog=wdao.selectByfivejoinMap();
+		designerPanel.setWorkdialogList(workDialog);
+		designerPanel.reloadData();
+		
+		
+		tfdId.setText(design.getdId());
+		tfdPassword.setText(design.getdPassword());
+		tfdGrade.setText(design.getdGrade());
+		tfdName.setText(design.getdName());
+		tfdTel.setText(design.getdTel());
+		tfdTel2.setText(design.getdTel2());
+		tfdAddr.setText(design.getdAddr());
+		tfdAddr2.setText(design.getdAddr2());
+		dcdBirth.setDate(design.getdBirth());
+		dcdJoin.setDate(design.getdJoin());
+		tfdMemo.setText(design.getdMemo());
 		
 	}
 	
@@ -314,7 +328,6 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	
 
 	public void setParent(HairMainFrame hairMainFrame) {
-		// TODO Auto-generated method stub
 		
 	}
 

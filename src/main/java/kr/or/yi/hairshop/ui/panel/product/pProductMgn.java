@@ -401,7 +401,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 			Designer worker = workerList.get(i);
 //			System.out.println("============================================"+i);
 //			System.out.println("============================================"+worker.toString2());
-//		
+//			
 			DesignerFrame.setProductMgn(this);
 			DesignerFrame.setText(worker);
 			setWorker(worker);
@@ -410,14 +410,12 @@ public class pProductMgn extends JPanel implements ActionListener {
 	}
 
 	private void DesignerFrameView() { // 등록
-		DesignerFrame.setParent(HairMainFrame);
 		DesignerFrame.setBtnText("등록");
 		DesignerFrame.setProductMgn(this);
 		DesignerFrame.setVisible(true);
 	}
 
 	private void setWorker(Designer worker) { // 수정
-		DesignerFrame.setParent(HairMainFrame);
 		DesignerFrame.setBtnText("수정");
 		DesignerFrame.setVisible(true);
 	}
