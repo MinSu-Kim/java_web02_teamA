@@ -73,12 +73,20 @@ public class pHomeWorkProductTable extends AbstractPanelTable<Product> implement
 		
 	}
 	public List<Product> getProductList(){
-		return itemList;
+		for(Product p:itemList) {
+			System.out.println(p);
+		}
+		return this.itemList;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		itemList.remove(choiceRow);
 		parent.setPriceSub();
+		reloadData();
+	}
+	
+	public void clearProduct() {
+		itemList=new ArrayList<Product>();
 		reloadData();
 	}
 }

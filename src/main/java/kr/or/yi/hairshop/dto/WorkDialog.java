@@ -85,6 +85,7 @@ public class WorkDialog {
 	public void setwGNo(Guest wGNo) {
 		this.wGNo = wGNo;
 	}
+	
 
 	public List<Product> getProductList() {
 		return productList;
