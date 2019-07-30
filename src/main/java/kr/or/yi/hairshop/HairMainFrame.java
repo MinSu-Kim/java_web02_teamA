@@ -39,15 +39,20 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
-					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+					
+					//1. vip고객 - 고객의 이용횟수, 결제총액 / 막대 
+					//2. 디자이너 - 작업횟수, 결제 총액 / 전체(디자이너별%)
+					//3. 어떤작업이 제일많이 작업되었는지
+					//4. 총매출 / 막대그래프
+					
+					// UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 					// UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
 					// UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
 					// UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
 					// UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
 					// UIManager.setLookAndFeel("net.infonode.gui.laf.InfoNodeLookAndFeel");
 //					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");// LookAndFeel
-					//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+					// UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					// Windows 스타일 적용
 					mainFrame = new HairMainFrame();
 					mainFrame.setVisible(true);
@@ -127,20 +132,18 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		ProductMgn.clearList();
 		ProductMgn.reloadData();
 		tabbedPane.addTab("제품 관리", null, ProductMgn, null);
-		
-		//BrowserP pWeb = new BrowserP("웹");
-		//tabbedPane.addTab("웹", null, pWeb, null);
-		
-		
+
+		// BrowserP pWeb = new BrowserP("웹");
+		// tabbedPane.addTab("웹", null, pWeb, null);
+
 		JPanel SalesMgn = new JPanel();
 		tabbedPane.addTab("매출 관리", null, SalesMgn, null);
 
 		JPanel PurchaseMgn = new JPanel();
 		tabbedPane.addTab("매입 관리", null, PurchaseMgn, null);
-		
+
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("New tab", null, panel, null);
-
 
 	}
 
@@ -170,7 +173,6 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		Auth = designer;
 		btnLogin.setText("로그아웃");
 		lblLogin.setText(Auth.getdName() + "님 반갑습니다");
-
 	}
 
 }
