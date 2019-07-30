@@ -63,6 +63,8 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	private pHomeTfgNameTable panelTfgNameTable;
 	private JTextField tfgTel;
 	WorkDialogMapper wDao=new WorkDialogMapperImpl();
+	private JButton btnDelete;
+	private int wNo;
 	
 	public pHomeFooterDesigner() {
 
@@ -214,12 +216,17 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 
 		JPanel panel_5 = new JPanel();
 		panelBtn.add(panel_5, BorderLayout.SOUTH);
-		panel_5.setLayout(new GridLayout(0, 2, 0, 0));
+		panel_5.setLayout(new GridLayout(0, 3, 0, 0));
 
 		btnUpdate = new JButton("추가");
 		btnUpdate.addActionListener(this);
 		panel_5.add(btnUpdate);
 
+		btnDelete = new JButton("삭제");
+		btnUpdate.addActionListener(this);
+		panel_5.add(btnDelete);
+		btnDelete.setVisible(false);
+		
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		panel_5.add(btnCancel);
@@ -248,9 +255,10 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 
 	public void cearTf() {
-		gNo=0;
+		gNo = 0;
+		wNo = 0;
 		tfgTel.setEnabled(true);
-
+		btnDelete.setVisible(false);
 		tfgTel.setText("");
 		lblPriceList.setText("0");
 		lblProductList.setText("");
@@ -266,10 +274,16 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		repaint();
 	}
 
+	public WorkDialog getWorkDialog() {
+		WorkDialog work = new WorkDialog();
+		return work;
+	}
+	
 	public void setTfWork(WorkDialog workDialog) {
-		
+		wNo=workDialog.getwNo();
 		gNo=workDialog.getwGNo().getgNo();
 		btnUpdate.setText("수정");
+		btnDelete.setVisible(true);
 		tfgTel.setText(workDialog.getwGNo().getgTel());
 		tfgTel.setEditable(false);
 		cmbDesigner.setSelectedItem(new Designer(workDialog.getwDNo().getdNo()));
@@ -295,7 +309,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		else
 			jSpinwWorkTime.setModel(new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY));
 
-		setTfProductName(workDialog.getProductList());
 	}
 	public void setTfGuest(Guest guest) {
 		gNo = guest.getgNo();
@@ -306,18 +319,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		
 	}
 		
-
-	public void setTfProductName(List<Product> productList) {
-		String pName = "";
-		for (int i = 0; i < productList.size(); i++) {
-			if (i != productList.size() - 1) {
-				pName += productList.get(i).getpName() + ",";
-				continue;
-			}
-			pName += productList.get(i).getpName();
-		}
-//		tfpName.setText(pName);
-	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancel) {
@@ -332,20 +333,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		WorkDialog work = getTfWork();
-		
-		Designer designer=(Designer)cmbDesigner.getSelectedItem();
-		Guest guest = new Guest(gNo);
-		Event event = new Event(cmbEvent.getSelectedItem()+"");
-		
-		
-		work.setwReservTime((Date)jSpinwReserveTime.getValue());
-		work.setwWorkTime((Date)jSpinwWorkTime.getValue());
-		if(!tfpPrice.getText().equals(""))
-			work.setwPriceTotal(Integer.parseInt(tfpPrice.getText()));
-		work.setwDNo(designer);
-		work.setwGNo(guest);
-		work.setwEName(event);
+		WorkDialog work = getWork();
 		
 		List<Product> list=panelWorkProduct.getProductList();
 		int wNo=-1;
@@ -372,14 +360,30 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 				
 	}
 
-	private WorkDialog getTfWork() {
+	public WorkDialog getWork() {
 		WorkDialog work = new WorkDialog();
-
+		
+		Designer designer=(Designer)cmbDesigner.getSelectedItem();
+		Guest guest = new Guest(gNo);
+		Event event = new Event(cmbEvent.getSelectedItem()+"");
+		
+		
+		work.setwReservTime((Date)jSpinwReserveTime.getValue());
+		work.setwWorkTime((Date)jSpinwWorkTime.getValue());
+		if(!tfpPrice.getText().equals(""))
+			work.setwPriceTotal(Integer.parseInt(tfpPrice.getText()));
+		work.setwDNo(designer);
+		work.setwGNo(guest);
+		work.setwEName(event);
 		return work;
 	}
 
-	protected void actionPerformedBtnUpdate(ActionEvent e) {
+	
 
+	protected void actionPerformedBtnUpdate(ActionEvent e) {
+		WorkDialog work = new WorkDialog();
+		work.setwNo(wNo);
+//		wDao.updateWork();
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
