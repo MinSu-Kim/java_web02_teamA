@@ -10,25 +10,22 @@ import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import kr.or.yi.hairshop.dao.DesignerMapper;
-import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
-import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.WorkDialog;
+import kr.or.yi.hairshop.ui.frame.DesignerFrame;
 
 
 @SuppressWarnings("serial")
 public class DesignerPanel extends JPanel {
 	private JTable table;	
 	private List<WorkDialog> dList;
-	private DesignerMapper dao = new DesignerMapperImpl();
 	private WorkDialogMapper wdao = new WorkDialogMapperImpl();
+	
 	
 	public DesignerPanel() {
 		initComponents();
@@ -48,10 +45,11 @@ public class DesignerPanel extends JPanel {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		scrollPane.setSize(200, 200);	
+		
 	}
 	
-	public void clearList(int dNo) {
-		dList = wdao.selectByfivejoinMap(dNo);
+	public void clearList(List<WorkDialog> work) {
+		dList = work;
 	}
 
 	public void reloadData() {
@@ -93,8 +91,20 @@ public class DesignerPanel extends JPanel {
 		}
 	}
 
-
 	public void setWorkdialogList(List<WorkDialog> workDialog) {
+		System.out.println("여기오나?");
 		dList=workDialog;
 	}	
+	
+	public int getSum() {
+		int sum=0;
+		
+		for(int i=0; i<dList.size(); i++) {
+			System.out.println(dList.get(i).getwPriceTotal());
+			sum+=dList.get(i).getwPriceTotal();
+		}
+		System.out.println(sum);
+		return sum;
+	}
+
 }

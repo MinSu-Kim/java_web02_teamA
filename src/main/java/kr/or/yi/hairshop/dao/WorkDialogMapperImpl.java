@@ -111,4 +111,13 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 		}
 	}
 
+	@Override
+	public List<WorkDialog> selectTotalPriceByDesigner(int wDNo) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectTotalPriceByDesigner", wDNo);
+		}
+	}
+
+	
+
 }

@@ -6,8 +6,6 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -21,18 +19,18 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import com.toedter.calendar.JDateChooser;
+
 import kr.or.yi.hairshop.HairMainFrame;
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
-import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.DesignerPanel;
+import kr.or.yi.hairshop.panel.SumPanel;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class DesignerFrame extends JFrame implements ActionListener {
@@ -47,23 +45,16 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private JTextField tfdAddr2;
 	private JTextField tfdMemo;
 	private JButton button;
-	private DesignerMapper dsmapper;
-	private JTable tableDesigner;
-	private List<Designer> DesignList;
-	private JTextField textField;
 	private JTextField tfdGrade;
 	private JTextField tfdId;
 	private JTextField tfdPassword;
-	
 	private JPanel panel_4;
-
-	private List<Designer> workerList;
 	private JDateChooser dcdBirth;
 	private JDateChooser dcdJoin;
-
 	private pProductMgn pProductMgn;
 	private DesignerPanel designerPanel;
-	 
+	private SumPanel sumpanel;
+	
 	
 	
 	public static void main(String[] args) {
@@ -84,7 +75,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	
 		ds = new DesignerMapperImpl();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 640, 624);
+		setBounds(100, 100, 800, 624);
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -207,11 +198,22 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 		designerPanel = new DesignerPanel();
 		panel_1.add(designerPanel);
+		designerPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		designerPanel.clearList(dNo);
-		designerPanel.reloadData();
+		sumpanel= new SumPanel();
+		designerPanel.add(sumpanel);
+		
+//		List<WorkDialog> work = wdao.selectByfivejoinMap(dNo); 
+		System.out.println("22222");
+		System.out.println(dNo);
+//		designerPanel.clearList(work);
+		
+//		designerPanel.reloadData();
+		
+		
+//		sumpanel.clearList(wDNo);
+//		sumpanel.reloadData();
 	
-		
 	}
 
 		
@@ -278,13 +280,14 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	public void setText(Designer design) {
 		
 		
-		
 		dNo = design.getdNo();
 		
 		List<WorkDialog> workDialog=wdao.selectByfivejoinMap(dNo);
 		designerPanel.setWorkdialogList(workDialog);
 		designerPanel.reloadData();
-		
+		int sum=designerPanel.getSum();
+		sumpanel.setSum(sum);
+		sumpanel.setCount(workDialog.size());
 		
 		tfdId.setText(design.getdId());
 		tfdPassword.setText(design.getdPassword());

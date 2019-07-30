@@ -120,17 +120,18 @@
 	</select>
 	
 	<select id="selectByfivejoinMap" resultMap="resultWorkDialogfivejoin">
-		SELECT g_name, w_workTime, p_name, p_price
+		SELECT g_name, w_workTime, p_name, p_price, w_priceTotal
 		FROM workdialog w
-		left join designer d
+		join designer d
 		on w.w_d_no=d.d_no
-		left join choice c
+		join choice c
 		on w.w_no=c.c_w_no
-		left join product p
+		join product p
 		on c.c_p_name=p.p_name
-		left join guest g
+		join guest g
 		on w_g_no=g.g_no
 		where d_no=#{dNo}
+		and w_workTime is not null
 	</select>
 	
 	<select id="selectReservDetail" resultMap="reserveDetail">
@@ -188,6 +189,12 @@
 		DELETE FROM hairshop.workdialog
 		WHERE w_no=#{wNo};
 	</delete>
+	
+	<select id="selectTotalPriceByDesigner" parameterType="int" >
+		select sum(w_priceTotal)
+		from workdialog
+		where w_d_no=#{wDNo}
+	</select>
 	
 </mapper>
 

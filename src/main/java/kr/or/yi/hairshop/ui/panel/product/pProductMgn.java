@@ -405,10 +405,15 @@ public class pProductMgn extends JPanel implements ActionListener {
 			Designer worker = workerList.get(i);
 //			System.out.println("============================================"+i);
 //			System.out.println("============================================"+worker.toString2());
-//			
+			
 			DesignerFrame.setProductMgn(this);
+			
 			DesignerFrame.setText(worker);
 			setWorker(worker);
+			
+			//수정 눌렀을 때 총매출.올라와야함 
+			
+			
 		}
 
 	}
@@ -417,6 +422,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 		DesignerFrame.setBtnText("등록");
 		DesignerFrame.setProductMgn(this);
 		DesignerFrame.setVisible(true);
+		
+		
 	}
 
 	private void setWorker(Designer worker) { // 수정
