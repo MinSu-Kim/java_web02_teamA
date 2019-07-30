@@ -58,7 +58,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 	private pHomeSectionBlock[] panelList= new pHomeSectionBlock[5];
 	private JButton btnLeft;
 	private JButton btnRight;
-	int start=0;
+	public int start=0;
 	
 	private JPopupMenu popupMenuTime=new JPopupMenu();
 	
@@ -219,6 +219,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		panelFooter.add(panel_4, BorderLayout.NORTH);
 		
 		panelFooterTf = new pHomeFooterDesigner();
+		panelFooterTf.setParent(this);
 		eDao = new EventMapperImpl();
 		dDao = new DesignerMapperImpl();
 		pDao = new ProductMapperImpl();

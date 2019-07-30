@@ -173,6 +173,22 @@
 		(c_w_no, c_p_name)
 		VALUES(#{wNo}, #{pName});
 	</insert>
+	
+	<delete id="deleteChoice">
+		DELETE FROM hairshop.choice
+		WHERE c_w_no=#{wNo}
+	</delete>
+	<update id="updateWorkDialog">
+		UPDATE hairshop.workdialog
+		SET w_workTime=#{wWorkTime}, w_reservTime=#{wReserveTime}, w_priceTotal=#{wPriceTotal}, w_e_name=#{wEName.eName}, w_d_no=#{wDNo.dNo}, w_g_no=#{wGNo.gNo}
+		WHERE w_no=#{wNo};
+	</update>
+	
+	<delete id="deleteWorkDialog">
+		DELETE FROM hairshop.workdialog
+		WHERE w_no=#{wNo};
+	</delete>
+	
 </mapper>
 
 

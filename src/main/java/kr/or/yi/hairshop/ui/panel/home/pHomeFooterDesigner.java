@@ -29,6 +29,8 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import kr.or.yi.hairshop.dao.DesignerMapper;
+import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dao.GuestMapper;
 import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
@@ -54,17 +56,27 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	private DefaultComboBoxModel<Designer> cmbDesignerModel;
 
 	List<JButton> btnList = new ArrayList<JButton>();
+	//테이블 패널들
 	private pHomeProductTable panelProduct;
 	private pHomeWorkProductTable panelWorkProduct;
+	private pHomeTfgNameTable panelTfgNameTable;
+	
 	private List<Product> workProductList;
 	private JLabel lblPriceList;
 	private JLabel lblProductList;
 	private int gNo;
-	private pHomeTfgNameTable panelTfgNameTable;
+	
 	private JTextField tfgTel;
 	WorkDialogMapper wDao=new WorkDialogMapperImpl();
 	private JButton btnDelete;
 	private int wNo;
+	
+	private pHomeSectionForm parent;
+	
+	
+	public void setParent(pHomeSectionForm parent) {
+		this.parent=parent;
+	}
 	
 	public pHomeFooterDesigner() {
 
@@ -223,6 +235,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		panel_5.add(btnUpdate);
 
 		btnDelete = new JButton("삭제");
+		btnDelete.addActionListener(this);
 		btnUpdate.addActionListener(this);
 		panel_5.add(btnDelete);
 		btnDelete.setVisible(false);
@@ -255,8 +268,8 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 
 	public void cearTf() {
-		gNo = 0;
-		wNo = 0;
+		gNo = -1;
+		wNo = -1;
 		tfgTel.setEnabled(true);
 		btnDelete.setVisible(false);
 		tfgTel.setText("");
@@ -321,6 +334,9 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnDelete) {
+			actionPerformedBtnDelete(e);
+		}
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}
@@ -331,35 +347,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 				actionPerformedBtnUpdate(e);
 		}
 	}
-
-	protected void actionPerformedBtnAdd(ActionEvent e) {
-		WorkDialog work = getWork();
-		
-		List<Product> list=panelWorkProduct.getProductList();
-		int wNo=-1;
-		if(list.size()>0)
-			wNo=wDao.insertWorkDialogResWNo(work);
-		else {
-			JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
-		}
-		if(wNo>0)
-			for(int i=0; i<list.size(); i++) {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("wNo",wNo+"");
-				map.put("pName", list.get(i).getpName());
-				wDao.insertChoice(map);
-				JOptionPane.showMessageDialog(null, "예약 성공");
-			}
-		else {
-			JOptionPane.showMessageDialog(null, "예약 실패");
-		}
-		
-		
-		
-		
-				
-	}
-
 	public WorkDialog getWork() {
 		WorkDialog work = new WorkDialog();
 		
@@ -377,13 +364,47 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		work.setwEName(event);
 		return work;
 	}
-
+	
+	protected void actionPerformedBtnAdd(ActionEvent e) {
+		WorkDialog work = getWork();
+		
+		List<Product> list=panelWorkProduct.getProductList();
+		int result=-1;
+		if(list.size()>0)
+			result=wDao.insertWorkDialogResWNo(work);
+		else {
+			JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
+		}
+		if(wNo>0)
+			for(int i=0; i<list.size(); i++) {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("wNo",result+"");
+				map.put("pName", list.get(i).getpName());
+				wDao.insertChoice(map);
+			}
+		else {
+			JOptionPane.showMessageDialog(null, "예약 실패");
+		}
+		parent.refresh(parent.start);
+	}
 	
 
 	protected void actionPerformedBtnUpdate(ActionEvent e) {
-		WorkDialog work = new WorkDialog();
+		WorkDialog work = getWork();
+		System.out.println(wNo);
 		work.setwNo(wNo);
-//		wDao.updateWork();
+		List<Product> list=panelWorkProduct.getProductList();
+		
+		wDao.deleteChoice(wNo);
+		for(int i=0; i<list.size(); i++) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("wNo",wNo+"");
+			map.put("pName", list.get(i).getpName());
+			wDao.insertChoice(map);
+		}
+		wDao.updateWorkDialog(work);
+		
+		parent.refresh(parent.start);
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
@@ -437,5 +458,10 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		panelTfgNameTable.setItemList(gList);
 		if(gList!=null)
 			panelTfgNameTable.reloadData();
+	}
+	protected void actionPerformedBtnDelete(ActionEvent e) {
+		int res1=wDao.deleteChoice(wNo);
+		int res2=wDao.deleteWorkDialog(wNo);
+		parent.refresh(parent.start);
 	}
 }

@@ -84,4 +84,31 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 		}
 	}
 
+	@Override
+	public int deleteChoice(int wNo) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".deleteChoice", wNo);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int updateWorkDialog(WorkDialog workDialog) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateWorkDialog", workDialog);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int deleteWorkDialog(int wNo) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".deleteWorkDialog", wNo);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
 }

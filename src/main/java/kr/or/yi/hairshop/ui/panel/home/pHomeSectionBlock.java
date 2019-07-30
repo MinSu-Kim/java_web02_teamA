@@ -119,6 +119,7 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 
 	public void mouseExited(MouseEvent e) {
 		jtable.clearSelection();
+		
 	}
 
 	public void mousePressed(MouseEvent e) {
