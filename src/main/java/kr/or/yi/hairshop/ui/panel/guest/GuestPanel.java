@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -61,13 +62,16 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private JComboBox<Level> cbGrade;
 	private List<Level> lList;
 	private Level level;
-	private JTextField textField;
+	private JTextField tfGrade;
 	private JTable table;
 	
-	private JPopupMenu popupMenu;
-	private JMenuItem mntmUpdate;
-	private JMenuItem mntmDelete;
-	private JMenuItem mntmAdd;
+	private JPopupMenu popupMenu2;
+	private JMenuItem mntmUpdate2;
+	private JMenuItem mntmDelete2;
+	private JMenuItem mntmAdd2;
+	private JSpinner spSale;
+	private JButton btnAdd2;
+	private JButton btnCancel2;
 
 	public void setParent(pGuestMgn pGuestMgn) {
 		this.parent = pGuestMgn;
@@ -201,22 +205,24 @@ public class GuestPanel extends JPanel implements ActionListener {
 		lblGrade.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_7.add(lblGrade);
 
-		textField = new JTextField();
-		panel_7.add(textField);
-		textField.setColumns(10);
+		tfGrade = new JTextField();
+		panel_7.add(tfGrade);
+		tfGrade.setColumns(10);
 		
 		JLabel lblSale = new JLabel("할인율");
 		lblSale.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_7.add(lblSale);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(100)));
-		panel_7.add(spinner);
+		spSale = new JSpinner();
+		spSale.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(100)));
+		panel_7.add(spSale);
 
-		JButton btnAdd2 = new JButton("등록");
+		btnAdd2 = new JButton("등록");
+		btnAdd2.addActionListener(this);
 		panel_7.add(btnAdd2);
 
-		JButton btnCancel2 = new JButton("취소");
+		btnCancel2 = new JButton("취소");
+		btnCancel2.addActionListener(this);
 		panel_7.add(btnCancel2);
 
 		JLabel lblNewLabel_3 = new JLabel("");
@@ -260,26 +266,73 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_4.add(lblNewLabel);
 		
 		
-		popupMenu = new JPopupMenu();
+		popupMenu2 = new JPopupMenu();
 		
-		mntmAdd = new JMenuItem("등록");
-		mntmAdd.addActionListener(this);
-		popupMenu.add(mntmAdd);
+		mntmAdd2 = new JMenuItem("등록");
+		mntmAdd2.addActionListener(this);
+		popupMenu2.add(mntmAdd2);
 		
-		mntmUpdate = new JMenuItem("수정");
-		mntmUpdate.addActionListener(this);
-		popupMenu.add(mntmUpdate);
+		mntmUpdate2 = new JMenuItem("수정");
+		mntmUpdate2.addActionListener(this);
+		popupMenu2.add(mntmUpdate2);
 		
-		mntmDelete = new JMenuItem("삭제");
-		mntmDelete.addActionListener(this);
-		popupMenu.add(mntmDelete);
+		mntmDelete2 = new JMenuItem("삭제");
+		mntmDelete2.addActionListener(this);
+		popupMenu2.add(mntmDelete2);
 		
-		table.setComponentPopupMenu(popupMenu);
-		scrollPane.setComponentPopupMenu(popupMenu);
+		table.setComponentPopupMenu(popupMenu2);
+		scrollPane.setComponentPopupMenu(popupMenu2);
 		
+	}
+	public void actionPerformed2(ActionEvent e) {
+		if (e.getSource() == mntmAdd2) {
+			clear2();
+			setBtn3();
+		}
+		if (e.getSource() == mntmUpdate2) {
+			int i = table.getSelectedRow();
+			Level selectlevel = lList.get(i);
+			setLevelTf(selectlevel);
+			setBtn4();
+			
+		}		
+		if (e.getSource() == mntmDelete2) {
+			deleteLevelUI();
+		}		
+	}
+
+	private void deleteLevelUI() {
+		int res = JOptionPane.showConfirmDialog(null, "삭제하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
+		
+		if(res == JOptionPane.CLOSED_OPTION) {
+			
+		}else if (res == JOptionPane.YES_OPTION) {
+			int i = table.getSelectedRow();
+			Level selectLevel = lList.get(i);
+			ldao.deleteLevel(selectLevel.getlGrade());
+			clear2();
+			clearLevelList();
+			reloadLevelData();
+		}else {
+			
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel2) {
+			actionPerformedBtnCancel2JButton(e);
+		}
+		if (e.getSource() == btnAdd2) {
+			if(e.getActionCommand().equals("등록")) {
+				actionPerformedBtnAdd2JButton(e);
+				clear2();
+			}else if (e.getActionCommand().equals("수정")) {
+				updateLevel();
+				clear2();
+				setBtn3();
+			}
+			
+		}
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancelJButton(e);
 		}
@@ -306,6 +359,17 @@ public class GuestPanel extends JPanel implements ActionListener {
 	protected void actionPerformedBtnUPJButton(ActionEvent e) {
 		if (btnAdd.getText() == "수정") {
 			updateGuest();
+		}
+	}
+	
+	protected void actionPerformedBtnAdd2JButton(ActionEvent e) {
+		if (btnAdd2.getText() == "등록") {
+			MakeLevel();
+		}
+	}
+	protected void actionPerformedBtnUP2JButton(ActionEvent e) {
+		if (btnAdd2.getText() == "수정") {
+			updateLevel();
 		}
 	}
 
@@ -338,7 +402,20 @@ public class GuestPanel extends JPanel implements ActionListener {
 		dao.updateGuest(modifyguest);
 		parent.clearList();
 		parent.reloadData();
-
+	}
+	
+	protected void updateLevel() {
+		Level lv = new Level();
+		
+		String grade = tfGrade.getText();
+		int sale = (int) spSale.getValue();
+		
+		lv.setlGrade(grade);
+		lv.setlSale(sale);
+		
+		ldao.updateLevel(lv);
+		clearLevelList();
+		reloadLevelData();
 	}
 
 	private void MakeGuest() {
@@ -370,6 +447,20 @@ public class GuestPanel extends JPanel implements ActionListener {
 		parent.clearList();
 		parent.reloadData();
 	}
+	
+	private void MakeLevel() {
+		Level lv = new Level();
+		
+		String grade = tfGrade.getText();
+		int sale = (int) spSale.getValue();
+		
+		lv.setlGrade(grade);
+		lv.setlSale(sale);
+		
+		ldao.insertLevel(lv);
+		clearLevelList();
+		reloadLevelData();
+	}
 
 	public void setBtn() {
 		if (btnAdd.getText() == "수정") {
@@ -380,6 +471,18 @@ public class GuestPanel extends JPanel implements ActionListener {
 	public void setBtn2() {
 		if (btnAdd.getText() == "등록") {
 			btnAdd.setText("수정");
+		}
+	}
+	
+	public void setBtn3() {
+		if (btnAdd2.getText() == "수정") {
+			btnAdd2.setText("등록");
+		}
+	}
+
+	public void setBtn4() {
+		if (btnAdd2.getText() == "등록") {
+			btnAdd2.setText("수정");
 		}
 	}
 
@@ -395,9 +498,13 @@ public class GuestPanel extends JPanel implements ActionListener {
 		dcJoin.setDate(g.getgJoin());
 		spPoint.setValue(g.getgPoint());
 		tfMemo.setText(g.getgMemo());
-
 	}
 
+	public void setLevelTf(Level lv) {
+		tfGrade.setText(lv.getlGrade());
+		spSale.setValue(lv.getlSale());
+	}
+	
 	public void clear() {
 		cbGrade.setSelectedIndex(1);
 		tfName.setText("");
@@ -411,10 +518,20 @@ public class GuestPanel extends JPanel implements ActionListener {
 		tfMemo.setText("");
 
 	}
+	
+	public void clear2() {
+		tfGrade.setText("");
+		spSale.setValue(0);
+	}
 
 	protected void actionPerformedBtnCancelJButton(ActionEvent e) {
 		clear();
 		setBtn();
+	}
+	
+	protected void actionPerformedBtnCancel2JButton(ActionEvent e) {
+		clear2();
+		setBtn3();
 	}
 
 	public void setGuestList(List<Level> level) {
@@ -472,4 +589,6 @@ public class GuestPanel extends JPanel implements ActionListener {
 				cModel.getColumn(i).setPreferredWidth(width[i]);
 			}
 		}
+	
+	
 }

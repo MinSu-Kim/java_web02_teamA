@@ -16,5 +16,32 @@ public class LevelMapperImpl implements LevelMapper {
 			return sqlSession.selectList(namespace + ".selectLevelByAll");
 		}
 	}
+
+	@Override
+	public int insertLevel(Level level) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.insert(namespace + ".insertLevel", level);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int updateLevel(Level level) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateLevel", level);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public void deleteLevel(String name) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".deleteLevel", name);
+			sqlSession.commit();
+			return;
+		}
+	}
 	
 }
