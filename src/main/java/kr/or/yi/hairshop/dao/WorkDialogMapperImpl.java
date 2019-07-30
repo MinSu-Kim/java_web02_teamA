@@ -67,18 +67,18 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	}
 
 	@Override
-	public int insertWorkDialog(WorkDialog workDialog) {
+	public int insertWorkDialogResWNo(WorkDialog workDialog) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			int res = sqlSession.insert(namespace + ".insertWorkDialog", workDialog);
+			sqlSession.insert(namespace + ".insertWorkDialogResWNo", workDialog);
 			sqlSession.commit();
-			return res;
+			return workDialog.getwNo();
 		}
 	}
 
 	@Override
-	public int insertChoice(String pName) {
+	public int insertChoice(Map<String, String> map) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			int res = sqlSession.insert(namespace + ".insertChoice", pName);
+			int res = sqlSession.insert(namespace + ".insertChoice", map);
 			sqlSession.commit();
 			return res;
 		}

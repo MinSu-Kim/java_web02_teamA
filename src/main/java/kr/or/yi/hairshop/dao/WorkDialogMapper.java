@@ -17,6 +17,6 @@ public interface WorkDialogMapper {
 	
 	public List<WorkDialog> selectReservDetailByDate(Map<String, String> map);
 	
-	public int insertWorkDialog(WorkDialog workDialog);
-	public int insertChoice(String pName);
+	public int insertWorkDialogResWNo(WorkDialog workDialog);
+	public int insertChoice(Map<String, String> map);
 }

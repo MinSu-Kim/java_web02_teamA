@@ -346,15 +346,27 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		work.setwDNo(designer);
 		work.setwGNo(guest);
 		work.setwEName(event);
-		String test = "파마";
 		
-		int result=wDao.insertWorkDialog(work);
-		int result2=0;
+		List<Product> list=panelWorkProduct.getProductList();
+		int wNo=-1;
+		if(list.size()>0)
+			wNo=wDao.insertWorkDialogResWNo(work);
+		else {
+			JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
+		}
+		if(wNo>0)
+			for(int i=0; i<list.size(); i++) {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("wNo",wNo+"");
+				map.put("pName", list.get(i).getpName());
+				wDao.insertChoice(map);
+				JOptionPane.showMessageDialog(null, "예약 성공");
+			}
+		else {
+			JOptionPane.showMessageDialog(null, "예약 실패");
+		}
 		
-		if(result==1)
-			result2=wDao.insertChoice(test);
-		System.out.println(result2);
-		JOptionPane.showMessageDialog(null, "dd");
+		
 		
 		
 				
