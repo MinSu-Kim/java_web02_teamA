@@ -22,9 +22,8 @@
 	
 	<update id="updateByName">
 		update product
-		set p_price=#{pPrice}, p_division=#{pDivision}
+		set p_name=#{pName}, p_price=#{pPrice}, p_division=#{pDivision}
 		where p_name=#{pName}
-		
 	</update>
 	
 	<delete id="deleteByName">

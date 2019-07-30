@@ -69,7 +69,7 @@ public class Browser {
 
 		// set the url
 		try {
-			url = new URL("https://blog.naver.com/chahong1");
+			url = new URL("http://www.chahongardor.com/?page_id=294");
 		} catch (MalformedURLException mue) {
 			JOptionPane.showMessageDialog(null, mue);
 		}

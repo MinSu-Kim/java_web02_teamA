@@ -50,12 +50,10 @@
 
 	<update id="updateGuest">
 		UPDATE hairshop.guest
-		SET g_id=#{gId},
-		g_password=#{gPassword}, g_l_grade=#{gLGrade.lGrade}, g_name=#{gName},
-		g_tel=#{gTel},
-		g_email=#{gEmail}, g_birth=#{gBirth}, g_join=#{gJoin},
+		SET g_id=#{gId}, g_password=#{gPassword}, g_l_grade=#{gLGrade.lGrade}, g_name=#{gName},
+		g_tel=#{gTel}, g_email=#{gEmail}, g_birth=#{gBirth}, g_join=#{gJoin},
 		g_point=#{gPoint}, g_memo=#{gMemo}
-		WHERE g_no=#{gNo};
+		where g_no=#{gNo};
 	</update>
 
 	<delete id="deleteGuest">
