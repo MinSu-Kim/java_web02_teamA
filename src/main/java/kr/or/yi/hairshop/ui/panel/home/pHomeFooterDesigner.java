@@ -267,7 +267,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		panelProduct.reloadData();
 	}
 
-	public void cearTf() {
+	public void clearTf() {
 		gNo = -1;
 		wNo = -1;
 		tfgTel.setEnabled(true);
@@ -385,6 +385,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		else {
 			JOptionPane.showMessageDialog(null, "예약 실패");
 		}
+		clearTf();
 		parent.refresh(parent.start);
 	}
 	
@@ -403,12 +404,12 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 			wDao.insertChoice(map);
 		}
 		wDao.updateWorkDialog(work);
-		
+		clearTf();
 		parent.refresh(parent.start);
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
-		cearTf();
+		clearTf();
 	}
 
 	protected void itemStateChangedCmbProduct(ItemEvent e) {
