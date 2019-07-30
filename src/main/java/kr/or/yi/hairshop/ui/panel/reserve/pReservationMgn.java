@@ -152,8 +152,8 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		mntmDelete.addActionListener(this);
 		popupMenu.add(mntmDelete);
 		
-		table.setComponentPopupMenu(popupMenu);
-		scrollPane.setComponentPopupMenu(popupMenu);
+//		table.setComponentPopupMenu(popupMenu);
+//		scrollPane.setComponentPopupMenu(popupMenu);
 	}
 	
 	public void clearList() {
@@ -219,7 +219,6 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		
 		String sDay = date.format(calStart.getDate());
 		String eDay = date.format(calEnd.getDate());
-		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", sDay);
 		map.put("end", eDay);

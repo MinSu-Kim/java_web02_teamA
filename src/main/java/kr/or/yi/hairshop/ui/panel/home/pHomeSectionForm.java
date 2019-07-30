@@ -3,6 +3,8 @@ package kr.or.yi.hairshop.ui.panel.home;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,13 +41,17 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import com.toedter.calendar.JCalendar;
+
 import java.awt.FlowLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 @SuppressWarnings("serial")
-public class pHomeSectionForm extends JPanel implements ActionListener {
+public class pHomeSectionForm extends JPanel implements ActionListener, PropertyChangeListener {
 	private List<Designer> dList=new ArrayList<Designer>();
 	private WorkDialogMapper wdao=new WorkDialogMapperImpl();
 	private List<WorkDialog> wList=new ArrayList<WorkDialog>();
@@ -80,6 +86,9 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 	private ProductMapper pDao;
 	private DesignerMapper dDao;
 	private EventMapper eDao;
+	private JCalendar calendar;
+	private DesignerMapper d_Dao= new DesignerMapperImpl();
+	private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");;
 	
 	
 	public pHomeSectionForm() {
@@ -93,8 +102,14 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 		add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		pCalendar panel_1 = new pCalendar();
-		panel.add(panel_1, BorderLayout.NORTH);
+		calendar = new JCalendar();
+		
+		
+		String today = sf.format(calendar.getDate());
+		dList = d_Dao.selectDesignerByAll();
+		calendar.getDayChooser().addPropertyChangeListener(this);
+		
+		panel.add(calendar, BorderLayout.NORTH);
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
@@ -233,7 +248,10 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 			if(dList.size()>i+start) {
 				panelList[i].setParent(this);
 				panelList[i].setDisigner(dList.get(i+start));
-				wList=wdao.selectWDGECPjoinByWDNo(dList.get(i+start).getdNo());
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("wDNo",dList.get(i+start).getdNo()+"");
+				map.put("date",sf.format(calendar.getDate()));
+				wList=wdao.selectWDGECPjoinByWDNoDate(map);
 				panelList[i].clearTable();
 				panelList[i].setTable(wList);
 				
@@ -289,4 +307,12 @@ public class pHomeSectionForm extends JPanel implements ActionListener {
 	
 	
 	
+	public void propertyChange(PropertyChangeEvent evt) {
+		if (evt.getSource() == calendar.getDayChooser()) {
+			propertyChangeCalendarDayChooser(evt);
+		}
+	}
+	protected void propertyChangeCalendarDayChooser(PropertyChangeEvent evt) {
+		refresh(start);
+	}
 }

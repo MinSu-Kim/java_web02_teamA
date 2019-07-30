@@ -62,7 +62,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private ProductMapper pdao = new ProductMapperImpl();
 	private EventMapper edao = new EventMapperImpl();
 	private DesignerMapper wdao = new DesignerMapperImpl();
-	
+
 	private JPanel panel;
 	private JPanel Section;
 	private pCalendar pCalandar;
@@ -117,9 +117,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private JMenuItem mntmPopWorkerDelete;
 	private DesignerFrame DesignerFrame;
 	private HairMainFrame HairMainFrame;
-	
-	
-	
+
 	public pProductMgn() {
 		DesignerFrame = new DesignerFrame();
 		initComponents();
@@ -161,14 +159,14 @@ public class pProductMgn extends JPanel implements ActionListener {
 		lblEventStartDate = new JLabel("시작일");
 		lblEventStartDate.setHorizontalAlignment(SwingConstants.CENTER);
 		pEventTF.add(lblEventStartDate);
-		
+
 		dcEventStartDate = new JDateChooser();
 		pEventTF.add(dcEventStartDate);
 
 		lblEventEndDate = new JLabel("종료일");
 		lblEventEndDate.setHorizontalAlignment(SwingConstants.CENTER);
 		pEventTF.add(lblEventEndDate);
-		
+
 		dcEventEndDate = new JDateChooser();
 		pEventTF.add(dcEventEndDate);
 
@@ -262,7 +260,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 		lblNewLabel_5 = new JLabel("");
 		panel_5.add(lblNewLabel_5);
 
-		pWorker = new JPanel(); //디자이너 
+		pWorker = new JPanel(); // 디자이너
 		Section.add(pWorker);
 		pWorker.setBorder(new TitledBorder(null, "디자이너 관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pWorker.setLayout(new BorderLayout(0, 0));
@@ -285,7 +283,6 @@ public class pProductMgn extends JPanel implements ActionListener {
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
 		panel_4.add(lblNewLabel);
-		
 
 		popupMenuEventInit(scrollPaneEvent);
 		popupMenuProductInit(scrollPaneProduct);
@@ -331,8 +328,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 		tableEvent.setComponentPopupMenu(popupMenuEvent);
 		scrollPaneEvent.setComponentPopupMenu(popupMenuEvent);
 	}
-	
-	public void popupMenuWorkerInit(JScrollPane scrollPaneWorker) { 
+
+	public void popupMenuWorkerInit(JScrollPane scrollPaneWorker) {
 		popupMenuWorker = new JPopupMenu();
 
 		mntmPopWorkerAdd = new JMenuItem("등록");
@@ -350,7 +347,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 		tableWorker.setComponentPopupMenu(popupMenuWorker);
 		scrollPaneWorker.setComponentPopupMenu(popupMenuWorker);
 	}
-	
+
 	public void setParent(HairMainFrame HairMainFrame) {
 		this.parent = HairMainFrame;
 	}
@@ -362,68 +359,63 @@ public class pProductMgn extends JPanel implements ActionListener {
 		if (e.getSource() == btnEvent) {
 			actionPerformedBtnEvent(e);
 		}
-
+		
+		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ event 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopEventAdd) {
 			clearEventTf();
 		}
 		if (e.getSource() == mntmPopEventUpdate) {
-
 			int i = tableEvent.getSelectedRow();
 			Event selectEvent = eventList.get(i);
 			setEventTf(selectEvent);
 			btnEvent.setText("수정");
 		}
-		
 		if (e.getSource() == mntmPopEventDelete) {
 			deleteEventUI();
 		}
-
+		
+		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ product 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopProductAdd) {
 			clearProductTf();
 		}
 		if (e.getSource() == mntmPopProductUpdate) {
-
 			int i = tableProduct.getSelectedRow();
 			Product selectProduct = proList.get(i);
 			setProductTf(selectProduct);
 			btnProduct.setText("수정");
-
 		}
-		
-	
+		if (e.getSource() == mntmPopProductDelete) {
+			deleteProductUI();
+		}
 		if (e.getSource() == mntmPopWorkerDelete) {
-			deleteDesigner(); 
+			deleteDesigner();
 		}
 		
-		if (e.getSource() == mntmPopWorkerAdd) { //디자이너 등록					
-			DesignerFrameView(); 			
-			
+		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ worker 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
+		if (e.getSource() == mntmPopWorkerAdd) { // 디자이너 등록
+			DesignerFrameView();
 		}
-		
-		if (e.getSource() == mntmPopWorkerUpdate) { //디자이너 수정
-			
+
+		if (e.getSource() == mntmPopWorkerUpdate) { // 디자이너 수정
 			int i = tableWorker.getSelectedRow();
 			Designer worker = workerList.get(i);
 //			System.out.println("============================================"+i);
 //			System.out.println("============================================"+worker.toString2());
-//		
+//			
 			DesignerFrame.setProductMgn(this);
 			DesignerFrame.setText(worker);
 			setWorker(worker);
-		}	
-	
-		
+		}
+
 	}
 
-	private void DesignerFrameView() { //등록
-		DesignerFrame.setParent(HairMainFrame);
+	private void DesignerFrameView() { // 등록
 		DesignerFrame.setBtnText("등록");
 		DesignerFrame.setProductMgn(this);
 		DesignerFrame.setVisible(true);
 	}
 
-	private void setWorker(Designer worker) { //수정
-		DesignerFrame.setParent(HairMainFrame);
+	private void setWorker(Designer worker) { // 수정
 		DesignerFrame.setBtnText("수정");
 		DesignerFrame.setVisible(true);
 	}
@@ -432,7 +424,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 		int result = JOptionPane.showConfirmDialog(null, "삭제 하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
 
 		if (result == JOptionPane.CLOSED_OPTION) {
-			// 취소 
+			// 취소
 		} else if (result == JOptionPane.YES_OPTION) {
 			// 예
 			int i = tableWorker.getSelectedRow();
@@ -443,7 +435,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 			clearList();
 			reloadData();
 		} else {
-			// 아니오 
+			// 아니오
 		}
 	}
 
@@ -452,39 +444,39 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 		if (result == JOptionPane.CLOSED_OPTION) {
 
-		} else if (result == JOptionPane.YES_OPTION) {// 예 
-			
+		} else if (result == JOptionPane.YES_OPTION) {// 예
+
 			int i = tableProduct.getSelectedRow();
 			Product selectProduct = proList.get(i);
 			pdao.deleteByName(selectProduct.getpName());
 			clearEventTf();
 			clearList();
 			reloadData();
-		} else {	// 아니오 
-		
+		} else { // 아니오
+
 		}
 
 	}
 
+	// product 등록 버튼
 	private void actionPerformedBtnProduct(ActionEvent e) {
-		if (btnProduct.getText().equals("수정")) {
-
-			String pName = tfProductName.getText();
-			int pPrice = (int) spProductPrice.getValue();
-			String pDivision = tfDivision.getText();
-
-			Product pro = new Product(pPrice, pName, pDivision);
-
-			pdao.updateByName(pro);
-
-			btnProduct.setText("등록");
-			clearProductTf();
-			clearList();
-			reloadData();
-
+		if (tfProductName.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "모두 입력하세요");
 		} else {
+			if (btnProduct.getText().equals("수정")) {
+				String pName = tfProductName.getText();
+				int pPrice = (int) spProductPrice.getValue();
+				String pDivision = tfDivision.getText();
 
-			if (tfProductName.getText() != null) {
+				Product pro = new Product(pPrice, pName, pDivision);
+
+				pdao.updateByName(pro);
+
+				btnProduct.setText("등록");
+				clearProductTf();
+				clearList();
+				reloadData();
+			} else {
 				String pName = tfProductName.getText();
 				int pPrice = (int) spProductPrice.getValue();
 				String pDivision = tfDivision.getText();
@@ -494,36 +486,39 @@ public class pProductMgn extends JPanel implements ActionListener {
 				clearList();
 				reloadData();
 			}
-			JOptionPane.showMessageDialog(null, "모두 입력하세요");
 		}
-
 	}
 
+	// event 등록 버튼
 	protected void actionPerformedBtnEvent(ActionEvent e) {
-		if (btnEvent.getText().equals("수정")) {
-			String eName = tfEventName.getText();
-			Date eStartDay = dcEventStartDate.getDate();
-			Date eEndDay = dcEventEndDate.getDate();
-			int eSale = (int) spEventSale.getValue();
+		if(tfEventName.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "모두 입력하세요");
+		}else {
+			if (btnEvent.getText().equals("수정")) {
+				String eName = tfEventName.getText();
+				Date eStartDay = dcEventStartDate.getDate();
+				Date eEndDay = dcEventEndDate.getDate();
+				int eSale = (int) spEventSale.getValue();
 
-			Event event = new Event(eName, eStartDay, eEndDay, eSale);
-			edao.updateByName(event);
-			btnEvent.setText("등록");
-			clearEventTf();
-			clearList();
-			reloadData();
+				Event event = new Event(eName, eStartDay, eEndDay, eSale);
+				edao.updateByName(event);
+				btnEvent.setText("등록");
+				clearEventTf();
+				clearList();
+				reloadData();
 
-		} else {
-			String eName = tfEventName.getText();
-			Date eStartDay = dcEventStartDate.getDate();
-			Date eEndDay = dcEventEndDate.getDate();
-			int eSale = (int) spEventSale.getValue();
+			} else {
+				String eName = tfEventName.getText();
+				Date eStartDay = dcEventStartDate.getDate();
+				Date eEndDay = dcEventEndDate.getDate();
+				int eSale = (int) spEventSale.getValue();
 
-			Event event = new Event(eName, eStartDay, eEndDay, eSale);
-			edao.insert(event);
-			clearEventTf();
-			clearList();
-			reloadData();			
+				Event event = new Event(eName, eStartDay, eEndDay, eSale);
+				edao.insert(event);
+				clearEventTf();
+				clearList();
+				reloadData();
+			}
 		}
 	}
 
@@ -601,7 +596,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 	}
 
 	private Object[][] getRowsProduct() {
-		if(proList == null) {
+		if (proList == null) {
 			proList = new ArrayList<Product>();
 		}
 		Object[][] rows = new Object[proList.size()][];
@@ -612,7 +607,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 	}
 
 	private Object[][] getRowsEvent() {
-		if(eventList == null) {
+		if (eventList == null) {
 			eventList = new ArrayList<Event>();
 		}
 		Object[][] rows = new Object[eventList.size()][];
@@ -623,7 +618,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 	}
 
 	public Object[][] getRowsWoker() {
-		if(workerList == null) {
+		if (workerList == null) {
 			workerList = new ArrayList<Designer>();
 		}
 		Object[][] rows = new Object[workerList.size()][];
@@ -700,9 +695,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
 	}
-	
 
-	
 	public void setWorkList(List<Designer> ds) {
 		this.workerList = ds;
 	}

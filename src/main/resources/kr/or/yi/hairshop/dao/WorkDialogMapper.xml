@@ -62,7 +62,7 @@
 		on w_g_no=g.g_no
 		where w.w_no=#{wNo}
 	</select>
-	<select id="selectWDGECPjoinByWDNo" resultMap="selectWDGECPjoinByNo">
+	<select id="selectWDGECPjoinByWDNoDate" resultMap="selectWDGECPjoinByNo">
 		SELECT *
 		FROM workdialog w
 		left join designer d
@@ -76,8 +76,8 @@
 		left join guest g
 		on w_g_no=g.g_no
 		where w.w_d_no=#{wDNo}
-		and w_reservTime <![CDATA[>]]> concat(curdate(), ' 00:00:00')
-		and w_reservTime <![CDATA[<]]> concat(curdate(), ' 23:59:59')
+		and w_reservTime <![CDATA[>]]> concat(#{date}, ' 00:00:00')
+		and w_reservTime <![CDATA[<]]> concat(#{date}, ' 23:59:59')
 		order by w_reservTime
 	</select>
 	<select id="selectDListByNo" parameterType="int" resultMap="resultWorkDialog">
@@ -129,7 +129,8 @@
 		left join product p
 		on c.c_p_name=p.p_name
 		left join guest g
-		on w_g_no=g.g_no;
+		on w_g_no=g.g_no
+		where d_no=#{dNo}
 	</select>
 	
 	<select id="selectReservDetail" resultMap="reserveDetail">
