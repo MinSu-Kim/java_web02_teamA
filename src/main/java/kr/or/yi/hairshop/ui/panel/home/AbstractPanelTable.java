@@ -1,5 +1,6 @@
 package kr.or.yi.hairshop.ui.panel.home;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
@@ -8,13 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
-import kr.or.yi.hairshop.dto.Product;
-import java.awt.BorderLayout;
+import kr.or.yi.hairshop.panel.MyTableModel;
 
 public abstract class AbstractPanelTable<T> extends JPanel {
 	protected JTable table;
@@ -38,7 +40,7 @@ public abstract class AbstractPanelTable<T> extends JPanel {
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// 단일선택
 		scrollPane.setViewportView(table);
-
+		
 	}
 
 	protected void setItemList(List<T> itemList) {
@@ -46,7 +48,16 @@ public abstract class AbstractPanelTable<T> extends JPanel {
 	}
 	
 
-	protected abstract void reloadData();
+	protected void reloadData() {
+		MyTableModel model = new MyTableModel(getRows(), getColumnNames());
+		table.setModel(model);
+//		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+		table.setRowSorter(sorter);
+		
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
+		tableSetWidth(200, 200, 200);
+	};
 
 	protected abstract String[] getColumnNames();
 
@@ -89,5 +100,6 @@ public abstract class AbstractPanelTable<T> extends JPanel {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
 	}
+	
 	
 }

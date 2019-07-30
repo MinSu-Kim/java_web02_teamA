@@ -21,12 +21,12 @@ public class pHomeTfgNameTable extends AbstractPanelTable<Guest> implements Mous
 		table.addMouseListener(this);
 		
 	}
-	@Override
-	public void reloadData() {
-		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
-		tableSetWidth(200, 200, 200);
-	}
+//	@Override
+//	public void reloadData() {
+//		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
+//		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
+//		tableSetWidth(200, 200, 200);
+//	}
 
 	@Override
 	protected String[] getColumnNames() {
