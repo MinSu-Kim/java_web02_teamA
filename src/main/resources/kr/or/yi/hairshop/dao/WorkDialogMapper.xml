@@ -130,6 +130,7 @@
 		on c.c_p_name=p.p_name
 		left join guest g
 		on w_g_no=g.g_no
+		where d_no=#{dNo}
 	</select>
 	
 	<select id="selectReservDetail" resultMap="reserveDetail">

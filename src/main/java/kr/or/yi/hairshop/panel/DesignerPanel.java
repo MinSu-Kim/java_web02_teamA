@@ -16,6 +16,7 @@ import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
+import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.WorkDialog;
 
 
@@ -46,8 +47,8 @@ public class DesignerPanel extends JPanel {
 		scrollPane.setSize(200, 200);	
 	}
 	
-	public void clearList() {
-		dList = wdao.selectByfivejoinMap();
+	public void clearList(int dNo) {
+		dList = wdao.selectByfivejoinMap(dNo);
 	}
 
 	public void reloadData() {
@@ -84,5 +85,10 @@ public class DesignerPanel extends JPanel {
 		for (int i = 0; i < width.length; i++) {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
+	}
+
+
+	public void setWorkdialogList(List<WorkDialog> workDialog) {
+		dList=workDialog;
 	}	
 }

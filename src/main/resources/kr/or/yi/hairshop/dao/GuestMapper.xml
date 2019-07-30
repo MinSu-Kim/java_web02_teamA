@@ -27,7 +27,8 @@
 		SELECT g_no, g_id, g_password, g_l_grade as l_grade, g_name,
 		g_tel, g_email,
 		g_birth, g_join, g_point, g_memo
-		FROM hairshop.guest;
+		FROM hairshop.guest
+		where g_secession = false
 	</select>
 	
 	<select id="selectGuestBygName" resultMap="extendsGuest">
@@ -58,7 +59,8 @@
 	</update>
 
 	<delete id="deleteGuest">
-		DELETE FROM hairshop.guest
+		update hairshop.guest
+		set g_secession = true
 		WHERE g_no=#{gNo};
 	</delete>
 </mapper>

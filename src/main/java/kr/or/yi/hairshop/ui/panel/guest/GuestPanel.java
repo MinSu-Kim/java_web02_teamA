@@ -23,6 +23,8 @@ import kr.or.yi.hairshop.dao.GuestMapper;
 import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.dto.Level;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 @SuppressWarnings("serial")
 public class GuestPanel extends JPanel implements ActionListener {
@@ -34,7 +36,6 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private JButton btnAdd;
 	private JTextField tfId;
 	private JTextField tfPassword;
-	private JTextField tfGrade;
 	private JDateChooser dcBirth;
 	private JDateChooser dcJoin;
 	private JSpinner spPoint;
@@ -42,6 +43,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private GuestMapper dao = new GuestMapperImpl();
 	private pGuestMgn parent;
 	private JButton btnCancel;
+	private JComboBox cbGrade;
 
 	public void setParent(pGuestMgn pGuestMgn) {
 		this.parent = pGuestMgn;
@@ -63,10 +65,10 @@ public class GuestPanel extends JPanel implements ActionListener {
 		label.setFont(new Font("굴림", Font.PLAIN, 14));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(label);
-
-		tfGrade = new JTextField();
-		panel_1.add(tfGrade);
-		tfGrade.setColumns(10);
+		
+		cbGrade = new JComboBox();
+		cbGrade.setModel(new DefaultComboBoxModel(new String[] {"골드", "실버", "브론즈"}));
+		panel_1.add(cbGrade);
 
 		JLabel label_1 = new JLabel("이름");
 		label_1.setFont(new Font("굴림", Font.PLAIN, 14));
@@ -206,7 +208,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	protected void updateGuest() {
 		Guest modifyguest = new Guest();
 		
-		Level level = new Level(tfGrade.getText());
+		Level level = new Level((String) cbGrade.getSelectedItem());
 		String name = tfName.getText();
 		String id = tfId.getText();
 		String pass = tfPassword.getText();
@@ -238,7 +240,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private void MakeGuest() {
 		Guest guest = new Guest();
 		
-		Level level = new Level(tfGrade.getText());
+		Level level = new Level((String) cbGrade.getSelectedItem());
 		String name = tfName.getText();
 		String id = tfId.getText();
 		String pass = tfPassword.getText();
@@ -280,7 +282,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	public void setGuestTf(Guest g) {
 		gno = g.getgNo();
-		tfGrade.setText(g.getgLGrade().getlGrade());
+		cbGrade.setSelectedItem(g.getgLGrade().getlGrade());
 		tfName.setText(g.getgName());
 		tfId.setText(g.getgId());
 		tfPassword.setText(g.getgPassword());
@@ -294,7 +296,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	}
 
 	public void clear() {
-		tfGrade.setText("");
+		cbGrade.setSelectedItem("");
 		tfName.setText("");
 		tfId.setText("");
 		tfPassword.setText("");
