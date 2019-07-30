@@ -303,7 +303,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	}
 
 	public void clear() {
-		cbGrade.setSelectedItem(1);
+		cbGrade.setSelectedIndex(1);
 		tfName.setText("");
 		tfId.setText("");
 		tfPassword.setText("");
@@ -318,6 +318,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	protected void actionPerformedBtnCancelJButton(ActionEvent e) {
 		clear();
+		setBtn();
 	}
 	
 	public void setGuestList(List<Level> level) {
