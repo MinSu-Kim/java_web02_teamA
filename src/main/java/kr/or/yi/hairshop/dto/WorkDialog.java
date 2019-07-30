@@ -133,21 +133,22 @@ public class WorkDialog {
 	
 	public Object[] toArrayReservDetail() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-		
 		String pName="";
-		String pPrice="";
 		for(int i=0;i<productList.size();i++) {
 			if(i!=productList.size()-1) {				
 				pName+=productList.get(i).getpName()+",";
-				pPrice+=productList.get(i).getpPrice()+",";
 			}else {
 				pName+=productList.get(i).getpName();
-				pPrice+=productList.get(i).getpPrice();
 			}			
-//			System.out.println("가격"+productList.get(i).getpPrice());
-//			System.out.println("이름"+productList.get(i).getpName());
 		}
-		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade().getlGrade(), pName, wEName.geteName(), pPrice, wWorkTime };
+		
+		String wWrok = "";
+		if(wWorkTime == null) {
+			wWrok = "작업전";
+		}else {
+			wWrok = (String) date.format(wWorkTime);
+		}
+		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade().getlGrade(), pName, wEName.geteName(), wPriceTotal, wWrok };
 		
 	}
 	
