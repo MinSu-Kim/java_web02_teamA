@@ -375,7 +375,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		else {
 			JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
 		}
-		if(wNo>0)
+		if(result>0)
 			for(int i=0; i<list.size(); i++) {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("wNo",result+"");
