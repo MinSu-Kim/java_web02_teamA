@@ -172,6 +172,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 		JPanel panel_2 = new JPanel();
 		add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
 		
 				JPanel panel_4 = new JPanel();
 				add(panel_4);
