@@ -366,10 +366,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		
 		List<Product> list=panelWorkProduct.getProductList();
 		int result=-1;
-		for(Product p:list) {
-			System.out.println("pHomeFooter");
-			System.out.println(p);
-		}
 		if(list.size()>0) {
 			result=wDao.insertWorkDialogResWNo(work);
 		}

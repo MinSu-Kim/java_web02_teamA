@@ -73,9 +73,6 @@ public class pHomeWorkProductTable extends AbstractPanelTable<Product> implement
 		
 	}
 	public List<Product> getProductList(){
-		for(Product p:itemList) {
-			System.out.println(p);
-		}
 		return this.itemList;
 	}
 	@Override
