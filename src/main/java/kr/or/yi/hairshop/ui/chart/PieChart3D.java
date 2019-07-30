@@ -73,10 +73,10 @@ public class PieChart3D extends ApplicationFrame {
         
         // create the chart...
         final JFreeChart chart = createChart(dataset);
-        
+
         // add the chart to a panel...
         final ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 300));
         setContentPane(chartPanel);
 
     }
@@ -87,13 +87,12 @@ public class PieChart3D extends ApplicationFrame {
      * @return A sample dataset.
      */
     private PieDataset createSampleDataset() {
-        
         final DefaultPieDataset result = new DefaultPieDataset();
-        result.setValue("Java", new Double(43.2));
-        result.setValue("Visual Basic", new Double(10.0));
-        result.setValue("C/C++", new Double(17.5));
-        result.setValue("PHP", new Double(32.5));
-        result.setValue("Perl", new Double(1.0));
+        result.setValue("차홍", new Double(40.2));
+        result.setValue("권차홍", new Double(9.0));
+        result.setValue("이차홍", new Double(17.5));
+        result.setValue("일차홍", new Double(32.5));
+        result.setValue("최차홍", new Double(1.0));
         return result;
         
     }

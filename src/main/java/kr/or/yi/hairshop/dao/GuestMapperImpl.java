@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.hairshop.dto.Guest;
+import kr.or.yi.hairshop.dto.Level;
 import kr.or.yi.hairshop.jdbc.MyBatisSqlSessionFactory;
 
 public class GuestMapperImpl implements GuestMapper {
@@ -51,4 +52,7 @@ public class GuestMapperImpl implements GuestMapper {
 			return sqlSession.selectList(namespace + ".selectGuestBygName",gName);
 		}
 	}
+
+
+	
 }

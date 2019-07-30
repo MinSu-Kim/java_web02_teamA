@@ -3,6 +3,7 @@ package kr.or.yi.hairshop.dao;
 import java.util.List;
 
 import kr.or.yi.hairshop.dto.Guest;
+import kr.or.yi.hairshop.dto.Level;
 
 public interface GuestMapper {
 	public List<Guest> selectGuestByAll();

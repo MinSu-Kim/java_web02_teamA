@@ -3,9 +3,12 @@ package kr.or.yi.hairshop.ui.panel.guest;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.color.CMMException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +24,8 @@ import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.hairshop.dao.GuestMapper;
 import kr.or.yi.hairshop.dao.GuestMapperImpl;
+import kr.or.yi.hairshop.dao.LevelMapper;
+import kr.or.yi.hairshop.dao.LevelMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.dto.Level;
 import javax.swing.JComboBox;
@@ -41,9 +46,11 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private JSpinner spPoint;
 
 	private GuestMapper dao = new GuestMapperImpl();
+	private LevelMapper ldao = new LevelMapperImpl();
 	private pGuestMgn parent;
 	private JButton btnCancel;
-	private JComboBox cbGrade;
+	private JComboBox<Level> cbGrade;
+	private Level level;
 
 	public void setParent(pGuestMgn pGuestMgn) {
 		this.parent = pGuestMgn;
@@ -66,8 +73,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(label);
 		
-		cbGrade = new JComboBox();
-		cbGrade.setModel(new DefaultComboBoxModel(new String[] {"골드", "실버", "브론즈"}));
+		cbGrade = new JComboBox<Level>();
+		setGuestList(ldao.selectLevelByAll(level));
 		panel_1.add(cbGrade);
 
 		JLabel label_1 = new JLabel("이름");
@@ -208,7 +215,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	protected void updateGuest() {
 		Guest modifyguest = new Guest();
 		
-		Level level = new Level((String) cbGrade.getSelectedItem());
+		Level level = (Level) cbGrade.getSelectedItem();
 		String name = tfName.getText();
 		String id = tfId.getText();
 		String pass = tfPassword.getText();
@@ -220,7 +227,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		String memo = tfMemo.getText();
 
 		modifyguest.setgNo(gno);
-		modifyguest.setgLGrade(level);
+		modifyguest.setgLGrade(level);;
 		modifyguest.setgName(name);
 		modifyguest.setgId(id);
 		modifyguest.setgPassword(pass);
@@ -240,7 +247,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private void MakeGuest() {
 		Guest guest = new Guest();
 		
-		Level level = new Level((String) cbGrade.getSelectedItem());
+		Level level = (Level) cbGrade.getSelectedItem();
 		String name = tfName.getText();
 		String id = tfId.getText();
 		String pass = tfPassword.getText();
@@ -282,7 +289,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	public void setGuestTf(Guest g) {
 		gno = g.getgNo();
-		cbGrade.setSelectedItem(g.getgLGrade().getlGrade());
+		cbGrade.setSelectedItem(new Level(g.getgLGrade().getlGrade()));
 		tfName.setText(g.getgName());
 		tfId.setText(g.getgId());
 		tfPassword.setText(g.getgPassword());
@@ -296,7 +303,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	}
 
 	public void clear() {
-		cbGrade.setSelectedItem("");
+		cbGrade.setSelectedItem(1);
 		tfName.setText("");
 		tfId.setText("");
 		tfPassword.setText("");
@@ -311,5 +318,11 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	protected void actionPerformedBtnCancelJButton(ActionEvent e) {
 		clear();
+	}
+	
+	public void setGuestList(List<Level> level) {
+		DefaultComboBoxModel<Level> levelModels = new DefaultComboBoxModel<Level>(new Vector<Level>(level));
+		cbGrade.setModel(levelModels);
+		cbGrade.setSelectedIndex(1);
 	}
 }
