@@ -42,6 +42,8 @@
 
 package kr.or.yi.hairshop.ui.chart;
 
+import java.awt.Font;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -52,18 +54,9 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.util.Rotation;
 
-/**
- * A simple demonstration application showing how to create a pie chart using data from a
- * {@link DefaultPieDataset}.
- *
- */
+
 public class PieChart3D extends ApplicationFrame {
 
-    /**
-     * Creates a new demo.
-     *
-     * @param title  the frame title.
-     */
     public PieChart3D(final String title) {
 
         super(title);
@@ -79,6 +72,11 @@ public class PieChart3D extends ApplicationFrame {
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 300));
         setContentPane(chartPanel);
 
+        // 제목
+        chart.getTitle().setFont(new Font("돋움", Font.BOLD, 15));
+        // 범례
+        chart.getLegend().setItemFont(new Font("돋움", Font.PLAIN, 10));
+        
     }
     
     /**
@@ -130,6 +128,7 @@ public class PieChart3D extends ApplicationFrame {
         plot.setDirection(Rotation.CLOCKWISE);
         plot.setForegroundAlpha(0.5f);
         plot.setNoDataMessage("No data to display");
+        
         return chart;
         
     }

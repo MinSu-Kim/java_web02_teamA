@@ -315,7 +315,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 		
 		Designer designer = new Designer(dNo, grade, id, ps, name, tel, tel2, addr, addr2, tfb, tfj, memo);
-		JOptionPane.showMessageDialog(null, designer.toString2());
+//		JOptionPane.showMessageDialog(null, designer.toString2());
 		ds.updateDesigner(designer);
 		pProductMgn.setWorkList(ds.selectDesignerByAll());
 		JOptionPane.showMessageDialog(null, "수정되었습니다.");
