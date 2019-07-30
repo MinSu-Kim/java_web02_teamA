@@ -8,9 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,8 +33,11 @@ import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.DesignerPanel;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
+
+import com.jtattoo.plaf.acryl.AcrylBorders.ComboBoxBorder;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class DesignerFrame extends JFrame implements ActionListener {
@@ -47,23 +52,22 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private JTextField tfdAddr2;
 	private JTextField tfdMemo;
 	private JButton button;
-	private DesignerMapper dsmapper;
-	private JTable tableDesigner;
-	private List<Designer> DesignList;
-	private JTextField textField;
-	private JTextField tfdGrade;
 	private JTextField tfdId;
 	private JTextField tfdPassword;
 	
 	private JPanel panel_4;
 
-	private List<Designer> workerList;
 	private JDateChooser dcdBirth;
 	private JDateChooser dcdJoin;
 
 	private pProductMgn pProductMgn;
 	private DesignerPanel designerPanel;
-	 
+//	private Object[] ComboBox  = {"","신입", "디자이너", "실장", "원장"};
+	private Object[] ComboBox;
+	private List<Designer> dList;
+	private List<Object> dGradeList=new ArrayList<Object>();
+	private JComboBox<Object> cmbdGrade;
+	private JTextField tfdGrade;
 	
 	
 	public static void main(String[] args) {
@@ -83,6 +87,22 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	public DesignerFrame() {
 	
 		ds = new DesignerMapperImpl();
+		dList=ds.selectDesignerByAll();
+		
+		for(int i=0; i<dList.size(); i++) {
+			if(!dGradeList.contains(dList.get(i).getdGrade())) {
+				dGradeList.add(dList.get(i).getdGrade());
+				
+			}
+		
+		}
+		ComboBox=new Object[dGradeList.size()];
+		
+		for(int i=0; i<dGradeList.size(); i++) {
+			ComboBox[i]=dGradeList.get(i);
+		}
+		
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 640, 624);
 		contentPane = new JPanel();
@@ -131,11 +151,11 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		lbldGrade.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldGrade);
 		
+//		cmbdGrade = new JComboBox<Object>(ComboBox);
 		tfdGrade = new JTextField();
 		tfdGrade.setColumns(10);
 		panel_4.add(tfdGrade);
-		
-		
+				
 		JLabel lbldName = new JLabel("이름");
 		lbldName.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldName);
@@ -244,7 +264,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private void actionPerformedBtnAdd(ActionEvent arg0) { //등록버튼
 		String tfi = tfdId.getText();
 		String tfp = tfdPassword.getText();	
-		String tfg =tfdGrade.getText();
+		String tfg = tfdGrade.getText();	
 		String tfn =tfdName.getText();
 		String tft =tfdTel.getText();
 		String tft2 =tfdTel2.getText();	
@@ -272,23 +292,19 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		clearTextField();
 		pProductMgn.setWorkList(ds.selectDesignerByAll());
 		pProductMgn.reloadData();
-	
 	}
 	
 	public void setText(Designer design) {
-		
-		
-		
 		dNo = design.getdNo();
 		
 		List<WorkDialog> workDialog=wdao.selectByfivejoinMap(dNo);
 		designerPanel.setWorkdialogList(workDialog);
 		designerPanel.reloadData();
 		
-		
 		tfdId.setText(design.getdId());
 		tfdPassword.setText(design.getdPassword());
-		tfdGrade.setText(design.getdGrade());
+		System.out.println(design.getdGrade());
+		cmbdGrade.setSelectedItem(design.getdGrade());	
 		tfdName.setText(design.getdName());
 		tfdTel.setText(design.getdTel());
 		tfdTel2.setText(design.getdTel2());
@@ -297,13 +313,13 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		dcdBirth.setDate(design.getdBirth());
 		dcdJoin.setDate(design.getdJoin());
 		tfdMemo.setText(design.getdMemo());
-		
 	}
 	
 	public void actionPerformedBtnModify(ActionEvent arg0) { //수정버튼
 		String id = tfdId.getText();
 		String ps = tfdPassword.getText();
-		String grade = tfdGrade.getText();
+		String grade = (String) cmbdGrade.getSelectedItem();
+		
 		String name = tfdName.getText();
 		String tel = tfdTel.getText();
 		String tel2 = tfdTel2.getText();
@@ -313,7 +329,6 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		Date tfj =dcdJoin.getDate();
 		String memo = tfdMemo.getText();
 		
-		
 		Designer designer = new Designer(dNo, grade, id, ps, name, tel, tel2, addr, addr2, tfb, tfj, memo);
 		JOptionPane.showMessageDialog(null, designer.toString2());
 		ds.updateDesigner(designer);
@@ -321,12 +336,9 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTextField();
 		pProductMgn.reloadData();
-		
-		
 	}
 
 	
-
 	public void setParent(HairMainFrame hairMainFrame) {
 		
 	}
