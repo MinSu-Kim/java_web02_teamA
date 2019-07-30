@@ -1,4 +1,6 @@
 
+use hairshop;
+
 select * from guest;
 select * from designer;
 select * from event;

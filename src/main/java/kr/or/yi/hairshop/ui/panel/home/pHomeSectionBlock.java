@@ -202,10 +202,6 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 		}
 
 	}
-//	public void refresh() {
-//		jtable.setModel(new DefaultTableModel(getRows(), new String[] {"시간","작업명"}));
-//		jtable.setValueAt("가나다라", 1 , 1);
-//	}
 
 	public void setDisigner(Designer designer) {
 		this.designer = designer;
