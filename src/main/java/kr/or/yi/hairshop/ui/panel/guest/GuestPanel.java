@@ -289,7 +289,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	public void setGuestTf(Guest g) {
 		gno = g.getgNo();
-		cbGrade.setSelectedItem(g.getgLGrade().getlGrade());
+		cbGrade.setSelectedItem(new Level(g.getgLGrade().getlGrade()));
 		tfName.setText(g.getgName());
 		tfId.setText(g.getgId());
 		tfPassword.setText(g.getgPassword());
