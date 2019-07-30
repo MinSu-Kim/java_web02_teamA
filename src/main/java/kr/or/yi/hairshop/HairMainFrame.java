@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.yi.hairshop.dto.Designer;
@@ -41,14 +40,14 @@ public class HairMainFrame extends JFrame implements ActionListener {
 			public void run() {
 				try {
 
-//					 UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//					 UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-//					 UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-//					 UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-//					 UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
-//					 UIManager.setLookAndFeel("net.infonode.gui.laf.InfoNodeLookAndFeel");
+					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+					// UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+					// UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
+					// UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
+					// UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
+					// UIManager.setLookAndFeel("net.infonode.gui.laf.InfoNodeLookAndFeel");
 //					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");// LookAndFeel
-//					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+					//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					// Windows 스타일 적용
 					mainFrame = new HairMainFrame();
 					mainFrame.setVisible(true);
@@ -128,12 +127,20 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		ProductMgn.clearList();
 		ProductMgn.reloadData();
 		tabbedPane.addTab("제품 관리", null, ProductMgn, null);
-
+		
+		//BrowserP pWeb = new BrowserP("웹");
+		//tabbedPane.addTab("웹", null, pWeb, null);
+		
+		
 		JPanel SalesMgn = new JPanel();
 		tabbedPane.addTab("매출 관리", null, SalesMgn, null);
 
 		JPanel PurchaseMgn = new JPanel();
 		tabbedPane.addTab("매입 관리", null, PurchaseMgn, null);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("New tab", null, panel, null);
+
 
 	}
 
