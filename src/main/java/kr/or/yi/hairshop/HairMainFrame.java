@@ -44,16 +44,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 					//2. 디자이너 - 작업횟수, 결제 총액 / 전체(디자이너별%)
 					//3. 어떤작업이 제일많이 작업되었는지
 					//4. 총매출 / 막대그래프
-					
-					// UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-					// UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-					// UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-					// UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-					// UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
-					// UIManager.setLookAndFeel("net.infonode.gui.laf.InfoNodeLookAndFeel");
-//					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");// LookAndFeel
-					// UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-					// Windows 스타일 적용
+
 					mainFrame = new HairMainFrame();
 					mainFrame.setVisible(true);
 

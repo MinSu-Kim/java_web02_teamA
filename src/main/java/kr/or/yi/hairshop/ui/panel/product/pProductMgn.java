@@ -19,12 +19,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowSorter;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -38,6 +41,7 @@ import kr.or.yi.hairshop.dao.ProductMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.Event;
 import kr.or.yi.hairshop.dto.Product;
+import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
 import kr.or.yi.hairshop.ui.frame.DesignerFrame;
 
@@ -588,8 +592,11 @@ public class pProductMgn extends JPanel implements ActionListener {
 		tableEvent.setModel(new DefaultTableModel(getRowsEvent(), getColumnNamesEvent()));
 		tableCellAlignmentEvent(SwingConstants.CENTER, 0, 1, 2, 3);
 		tableSetWidthEvent(80, 80, 120, 120);
-
-		tableWorker.setModel(new DefaultTableModel(getRowsWoker(), getColumnNamesWoker()));
+		
+		MyTableModel model = new MyTableModel(getRowsWoker(), getColumnNamesWoker());
+		tableWorker.setModel(model);
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+		tableWorker.setRowSorter(sorter);
 		tableCellAlignmentWoker(SwingConstants.CENTER, 0, 1, 2, 3);
 		tableSetWidthWoker(80, 80, 120, 120);
 

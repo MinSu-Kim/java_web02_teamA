@@ -34,12 +34,12 @@ public class pHomeProductTable extends AbstractPanelTable<Product> implements Mo
 		table.setComponentPopupMenu(popupMenuProduct);
 	}
 
-	@Override
-	protected void reloadData() {
-		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
-		tableSetWidth(200, 200, 200);		
-	}
+//	@Override
+//	protected void reloadData() {
+//		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
+//		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
+//		tableSetWidth(200, 200, 200);		
+//	}
 
 	@Override
 	protected String[] getColumnNames() {

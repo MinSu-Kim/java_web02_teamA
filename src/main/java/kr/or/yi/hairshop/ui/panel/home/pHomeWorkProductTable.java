@@ -2,10 +2,13 @@ package kr.or.yi.hairshop.ui.panel.home;
 
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import kr.or.yi.hairshop.dto.Product;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.RowSorter;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -34,12 +37,6 @@ public class pHomeWorkProductTable extends AbstractPanelTable<Product> implement
 		table.setComponentPopupMenu(popupMenuProduct);
 	}
 
-	@Override
-	protected void reloadData() {
-		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
-		tableSetWidth(200, 200, 200);
-	}
 
 	@Override
 	protected String[] getColumnNames() {
