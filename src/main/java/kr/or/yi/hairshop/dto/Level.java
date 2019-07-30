@@ -98,4 +98,5 @@ public class Level {
 		return new Object[] { lGrade, lSale };
 	}
 
+
 }

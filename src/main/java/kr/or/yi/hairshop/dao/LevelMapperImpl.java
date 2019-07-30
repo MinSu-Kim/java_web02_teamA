@@ -11,9 +11,9 @@ public class LevelMapperImpl implements LevelMapper {
 	private String namespace = "kr.or.yi.hairshop.dao.LevelMapper";
 	
 	@Override
-	public List<Level> selectLevelByAll(Level level) {
+	public List<Level> selectLevelByAll() {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			return sqlSession.selectList(namespace + ".selectLevelByAll",level);
+			return sqlSession.selectList(namespace + ".selectLevelByAll");
 		}
 	}
 	

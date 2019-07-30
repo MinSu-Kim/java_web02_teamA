@@ -38,6 +38,7 @@ import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.Event;
 import kr.or.yi.hairshop.dto.Guest;
+import kr.or.yi.hairshop.dto.Level;
 import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.dto.WorkDialog;
 
@@ -236,7 +237,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 
 		btnDelete = new JButton("삭제");
 		btnDelete.addActionListener(this);
-		btnUpdate.addActionListener(this);
 		panel_5.add(btnDelete);
 		btnDelete.setVisible(false);
 		
@@ -287,10 +287,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		repaint();
 	}
 
-	public WorkDialog getWorkDialog() {
-		WorkDialog work = new WorkDialog();
-		return work;
-	}
 	
 	public void setTfWork(WorkDialog workDialog) {
 		wNo=workDialog.getwNo();
@@ -349,50 +345,51 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 	public WorkDialog getWork() {
 		WorkDialog work = new WorkDialog();
-		
 		Designer designer=(Designer)cmbDesigner.getSelectedItem();
-		Guest guest = new Guest(gNo);
-		Event event = new Event(cmbEvent.getSelectedItem()+"");
-		
+		Event event = (Event)cmbEvent.getSelectedItem();
 		
 		work.setwReservTime((Date)jSpinwReserveTime.getValue());
 		work.setwWorkTime((Date)jSpinwWorkTime.getValue());
 		if(!tfpPrice.getText().equals(""))
 			work.setwPriceTotal(Integer.parseInt(tfpPrice.getText()));
+		
+		
 		work.setwDNo(designer);
-		work.setwGNo(guest);
+		work.setwGNo(new Guest(gNo));
 		work.setwEName(event);
 		return work;
 	}
 	
 	protected void actionPerformedBtnAdd(ActionEvent e) {
+		
 		WorkDialog work = getWork();
 		
 		List<Product> list=panelWorkProduct.getProductList();
 		int result=-1;
-		if(list.size()>0)
+		if(list.size()>0) {
 			result=wDao.insertWorkDialogResWNo(work);
+		}
 		else {
 			JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
 		}
-		if(result>0)
+		if(result>0) {
 			for(int i=0; i<list.size(); i++) {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("wNo",result+"");
 				map.put("pName", list.get(i).getpName());
 				wDao.insertChoice(map);
 			}
-		else {
+		}else {
 			JOptionPane.showMessageDialog(null, "예약 실패");
 		}
-		clearTf();
 		parent.refresh(parent.start);
+		panelWorkProduct.clearProduct();
+		clearTf();
 	}
 	
 
 	protected void actionPerformedBtnUpdate(ActionEvent e) {
 		WorkDialog work = getWork();
-		System.out.println(wNo);
 		work.setwNo(wNo);
 		List<Product> list=panelWorkProduct.getProductList();
 		

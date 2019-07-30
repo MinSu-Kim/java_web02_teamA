@@ -22,6 +22,7 @@ import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn;
 import kr.or.yi.hairshop.ui.panel.home.pHomeSectionForm;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
 import kr.or.yi.hairshop.ui.panel.reserve.pReservationMgn;
+import kr.or.yi.hairshop.ui.chart.GuestBarChart;
 
 @SuppressWarnings("serial")
 public class HairMainFrame extends JFrame implements ActionListener {
@@ -39,16 +40,13 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+					//1. vip고객 - 고객의 이용횟수, 결제총액 / 막대
+					//2. 디자이너 - 작업횟수, 결제 총액 / 전체(디자이너별%)
+					
+					//3. 어떤작업이 제일많이 작업되었는지
+					//4. 총매출 / 막대그래프
 
-//					 UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//					 UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-//					 UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-//					 UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-//					 UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
-//					 UIManager.setLookAndFeel("net.infonode.gui.laf.InfoNodeLookAndFeel");
-//					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");// LookAndFeel
-					//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-					// Windows 스타일 적용
 					mainFrame = new HairMainFrame();
 					mainFrame.setVisible(true);
 
@@ -127,20 +125,18 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		ProductMgn.clearList();
 		ProductMgn.reloadData();
 		tabbedPane.addTab("제품 관리", null, ProductMgn, null);
-		
-		//BrowserP pWeb = new BrowserP("웹");
-		//tabbedPane.addTab("웹", null, pWeb, null);
-		
-		
-		JPanel SalesMgn = new JPanel();
-		tabbedPane.addTab("매출 관리", null, SalesMgn, null);
 
-		JPanel PurchaseMgn = new JPanel();
-		tabbedPane.addTab("매입 관리", null, PurchaseMgn, null);
-		
+		// BrowserP pWeb = new BrowserP("웹");
+		// tabbedPane.addTab("웹", null, pWeb, null);
+
+		GuestBarChart guestChart = new GuestBarChart();
+		tabbedPane.addTab("고객 현황", null, guestChart, null);
+
+		GuestBarChart purcharge = new GuestBarChart();
+		tabbedPane.addTab("디자이너 현황", null, purcharge, null);
+
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("New tab", null, panel, null);
-
 
 	}
 
@@ -170,7 +166,6 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		Auth = designer;
 		btnLogin.setText("로그아웃");
 		lblLogin.setText(Auth.getdName() + "님 반갑습니다");
-
 	}
 
 }

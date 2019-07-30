@@ -14,15 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import kr.or.yi.hairshop.dao.GuestMapper;
 import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
+import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
 
 @SuppressWarnings("serial")
@@ -102,7 +105,11 @@ public class pGuestMgn extends JPanel implements ActionListener {
 	}
 
 	public void reloadData() {
-		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
+		MyTableModel model = new MyTableModel(getRows(), getColumnNames());
+		table.setModel(model);
+//		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+		table.setRowSorter(sorter);
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8);
 		tableSetWidth(20, 20, 50, 50, 80, 50, 50, 50, 100);
 	}
@@ -116,6 +123,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			int i = table.getSelectedRow();
 			Guest selectGuest = gList.get(i);
 			pInfomation.setGuestTf(selectGuest);
+			
 			pInfomation.setBtn2();
 			
 		}		
