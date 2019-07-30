@@ -11,6 +11,8 @@
 		SELECT l_grade, l_sale
 		FROM hairshop.level;
 	</select>
+	
+	
 
 	<!-- <resultMap type="Level" id="extendsLevel" extends="basicLevel"> <collection 
 		property="guestList" resultMap="kr.or.yi.hairshop.dao.GuestMapper.basicGuest"></collection> 

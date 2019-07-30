@@ -18,7 +18,6 @@ import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -124,6 +123,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			int i = table.getSelectedRow();
 			Guest selectGuest = gList.get(i);
 			pInfomation.setGuestTf(selectGuest);
+			
 			pInfomation.setBtn2();
 			
 		}		
