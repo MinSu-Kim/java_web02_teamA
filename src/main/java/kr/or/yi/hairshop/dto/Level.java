@@ -58,9 +58,12 @@ public class Level {
 	
 	
 	
+	
+
+	
 	@Override
 	public String toString() {
-		return String.format("Level [lGrade=%s, lSale=%s, guestList=%s]", lGrade, lSale, guestList);
+		return lGrade;
 	}
 
 
