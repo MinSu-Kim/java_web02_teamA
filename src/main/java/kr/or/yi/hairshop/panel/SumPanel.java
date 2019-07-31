@@ -1,23 +1,15 @@
 package kr.or.yi.hairshop.panel;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-
+import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
@@ -40,18 +32,22 @@ public class SumPanel extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel dsPanel = new JPanel();
+		dsPanel.setSize(100, 100);
 		dsPanel.setBorder(new TitledBorder(null, null, TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		add(dsPanel);
-		dsPanel.setLayout(new BorderLayout(0, 0));
+		dsPanel.setLayout(new GridLayout(2, 2, 5, 5));
 		
 		JLabel lblSum = new JLabel("총합");
+		lblSum.setBounds(new Rectangle(0, 0, 30, 30));
+		lblSum.setHorizontalAlignment(SwingConstants.CENTER);
 		dsPanel.add(lblSum);
+		
+		JLabel lblCount = new JLabel("총횟수");
+		lblCount.setHorizontalAlignment(SwingConstants.CENTER);
+		dsPanel.add(lblCount);
 		
 		tfSum = new JTextField();
 		dsPanel.add(tfSum);
-		
-		JLabel lblCount = new JLabel("총횟수");
-		dsPanel.add(lblCount);
 		
 		tfCount = new JTextField();
 		dsPanel.add(tfCount);
