@@ -27,6 +27,8 @@ import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class pGuestMgn extends JPanel implements ActionListener {
@@ -49,7 +51,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel pGuestMain = new JPanel();
-		pGuestMain.setBorder(new TitledBorder(null, "고객관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pGuestMain.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uACE0\uAC1D\uAD00\uB9AC", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		add(pGuestMain);
 		pGuestMain.setLayout(new GridLayout(0, 1, 0, 0));
 

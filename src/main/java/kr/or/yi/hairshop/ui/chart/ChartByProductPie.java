@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.ui.panel.chart.designer;
+package kr.or.yi.hairshop.ui.chart;
 
 import java.util.List;
 
@@ -11,20 +11,20 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
-import kr.or.yi.hairshop.dao.WorkDialogMapper;
-import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
-import kr.or.yi.hairshop.dto.WorkDialog;
+import kr.or.yi.hairshop.dao.ProductMapper;
+import kr.or.yi.hairshop.dao.ProductMapperImpl;
+import kr.or.yi.hairshop.dto.Product;
 
 @SuppressWarnings("serial")
-public class pPieChart extends JFXPanel implements InitScene {
+public class ChartByProductPie extends JFXPanel implements InitScene {
 
-	public pPieChart() {
+	public ChartByProductPie() {
 		super();
 	}
 
 	private PieChart pieChart;
-	private WorkDialogMapper dao = new WorkDialogMapperImpl();
-
+	private ProductMapper dao = new ProductMapperImpl();
+	
 	@Override
 	public Scene createScene() {
 		Group root = new Group();
@@ -34,7 +34,7 @@ public class pPieChart extends JFXPanel implements InitScene {
 		pieChart = new PieChart();
 		pieChart.setPrefSize(500, 250);
 		pieChart.setData(getChartData());
-		pieChart.setTitle("총 매출 (디자이너별 비율)");
+		pieChart.setTitle("작업 분포도");
 		pieChart.setLegendVisible(true); // 범례 표시 유무
 		pieChart.setLegendSide(Side.BOTTOM);// 범례 위치
 		pieChart.setLabelLineLength(30); // 원의 둘레 가장자리와 라벨간의 거리 지정
@@ -53,21 +53,22 @@ public class pPieChart extends JFXPanel implements InitScene {
 
 	public ObservableList<Data> getChartData() {
 		ObservableList<Data> list = FXCollections.observableArrayList();
-		List<WorkDialog> li = dao.selectByDName();
+		List<Product> li = dao.selectByProductName();
 
-		int size = li.size();
+		int size = li.size();	
 		String[] name = new String[size];
 		int[] money = new int[size];
 		int i = 0;
 		float all = 0;
 
-		for (WorkDialog w : li) {
-			name[i] = w.getwDNo().getdName();
-			money[i] = w.getwPriceTotal();
+		for (Product p : li) {
+			name[i] = p.getpName();
+			money[i] = p.getpPrice();
 			all+=money[i];
+	
 			i++;
 		}
-
+		
 		for (int j = 0; j < size; j++) {
 			list.add(new PieChart.Data(name[j], Math.round(100/(all/money[j]))/1));
 		}

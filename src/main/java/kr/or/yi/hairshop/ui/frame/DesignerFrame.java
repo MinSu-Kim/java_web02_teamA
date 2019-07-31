@@ -55,8 +55,6 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private DesignerPanel designerPanel;
 	private SumPanel sumpanel;
 	
-	
-	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -325,7 +323,6 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTextField();
 		pProductMgn.reloadData();
-		
 		
 	}
 

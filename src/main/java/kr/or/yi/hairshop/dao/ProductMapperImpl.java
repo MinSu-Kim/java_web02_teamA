@@ -60,4 +60,12 @@ public class ProductMapperImpl implements ProductMapper {
 
 	}
 
+
+	@Override
+	public List<Product> selectByProductName() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".selectByProductName");
+		}
+	}
+
 }
