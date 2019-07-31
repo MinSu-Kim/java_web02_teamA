@@ -70,8 +70,20 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	}
 
 	public DesignerFrame() {
+//		designerPanel.clearList(work);
+		
+//		designerPanel.reloadData();
+		
+		
+//		sumpanel.clearList(wDNo);
+//		sumpanel.reloadData();
 	
-		ds = new DesignerMapperImpl();
+		initComponents();
+	}
+	private void initComponents() {
+		setTitle("디자이너 관리 프로그램");
+		
+			ds = new DesignerMapperImpl();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 624);
 		contentPane = new JPanel();
@@ -95,8 +107,8 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		panel_4 = new JPanel();
-	
-		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		
+			panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_2.add(panel_4, BorderLayout.CENTER);
 		panel_4.setLayout(new GridLayout(0, 2, 10, 10));
 		
@@ -117,7 +129,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		panel_4.add(tfdPassword);
 		
 		
-		JLabel lbldGrade = new JLabel("직책");
+		JLabel lbldGrade = new JLabel("직급");
 		lbldGrade.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldGrade);
 		
@@ -202,18 +214,10 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		sumpanel= new SumPanel();
 		
 		designerPanel.add(sumpanel);
-	
+		
 //		List<WorkDialog> work = wdao.selectByfivejoinMap(dNo); 
-		System.out.println("22222");
+			System.out.println("22222");
 		System.out.println(dNo);
-//		designerPanel.clearList(work);
-		
-//		designerPanel.reloadData();
-		
-		
-//		sumpanel.clearList(wDNo);
-//		sumpanel.reloadData();
-	
 	}
 
 		

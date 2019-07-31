@@ -1,5 +1,6 @@
 package kr.or.yi.hairshop.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -233,8 +234,19 @@ public class Designer {
 	}
 
 	public Object[] toArrayMgn() {
-		return new Object[] { dGrade, dName, dTel, dTel2 };
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		String birth = date.format(dBirth);
+		
+		return new Object[] { dGrade, dId, dName, dTel, dTel2, birth, dMemo };
 	}
 
 	
 }
+
+
+
+
+
+
+
+

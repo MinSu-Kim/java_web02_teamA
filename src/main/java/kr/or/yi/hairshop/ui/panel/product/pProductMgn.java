@@ -596,8 +596,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 		tableWorker.setModel(model);
 		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
 		tableWorker.setRowSorter(sorter);
-		tableCellAlignmentWoker(SwingConstants.CENTER, 0, 1, 2, 3);
-		tableSetWidthWoker(80, 80, 120, 120);
+		tableCellAlignmentWoker(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6);
+		tableSetWidthWoker(50, 50, 60, 60, 60, 60, 60);
 
 	}
 
@@ -643,7 +643,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 	}
 
 	private String[] getColumnNamesWoker() {
-		return new String[] { "직급", "이름", "전화번호", "비상연락망" };
+		return new String[] { "직급", "아이디", "이름", "전화번호", "비상연락망", "생일", "메모" };
 	}
 
 	// 테이블 셀 내용의 정렬
