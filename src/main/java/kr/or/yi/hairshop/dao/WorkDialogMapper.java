@@ -29,5 +29,6 @@ public interface WorkDialogMapper {
 	public List<WorkDialog> selectTotalPriceByDesigner (int wDNo);
 
 	public List<WorkDialog> selectByDName();
+	public List<WorkDialog> selectByDateForChartMon(Map<String, String> map);
 
 }

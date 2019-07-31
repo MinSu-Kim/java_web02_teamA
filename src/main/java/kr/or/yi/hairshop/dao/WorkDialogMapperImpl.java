@@ -144,4 +144,11 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 		}
 	}
 
+	@Override
+	public List<WorkDialog> selectByDateForChartMon(Map<String, String> map) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectByDateForChartMon",map);
+		}
+	}
+
 }

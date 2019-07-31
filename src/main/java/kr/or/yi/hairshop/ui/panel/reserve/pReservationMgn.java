@@ -33,7 +33,6 @@ import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.pCalendar;
-import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class pReservationMgn extends JPanel implements ActionListener {
@@ -146,7 +145,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		panel_6.add(lblNewLabel_1);
 		
 		btnSearch = new JButton("검색");
-		btnSearch.setToolTipText("시작일, 종료일을 선택 후 클릭하면 검색된 정보가 출력된다.\r\n종료일이 시작일 보다 앞이면 검색되지 않는다.");
+		btnSearch.setToolTipText("시작일, 종료일을 선택 후 클릭하면 검색된 정보가 출력된다. 종료일이 시작일 보다 앞이면 검색되지 않는다.");
 		panel_6.add(btnSearch);
 		
 		btnAllSearch = new JButton("전체 검색");
