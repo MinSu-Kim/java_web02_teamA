@@ -280,6 +280,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 		pCalandar = new pCalendar();
 		panel.add(pCalandar, BorderLayout.NORTH);
+		pCalandar.setLayout(new GridLayout(1, 0, 0, 0));
 
 		panel_4 = new JPanel();
 		panel.add(panel_4);

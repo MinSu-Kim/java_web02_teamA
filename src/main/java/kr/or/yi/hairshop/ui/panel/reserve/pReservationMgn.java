@@ -31,6 +31,7 @@ import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.pCalendar;
+import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class pReservationMgn extends JPanel implements ActionListener {
@@ -130,6 +131,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		
 		pCalendar pCalendar = new pCalendar();
 		pR.add(pCalendar, BorderLayout.NORTH);
+		pCalendar.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel panel_1 = new JPanel();
 		pR.add(panel_1);

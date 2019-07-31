@@ -74,6 +74,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 
 		pCalendar pCalendar = new pCalendar();
 		panel.add(pCalendar, BorderLayout.NORTH);
+		pCalendar.setLayout(new GridLayout(1, 0, 0, 0));
 
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1);
