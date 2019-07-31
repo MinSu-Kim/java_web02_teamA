@@ -13,7 +13,7 @@ import javafx.scene.Scene;
 
 
 public class ChartTest extends JFrame {
-	GuestPriceChart pBarChart;
+	GuestCountBarChart pBarChart;
 	private JPanel contentPane;
 
 	/**
@@ -47,7 +47,7 @@ public class ChartTest extends JFrame {
 		setContentPane(contentPane);
 		
 		
-		pBarChart = new GuestPriceChart();
+		pBarChart = new GuestCountBarChart();
 		contentPane.add(pBarChart);
 		
 		Platform.runLater(() -> initFX(pBarChart));

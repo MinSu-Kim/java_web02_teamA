@@ -19,17 +19,17 @@ import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
 
 @SuppressWarnings("serial")
-public class GuestPriceChart extends JFXPanel implements InitScene{
+public class GuestPriceBarChart extends JFXPanel implements InitScene{
 
 	private BarChart<String, Number> barChart;
-	
 	private List<WorkDialog> wList;
 	
-	public GuestPriceChart() {
+	public GuestPriceBarChart() {
+		
 		
 	}
 	public void setWList(List<WorkDialog> wList) {
-		this.wList=wList;
+		this.wList = wList;
 	}
 	@Override
 	public Scene createScene() {
@@ -39,7 +39,7 @@ public class GuestPriceChart extends JFXPanel implements InitScene{
 		
 		//막 대형 차트의 X 축과 Y 축을 정의하고 레이블을 설정
 		CategoryAxis xAxis = new CategoryAxis();
-		xAxis.setLabel("고객 인원");
+		xAxis.setLabel("");
 
 		NumberAxis yAxis = new NumberAxis();
 		yAxis.setLabel("총매출");
@@ -151,5 +151,7 @@ public class GuestPriceChart extends JFXPanel implements InitScene{
 		
 		return list;
 	}
+
+	
 
 }

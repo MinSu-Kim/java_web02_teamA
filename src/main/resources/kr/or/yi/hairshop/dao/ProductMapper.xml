@@ -30,4 +30,10 @@
 		delete from product where p_name=#{param1}
 	</delete>
 
+	<select id="selectDateYearPriceChart" resultType="Product">
+		select sum(w_priceTotal) as p_price,left(w_workTime,10) as p_name 
+		from workdialog
+		where w_workTime is not null
+		group by left(w_workTime,8)
+	</select>
 </mapper>
