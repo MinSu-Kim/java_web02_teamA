@@ -2,7 +2,6 @@ package kr.or.yi.hairshop.ui.panel.chart.designer;
 
 import java.util.List;
 
-import chart_project.chart_panel.InitScene;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
