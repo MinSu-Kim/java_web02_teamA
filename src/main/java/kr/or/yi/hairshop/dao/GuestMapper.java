@@ -11,4 +11,5 @@ public interface GuestMapper {
 	public int insertGuest(Guest guest);
 	public int updateGuest(Guest guest);
 	public void deleteGuest(int getgNo);
+	public int insertGuestByWorkMain(Guest guest);
 }

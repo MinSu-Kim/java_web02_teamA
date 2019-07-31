@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -57,28 +58,28 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	private DefaultComboBoxModel<Designer> cmbDesignerModel;
 
 	List<JButton> btnList = new ArrayList<JButton>();
-	//테이블 패널들
+	// 테이블 패널들
 	private pHomeProductTable panelProduct;
 	private pHomeWorkProductTable panelWorkProduct;
 	private pHomeTfgNameTable panelTfgNameTable;
-	
+
 	private List<Product> workProductList;
 	private JLabel lblPriceList;
 	private JLabel lblProductList;
-	private int gNo;
-	
+	private int gNo=-1;
+
 	private JTextField tfgTel;
-	WorkDialogMapper wDao=new WorkDialogMapperImpl();
+	WorkDialogMapper wDao = new WorkDialogMapperImpl();
 	private JButton btnDelete;
 	private int wNo;
-	
+
 	private pHomeSectionForm parent;
-	
-	
+	private GuestMapper gDao = new GuestMapperImpl();;
+
 	public void setParent(pHomeSectionForm parent) {
-		this.parent=parent;
+		this.parent = parent;
 	}
-	
+
 	public pHomeFooterDesigner() {
 
 		initComponents();
@@ -157,12 +158,11 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		tfgName.addKeyListener(this);
 		panelData.add(tfgName);
 		tfgName.setColumns(10);
-		
-		
+
 		JLabel lblgTel = new JLabel("전화번호");
 		panelData.add(lblgTel);
 		lblgTel.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		tfgTel = new JTextField();
 		panelData.add(tfgTel);
 
@@ -239,25 +239,25 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		btnDelete.addActionListener(this);
 		panel_5.add(btnDelete);
 		btnDelete.setVisible(false);
-		
+
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		panel_5.add(btnCancel);
-		
+
 		JPanel panel_8 = new JPanel();
 		panel_1.add(panel_8);
 		panel_8.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		panelTfgNameTable = new pHomeTfgNameTable();
 		panelTfgNameTable.setParent(this);
 		panel_8.add(panelTfgNameTable);
-		
+
 		JPanel panel_9 = new JPanel();
 		panel_8.add(panel_9);
 	}
 
 	public void setBaseTf(List<Event> event, List<Designer> designer, List<Product> product) {
-		
+
 		cmbEventModel = new DefaultComboBoxModel<Event>(new Vector<Event>(event));
 		cmbEvent.setModel(cmbEventModel);
 		cmbDesignerModel = new DefaultComboBoxModel<Designer>(new Vector<Designer>(designer));
@@ -287,10 +287,9 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		repaint();
 	}
 
-	
 	public void setTfWork(WorkDialog workDialog) {
-		wNo=workDialog.getwNo();
-		gNo=workDialog.getwGNo().getgNo();
+		wNo = workDialog.getwNo();
+		gNo = workDialog.getwGNo().getgNo();
 		btnUpdate.setText("수정");
 		btnDelete.setVisible(true);
 		tfgTel.setText(workDialog.getwGNo().getgTel());
@@ -319,15 +318,15 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 //			jSpinwWorkTime.setModel(new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY));
 
 	}
+
 	public void setTfGuest(Guest guest) {
 		gNo = guest.getgNo();
 		tfgName.setText(guest.getgName());
 		tfgTel.setText(guest.getgTel());
 		tfgTel.setEnabled(false);
 		tfgName.setEnabled(false);
-		
+
 	}
-		
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnDelete) {
@@ -343,72 +342,109 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 				actionPerformedBtnUpdate(e);
 		}
 	}
+
 	public WorkDialog getWork() {
 		WorkDialog work = new WorkDialog();
-		Designer designer=(Designer)cmbDesigner.getSelectedItem();
-		Event event = (Event)cmbEvent.getSelectedItem();
-		
-		work.setwReservTime((Date)jSpinwReserveTime.getValue());
+		Designer designer = (Designer) cmbDesigner.getSelectedItem();
+		Event event = (Event) cmbEvent.getSelectedItem();
+
+		work.setwReservTime((Date) jSpinwReserveTime.getValue());
 //		work.setwWorkTime((Date)jSpinwWorkTime.getValue());
-		if(!tfpPrice.getText().equals(""))
+		if (!tfpPrice.getText().equals(""))
 			work.setwPriceTotal(Integer.parseInt(tfpPrice.getText()));
-		
-		
+
 		work.setwDNo(designer);
 		work.setwGNo(new Guest(gNo));
 		work.setwEName(event);
 		return work;
 	}
-	
+
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		
+
 		WorkDialog work = getWork();
-		
-		List<Product> list=panelWorkProduct.getProductList();
-		int result=-1;
-		if(list.size()>0) {
-			result=wDao.insertWorkDialogResWNo(work);
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
-		}
-		if(result>0) {
-			for(int i=0; i<list.size(); i++) {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("wNo",result+"");
-				map.put("pName", list.get(i).getpName());
-				wDao.insertChoice(map);
+
+		List<Product> productList = panelWorkProduct.getProductList();
+
+		int confirm = JOptionPane.showConfirmDialog(null, "정말 추가 하시겠습니까?", "추가", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
+
+		if (confirm == 0) {
+
+			if (tfgName.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "손님을 입력해 주세요");
+				return;
 			}
-		}else {
-			JOptionPane.showMessageDialog(null, "예약 실패");
+			if (tfgTel.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "전화번호를 입력해 주세요");
+				return;
+			}
+
+			if (cmbDesigner.getSelectedItem() == null) {
+				JOptionPane.showMessageDialog(null, "디자이너를 선택해 주세요");
+				return;
+			}
+
+			if (cmbEvent.getSelectedItem() == null) {
+				JOptionPane.showMessageDialog(null, "이벤트를 선택해 주세요");
+				return;
+			}
+			System.out.println(gNo);
+			if(gNo<0) {
+				Guest guest = new Guest();
+				guest.setgTel(tfgTel.getText());
+				guest.setgName(tfgName.getText());
+				gNo = gDao.insertGuestByWorkMain(guest);
+			}
+			System.out.println(gNo);
+			if (gNo > 0) {
+				int result = -1;
+				if (productList.size() > 0) {
+					Date date = new Date();
+					work.setwWorkTime(date);
+					work.setwGNo(new Guest(gNo));
+					result = wDao.insertWorkDialogResWNo(work);
+				} else {
+					JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
+				}
+
+				if (result > 0) {
+					for (int i = 0; i < productList.size(); i++) {
+						Map<String, String> map = new HashMap<String, String>();
+						map.put("wNo", result + "");
+						map.put("pName", productList.get(i).getpName());
+						wDao.insertChoice(map);
+					}
+				}
+
+				parent.refresh(parent.start);
+				panelWorkProduct.clearProduct();
+				clearTf();
+			}else {
+				JOptionPane.showMessageDialog(null, "손님 데이터를 정확히 입력해주세요");
+			}
 		}
-		parent.refresh(parent.start);
-		panelWorkProduct.clearProduct();
-		clearTf();
 	}
-	
 
 	protected void actionPerformedBtnUpdate(ActionEvent e) {
 		WorkDialog work = getWork();
 		work.setwNo(wNo);
-		List<Product> list=panelWorkProduct.getProductList();
-		
+		List<Product> list = panelWorkProduct.getProductList();
+
 		wDao.deleteChoice(wNo);
-		for(int i=0; i<list.size(); i++) {
+		for (int i = 0; i < list.size(); i++) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("wNo",wNo+"");
+			map.put("wNo", wNo + "");
 			map.put("pName", list.get(i).getpName());
 			wDao.insertChoice(map);
 		}
 		wDao.updateWorkDialog(work);
 		clearTf();
 		parent.refresh(parent.start);
+		panelWorkProduct.clearProduct();
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		clearTf();
 	}
-
 
 	public void setWorkProduct(Product product) {
 		panelWorkProduct.addProduct(product);
@@ -446,15 +482,17 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 
 	protected void keyTypedTfgName(KeyEvent e) {
-		GuestMapper gDao = new GuestMapperImpl();
-		List<Guest> gList=gDao.selectGuestBygName(tfgName.getText());
+
+		List<Guest> gList = gDao.selectGuestBygName(tfgName.getText());
 		panelTfgNameTable.setItemList(gList);
-		if(gList!=null)
+		if (gList != null)
 			panelTfgNameTable.reloadData();
 	}
+
 	protected void actionPerformedBtnDelete(ActionEvent e) {
-		int res1=wDao.deleteChoice(wNo);
-		int res2=wDao.deleteWorkDialog(wNo);
+		int res1 = wDao.deleteChoice(wNo);
+		int res2 = wDao.deleteWorkDialog(wNo);
 		parent.refresh(parent.start);
+		
 	}
 }

@@ -53,6 +53,15 @@ public class GuestMapperImpl implements GuestMapper {
 		}
 	}
 
+	@Override
+	public int insertGuestByWorkMain(Guest guest) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			sqlSession.insert(namespace + ".insertGuestByWorkMain", guest);
+			sqlSession.commit();
+			return guest.getgNo();
+		}
+	}
+
 
 	
 }

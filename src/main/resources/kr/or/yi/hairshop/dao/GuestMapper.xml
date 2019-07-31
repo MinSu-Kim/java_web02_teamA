@@ -61,4 +61,10 @@
 		set g_secession = true
 		WHERE g_no=#{gNo};
 	</update>
+	
+	<insert id="insertGuestByWorkMain"  useGeneratedKeys="true" keyProperty="gNo">
+		INSERT INTO hairshop.guest
+		(g_name, g_tel,g_join)
+		VALUES(#{gName},#{gTel},#{gJoin});
+	</insert>
 </mapper>
