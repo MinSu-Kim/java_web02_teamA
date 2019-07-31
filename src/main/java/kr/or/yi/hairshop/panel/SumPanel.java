@@ -37,11 +37,13 @@ public class SumPanel extends JPanel {
 		tfCount = new JTextField();
 		tfCount.setColumns(17);
 		tfCount.setHorizontalAlignment(SwingConstants.CENTER);
+		tfCount.setEditable(false);
 		dsPanel.add(tfCount);
 		
 		tfSum = new JTextField();
 		tfSum.setColumns(17);
 		tfSum.setHorizontalAlignment(SwingConstants.CENTER);
+		tfSum.setEditable(false);
 		dsPanel.add(tfSum);
 	
 	
