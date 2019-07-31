@@ -1,6 +1,7 @@
 package kr.or.yi.hairshop.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -27,9 +28,9 @@ public class LevelMapperImpl implements LevelMapper {
 	}
 
 	@Override
-	public int updateLevel(Level level) {
+	public int updateLevel(Map<String, Object> map) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			int res = sqlSession.update(namespace + ".updateLevel", level);
+			int res = sqlSession.update(namespace + ".updateLevel", map);
 			sqlSession.commit();
 			return res;
 		}

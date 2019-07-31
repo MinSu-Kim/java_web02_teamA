@@ -6,7 +6,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
@@ -61,6 +63,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private JButton btnCancel;
 	private JComboBox<Level> cbGrade;
 	private List<Level> lList;
+	private List<Guest> gList;
 	private Level level;
 	private JTextField tfGrade;
 	private JTable table;
@@ -72,6 +75,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private JSpinner spSale;
 	private JButton btnAdd2;
 	private JButton btnCancel2;
+	
+	private String OriginalGrade;
 
 	public void setParent(pGuestMgn pGuestMgn) {
 		this.parent = pGuestMgn;
@@ -95,7 +100,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_1.add(label);
 
 		cbGrade = new JComboBox<Level>();
-		setGuestList(ldao.selectLevelByAll());
+		resetGradeCmb();
 		panel_1.add(cbGrade);
 
 		JLabel label_1 = new JLabel("이름");
@@ -206,15 +211,15 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_7.add(lblGrade);
 
 		tfGrade = new JTextField();
-		panel_7.add(tfGrade);
 		tfGrade.setColumns(10);
+		panel_7.add(tfGrade);
 		
 		JLabel lblSale = new JLabel("할인율");
 		lblSale.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_7.add(lblSale);
 		
 		spSale = new JSpinner();
-		spSale.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(100)));
+		spSale.setModel(new SpinnerNumberModel(0, 0, 50, 1));
 		panel_7.add(spSale);
 
 		btnAdd2 = new JButton("등록");
@@ -284,21 +289,14 @@ public class GuestPanel extends JPanel implements ActionListener {
 		scrollPane.setComponentPopupMenu(popupMenu2);
 		
 	}
-	public void actionPerformed2(ActionEvent e) {
-		if (e.getSource() == mntmAdd2) {
-			clear2();
-			setBtn3();
-		}
-		if (e.getSource() == mntmUpdate2) {
-			int i = table.getSelectedRow();
-			Level selectlevel = lList.get(i);
-			setLevelTf(selectlevel);
-			setBtn4();
-			
-		}		
-		if (e.getSource() == mntmDelete2) {
-			deleteLevelUI();
-		}		
+	/*
+	 * public void actionPerformed1(ActionEvent e) {
+	 * 
+	 * }
+	 */
+
+	public void resetGradeCmb() {
+		setGuestList(ldao.selectLevelByAll());
 	}
 
 	private void deleteLevelUI() {
@@ -348,6 +346,23 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 		}
 
+		
+		if (e.getSource() == mntmAdd2) {
+			clear2();
+			setBtn3();
+		}
+		if (e.getSource() == mntmUpdate2) {
+			int i = table.getSelectedRow();
+			Level selectlevel = lList.get(i);
+			setLevelTf(selectlevel);
+			setBtn4();
+			
+			OriginalGrade = tfGrade.getText();
+			
+		}		
+		if (e.getSource() == mntmDelete2) {
+			deleteLevelUI();
+		}
 	}
 
 	protected void actionPerformedBtnAddJButton(ActionEvent e) {
@@ -359,6 +374,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	protected void actionPerformedBtnUPJButton(ActionEvent e) {
 		if (btnAdd.getText() == "수정") {
 			updateGuest();
+			
 		}
 	}
 	
@@ -405,15 +421,21 @@ public class GuestPanel extends JPanel implements ActionListener {
 	}
 	
 	protected void updateLevel() {
-		Level lv = new Level();
-		
-		String grade = tfGrade.getText();
+//		Level lv = new Level();
+//		
+//		String grade = tfGrade.getText();
 		int sale = (int) spSale.getValue();
+//		
+//		lv.setlGrade(grade);
+//		lv.setlSale(sale);
 		
-		lv.setlGrade(grade);
-		lv.setlSale(sale);
-		
-		ldao.updateLevel(lv);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("Sale",sale );
+		map.put("OriginalGrade", OriginalGrade);
+		map.put("NewGrade", tfGrade.getText());
+//		
+//		
+		ldao.updateLevel(map);
 		clearLevelList();
 		reloadLevelData();
 	}
@@ -506,7 +528,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	}
 	
 	public void clear() {
-		cbGrade.setSelectedIndex(1);
+		cbGrade.setSelectedIndex(-1);
 		tfName.setText("");
 		tfId.setText("");
 		tfPassword.setText("");
@@ -537,7 +559,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	public void setGuestList(List<Level> level) {
 		DefaultComboBoxModel<Level> levelModels = new DefaultComboBoxModel<Level>(new Vector<Level>(level));
 		cbGrade.setModel(levelModels);
-		cbGrade.setSelectedIndex(1);
+		cbGrade.setSelectedIndex(-1);
 	}
 	
 	

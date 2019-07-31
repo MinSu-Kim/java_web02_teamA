@@ -20,8 +20,15 @@
 		VALUES(#{lGrade}, #{lSale});
 	</insert>
 
+	<update id="updateLevel">
+		UPDATE hairshop.level
+		SET l_sale=#{Sale},l_grade=#{NewGrade}
+		WHERE l_grade=#{OriginalGrade};
+	</update>
+
 	<delete id="deleteLevel" parameterType="Level">
-		DELETE FROM hairshop.level
+		DELETE FROM
+		hairshop.level
 		WHERE l_grade=#{lGrade};
 	</delete>
 	<!-- <resultMap type="Level" id="extendsLevel" extends="basicLevel"> <collection 
