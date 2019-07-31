@@ -127,14 +127,13 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			pInfomation.setGuestTf(selectGuest);
 			
 			pInfomation.setBtn2();
-			pInfomation.resetGradeCmb();
 
 			
 		}		
 		if (e.getSource() == mntmDelete) {
 			deleteGuestUI();
 			pInfomation.resetGradeCmb();
-
+			
 		}		
 	}
 	
