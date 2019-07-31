@@ -36,9 +36,11 @@ public class LoginFrame extends JFrame implements ActionListener {
 		initComponents();
 	}
 	private void initComponents() {
+		setTitle("관리자님 반갑습니다");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 271, 300);
+		setBounds(100, 100, 320, 320);
 		contentPane = new JPanel();
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
@@ -57,7 +59,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		JPanel panel_4 = new JPanel();
 		center.add(panel_4);
-		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
+		panel_4.setLayout(new GridLayout(0, 2, 5, 5));
 		
 		JLabel lblLogin = new JLabel("아이디");
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -77,7 +79,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		JPanel bottom = new JPanel();
 		contentPane.add(bottom);
-		bottom.setLayout(new GridLayout(0, 1, 0, 0));
+		bottom.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JPanel panel_7 = new JPanel();
 		bottom.add(panel_7);
@@ -87,7 +89,14 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		btnLogin = new JButton("로그인");
 		btnLogin.addActionListener(this);
+		panel_6.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel label_2 = new JLabel("");
+		panel_6.add(label_2);
 		panel_6.add(btnLogin);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		panel_6.add(lblNewLabel_1);
 		
 		JPanel panel_5 = new JPanel();
 		bottom.add(panel_5);

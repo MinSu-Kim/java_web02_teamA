@@ -2,12 +2,14 @@ package kr.or.yi.hairshop.panel;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.text.DecimalFormat;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class SumPanel extends JPanel {
@@ -35,12 +37,14 @@ public class SumPanel extends JPanel {
 		dsPanel.add(lblSum);
 		
 		tfCount = new JTextField();
+		tfCount.setFont(new Font("굴림", Font.PLAIN, 17));
 		tfCount.setColumns(17);
 		tfCount.setHorizontalAlignment(SwingConstants.CENTER);
 		tfCount.setEditable(false);
 		dsPanel.add(tfCount);
 		
 		tfSum = new JTextField();
+		tfSum.setFont(new Font("굴림", Font.PLAIN, 17));
 		tfSum.setColumns(17);
 		tfSum.setHorizontalAlignment(SwingConstants.CENTER);
 		tfSum.setEditable(false);
@@ -50,7 +54,9 @@ public class SumPanel extends JPanel {
 	}
 
 	public void setSum(int sum) {
-		tfSum.setText(sum+"");
+		DecimalFormat dc = new DecimalFormat("###,###,###");
+		String d = dc.format(sum);
+		tfSum.setText(d+""+"원");
 	}
 
 	public void setCount(int size) {

@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +47,7 @@ import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
 import kr.or.yi.hairshop.ui.frame.DesignerFrame;
 
-public class pProductMgn extends JPanel implements ActionListener {
+public class pProductMgn extends JPanel implements ActionListener, MouseListener {
 
 	public pProductMgn ProductMgn;
 
@@ -197,6 +199,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 		pEvent.add(scrollPaneEvent);
 		tableEvent = new JTable();
+		tableEvent.addMouseListener(this);
 		scrollPaneEvent.setViewportView(tableEvent);
 
 		pProduct = new JPanel();
@@ -208,6 +211,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 		pProduct.add(scrollPaneProduct);
 		tableProduct = new JTable();
+		tableProduct.addMouseListener(this);
 		scrollPaneProduct.setViewportView(tableProduct);
 
 		panel_2 = new JPanel();
@@ -270,6 +274,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 
 		pWorker.add(scrollPaneWorker);
 		tableWorker = new JTable();
+		tableWorker.addMouseListener(this);
 		scrollPaneWorker.setViewportView(tableWorker);
 
 		panel = new JPanel();
@@ -366,6 +371,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ event 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopEventAdd) {
 			clearEventTf();
+			btnEvent.setText("등록");
+			tfEventName.setEditable(true);
 		}
 		if (e.getSource() == mntmPopEventUpdate) {
 			int i = tableEvent.getSelectedRow();
@@ -376,11 +383,16 @@ public class pProductMgn extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == mntmPopEventDelete) {
 			deleteEventUI();
+			clearEventTf();
+			btnEvent.setText("등록");
+			tfEventName.setEditable(true);
 		}
 		
 		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ product 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopProductAdd) {
 			clearProductTf();
+			btnProduct.setText("등록");
+			tfProductName.setEditable(true);
 		}
 		if (e.getSource() == mntmPopProductUpdate) {
 			int i = tableProduct.getSelectedRow();
@@ -391,6 +403,9 @@ public class pProductMgn extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == mntmPopProductDelete) {
 			deleteProductUI();
+			clearProductTf();
+			btnProduct.setText("등록");
+			tfProductName.setEditable(true);
 		}
 
 		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ worker 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
@@ -596,8 +611,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 		tableWorker.setModel(model);
 		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
 		tableWorker.setRowSorter(sorter);
-		tableCellAlignmentWoker(SwingConstants.CENTER, 0, 1, 2, 3);
-		tableSetWidthWoker(80, 80, 120, 120);
+		tableCellAlignmentWoker(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6);
+		tableSetWidthWoker(50, 50, 60, 60, 60, 60, 60);
 
 	}
 
@@ -643,7 +658,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 	}
 
 	private String[] getColumnNamesWoker() {
-		return new String[] { "직급", "이름", "전화번호", "비상연락망" };
+		return new String[] { "직급", "아이디", "이름", "전화번호", "비상연락망", "생일", "메모" };
 	}
 
 	// 테이블 셀 내용의 정렬
@@ -706,4 +721,32 @@ public class pProductMgn extends JPanel implements ActionListener {
 		this.workerList = ds;
 	}
 
+	public void mouseClicked(MouseEvent e) {
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+		if (e.getSource() == tableWorker) {
+			mouseExitedTableWorker(e);
+		}
+		if (e.getSource() == tableProduct) {
+			mouseExitedTableProduct(e);
+		}
+		if (e.getSource() == tableEvent) {
+			mouseExitedTableEvent(e);
+		}
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseExitedTableEvent(MouseEvent e) {
+		tableEvent.clearSelection();
+	}
+	protected void mouseExitedTableProduct(MouseEvent e) {
+		tableProduct.clearSelection();
+	}
+	protected void mouseExitedTableWorker(MouseEvent e) {
+		tableWorker.clearSelection();
+	}
 }

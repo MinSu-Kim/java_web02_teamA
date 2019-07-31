@@ -49,7 +49,6 @@ public class pReservationMgn extends JPanel implements ActionListener {
 	private JMenuItem mntmUpdate;
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmAdd;
-	private JButton button;
 	
 	public pReservationMgn() {
 
@@ -231,7 +230,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 	public void reloadData() {
 		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-		tableSetWidth(20, 80, 40, 40, 40, 40, 40, 40, 40, 80);
+		tableSetWidth(20, 80, 40, 40, 40, 40, 80, 40, 40, 80);
 	}
 
 	private Object[][] getRows() {

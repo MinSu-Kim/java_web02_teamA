@@ -32,12 +32,12 @@ public class pPieChartAll extends JFXPanel implements InitScene {
 		root.setAutoSizeChildren(true);
 
 		pieChart = new PieChart();
-		pieChart.setPrefSize(500, 250);
+		pieChart.setPrefSize(600, 400);
 		pieChart.setData(getChartData());
 		pieChart.setTitle("총 매출 (디자이너별 비율)");
 		pieChart.setLegendVisible(true); // 범례 표시 유무
-		pieChart.setLegendSide(Side.BOTTOM);// 범례 위치
-		pieChart.setLabelLineLength(30); // 원의 둘레 가장자리와 라벨간의 거리 지정
+		pieChart.setLegendSide(Side.RIGHT);// 범례 위치
+		pieChart.setLabelLineLength(15); // 원의 둘레 가장자리와 라벨간의 거리 지정
 		pieChart.setClockwise(true); // 시계방향 배치여부
 		pieChart.setLabelsVisible(true); // 레이블 표시여부
 
