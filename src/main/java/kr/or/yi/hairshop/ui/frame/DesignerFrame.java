@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -31,6 +30,7 @@ import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.DesignerPanel;
 import kr.or.yi.hairshop.panel.SumPanel;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class DesignerFrame extends JFrame implements ActionListener {
@@ -75,7 +75,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	
 		ds = new DesignerMapperImpl();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 800, 624);
+		setBounds(100, 100, 840, 624);
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -93,10 +93,11 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2);
+		panel_2.setSize(300, 600);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		panel_4 = new JPanel();
-		panel_4.setSize(200, 400);
+	
 		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_2.add(panel_4, BorderLayout.CENTER);
 		panel_4.setLayout(new GridLayout(0, 2, 10, 10));
@@ -198,11 +199,12 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 		designerPanel = new DesignerPanel();
 		panel_1.add(designerPanel);
-		designerPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		designerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 13));
 		
 		sumpanel= new SumPanel();
-		designerPanel.add(sumpanel);
 		
+		designerPanel.add(sumpanel);
+	
 //		List<WorkDialog> work = wdao.selectByfivejoinMap(dNo); 
 		System.out.println("22222");
 		System.out.println(dNo);
@@ -278,8 +280,6 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	}
 	
 	public void setText(Designer design) {
-		
-		
 		dNo = design.getdNo();
 		
 		List<WorkDialog> workDialog=wdao.selectByfivejoinMap(dNo);
@@ -288,6 +288,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		int sum=designerPanel.getSum();
 		sumpanel.setSum(sum);
 		sumpanel.setCount(workDialog.size());
+	
 		
 		tfdId.setText(design.getdId());
 		tfdPassword.setText(design.getdPassword());
