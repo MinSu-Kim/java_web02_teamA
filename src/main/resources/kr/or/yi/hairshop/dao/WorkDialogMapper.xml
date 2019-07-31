@@ -190,6 +190,7 @@
 		WHERE w_no=#{wNo};
 	</delete>
 	
+<<<<<<< HEAD
 	<select id="selectTotalPriceByDesigner" parameterType="int" >
 		select sum(w_priceTotal)
 		from workdialog
@@ -213,6 +214,15 @@
 	order by sum(w_priceTotal) desc
 	</select>
 	
+=======
+	<select id="selectByDName" resultMap="reserveDetail">
+		select sum(w_priceTotal) as w_priceTotal, d_name
+		from workdialog w
+		left join choice c on w.w_g_no = c.c_w_no
+		left join designer d on w.w_d_no = d.d_no
+		group by d_name
+	</select>
+>>>>>>> refs/heads/권_chart
 	
 </mapper>
 
