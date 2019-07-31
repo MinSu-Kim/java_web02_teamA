@@ -36,4 +36,10 @@
 		where w_workTime is not null
 		group by left(w_workTime,8)
 	</select>
+	
+	<select id="selectByProductName" resultType="Product">
+		select count(c_p_name) as pPrice, c_p_name as pName
+		from choice group by c_p_name
+	</select>
+	
 </mapper>
