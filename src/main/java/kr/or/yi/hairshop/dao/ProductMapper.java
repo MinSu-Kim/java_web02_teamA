@@ -14,5 +14,6 @@ public interface ProductMapper {
 	public int deleteByName(String name);
 
 	public List<Product> selectDateYearPriceChart();
+	public List<Product> selectByProductName();
 	
 }

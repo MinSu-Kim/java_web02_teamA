@@ -14,18 +14,13 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import kr.or.yi.hairshop.dao.WorkDialogMapper;
-import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
-import kr.or.yi.hairshop.ui.frame.DesignerFrame;
 
 
 @SuppressWarnings("serial")
 public class DesignerPanel extends JPanel {
 	private JTable table;	
 	private List<WorkDialog> dList;
-	private WorkDialogMapper wdao = new WorkDialogMapperImpl();
-	
 	
 	public DesignerPanel() {
 		initComponents();

@@ -115,12 +115,10 @@ public class pProductMgn extends JPanel implements ActionListener {
 	private JDateChooser dcEventStartDate;
 	private JDateChooser dcEventEndDate;
 
-	private JButton btnWorker;
 	private JMenuItem mntmPopWorkerAdd;
 	private JMenuItem mntmPopWorkerUpdate;
 	private JMenuItem mntmPopWorkerDelete;
 	private DesignerFrame DesignerFrame;
-	private HairMainFrame HairMainFrame;
 
 	public pProductMgn() {
 		DesignerFrame = new DesignerFrame();
@@ -390,44 +388,33 @@ public class pProductMgn extends JPanel implements ActionListener {
 			setProductTf(selectProduct);
 			btnProduct.setText("수정");
 			tfProductName.setEditable(false);
-			
 		}
 		if (e.getSource() == mntmPopProductDelete) {
 			deleteProductUI();
 		}
+
+		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ worker 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopWorkerDelete) {
 			deleteDesigner();
 		}
-		
-		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ worker 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopWorkerAdd) { // 디자이너 등록
 			DesignerFrameView();
 		}
-
 		if (e.getSource() == mntmPopWorkerUpdate) { // 디자이너 수정
 			int i = tableWorker.getSelectedRow();
 			Designer worker = workerList.get(i);
 //			System.out.println("============================================"+i);
 //			System.out.println("============================================"+worker.toString2());
-			
 			DesignerFrame.setProductMgn(this);
-			
 			DesignerFrame.setText(worker);
 			setWorker(worker);
-			
-			//수정 눌렀을 때 총매출.올라와야함 
-			
-			
 		}
-
 	}
 
 	private void DesignerFrameView() { // 등록
 		DesignerFrame.setBtnText("등록");
 		DesignerFrame.setProductMgn(this);
 		DesignerFrame.setVisible(true);
-		
-		
 	}
 
 	private void setWorker(Designer worker) { // 수정
