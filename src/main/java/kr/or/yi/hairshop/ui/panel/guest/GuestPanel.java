@@ -43,6 +43,7 @@ import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.dto.Level;
 import kr.or.yi.hairshop.panel.MyTableModel;
 import java.awt.Color;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class GuestPanel extends JPanel implements ActionListener {
@@ -88,7 +89,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		setLayout(new GridLayout(0, 3, 0, 0));
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "\uACE0\uAC1D\uB4F1\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
+		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uACE0\uAC1D\uB4F1\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 
@@ -205,7 +206,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_5.setLayout(new GridLayout(2, 0, 0, 0));
 
 		JPanel panel_7 = new JPanel();
-		panel_7.setBorder(new TitledBorder(null, "\uB4F1\uAE09\uB4F1\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
+		panel_7.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uB4F1\uAE09\uB4F1\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panel_5.add(panel_7);
 		panel_7.setLayout(new GridLayout(0, 2, 2, 2));
 
@@ -252,7 +253,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_7.add(lblNewLabel_6);
 
 		JPanel panel_8 = new JPanel();
-		panel_8.setBorder(new TitledBorder(null, "\uB4F1\uAE09\uB9AC\uC2A4\uD2B8", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
+		panel_8.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uB4F1\uAE09\uB9AC\uC2A4\uD2B8", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panel_5.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 	

@@ -51,7 +51,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel pGuestMain = new JPanel();
-		pGuestMain.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uACE0\uAC1D\uAD00\uB9AC", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
+		pGuestMain.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uACE0\uAC1D\uAD00\uB9AC", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		add(pGuestMain);
 		pGuestMain.setLayout(new GridLayout(0, 1, 0, 0));
 
