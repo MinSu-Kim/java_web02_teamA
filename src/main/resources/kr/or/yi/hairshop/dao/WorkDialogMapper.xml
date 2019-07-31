@@ -205,12 +205,12 @@
 		order by count(w_priceTotal) desc
 	</select>
 	<select id="selectGuestBarChartCount" resultMap="selectWDGECPjoinByNo">
-	select sum(w_priceTotal) as w_priceTotal, w_g_no, g_name 
-	from workdialog w 
-	join guest g
-	on w.w_g_no=g.g_no
-	group by w_g_no 
-	order by sum(w_priceTotal) desc
+		select sum(w_priceTotal) as w_priceTotal, w_g_no, g_name 
+		from workdialog w 
+		join guest g
+		on w.w_g_no=g.g_no
+		group by w_g_no 
+		order by sum(w_priceTotal) desc
 	</select>
 	
 	<select id="selectByDName" resultMap="reserveDetail">
