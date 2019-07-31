@@ -1,9 +1,14 @@
 package kr.or.yi.hairshop.ui.panel.workMain;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +16,17 @@ import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+import com.toedter.calendar.JCalendar;
 
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
@@ -23,32 +37,7 @@ import kr.or.yi.hairshop.dao.ProductMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
-import kr.or.yi.hairshop.dto.Guest;
-import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.dto.WorkDialog;
-import kr.or.yi.hairshop.panel.pCalendar;
-import kr.or.yi.hairshop.ui.frame.WorkDialogFrame;
-
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-
-import com.toedter.calendar.JCalendar;
-
-import java.awt.FlowLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.JLabel;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
 
 @SuppressWarnings("serial")
 public class pHomeSectionForm extends JPanel implements ActionListener, PropertyChangeListener {
@@ -103,6 +92,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		calendar = new JCalendar();
+		calendar.setWeekOfYearVisible(false);
 		
 		
 		String today = sf.format(calendar.getDate());
