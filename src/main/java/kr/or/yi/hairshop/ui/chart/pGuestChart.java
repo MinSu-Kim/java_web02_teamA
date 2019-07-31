@@ -1,23 +1,24 @@
 package kr.or.yi.hairshop.ui.chart;
 
+import java.awt.GridLayout;
+
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
+import kr.or.yi.hairshop.dao.ProductMapper;
+import kr.or.yi.hairshop.dao.ProductMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
-import kr.or.yi.hairshop.dto.WorkDialog;
-
-import java.awt.GridLayout;
-import java.util.List;
-
-import javax.swing.BoxLayout;
 
 public class pGuestChart extends JPanel {
 	private WorkDialogMapper wDao=new WorkDialogMapperImpl();
-	GuestPriceChart pBarPriceChart;
-	GuestCountChart pBarCountChart;
+	private ProductMapper pDao=new ProductMapperImpl();
+	GuestCountBarChart pBarPriceChart;
+	GuestPriceBarChart pBarCountChart;
+	DateYearPriceLineChart dateYearPriceChart;
 	
 	public pGuestChart() {
 		initComponents();
@@ -29,20 +30,27 @@ public class pGuestChart extends JPanel {
 		JPanel panel = new JPanel();
 		add(panel);
 		panel.setLayout(new GridLayout(0, 2, 0, 0));
-		pBarPriceChart = new GuestPriceChart();
+		pBarPriceChart = new GuestCountBarChart();
 		
 		pBarPriceChart.setWList(wDao.selectGuestBarChartPrice());
 		panel.add(pBarPriceChart);
 		
-		pBarCountChart = new GuestCountChart();
+		pBarCountChart = new GuestPriceBarChart();
 		pBarCountChart.setWList(wDao.selectGuestBarChartCount());
 		panel.add(pBarCountChart);
+		
+		
+		dateYearPriceChart = new DateYearPriceLineChart();
+		dateYearPriceChart.setWList(pDao.selectDateYearPriceChart());
+		panel.add(dateYearPriceChart);
+		
 		
 		
 		
 		
 		Platform.runLater(() -> initFX(pBarPriceChart));
 		Platform.runLater(() -> initFX(pBarCountChart));
+		Platform.runLater(() -> initFX(dateYearPriceChart));
 	}
 	
 	public void initFX(InitScene fxPanel) {

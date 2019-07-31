@@ -13,6 +13,15 @@ public class Product {
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	public Product(int pPrice, String pName) {
+		this.pPrice = pPrice;
+		this.pName = pName;
+	}
+
+
 
 	public Product(int pPrice, String pName, String pDivision) {
 		this.pPrice = pPrice;
