@@ -133,10 +133,11 @@ and left(right(`w_reservTime`,8),2) between 0 and 7);
 delete from choice where c_w_no in (select w_no from workdialog where `w_workTime` between '2015-01-01' and '2019-12-31'
 and left(right(`w_reservTime`,8),2) between 22 and 24);
 
-delete from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
-and left(right(`w_reservTime`,8),2) between 0 and 7;
-delete from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
-and left(right(`w_reservTime`,8),2) between 22 and 24;
+
+
+
+
+
 
 delete from workdialog;
 select * from workdialog;
@@ -260,8 +261,8 @@ order by w_reservTime desc
 
 
 
-
-
+select * from product where p_secession = '0' order by p_name;
+select * from product;
 
 
 
