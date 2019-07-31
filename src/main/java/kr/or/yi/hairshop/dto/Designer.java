@@ -215,10 +215,10 @@ public class Designer {
 		return true;
 	}
 
-//	@Override
-//	public String toString() {
-//		return String.format("%s", dName);
-//	}
+	@Override
+	public String toString() {
+		return String.format("%s", dName);
+	}
 
 	
 	public String toString2() {
@@ -236,11 +236,5 @@ public class Designer {
 		return new Object[] { dGrade, dName, dTel, dTel2 };
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-				"Designer [dNo=%s, dGrade=%s, dId=%s, dPassword=%s, dName=%s, dTel=%s, dTel2=%s, dAddr=%s, dAddr2=%s, dAddr3=%s, dBirth=%s, dJoin=%s, dMemo=%s, workDialogList=%s, dSecession=%s]",
-				dNo, dGrade, dId, dPassword, dName, dTel, dTel2, dAddr, dAddr2, dAddr3, dBirth, dJoin, dMemo,
-				workDialogList, dSecession);
-	}
+	
 }
