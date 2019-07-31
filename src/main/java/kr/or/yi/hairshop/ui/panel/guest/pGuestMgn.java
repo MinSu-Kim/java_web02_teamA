@@ -118,6 +118,8 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		if (e.getSource() == mntmAdd) {
 			pInfomation.clear();
 			pInfomation.setBtn();
+			pInfomation.resetGradeCmb();
+
 		}
 		if (e.getSource() == mntmUpdate) {
 			int i = table.getSelectedRow();
@@ -125,10 +127,13 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			pInfomation.setGuestTf(selectGuest);
 			
 			pInfomation.setBtn2();
+
 			
 		}		
 		if (e.getSource() == mntmDelete) {
 			deleteGuestUI();
+			pInfomation.resetGradeCmb();
+			
 		}		
 	}
 	

@@ -25,4 +25,6 @@ public interface WorkDialogMapper {
 	public int deleteWorkDialog(int wNo);
 	public List<WorkDialog> selectGuestBarChartPrice();
 	public List<WorkDialog> selectGuestBarChartCount();
+	
+	public List<WorkDialog> selectTotalPriceByDesigner (int wDNo);
 }
