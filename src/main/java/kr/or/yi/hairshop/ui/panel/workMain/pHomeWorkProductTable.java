@@ -1,45 +1,42 @@
-package kr.or.yi.hairshop.ui.panel.home;
+package kr.or.yi.hairshop.ui.panel.workMain;
 
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
-import org.junit.runners.ParentRunner;
-
-import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.dto.Product;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.RowSorter;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
-public class pHomeProductTable extends AbstractPanelTable<Product> implements MouseListener,ActionListener {
-	
+public class pHomeWorkProductTable extends AbstractPanelTable<Product> implements MouseListener,ActionListener {
 	private JPopupMenu popupMenuProduct=new JPopupMenu();
 	private JMenuItem popupItemProduct=null;
 	private int choiceRow;
 	
-	public pHomeProductTable() {
-		
+	public pHomeWorkProductTable() {
 		initComponents();
 	}
 	private void initComponents() {
 		table.addMouseListener(this);
-		popupItemProduct=new JMenuItem("추가");
+		popupItemProduct=new JMenuItem("삭제");
 		popupItemProduct.addActionListener(this);
 		popupMenuProduct.add(popupItemProduct);
+		itemList=new ArrayList<Product>();
 		table.setComponentPopupMenu(popupMenuProduct);
 	}
 
-//	@Override
-//	protected void reloadData() {
-//		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
-//		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
-//		tableSetWidth(200, 200, 200);		
-//	}
 
 	@Override
 	protected String[] getColumnNames() {
@@ -48,7 +45,7 @@ public class pHomeProductTable extends AbstractPanelTable<Product> implements Mo
 
 	@Override
 	protected Object[] toArray(int i) {
-		return itemList.get(i).toArray();
+		return itemList.get(i).toArray2();
 	}
 	
 	public void mouseClicked(MouseEvent e) {
@@ -63,11 +60,30 @@ public class pHomeProductTable extends AbstractPanelTable<Product> implements Mo
 	}
 	public void mouseReleased(MouseEvent e) {
 	}
-	protected void mouseExitedThisTable(MouseEvent e) {
+	protected void mouseEnteredThisTable(MouseEvent e) {
+	}
+	
+	public void addProduct(Product product) {
+		if(itemList.contains(product)==false) {
+			itemList.add(product);
+			reloadData();
+		}else {
+			JOptionPane.showMessageDialog(null, "이미 상품이 있습니다.");
+		}
+		
+	}
+	public List<Product> getProductList(){
+		return this.itemList;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		parent.setWorkProduct(itemList.get(choiceRow));
+		itemList.remove(choiceRow);
+		parent.setPriceSub();
+		reloadData();
 	}
 	
+	public void clearProduct() {
+		itemList=new ArrayList<Product>();
+		reloadData();
+	}
 }

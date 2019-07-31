@@ -1,10 +1,7 @@
 package kr.or.yi.hairshop.ui.chart;
 
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,19 +19,18 @@ import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
 
 @SuppressWarnings("serial")
-public class GuestChart extends JFXPanel implements InitScene{
+public class GuestPriceChart extends JFXPanel implements InitScene{
 
 	private BarChart<String, Number> barChart;
-	private WorkDialogMapper wDao=new WorkDialogMapperImpl();
+	
 	private List<WorkDialog> wList;
 	
-	public GuestChart() {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("wDNo",1+"");
-		map.put("date","2019-07-30");
-		wList = wDao.selectWDGECPjoinByWDNoDate(map);
+	public GuestPriceChart() {
+		
 	}
-
+	public void setWList(List<WorkDialog> wList) {
+		this.wList=wList;
+	}
 	@Override
 	public Scene createScene() {
 		Group root = new Group();
@@ -43,10 +39,10 @@ public class GuestChart extends JFXPanel implements InitScene{
 		
 		//막 대형 차트의 X 축과 Y 축을 정의하고 레이블을 설정
 		CategoryAxis xAxis = new CategoryAxis();
-		xAxis.setLabel("기간");
+		xAxis.setLabel("고객 인원");
 
 		NumberAxis yAxis = new NumberAxis();
-		yAxis.setLabel("방문횟수");
+		yAxis.setLabel("총매출");
 
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("고객 현황");
@@ -122,10 +118,8 @@ public class GuestChart extends JFXPanel implements InitScene{
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
 		
 
-		dataSeries.setName(work.getwEName().geteName());
-		for(int i=0; i<wList.size(); i++) {
-			dataSeries.getData().add(new XYChart.Data<>(i+"",100));
-		}
+		dataSeries.setName(work.getwGNo().getgName());
+		dataSeries.getData().add(new XYChart.Data<>("Top10",work.getwPriceTotal()));
 		
 		return dataSeries;
 	}
@@ -134,8 +128,17 @@ public class GuestChart extends JFXPanel implements InitScene{
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
 		
 		
+		int top=0;
+		if(wList.size()>9)
+			top=10;
+		else
+			top=wList.size();
+		for(int i=0; i<top; i++) {
+//			WorkDialog work = new WorkDialog(wList.get(i).getwNo(),wList.get(i).getwGNo(),wList.get(i).getwPriceTotal());
+			list.add(getChartData(wList.get(i)));
+		}
 		
-//		list.add(getChartData(wList.get(i)));
+		
 		
 //		list.add(getChartData(work))
 		

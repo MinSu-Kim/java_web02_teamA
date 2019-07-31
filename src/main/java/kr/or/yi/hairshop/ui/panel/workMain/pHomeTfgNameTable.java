@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.ui.panel.home;
+package kr.or.yi.hairshop.ui.panel.workMain;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

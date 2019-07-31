@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.ui.panel.home;
+package kr.or.yi.hairshop.ui.panel.workMain;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

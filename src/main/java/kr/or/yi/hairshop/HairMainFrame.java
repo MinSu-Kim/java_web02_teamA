@@ -19,10 +19,11 @@ import javax.swing.border.EmptyBorder;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.ui.frame.LoginFrame;
 import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn;
-import kr.or.yi.hairshop.ui.panel.home.pHomeSectionForm;
+import kr.or.yi.hairshop.ui.panel.home.pHomeSection;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
 import kr.or.yi.hairshop.ui.panel.reserve.pReservationMgn;
-import kr.or.yi.hairshop.ui.chart.GuestBarChart;
+import kr.or.yi.hairshop.ui.panel.workMain.pHomeSectionForm;
+import kr.or.yi.hairshop.ui.chart.pGuestChart;
 
 @SuppressWarnings("serial")
 public class HairMainFrame extends JFrame implements ActionListener {
@@ -32,7 +33,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	private static Designer Auth = null;
 
 	private JPanel contentPane;
-	private pHomeSectionForm home;
+	private pHomeSectionForm workMain;
 	private JButton btnLogin;
 	private JLabel lblLogin;
 
@@ -45,7 +46,10 @@ public class HairMainFrame extends JFrame implements ActionListener {
 					//2. 디자이너 - 작업횟수, 결제 총액 / 전체(디자이너별%)
 					
 					//3. 어떤작업이 제일많이 작업되었는지
-					//4. 총매출 / 막대그래프
+					//4. 총매출 / 년/월 /일 막대그래프
+					//4-1 년 : 월별로-12 -파이로
+					//4-2 달 : 일별로-30 -
+					//4-3 일 : 시간별-24 -
 
 					mainFrame = new HairMainFrame();
 					mainFrame.setVisible(true);
@@ -106,9 +110,13 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		pMain.add(tabbedPane);
 
-		home = new pHomeSectionForm();
-		home.refresh(0);
+		pHomeSection home = new pHomeSection();
 		tabbedPane.addTab("홈", null, home, "홈");
+		
+		
+		workMain = new pHomeSectionForm();
+		workMain.refresh(0);
+		tabbedPane.addTab("작업화면", null, workMain, "작업화면");
 
 		pReservationMgn ReservationMgn = new pReservationMgn();
 		ReservationMgn.clearList();
@@ -129,10 +137,10 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		// BrowserP pWeb = new BrowserP("웹");
 		// tabbedPane.addTab("웹", null, pWeb, null);
 
-		GuestBarChart guestChart = new GuestBarChart();
+		pGuestChart guestChart = new pGuestChart();
 		tabbedPane.addTab("고객 현황", null, guestChart, null);
 
-		GuestBarChart purcharge = new GuestBarChart();
+		JPanel purcharge = new JPanel();
 		tabbedPane.addTab("디자이너 현황", null, purcharge, null);
 
 		JPanel panel = new JPanel();
