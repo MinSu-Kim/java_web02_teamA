@@ -70,7 +70,7 @@ public class pDesignerChart extends JPanel implements ItemListener {
 
 		JPanel pRDB = new JPanel();
 		pRightMon.add(pRDB, BorderLayout.SOUTH);
-		pRDB.setLayout(new GridLayout(0, 6, 0, 0));
+		pRDB.setLayout(new GridLayout(0, 7, 0, 0));
 		
 		rbBtn0 = new JRadioButton("1월");
 		rbBtn0.addItemListener(this);

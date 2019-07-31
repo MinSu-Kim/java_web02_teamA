@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,8 +26,6 @@ import kr.or.yi.hairshop.ui.panel.home.pHomeSection;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
 import kr.or.yi.hairshop.ui.panel.reserve.pReservationMgn;
 import kr.or.yi.hairshop.ui.panel.workMain.pHomeSectionForm;
-import kr.or.yi.hairshop.ui.webborwser.pWebBrowser;
-import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class HairMainFrame extends JFrame implements ActionListener {
@@ -38,9 +37,14 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	private pDesignerChart pDesignerChart;
 
 	private JPanel contentPane;
-	private pHomeSectionForm workMain;
 	private JButton btnLogin;
 	private JLabel lblLogin;
+	private pGuestChart guestChart;
+	private pProductMgn ProductMgn;
+	private pGuestMgn GuestMgn;
+	private pHomeSection home;
+	private pReservationMgn ReservationMgn;
+	private JTabbedPane tabbedPane;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -115,48 +119,39 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		contentPane.add(pMain, BorderLayout.CENTER);
 		pMain.setLayout(new BorderLayout(0, 0));
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		pMain.add(tabbedPane);
 
-		pHomeSection home = new pHomeSection();
+		home = new pHomeSection();
 		tabbedPane.addTab("홈", null, home, "홈");
 		
-		
-		workMain = new pHomeSectionForm();
+		pHomeSectionForm workMain = new pHomeSectionForm();
 		workMain.refresh(0);
 		tabbedPane.addTab("작업화면", null, workMain, "작업화면");
 
-		pReservationMgn ReservationMgn = new pReservationMgn();
+		ReservationMgn = new pReservationMgn();
 		ReservationMgn.clearList();
 		ReservationMgn.reloadData();
 		tabbedPane.addTab("예약 관리", null, ReservationMgn, null);
 
-		pGuestMgn GuestMgn = new pGuestMgn();
+		GuestMgn = new pGuestMgn();
 		GuestMgn.clearList();
 		GuestMgn.reloadData();
 		tabbedPane.addTab("고객 관리", null, GuestMgn, null);
 
-		pProductMgn ProductMgn = new pProductMgn();
+		ProductMgn = new pProductMgn();
 		ProductMgn.setParent(HairMainFrame.this);
 		ProductMgn.clearList();
 		ProductMgn.reloadData();
 		tabbedPane.addTab("제품 관리", null, ProductMgn, null);
-
-
-		// BrowserP pWeb = new BrowserP("웹");
-		// tabbedPane.addTab("웹", null, pWeb, null);
 		
-		
-		
-		pGuestChart guestChart = new pGuestChart();
+		guestChart = new pGuestChart();
 		tabbedPane.addTab("매출 현황", null, guestChart, null);
+		tabbedPane.setEnabledAt(5, false);
 
 		pDesignerChart = new pDesignerChart();
 		tabbedPane.addTab("디자이너 현황", null, pDesignerChart, null);
-
-
-		pWebBrowser pWeb = new pWebBrowser();
-		tabbedPane.addTab("WEB", null, pWeb, null);
+		tabbedPane.setEnabledAt(6, false);
 
 	}
 
@@ -179,6 +174,11 @@ public class HairMainFrame extends JFrame implements ActionListener {
 			btnLogin.setText("로그인");
 			lblLogin.setText("");
 			LoginFrame.setVisible(true);
+			
+			//로그 아웃시 볼수 없음
+			tabbedPane.setEnabledAt(5, false);
+			tabbedPane.setEnabledAt(6, false);
+			
 		}
 	}
 
@@ -186,6 +186,9 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		Auth = designer;
 		btnLogin.setText("로그아웃");
 		lblLogin.setText(Auth.getdName() + "님 반갑습니다");
+		
+		tabbedPane.setEnabledAt(5, true);
+		tabbedPane.setEnabledAt(6, true);
 	}
 
 }

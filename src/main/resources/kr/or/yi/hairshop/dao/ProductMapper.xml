@@ -11,7 +11,7 @@
 	
 	
 	<select id="selectProductByAll" resultType="Product">
-		select * from product order by p_name
+		select * from product where p_secession = false order by p_name
 	</select>
 	
 	<insert id="insert" parameterType="Product">
@@ -24,11 +24,13 @@
 		update product
 		set p_name=#{pName}, p_price=#{pPrice}, p_division=#{pDivision}
 		where p_name=#{pName}
-	</update>
+	</update>	
 	
-	<delete id="deleteByName">
-		delete from product where p_name=#{param1}
-	</delete>
+	<update id="deleteByName">
+		update product
+		set p_secession = 1
+		where p_name=#{param1}
+	</update>
 
 	<select id="selectDateYearPriceChart" resultType="Product">
 		select sum(w_priceTotal) as p_price,left(w_workTime,7) as p_name 
