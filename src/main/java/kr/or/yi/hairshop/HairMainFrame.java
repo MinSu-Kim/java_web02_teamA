@@ -33,7 +33,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	private static Designer Auth = null;
 
 	private pDesignerChart pDesignerChart;
-	
+
 	private JPanel contentPane;
 	private pHomeSectionForm home;
 	private JButton btnLogin;
@@ -134,14 +134,12 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 		pDesignerChart = new pDesignerChart();
 		tabbedPane.addTab("디자이너 현황", null, pDesignerChart, null);
-		
+
 		pWebBrowser pWeb = new pWebBrowser();
 		tabbedPane.addTab("WEB", null, pWeb, null);
 
 	}
-	
 
-	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnLogin) {

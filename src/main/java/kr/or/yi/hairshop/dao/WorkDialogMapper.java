@@ -24,4 +24,7 @@ public interface WorkDialogMapper {
 	public int updateWorkDialog(WorkDialog workDialog);
 	public int deleteWorkDialog(int wNo);
 	
+	
+	public List<WorkDialog> selectByDName();
+	
 }
