@@ -18,15 +18,14 @@ import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-public class Browser {
-	private JFrame frame;
+public class pWebBrowser extends JPanel{
+	private JPanel mainPanel;
 	private JPanel panelTop;
 	private JEditorPane editor;
 	private JScrollPane scroll;
@@ -34,35 +33,36 @@ public class Browser {
 	private JButton button;
 	private URL url;
 
-	public Browser(String title) {
+	public pWebBrowser() {
 		initComponents();
 
 		// set the title of the frame
-		frame.setTitle(title);
+		// mainPanel.setTitle(title);
 
 		// set the default cloe op of the jframe
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// mainPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// set size of frame
-		frame.setSize(800, 600);
+		mainPanel.setSize(800, 600);
+		mainPanel.setLayout(new BorderLayout(0, 0));
 
 		// add jpanel to north of jframe
-		frame.add(BorderLayout.NORTH, panelTop);
+		mainPanel.add(panelTop, BorderLayout.NORTH);
 
 		// add textfield and navigation button to jpanel.
 		panelTop.add(field);
 		panelTop.add(button);
 
 		// add scroll pane to jframe center
-		frame.add(BorderLayout.CENTER, scroll);
+		mainPanel.add(scroll);
 
 		// set the frame visible
-		frame.setVisible(true);
+		mainPanel.setVisible(true);
 	}// end Browser() constructor
 
 	private void initComponents() {
 		// create the JFrame
-		frame = new JFrame();
+		mainPanel = new JPanel();
 
 		// create the JPanel used to hold the text field and button.
 		panelTop = new JPanel();
@@ -85,7 +85,8 @@ public class Browser {
 		}
 
 		// create the scroll pane and add the JEditorPane to it.
-		scroll = new JScrollPane(editor, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll = new JScrollPane(editor, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		// create the JTextField
 		field = new JTextField();
@@ -114,11 +115,11 @@ public class Browser {
 		});
 	}// end initComponents()
 
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new Browser("Simple web browser");
-			}
-		});
-	}// end main method.
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				new Browser2();
+//			}
+//		});
+//	}// end main method.
 }// end Browser class

@@ -179,7 +179,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 		pEventTF.add(lblEventSale);
 
 		spEventSale = new JSpinner();
-		spEventSale.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
+		spEventSale.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		pEventTF.add(spEventSale);
 
 		panel_3 = new JPanel();
@@ -239,7 +239,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 		pProductTF.add(label);
 
 		spProductPrice = new JSpinner();
-		spProductPrice.setModel(new SpinnerNumberModel(new Integer(5000), null, null, new Integer(5000)));
+		spProductPrice.setModel(new SpinnerNumberModel(new Integer(5000), new Integer(0), null, new Integer(5000)));
 		pProductTF.add(spProductPrice);
 
 		label_1 = new JLabel("분류");
@@ -373,6 +373,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 			Event selectEvent = eventList.get(i);
 			setEventTf(selectEvent);
 			btnEvent.setText("수정");
+			tfEventName.setEditable(false);
 		}
 		if (e.getSource() == mntmPopEventDelete) {
 			deleteEventUI();
@@ -387,6 +388,8 @@ public class pProductMgn extends JPanel implements ActionListener {
 			Product selectProduct = proList.get(i);
 			setProductTf(selectProduct);
 			btnProduct.setText("수정");
+			tfProductName.setEditable(false);
+			
 		}
 		if (e.getSource() == mntmPopProductDelete) {
 			deleteProductUI();
@@ -480,10 +483,10 @@ public class pProductMgn extends JPanel implements ActionListener {
 				String pDivision = tfDivision.getText();
 
 				Product pro = new Product(pPrice, pName, pDivision);
-
+				
 				pdao.updateByName(pro);
-
 				btnProduct.setText("등록");
+				tfProductName.setEditable(true);
 				clearProductTf();
 				clearList();
 				reloadData();
@@ -514,6 +517,7 @@ public class pProductMgn extends JPanel implements ActionListener {
 				Event event = new Event(eName, eStartDay, eEndDay, eSale);
 				edao.updateByName(event);
 				btnEvent.setText("등록");
+				tfEventName.setEditable(true);
 				clearEventTf();
 				clearList();
 				reloadData();

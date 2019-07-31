@@ -23,7 +23,7 @@
 	
 	<update id="updateByName">
 		update event
-		set e_startday=#{eStartDay}, e_endday=#{eEndDay}, e_sale=#{eSale}
+		set e_name=#{eName}, e_startday=#{eStartDay}, e_endday=#{eEndDay}, e_sale=#{eSale}
 		where e_name=#{eName}
 	</update>
 	
