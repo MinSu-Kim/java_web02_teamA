@@ -158,6 +158,8 @@ public class Guest {
 	public String toString() { // 나모가 바꿈
 		return String.format("%s", gName);
 	}
+	
+	
 
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -170,6 +172,7 @@ public class Guest {
 		
 		return new Object[] {gName,date.format(gBirth),gId,gLGrade.getlGrade()};
 	}
+
 	
 	
 }

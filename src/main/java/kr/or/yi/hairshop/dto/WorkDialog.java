@@ -18,6 +18,8 @@ public class WorkDialog {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
 	public WorkDialog(int wNo, Date wReservTime, Date wWorkTime, int wPriceTotal, Event wEName, Designer wDNo,
 			Guest wGNo, List<Product> productList) {
 		this.wNo = wNo;
@@ -29,6 +31,13 @@ public class WorkDialog {
 		this.wGNo = wGNo;
 		this.productList = productList;
 	}
+
+	public WorkDialog(int wPriceTotal, Guest wGNo) {
+		this.wPriceTotal = wPriceTotal;
+		this.wGNo = wGNo;
+	}
+
+
 
 	public int getwNo() {
 		return wNo;
@@ -97,13 +106,19 @@ public class WorkDialog {
 
 	
 
+	public WorkDialog(int wNo,  Guest wGNo,int wPriceTotal) {
+		this.wNo = wNo;
+		this.wPriceTotal = wPriceTotal;
+		this.wGNo = wGNo;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
 				"WorkDialog [wNo=%s, wReservTime=%s, wWorkTime=%s, wPriceTotal=%s, wEName=%s, wDNo=%s, wGNo=%s, productList=%s]",
 				wNo, wReservTime, wWorkTime, wPriceTotal, wEName, wDNo, wGNo, productList);
 	}
-
+	
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		return new Object[] { wNo, date.format(wWorkTime), date.format(wReservTime), wPriceTotal, wEName, wDNo, wGNo };
