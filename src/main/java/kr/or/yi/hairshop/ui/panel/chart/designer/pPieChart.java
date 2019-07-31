@@ -69,21 +69,9 @@ public class pPieChart extends JFXPanel implements InitScene {
 			i++;
 		}
 
-		list.addAll(
-				new PieChart.Data(name[0], Math.round(100/(all/money[0]))/1),
-				new PieChart.Data(name[1], Math.round(100/(all/money[1]))/1),
-				new PieChart.Data(name[2], Math.round(100/(all/money[2]))/1),
-				new PieChart.Data(name[3], Math.round(100/(all/money[3]))/1)
-				);
-	
-		
-//		for (int j = 0; i < size; i++) {
-//			list.addAll(new PieChart.Data(name[j], money[j]));
-//			//addChartData(name[j], money[j]);
-//		}
-
-		// list.addAll(new PieChart.Data("영각", 17), new PieChart.Data("철수", 31), new
-		// PieChart.Data("마리", 10));
+		for (int j = 0; j < size; j++) {
+			list.add(new PieChart.Data(name[j], Math.round(100/(all/money[j]))/1));
+		}
 
 		return list;
 	}
