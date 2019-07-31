@@ -144,10 +144,11 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		
 		JPanel panel_13 = new JPanel();
 		ptimeTable.add(panel_13);
-		panel_13.setLayout(new BorderLayout(0, 0));
+		panel_13.setLayout(null);
 		
 		JPanel panel_5 = new JPanel();
-		panel_13.add(panel_5, BorderLayout.NORTH);
+		panel_5.setBounds(0, 0, 52, 310);
+		panel_13.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
 		
@@ -194,10 +195,15 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		pSection.add(panel_3, BorderLayout.CENTER);
 		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		JPanel panel_1 = new JPanel();
+		panel_3.add(panel_1);
+		panel_1.setLayout(null);
+		
 		
 		
 		JPanel panelListForm = new JPanel();
-		panel_3.add(panelListForm);
+		panelListForm.setBounds(0, 0, 900, 310);
+		panel_1.add(panelListForm);
 		panelListForm.setLayout(new BoxLayout(panelListForm, BoxLayout.X_AXIS));
 		
 		JPanel panelFooter = new JPanel();
@@ -217,7 +223,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		panelFooter.add(panelFooterTf, BorderLayout.CENTER);
 		
 		
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<5; i++) {
 			panelList[i] = new pHomeSectionBlock();
 			panelListForm.add(panelList[i]);
 			panelList[i].setPopupMenu(popupMenuTime);
@@ -235,7 +241,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 	
 	
 	public void refresh(int start) {
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<5; i++) {
 			if(dList.size()>i+start) {
 				panelList[i].setParent(this);
 				panelList[i].setDisigner(dList.get(i+start));
@@ -261,12 +267,12 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		}
 	}
 	protected void actionPerformedBtnLeft(ActionEvent e) {
-		start-=3;
+		start-=4;
 		if(start==0) {
 			btnLeft.setEnabled(false);
 		}
 		btnRight.setEnabled(true);
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<5; i++) {
 			panelList[i].clearTable();
 		}
 		refresh(start);
@@ -274,12 +280,12 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		repaint();
 	}
 	protected void actionPerformedBtnRight(ActionEvent e) {
-		start+=3;
+		start+=5;
 		btnLeft.setEnabled(true);
-		if(dList.size()<start+3) {
+		if(dList.size()<start+5) {
 			btnRight.setEnabled(false);
 		}
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<5; i++) {
 			panelList[i].clearTable();
 		}
 		refresh(start);

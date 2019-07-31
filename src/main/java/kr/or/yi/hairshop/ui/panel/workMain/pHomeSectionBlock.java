@@ -45,13 +45,10 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 	private JLabel lblDesigner;
 	private Designer designer;
 	private DefaultTableModel model;
-//	private Map<Integer, WorkDialog> list=new HashMap<Integer, WorkDialog>();
 
 	private Map<Integer, ArrayList<WorkDialog>> dWorkList = new HashMap<Integer,ArrayList<WorkDialog>>();
 	private final String[] columns = {"손님" };
 
-	private WorkDialogMapper dao = new WorkDialogMapperImpl();
-	private WorkDialogFrame frame;
 	private String[][] data = { 
 			{""},
 			{""},

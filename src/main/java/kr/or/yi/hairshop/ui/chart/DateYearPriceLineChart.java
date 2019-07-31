@@ -84,14 +84,12 @@ public class DateYearPriceLineChart extends JFXPanel implements InitScene{
 	}
 	public XYChart.Series<String, Number> getChartData(Object[][] obj) {
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
-
 		
 		dataSeries.setName(year);
 		for(int i=0; i<12; i++) {
 			dataSeries.getData().add(new XYChart.Data<>(obj[i][0].toString(),Integer.parseInt(obj[i][1]+"")));
 			
 		}
-			
 		
 		return dataSeries;
 	}

@@ -26,6 +26,7 @@ import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
 import kr.or.yi.hairshop.ui.panel.reserve.pReservationMgn;
 import kr.or.yi.hairshop.ui.panel.workMain.pHomeSectionForm;
 import kr.or.yi.hairshop.ui.webborwser.pWebBrowser;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class HairMainFrame extends JFrame implements ActionListener {
@@ -72,7 +73,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	}
 
 	private void initComponents() {
-
+		setTitle("미용실 관리 프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 960);
 		contentPane = new JPanel();
@@ -93,7 +94,8 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		TopLogo.add(topLogo);
 		topLogo.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JLabel lblNewLabel = new JLabel("미용실관리 프로그램");
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("images\\logo.png"));
 		topLogo.add(lblNewLabel);
 
 		JPanel LoginBtn = new JPanel();
@@ -143,7 +145,9 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 		// BrowserP pWeb = new BrowserP("웹");
 		// tabbedPane.addTab("웹", null, pWeb, null);
-
+		
+		
+		
 		pGuestChart guestChart = new pGuestChart();
 		tabbedPane.addTab("매출 현황", null, guestChart, null);
 

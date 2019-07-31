@@ -36,7 +36,7 @@ public class pPieChartMon extends JFXPanel implements InitScene {
 		root.setAutoSizeChildren(true);
 
 		pieChart = new PieChart();
-		pieChart.setPrefSize(500, 250);
+		pieChart.setPrefSize(500, 300);
 		pieChart.setData(getChartData());
 		pieChart.setTitle("월별 매출 (디자이너별 비율)");
 		pieChart.setLegendVisible(true); // 범례 표시 유무

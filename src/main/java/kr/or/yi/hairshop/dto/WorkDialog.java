@@ -164,7 +164,14 @@ public class WorkDialog {
 		}else {
 			wWrok = (String) date.format(wWorkTime);
 		}
-		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade().getlGrade(), pName, wEName.geteName(), wPriceTotal, wWrok };
+		
+		String eventstr="";
+		if(wEName==null) {
+			eventstr="일반";
+		}else {
+			eventstr=wEName.geteName();
+		}
+		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade().getlGrade(), pName, eventstr, wPriceTotal, wWrok };
 		
 	}
 	

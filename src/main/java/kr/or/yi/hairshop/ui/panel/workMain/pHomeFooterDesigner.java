@@ -47,7 +47,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	private JTextField tfgName;
 	private JTextField tfpPrice;
 	private JButton btnUpdate;
-	private JSpinner jSpinwWorkTime;
+//	private JSpinner jSpinwWorkTime;
 	private JSpinner jSpinwReserveTime;
 	private JButton btnCancel;
 
@@ -177,17 +177,17 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 //		panelData.add(tfdName);
 //		tfdName.setColumns(10);
 
-		JLabel lblwWorkTime = new JLabel("작업완료일");
-		panelData.add(lblwWorkTime);
-		lblwWorkTime.setHorizontalAlignment(SwingConstants.CENTER);
+//		JLabel lblwWorkTime = new JLabel("작업완료일");
+//		panelData.add(lblwWorkTime);
+//		lblwWorkTime.setHorizontalAlignment(SwingConstants.CENTER);
 
 //		tfwWorkTime = new JTextField();
 //		tfwWorkTime.setColumns(10);
 //		panel.add(tfwWorkTime);
 
-		jSpinwWorkTime = new JSpinner();
-		panelData.add(jSpinwWorkTime);
-		jSpinwWorkTime.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
+//		jSpinwWorkTime = new JSpinner();
+//		panelData.add(jSpinwWorkTime);
+//		jSpinwWorkTime.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
 
 		JLabel lblwReservTime = new JLabel("작업일예약");
 		panelData.add(lblwReservTime);
@@ -280,7 +280,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		tfgName.setText("");
 		tfpPrice.setText("");
 		jSpinwReserveTime.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
-		jSpinwWorkTime.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
+//		jSpinwWorkTime.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
 		cmbDesigner.setSelectedIndex(-1);
 		cmbEvent.setSelectedIndex(-1);
 		revalidate();
@@ -313,10 +313,10 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		else {
 			jSpinwReserveTime.setModel(new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY));
 		}
-		if (workDialog.getwWorkTime() != null)
-			jSpinwWorkTime.setModel(new SpinnerDateModel(workDialog.getwWorkTime(), null, null, Calendar.HOUR_OF_DAY));
-		else
-			jSpinwWorkTime.setModel(new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY));
+//		if (workDialog.getwWorkTime() != null)
+//			jSpinwWorkTime.setModel(new SpinnerDateModel(workDialog.getwWorkTime(), null, null, Calendar.HOUR_OF_DAY));
+//		else
+//			jSpinwWorkTime.setModel(new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY));
 
 	}
 	public void setTfGuest(Guest guest) {
@@ -349,7 +349,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		Event event = (Event)cmbEvent.getSelectedItem();
 		
 		work.setwReservTime((Date)jSpinwReserveTime.getValue());
-		work.setwWorkTime((Date)jSpinwWorkTime.getValue());
+//		work.setwWorkTime((Date)jSpinwWorkTime.getValue());
 		if(!tfpPrice.getText().equals(""))
 			work.setwPriceTotal(Integer.parseInt(tfpPrice.getText()));
 		
@@ -409,11 +409,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		clearTf();
 	}
 
-	protected void itemStateChangedCmbProduct(ItemEvent e) {
-		String pName = e.getItem().toString();
-		JLabel label = new JLabel(pName);
-		JButton btn = new JButton("x");
-	}
 
 	public void setWorkProduct(Product product) {
 		panelWorkProduct.addProduct(product);

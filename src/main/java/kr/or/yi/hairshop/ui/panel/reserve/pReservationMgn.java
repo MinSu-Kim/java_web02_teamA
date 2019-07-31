@@ -90,7 +90,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 				SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
 				
 				String oneDay = sdate.format(calStart.getDate());
-				String endDay = edate.format(calStart.getDate());
+				String endDay = edate.format(calEnd.getDate());
 				
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("start", oneDay);
@@ -120,7 +120,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 				SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
 				SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
 				
-				String oneDay = sdate.format(calEnd.getDate());
+				String oneDay = sdate.format(calStart.getDate());
 				String endDay = edate.format(calEnd.getDate());
 				
 				Map<String, String> map = new HashMap<String, String>();
