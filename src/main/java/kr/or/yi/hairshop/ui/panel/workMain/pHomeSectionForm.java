@@ -95,7 +95,6 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		calendar.setWeekOfYearVisible(false);
 		
 		
-		String today = sf.format(calendar.getDate());
 		dList = d_Dao.selectDesignerByAll();
 		calendar.getDayChooser().addPropertyChangeListener(this);
 		
@@ -267,7 +266,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		}
 	}
 	protected void actionPerformedBtnLeft(ActionEvent e) {
-		start-=4;
+		start-=5;
 		if(start==0) {
 			btnLeft.setEnabled(false);
 		}
