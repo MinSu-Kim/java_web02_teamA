@@ -83,7 +83,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private void initComponents() {
 		setTitle("디자이너 관리 프로그램");
 		
-			ds = new DesignerMapperImpl();
+		ds = new DesignerMapperImpl();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 624);
 		contentPane = new JPanel();
@@ -103,12 +103,12 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2);
-		panel_2.setSize(300, 600);
+		panel_2.setSize(200, 600);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		panel_4 = new JPanel();
 		
-			panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_2.add(panel_4, BorderLayout.CENTER);
 		panel_4.setLayout(new GridLayout(0, 2, 10, 10));
 		
@@ -208,16 +208,12 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		panel_5.add(button);
 		
 		designerPanel = new DesignerPanel();
+
 		panel_1.add(designerPanel);
 		designerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 13));
 		
 		sumpanel= new SumPanel();
-		
 		designerPanel.add(sumpanel);
-		
-//		List<WorkDialog> work = wdao.selectByfivejoinMap(dNo); 
-			System.out.println("22222");
-		System.out.println(dNo);
 	}
 
 		
