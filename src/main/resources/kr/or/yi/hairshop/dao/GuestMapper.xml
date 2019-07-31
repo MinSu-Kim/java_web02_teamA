@@ -56,9 +56,9 @@
 		where g_no=#{gNo};
 	</update>
 
-	<delete id="deleteGuest">
+	<update id="deleteGuest">
 		update hairshop.guest
 		set g_secession = true
 		WHERE g_no=#{gNo};
-	</delete>
+	</update>
 </mapper>
