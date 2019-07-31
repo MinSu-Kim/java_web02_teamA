@@ -16,9 +16,9 @@ import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
 
 @SuppressWarnings("serial")
-public class pPieChart extends JFXPanel implements InitScene {
+public class pPieChartAll extends JFXPanel implements InitScene {
 
-	public pPieChart() {
+	public pPieChartAll() {
 		super();
 	}
 
@@ -64,12 +64,12 @@ public class pPieChart extends JFXPanel implements InitScene {
 		for (WorkDialog w : li) {
 			name[i] = w.getwDNo().getdName();
 			money[i] = w.getwPriceTotal();
-			all+=money[i];
+			all += money[i];
 			i++;
 		}
 
 		for (int j = 0; j < size; j++) {
-			list.add(new PieChart.Data(name[j], Math.round(100/(all/money[j]))/1));
+			list.add(new PieChart.Data(name[j], Math.round(100 / (all / money[j])) / 1));
 		}
 
 		return list;
