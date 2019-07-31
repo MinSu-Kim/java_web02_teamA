@@ -153,9 +153,13 @@ public class WorkDialog {
 		
 	}
 	
-	public Object[] toArrayPriceTotal() { //다영:디자이너프레임에 작업횟수 어떻게 나오게 해?
+	public Object[] toArrayNumberOfWork() { //다영:디자이너프레임에 작업횟수 어떻게 나오게 해?
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		return new Object[] { wNo, wPriceTotal };
+	}
+	
+	public Object[] toArrayPriceTotal() { //총매출
+		return new Object[] {wPriceTotal};
 	}
 }
 

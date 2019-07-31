@@ -22,6 +22,7 @@ import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn;
 import kr.or.yi.hairshop.ui.panel.home.pHomeSectionForm;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
 import kr.or.yi.hairshop.ui.panel.reserve.pReservationMgn;
+import kr.or.yi.hairshop.ui.chart.GuestBarChart;
 
 @SuppressWarnings("serial")
 public class HairMainFrame extends JFrame implements ActionListener {
@@ -128,11 +129,11 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		// BrowserP pWeb = new BrowserP("웹");
 		// tabbedPane.addTab("웹", null, pWeb, null);
 
-		JPanel SalesMgn = new JPanel();
-		tabbedPane.addTab("고객 현황", null, SalesMgn, null);
+		GuestBarChart guestChart = new GuestBarChart();
+		tabbedPane.addTab("고객 현황", null, guestChart, null);
 
-		JPanel PurchaseMgn = new JPanel();
-		tabbedPane.addTab("디자이너 현황", null, PurchaseMgn, null);
+		GuestBarChart purcharge = new GuestBarChart();
+		tabbedPane.addTab("디자이너 현황", null, purcharge, null);
 
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("New tab", null, panel, null);

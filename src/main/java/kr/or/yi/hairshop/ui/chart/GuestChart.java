@@ -117,26 +117,25 @@ public class GuestChart extends JFXPanel implements InitScene{
 	 */
 //	고정 가로 픽스
 //	년도를 표시하기위해 가로 텍스트 셋팅일듯
+//	가로를 몇칸으로 할지
 	public XYChart.Series<String, Number> getChartData(WorkDialog work) {
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
 		
 
 		dataSeries.setName(work.getwEName().geteName());
 		for(int i=0; i<wList.size(); i++) {
-			dataSeries.getData().add(new XYChart.Data<>(i+"",i));
+			dataSeries.getData().add(new XYChart.Data<>(i+"",100));
 		}
 		
 		return dataSeries;
 	}
-//	세로의 데이터 값 삽입	
+//	한(국어) 컬럼에 몇명을 표시할지
 	private ObservableList<XYChart.Series<String, Number>> getChartData() {
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
 		
 		
 		
-		for(int i=0; i<wList.size(); i++) {
-			list.add(getChartData(wList.get(i)));
-		}
+//		list.add(getChartData(wList.get(i)));
 		
 //		list.add(getChartData(work))
 		
