@@ -26,9 +26,9 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	}
 
 	@Override
-	public List<WorkDialog> selectByfivejoinMap() {
+	public List<WorkDialog> selectByfivejoinMap(int dNo) {
 		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
-			return sqlSession.selectList(namespace+".selectByfivejoinMap");
+			return sqlSession.selectList(namespace+".selectByfivejoinMap", dNo);
 		}
 	}
 	@Override
@@ -81,6 +81,73 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 			int res = sqlSession.insert(namespace + ".insertChoice", map);
 			sqlSession.commit();
 			return res;
+		}
+	}
+
+	@Override
+	public int deleteChoice(int wNo) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".deleteChoice", wNo);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int updateWorkDialog(WorkDialog workDialog) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateWorkDialog", workDialog);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int deleteWorkDialog(int wNo) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".deleteWorkDialog", wNo);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public List<WorkDialog> selectGuestBarChartPrice() {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectGuestBarChartPrice");
+		}
+	}
+	@Override
+	public List<WorkDialog> selectTotalPriceByDesigner(int wDNo) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectTotalPriceByDesigner", wDNo);
+		}
+	}
+
+	
+	public List<WorkDialog> selectGuestBarChart() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".selectGuestBarChartPrice");
+		}
+	}
+	@Override
+	public List<WorkDialog> selectGuestBarChartCount() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".selectGuestBarChartCount");
+		}
+	}
+
+	public List<WorkDialog> selectByDName() {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectByDName");
+
+		}
+	}
+
+	@Override
+	public List<WorkDialog> selectByDateForChartMon(Map<String, String> map) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectByDateForChartMon",map);
 		}
 	}
 

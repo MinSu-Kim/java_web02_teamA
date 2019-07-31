@@ -1,9 +1,14 @@
-package kr.or.yi.hairshop.ui.panel.home;
+package kr.or.yi.hairshop.ui.panel.workMain;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +16,17 @@ import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+import com.toedter.calendar.JCalendar;
 
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
@@ -23,32 +37,7 @@ import kr.or.yi.hairshop.dao.ProductMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
-import kr.or.yi.hairshop.dto.Guest;
-import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.dto.WorkDialog;
-import kr.or.yi.hairshop.panel.pCalendar;
-import kr.or.yi.hairshop.ui.frame.WorkDialogFrame;
-
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-
-import com.toedter.calendar.JCalendar;
-
-import java.awt.FlowLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.JLabel;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
 
 @SuppressWarnings("serial")
 public class pHomeSectionForm extends JPanel implements ActionListener, PropertyChangeListener {
@@ -58,7 +47,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 	private pHomeSectionBlock[] panelList= new pHomeSectionBlock[5];
 	private JButton btnLeft;
 	private JButton btnRight;
-	int start=0;
+	public int start=0;
 	
 	private JPopupMenu popupMenuTime=new JPopupMenu();
 	
@@ -103,6 +92,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		calendar = new JCalendar();
+		calendar.setWeekOfYearVisible(false);
 		
 		
 		String today = sf.format(calendar.getDate());
@@ -154,10 +144,11 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		
 		JPanel panel_13 = new JPanel();
 		ptimeTable.add(panel_13);
-		panel_13.setLayout(new BorderLayout(0, 0));
+		panel_13.setLayout(null);
 		
 		JPanel panel_5 = new JPanel();
-		panel_13.add(panel_5, BorderLayout.NORTH);
+		panel_5.setBounds(0, 0, 52, 310);
+		panel_13.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
 		
@@ -204,10 +195,15 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		pSection.add(panel_3, BorderLayout.CENTER);
 		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		JPanel panel_1 = new JPanel();
+		panel_3.add(panel_1);
+		panel_1.setLayout(null);
+		
 		
 		
 		JPanel panelListForm = new JPanel();
-		panel_3.add(panelListForm);
+		panelListForm.setBounds(0, 0, 900, 310);
+		panel_1.add(panelListForm);
 		panelListForm.setLayout(new BoxLayout(panelListForm, BoxLayout.X_AXIS));
 		
 		JPanel panelFooter = new JPanel();
@@ -219,6 +215,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		panelFooter.add(panel_4, BorderLayout.NORTH);
 		
 		panelFooterTf = new pHomeFooterDesigner();
+		panelFooterTf.setParent(this);
 		eDao = new EventMapperImpl();
 		dDao = new DesignerMapperImpl();
 		pDao = new ProductMapperImpl();
@@ -226,7 +223,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		panelFooter.add(panelFooterTf, BorderLayout.CENTER);
 		
 		
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<5; i++) {
 			panelList[i] = new pHomeSectionBlock();
 			panelListForm.add(panelList[i]);
 			panelList[i].setPopupMenu(popupMenuTime);
@@ -244,7 +241,7 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 	
 	
 	public void refresh(int start) {
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<5; i++) {
 			if(dList.size()>i+start) {
 				panelList[i].setParent(this);
 				panelList[i].setDisigner(dList.get(i+start));
@@ -270,12 +267,12 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		}
 	}
 	protected void actionPerformedBtnLeft(ActionEvent e) {
-		start-=3;
+		start-=4;
 		if(start==0) {
 			btnLeft.setEnabled(false);
 		}
 		btnRight.setEnabled(true);
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<5; i++) {
 			panelList[i].clearTable();
 		}
 		refresh(start);
@@ -283,12 +280,12 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		repaint();
 	}
 	protected void actionPerformedBtnRight(ActionEvent e) {
-		start+=3;
+		start+=5;
 		btnLeft.setEnabled(true);
-		if(dList.size()<start+3) {
+		if(dList.size()<start+5) {
 			btnRight.setEnabled(false);
 		}
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<5; i++) {
 			panelList[i].clearTable();
 		}
 		refresh(start);

@@ -1,4 +1,6 @@
 
+use hairshop;
+
 select * from guest;
 select * from designer;
 select * from event;
@@ -91,8 +93,8 @@ select @w_reservTime,@w_workTime;
 
 /* 1.시작~끝 시간 설정 */
 /* 7/1~8/31셋팅 */
-set @start=UNIX_TIMESTAMP('2019-07-01 00:00:00');
-set @end=UNIX_TIMESTAMP('2019-08-31 23:59:59');
+set @start=UNIX_TIMESTAMP('2019-01-01 00:00:00');
+set @end=UNIX_TIMESTAMP('2019-12-31 23:59:59');
 /* 당일데이터만 삽입 */
 set @start=UNIX_TIMESTAMP(concat(left(curdate(),10),' 08:00:00'));
 set @end=UNIX_TIMESTAMP(concat(left(curdate(),10),' 23:00:00'));
@@ -109,7 +111,7 @@ INSERT INTO hairshop.workdialog
 values
 (@w_reservTime:=(SELECT FROM_UNIXTIME(RAND() * (@end - @start) + @start)),
 if(UNIX_TIMESTAMP(@w_reservTime) < UNIX_TIMESTAMP(now()), @w_reservTime,null),
-10000,
+100000,
 (select e_name from event order by rand() limit 1),
 (select d_no from designer order by rand() limit 1),
 (select g_no from guest order by rand() limit 1))
@@ -122,9 +124,13 @@ insert into choice(c_w_no,c_p_name) values
 
 /* 3.불필요 데이터 삭제 */
 
-delete from choice where c_w_no in (select w_no from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
+delete from choice where c_w_no in (select w_no from workdialog where `w_reservTime` between '2015-01-01' and '2019-12-31'
 and left(right(`w_reservTime`,8),2) between 0 and 7);
-delete from choice where c_w_no in (select w_no from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
+delete from choice where c_w_no in (select w_no from workdialog where `w_reservTime` between '2015-01-01' and '2019-12-31'
+and left(right(`w_reservTime`,8),2) between 22 and 24);
+delete from choice where c_w_no in (select w_no from workdialog where `w_workTime` between '2015-01-01' and '2019-12-31'
+and left(right(`w_reservTime`,8),2) between 0 and 7);
+delete from choice where c_w_no in (select w_no from workdialog where `w_workTime` between '2015-01-01' and '2019-12-31'
 and left(right(`w_reservTime`,8),2) between 22 and 24);
 
 delete from workdialog where `w_reservTime` between '2019-01-01' and '2019-09-14'
@@ -278,4 +284,5 @@ SELECT *
 
 
 
-
+select * from level;
+		

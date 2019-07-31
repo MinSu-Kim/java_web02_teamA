@@ -158,11 +158,15 @@ public class Guest {
 	public String toString() { // 나모가 바꿈
 		return String.format("%s", gName);
 	}
+	
+	
 
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		return new Object[] { gNo, gLGrade.getlGrade(), gName, gTel, gEmail, date.format(gBirth), date.format(gJoin),
-				gPoint, gMemo };
+		
+//		return new Object[] { gNo, gLGrade.getlGrade(), gName, gTel, gEmail, date.format(gBirth), date.format(gJoin),
+//				gPoint, gMemo };
+		return null;
 	}
 
 	public Object[] toArray2() {
@@ -170,6 +174,7 @@ public class Guest {
 		
 		return new Object[] {gName,date.format(gBirth),gId,gLGrade.getlGrade()};
 	}
+
 	
 	
 }

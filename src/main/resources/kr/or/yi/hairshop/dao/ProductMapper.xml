@@ -22,13 +22,25 @@
 	
 	<update id="updateByName">
 		update product
-		set p_price=#{pPrice}, p_division=#{pDivision}
+		set p_name=#{pName}, p_price=#{pPrice}, p_division=#{pDivision}
 		where p_name=#{pName}
-		
 	</update>
 	
 	<delete id="deleteByName">
 		delete from product where p_name=#{param1}
 	</delete>
 
+	<select id="selectDateYearPriceChart" resultType="Product">
+		select sum(w_priceTotal) as p_price,left(w_workTime,7) as p_name 
+		from workdialog
+		where w_workTime is not null
+		and left(w_workTime,4)=#{year}
+		group by left(w_workTime,7)
+	</select>
+	
+	<select id="selectByProductName" resultType="Product">
+		select count(c_p_name) as pPrice, c_p_name as pName
+		from choice group by c_p_name
+	</select>
+	
 </mapper>

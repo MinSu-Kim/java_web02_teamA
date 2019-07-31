@@ -27,7 +27,8 @@
 		SELECT g_no, g_id, g_password, g_l_grade as l_grade, g_name,
 		g_tel, g_email,
 		g_birth, g_join, g_point, g_memo
-		FROM hairshop.guest;
+		FROM hairshop.guest
+		where g_secession = false
 	</select>
 	
 	<select id="selectGuestBygName" resultMap="extendsGuest">
@@ -49,16 +50,21 @@
 
 	<update id="updateGuest">
 		UPDATE hairshop.guest
-		SET g_id=#{gId},
-		g_password=#{gPassword}, g_l_grade=#{gLGrade.lGrade}, g_name=#{gName},
-		g_tel=#{gTel},
-		g_email=#{gEmail}, g_birth=#{gBirth}, g_join=#{gJoin},
+		SET g_id=#{gId}, g_password=#{gPassword}, g_l_grade=#{gLGrade.lGrade}, g_name=#{gName},
+		g_tel=#{gTel}, g_email=#{gEmail}, g_birth=#{gBirth}, g_join=#{gJoin},
 		g_point=#{gPoint}, g_memo=#{gMemo}
-		WHERE g_no=#{gNo};
+		where g_no=#{gNo};
 	</update>
 
-	<delete id="deleteGuest">
-		DELETE FROM hairshop.guest
+	<update id="deleteGuest">
+		update hairshop.guest
+		set g_secession = true
 		WHERE g_no=#{gNo};
-	</delete>
+	</update>
+	
+	<insert id="insertGuestByWorkMain"  useGeneratedKeys="true" keyProperty="gNo">
+		INSERT INTO hairshop.guest
+		(g_name, g_tel,g_join)
+		VALUES(#{gName},#{gTel},#{gJoin});
+	</insert>
 </mapper>

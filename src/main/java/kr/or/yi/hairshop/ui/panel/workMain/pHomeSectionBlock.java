@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.ui.panel.home;
+package kr.or.yi.hairshop.ui.panel.workMain;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -45,13 +45,10 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 	private JLabel lblDesigner;
 	private Designer designer;
 	private DefaultTableModel model;
-//	private Map<Integer, WorkDialog> list=new HashMap<Integer, WorkDialog>();
 
 	private Map<Integer, ArrayList<WorkDialog>> dWorkList = new HashMap<Integer,ArrayList<WorkDialog>>();
 	private final String[] columns = {"손님" };
 
-	private WorkDialogMapper dao = new WorkDialogMapperImpl();
-	private WorkDialogFrame frame;
 	private String[][] data = { 
 			{""},
 			{""},
@@ -119,6 +116,7 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 
 	public void mouseExited(MouseEvent e) {
 		jtable.clearSelection();
+		
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -201,10 +199,6 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 		}
 
 	}
-//	public void refresh() {
-//		jtable.setModel(new DefaultTableModel(getRows(), new String[] {"시간","작업명"}));
-//		jtable.setValueAt("가나다라", 1 , 1);
-//	}
 
 	public void setDisigner(Designer designer) {
 		this.designer = designer;

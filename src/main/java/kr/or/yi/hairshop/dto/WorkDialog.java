@@ -18,6 +18,8 @@ public class WorkDialog {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
 	public WorkDialog(int wNo, Date wReservTime, Date wWorkTime, int wPriceTotal, Event wEName, Designer wDNo,
 			Guest wGNo, List<Product> productList) {
 		this.wNo = wNo;
@@ -29,6 +31,13 @@ public class WorkDialog {
 		this.wGNo = wGNo;
 		this.productList = productList;
 	}
+
+	public WorkDialog(int wPriceTotal, Guest wGNo) {
+		this.wPriceTotal = wPriceTotal;
+		this.wGNo = wGNo;
+	}
+
+
 
 	public int getwNo() {
 		return wNo;
@@ -85,6 +94,7 @@ public class WorkDialog {
 	public void setwGNo(Guest wGNo) {
 		this.wGNo = wGNo;
 	}
+	
 
 	public List<Product> getProductList() {
 		return productList;
@@ -96,13 +106,19 @@ public class WorkDialog {
 
 	
 
+	public WorkDialog(int wNo,  Guest wGNo,int wPriceTotal) {
+		this.wNo = wNo;
+		this.wPriceTotal = wPriceTotal;
+		this.wGNo = wGNo;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
 				"WorkDialog [wNo=%s, wReservTime=%s, wWorkTime=%s, wPriceTotal=%s, wEName=%s, wDNo=%s, wGNo=%s, productList=%s]",
 				wNo, wReservTime, wWorkTime, wPriceTotal, wEName, wDNo, wGNo, productList);
 	}
-
+	
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		return new Object[] { wNo, date.format(wWorkTime), date.format(wReservTime), wPriceTotal, wEName, wDNo, wGNo };
@@ -133,27 +149,39 @@ public class WorkDialog {
 	
 	public Object[] toArrayReservDetail() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-		
 		String pName="";
-		String pPrice="";
 		for(int i=0;i<productList.size();i++) {
 			if(i!=productList.size()-1) {				
 				pName+=productList.get(i).getpName()+",";
-				pPrice+=productList.get(i).getpPrice()+",";
 			}else {
 				pName+=productList.get(i).getpName();
-				pPrice+=productList.get(i).getpPrice();
 			}			
-//			System.out.println("가격"+productList.get(i).getpPrice());
-//			System.out.println("이름"+productList.get(i).getpName());
 		}
-		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade().getlGrade(), pName, wEName.geteName(), pPrice, wWorkTime };
+		
+		String wWrok = "";
+		if(wWorkTime == null) {
+			wWrok = "작업전";
+		}else {
+			wWrok = (String) date.format(wWorkTime);
+		}
+		
+		String eventstr="";
+		if(wEName==null) {
+			eventstr="일반";
+		}else {
+			eventstr=wEName.geteName();
+		}
+		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade().getlGrade(), pName, eventstr, wPriceTotal, wWrok };
 		
 	}
 	
-	public Object[] toArrayPriceTotal() { //다영:디자이너프레임에 작업횟수 어떻게 나오게 해?
+	public Object[] toArrayNumberOfWork() { //다영:디자이너프레임에 작업횟수 어떻게 나오게 해?
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		return new Object[] { wNo, wPriceTotal };
+	}
+	
+	public Object[] toArrayPriceTotal() { //총매출
+		return new Object[] {wPriceTotal};
 	}
 }
 

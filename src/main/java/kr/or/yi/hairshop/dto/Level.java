@@ -58,14 +58,45 @@ public class Level {
 	
 	
 	
+	
+
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((lGrade == null) ? 0 : lGrade.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Level other = (Level) obj;
+		if (lGrade == null) {
+			if (other.lGrade != null)
+				return false;
+		} else if (!lGrade.equals(other.lGrade))
+			return false;
+		return true;
+	}
+
+
 	@Override
 	public String toString() {
-		return String.format("Level [lGrade=%s, lSale=%s, guestList=%s]", lGrade, lSale, guestList);
+		return lGrade;
 	}
 
 
 	public Object[] toArray() {
 		return new Object[] { lGrade, lSale };
 	}
+
 
 }

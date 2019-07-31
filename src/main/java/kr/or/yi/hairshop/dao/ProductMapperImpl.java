@@ -52,4 +52,20 @@ public class ProductMapperImpl implements ProductMapper {
 		}
 	}
 
+	@Override
+	public List<Product> selectDateYearPriceChart(int year) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".selectDateYearPriceChart",year);
+		}
+
+	}
+
+
+	@Override
+	public List<Product> selectByProductName() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".selectByProductName");
+		}
+	}
+
 }

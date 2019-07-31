@@ -35,6 +35,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     
     compile files('libs/jcalendar-1.4.jar')
+    compile files('libs/jcommon-1.0.23.jar')
+    compile files('libs/jfreechart-1.0.19.jar')
+    
 }
 
 jar{

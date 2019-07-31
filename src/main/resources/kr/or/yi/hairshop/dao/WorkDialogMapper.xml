@@ -7,7 +7,7 @@
 		<result property="wReservTime" column="w_reservTime" />
 		<result property="wPriceTotal" column="w_priceTotal" />
 	</resultMap>
-	<resultMap type="WorkDialog" id="resultWorkDialog">
+	<resultMap type="WorkDialog" id="resultWorkDialog"> 
 		<result property="wNo" column="w_no"/>
 		<result property="wWorkTime" column="w_workTime" />
 		<result property="wReservTime" column="w_reservTime" />
@@ -120,16 +120,18 @@
 	</select>
 	
 	<select id="selectByfivejoinMap" resultMap="resultWorkDialogfivejoin">
-		SELECT g_name, w_workTime, p_name, p_price
+		SELECT g_name, w_workTime, p_name, p_price, w_priceTotal
 		FROM workdialog w
-		left join designer d
+		join designer d
 		on w.w_d_no=d.d_no
-		left join choice c
+		join choice c
 		on w.w_no=c.c_w_no
-		left join product p
+		join product p
 		on c.c_p_name=p.p_name
-		left join guest g
+		join guest g
 		on w_g_no=g.g_no
+		where d_no=#{dNo}
+		and w_workTime is not null
 	</select>
 	
 	<select id="selectReservDetail" resultMap="reserveDetail">
@@ -172,6 +174,62 @@
 		(c_w_no, c_p_name)
 		VALUES(#{wNo}, #{pName});
 	</insert>
+	
+	<delete id="deleteChoice">
+		DELETE FROM hairshop.choice
+		WHERE c_w_no=#{wNo}
+	</delete>
+	<update id="updateWorkDialog">
+		UPDATE hairshop.workdialog
+		SET w_workTime=#{wWorkTime}, w_reservTime=#{wReserveTime}, w_priceTotal=#{wPriceTotal}, w_e_name=#{wEName.eName}, w_d_no=#{wDNo.dNo}, w_g_no=#{wGNo.gNo}
+		WHERE w_no=#{wNo};
+	</update>
+	
+	<delete id="deleteWorkDialog">
+		DELETE FROM hairshop.workdialog
+		WHERE w_no=#{wNo};
+	</delete>
+	
+	<select id="selectTotalPriceByDesigner" parameterType="int" >
+		select sum(w_priceTotal)
+		from workdialog
+		where w_d_no=#{wDNo}
+	</select>
+	
+	<select id="selectGuestBarChartPrice" resultMap="selectWDGECPjoinByNo">
+		select count(w_g_no) as w_priceTotal, w_g_no, g_name 
+		from workdialog w 
+		join guest g
+		on w.w_g_no=g.g_no
+		group by w_g_no 
+		order by count(w_priceTotal) desc
+	</select>
+	<select id="selectGuestBarChartCount" resultMap="selectWDGECPjoinByNo">
+		select sum(w_priceTotal) as w_priceTotal, w_g_no, g_name 
+		from workdialog w 
+		join guest g
+		on w.w_g_no=g.g_no
+		group by w_g_no 
+		order by sum(w_priceTotal) desc
+	</select>
+	
+	<select id="selectByDName" resultMap="reserveDetail">
+		select sum(w_priceTotal) as w_priceTotal, d_name
+		from workdialog w
+		left join choice c on w.w_g_no = c.c_w_no
+		left join designer d on w.w_d_no = d.d_no
+		group by d_name
+	</select>
+	
+	<select id="selectByDateForChartMon" resultMap="reserveDetail">
+		select sum(w_priceTotal) as w_priceTotal, d_name, w_reservTime
+		from workdialog w
+		left join choice c on w.w_g_no = c.c_w_no
+		left join designer d on w.w_d_no = d.d_no
+		where w_reservTime between #{start} and #{end}
+		group by d_name	
+	</select>
+	
 </mapper>
 
 

@@ -1,6 +1,8 @@
 package kr.or.yi.hairshop.ui.panel.reserve;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -62,9 +64,25 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		
 		JPanel pNorth = new JPanel();
 		panel.add(pNorth, BorderLayout.NORTH);
+		pNorth.setLayout(new GridLayout(0, 2, 10, 0));
+		
+		JPanel panel_2 = new JPanel();
+		pNorth.add(panel_2);
+		panel_2.setLayout(new GridLayout(0, 2, 10, 0));
+		
+		JPanel panel_4 = new JPanel();
+		panel_2.add(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_3 = new JLabel("시작일");
+		lblNewLabel_3.setFont(new Font("굴림", Font.BOLD, 22));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_4.add(lblNewLabel_3, BorderLayout.NORTH);
 		
 		calStart = new JCalendar();
-		pNorth.add(calStart);
+		calStart.setWeekOfYearVisible(false);
+		calStart.setTodayButtonText("");
+		panel_4.add(calStart);
 		calStart.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent e) {
@@ -72,7 +90,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 				SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
 				
 				String oneDay = sdate.format(calStart.getDate());
-				String endDay = edate.format(calStart.getDate());
+				String endDay = edate.format(calEnd.getDate());
 				
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("start", oneDay);
@@ -84,15 +102,25 @@ public class pReservationMgn extends JPanel implements ActionListener {
 			}
 		});
 		
+		JPanel panel_5 = new JPanel();
+		panel_2.add(panel_5);
+		panel_5.setLayout(new BorderLayout(0, 0));
+		
+		JLabel label_1 = new JLabel("종료일");
+		label_1.setFont(new Font("굴림", Font.BOLD, 22));
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_5.add(label_1, BorderLayout.NORTH);
+		
 		calEnd = new JCalendar();
-		pNorth.add(calEnd);
+		calEnd.setWeekOfYearVisible(false);
+		panel_5.add(calEnd);
 		calEnd.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent e) {
 				SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
 				SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
 				
-				String oneDay = sdate.format(calEnd.getDate());
+				String oneDay = sdate.format(calStart.getDate());
 				String endDay = edate.format(calEnd.getDate());
 				
 				Map<String, String> map = new HashMap<String, String>();
@@ -105,13 +133,52 @@ public class pReservationMgn extends JPanel implements ActionListener {
 			}
 		});		
 		
+		JPanel panel_3 = new JPanel();
+		pNorth.add(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_6 = new JPanel();
+		panel_3.add(panel_6, BorderLayout.WEST);
+		panel_6.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		panel_6.add(lblNewLabel_1);
+		
 		btnSearch = new JButton("검색");
-		btnSearch.addActionListener(this);
-		pNorth.add(btnSearch);
+		btnSearch.setToolTipText("시작일, 종료일을 선택 후 클릭하면 검색된 정보가 출력된다. 종료일이 시작일 보다 앞이면 검색되지 않는다.");
+		panel_6.add(btnSearch);
 		
 		btnAllSearch = new JButton("전체 검색");
+		panel_6.add(btnAllSearch);
+		
+		JLabel label = new JLabel("");
+		panel_6.add(label);
 		btnAllSearch.addActionListener(this);
-		pNorth.add(btnAllSearch);
+		btnSearch.addActionListener(this);
+		
+		JPanel panel_7 = new JPanel();
+		panel_3.add(panel_7);
+		panel_7.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel lblNewLabel_2 = new JLabel("주의사항");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_7.add(lblNewLabel_2);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_7.add(label_2);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_7.add(label_3);
+		
+		JLabel label_4 = new JLabel("");
+		label_4.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_7.add(label_4);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_7.add(label_5);
 		
 		JPanel pList = new JPanel();
 		pList.setBorder(new TitledBorder(null, "예약정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -130,6 +197,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		
 		pCalendar pCalendar = new pCalendar();
 		pR.add(pCalendar, BorderLayout.NORTH);
+		pCalendar.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel panel_1 = new JPanel();
 		pR.add(panel_1);
@@ -152,8 +220,8 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		mntmDelete.addActionListener(this);
 		popupMenu.add(mntmDelete);
 		
-		table.setComponentPopupMenu(popupMenu);
-		scrollPane.setComponentPopupMenu(popupMenu);
+//		table.setComponentPopupMenu(popupMenu);
+//		scrollPane.setComponentPopupMenu(popupMenu);
 	}
 	
 	public void clearList() {

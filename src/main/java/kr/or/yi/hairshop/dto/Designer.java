@@ -19,7 +19,7 @@ public class Designer {
 	private String dMemo;
 	private List<WorkDialog> workDialogList;
 	private boolean dSecession;
-
+	
 	public Designer() {
 	}
 
@@ -235,4 +235,6 @@ public class Designer {
 	public Object[] toArrayMgn() {
 		return new Object[] { dGrade, dName, dTel, dTel2 };
 	}
+
+	
 }

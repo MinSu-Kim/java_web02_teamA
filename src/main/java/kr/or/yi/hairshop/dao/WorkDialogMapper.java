@@ -8,7 +8,7 @@ import kr.or.yi.hairshop.dto.WorkDialog;
 public interface WorkDialogMapper {
 	public List<WorkDialog> selectDListByNo(int dNo);
 	public List<WorkDialog> selectByAll();
-	public List<WorkDialog> selectByfivejoinMap();
+	public List<WorkDialog> selectByfivejoinMap(int dNo);
 	public List<WorkDialog> selectWDGECPjoinByNo(int no);
 	
 	public List<WorkDialog> selectReservDetail();
@@ -19,4 +19,16 @@ public interface WorkDialogMapper {
 	
 	public int insertWorkDialogResWNo(WorkDialog workDialog);
 	public int insertChoice(Map<String, String> map);
+	
+	public int deleteChoice(int wNo);
+	public int updateWorkDialog(WorkDialog workDialog);
+	public int deleteWorkDialog(int wNo);
+	public List<WorkDialog> selectGuestBarChartPrice();
+	public List<WorkDialog> selectGuestBarChartCount();
+
+	public List<WorkDialog> selectTotalPriceByDesigner (int wDNo);
+
+	public List<WorkDialog> selectByDName();
+	public List<WorkDialog> selectByDateForChartMon(Map<String, String> map);
+
 }
