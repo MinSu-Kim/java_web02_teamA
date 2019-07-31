@@ -34,7 +34,7 @@ public abstract class AbstractBarChart<T> extends JFXPanel implements InitScene{
 		else
 			top=obj.length;
 		
-		dataSeries.setName("이름");
+		dataSeries.setName("고객이름");
 		for(int i=0; i<top; i++) {
 			
 			dataSeries.getData().add(new XYChart.Data<>(obj[i][0]+"",Integer.parseInt(obj[i][1]+"")));
@@ -63,7 +63,7 @@ public abstract class AbstractBarChart<T> extends JFXPanel implements InitScene{
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle(setTitle());
 		
-		barChart.setPrefSize(500, 250);
+		barChart.setPrefSize(600, 400);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);

@@ -31,9 +31,10 @@
 	</delete>
 
 	<select id="selectDateYearPriceChart" resultType="Product">
-		select sum(w_priceTotal) as p_price,left(w_workTime,10) as p_name 
+		select sum(w_priceTotal) as p_price,left(w_workTime,7) as p_name 
 		from workdialog
 		where w_workTime is not null
-		group by left(w_workTime,8)
+		and left(w_workTime,4)=#{year}
+		group by left(w_workTime,7)
 	</select>
 </mapper>

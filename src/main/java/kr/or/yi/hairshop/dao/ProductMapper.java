@@ -13,6 +13,6 @@ public interface ProductMapper {
 	public int updateByName(Product pro);
 	public int deleteByName(String name);
 
-	public List<Product> selectDateYearPriceChart();
+	public List<Product> selectDateYearPriceChart(int year);
 	
 }

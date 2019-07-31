@@ -41,17 +41,6 @@ public class GuestCountBarChart extends AbstractBarChart<WorkDialog>{
 		
 		list.add(getChartData(object));
 		
-		
-		
-//		list.add(getChartData(work))
-		
-//		가로로 셋팅이 됩니다.
-//		WorkDialog work = new WorkDialog("S001", "현빈", 90, 60,70);
-//		WorkDialog work2 = new WorkDialog("S002", "박신혜", 60, 55,88);
-		
-//		list.add(getChartData(work));
-//		list.add(getChartData(work2));
-		
 		return list;
 	}
 
