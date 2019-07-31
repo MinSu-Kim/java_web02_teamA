@@ -369,6 +369,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		}		
 		if (e.getSource() == mntmDelete2) {
 			deleteLevelUI();
+			resetGradeCmb();
 		}
 	}
 
