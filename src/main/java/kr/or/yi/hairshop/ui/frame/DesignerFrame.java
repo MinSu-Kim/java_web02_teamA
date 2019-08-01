@@ -99,7 +99,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+		panel_1.setLayout(new GridLayout(0, 2, 50, 0));
 		
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2);
@@ -207,13 +207,16 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		button.addActionListener(this);
 		panel_5.add(button);
 		
+		JPanel panel_3 = new JPanel();
+		panel_1.add(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		
 		designerPanel = new DesignerPanel();
-
-		panel_1.add(designerPanel);
-		designerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 13));
+		panel_3.add(designerPanel);
+		designerPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		sumpanel= new SumPanel();
-		designerPanel.add(sumpanel);
+		panel_3.add(sumpanel, BorderLayout.SOUTH);
 	}
 
 		
