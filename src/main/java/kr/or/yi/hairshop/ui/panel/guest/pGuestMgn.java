@@ -156,6 +156,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			pInfomation.clear();
 			clearList();
 			reloadData();
+			pInfomation.setBtn();
 		}else {
 			//아니오 선택
 		}

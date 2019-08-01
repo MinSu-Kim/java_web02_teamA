@@ -316,6 +316,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 			clear2();
 			clearLevelList();
 			reloadLevelData();
+			setBtn3();
 		}else {
 			
 		}

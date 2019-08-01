@@ -164,9 +164,9 @@ public class Guest {
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		
-//		return new Object[] { gNo, gLGrade.getlGrade(), gName, gTel, gEmail, date.format(gBirth), date.format(gJoin),
-//				gPoint, gMemo };
-		return null;
+		return new Object[] { gNo, gLGrade.getlGrade(), gName, gTel, gEmail, date.format(gBirth), date.format(gJoin),
+				gPoint, gMemo };
+//		return null;
 	}
 
 	public Object[] toArray2() {
