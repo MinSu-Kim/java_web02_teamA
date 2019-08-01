@@ -45,7 +45,7 @@ public class DateYearPriceLineChart extends JFXPanel implements InitScene{
 		yAxis.setLabel("총매출");
 
 		lineChart = new LineChart<>(xAxis, yAxis);
-		lineChart.setPrefSize(1200, 400);
+		lineChart.setPrefSize(1200, 300);
 		lineChart.setData(getChartData());
 		
 		lineChart.setTitle("연 매출");
@@ -61,7 +61,6 @@ public class DateYearPriceLineChart extends JFXPanel implements InitScene{
 	private ObservableList<XYChart.Series<String, Number>> getChartData() {
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
 		
-		
 		Object[][] object = new Object[][] {{"01월",0},
 			{"02월",0},
 			{"03월",0},
@@ -76,13 +75,9 @@ public class DateYearPriceLineChart extends JFXPanel implements InitScene{
 			{"12월",0}};
 		for(int i=0; i<pList.size(); i++) {
 			String month=pList.get(i).getpName().substring(5, 7);
-			if(i+1==Integer.parseInt(month)) {
-				object[i][0]=month+"월";
-				object[i][1]=pList.get(i).getpPrice();
-			}else {
-				object[i][0]=String.format("%02d", i+1)+"월";
-				object[i][1]=0;
-			}
+			System.out.println("1111111111");
+			System.out.println(month);
+			object[Integer.parseInt(month)][1]=pList.get(i).getpPrice();
 		}
 		
 		list.add(getChartData(object));

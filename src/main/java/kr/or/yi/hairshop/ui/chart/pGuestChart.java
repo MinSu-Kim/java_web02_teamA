@@ -120,6 +120,7 @@ public class pGuestChart extends JPanel implements ActionListener {
 			year--;
 			dateYearPriceChart.setYear(year);
 			List<Product> pList=pDao.selectDateYearPriceChart(year);
+			System.out.println(pList.size());
 			Object[][] object = new Object[][] {{"01월",0},
 				{"02월",0},
 				{"03월",0},
@@ -134,13 +135,7 @@ public class pGuestChart extends JPanel implements ActionListener {
 				{"12월",0}};
 			for(int i=0; i<pList.size(); i++) {
 				String month=pList.get(i).getpName().substring(5, 7);
-				if(i+1==Integer.parseInt(month)) {
-					object[i][0]=month+"월";
-					object[i][1]=pList.get(i).getpPrice();
-				}else {
-					object[i][0]=String.format("%02d", i+1)+"월";
-					object[i][1]=0;
-				}
+				object[Integer.parseInt(month)][1]=pList.get(i).getpPrice();
 			}
 			Platform.runLater(() -> {
 				dateYearPriceChart.addChartData(object);

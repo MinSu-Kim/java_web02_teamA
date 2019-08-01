@@ -75,6 +75,7 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 	private JScrollPane spane;
 	private pHomeSectionForm parent;
 	private JMenuItem menuItemList;
+	private int row;
 
 	public pHomeSectionBlock() {
 		setBorder(null);
@@ -143,8 +144,8 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 //			}
 //
 //		}
-
-		int row = jtable.getSelectedRow();
+		
+		row = jtable.getSelectedRow();
 		parent.getMenuPopup().removeAll();
 		
 		if (dWorkList.get(row) != null) {
@@ -158,8 +159,10 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 				parent.getMenuPopup().add(menuItemList);
 
 			}
-
 		}
+		menuItemList=new JMenuItem("    추가");
+		parent.getMenuPopup().add(menuItemList);
+		menuItemList.addActionListener(this);
 
 //		System.out.println(lblDesigner.getText());
 //		System.out.println(row + "행, " + column + "열 : " + jtable.getValueAt(row, column) + " 선택했음");
@@ -253,16 +256,19 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String str = e.getActionCommand();
-		int index=Integer.parseInt(str.substring(0, str.indexOf(".")));
-		System.out.println(index);
-		str = str.substring(str.length() - 5, str.length());
-		int h = Integer.parseInt(str.substring(0, 2));
-		int m = Integer.parseInt(str.substring(3));
-		
-		
-		parent.setWorkDate(dWorkList.get(h - 8).get(index-1));
-
+		String str = e.getActionCommand().trim();
+		if(str.equals("추가")) {
+			parent.setReservTime(row);
+		}else {
+			System.out.println("ddddddd");
+			int index=Integer.parseInt(str.substring(0, str.indexOf(".")));
+			System.out.println(index);
+			str = str.substring(str.length() - 5, str.length());
+			int h = Integer.parseInt(str.substring(0, 2));
+			int m = Integer.parseInt(str.substring(3));
+			
+			parent.setWorkDate(dWorkList.get(h - 8).get(index-1));
+		}
 	}
 
 	public void setPopupMenu(JPopupMenu popupMenuList) {

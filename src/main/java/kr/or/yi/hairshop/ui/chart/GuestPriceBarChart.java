@@ -47,7 +47,7 @@ public class GuestPriceBarChart extends JFXPanel implements InitScene{
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("고객 현황");
 		
-		barChart.setPrefSize(600, 400);
+		barChart.setPrefSize(600, 300);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);

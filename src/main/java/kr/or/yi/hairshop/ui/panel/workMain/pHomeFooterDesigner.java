@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -516,6 +517,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 					result = wDao.insertWorkDialogResWNoNoGuest(work);
 				} else {
 					JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
+					return ;
 				}
 
 				if (result > 0) {
@@ -533,5 +535,17 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 				JOptionPane.showMessageDialog(null, "손님 데이터를 정확히 입력해주세요");
 			}
 		}
+	}
+
+	public void setReservTime(String day) {
+		SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date date=new Date();
+		try {
+			date=sf.parse(day);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jSpinwReserveTime.setModel(new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY));
 	}
 }

@@ -311,4 +311,8 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 	protected void propertyChangeCalendarDayChooser(PropertyChangeEvent evt) {
 		refresh(start);
 	}
+	public void setReservTime(int row) {
+		String day=sf.format(calendar.getDate())+" "+(row+8)+":00:00";
+		panelFooterTf.setReservTime(day);
+	}
 }
