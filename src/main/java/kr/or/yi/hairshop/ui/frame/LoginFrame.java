@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,7 +22,7 @@ import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 
-public class LoginFrame extends JFrame implements ActionListener {
+public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 
 	private static Designer Auth = null;
 	private JPanel contentPane;
@@ -74,6 +76,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		panel_4.add(lblPassWord);
 		
 		tfPassWord = new JPasswordField();
+		tfPassWord.addKeyListener(this);
 		panel_4.add(tfPassWord);
 		tfPassWord.setColumns(10);
 		
@@ -112,6 +115,22 @@ public class LoginFrame extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnLogin(ActionEvent arg0) {
+		loginAction();		
+	}
+
+	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
+		
+		if (key == KeyEvent.VK_ENTER) {
+			keyPressedTfPassWord(e);
+		}
+	}
+	
+	private void keyPressedTfPassWord(KeyEvent e) {
+		loginAction();
+	}
+
+	public void loginAction() {
 		String id = tfId.getText();
 		String password = tfPassWord.getText();
 		
@@ -132,13 +151,24 @@ public class LoginFrame extends JFrame implements ActionListener {
 		}else {
 			JOptionPane.showMessageDialog(null, "아이디, 비밀번호를 잘못 입력하였습니다");
 		}
-
-		
 	}
+	
 	public void clearAuth() {
 		if(Auth != null) {
 			Auth = null;
-		}
+		}		
+	}
+	
+	@Override
+	public void keyReleased(KeyEvent arg0) {
 		
 	}
+	
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		
+	}
+	
+	
+	
 }
