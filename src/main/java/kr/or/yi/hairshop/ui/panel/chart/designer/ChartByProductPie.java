@@ -1,4 +1,4 @@
-package kr.or.yi.hairshop.ui.chart;
+package kr.or.yi.hairshop.ui.panel.chart.designer;
 
 import java.util.List;
 
