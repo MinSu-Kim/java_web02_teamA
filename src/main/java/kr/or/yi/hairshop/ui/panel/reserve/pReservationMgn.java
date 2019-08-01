@@ -291,9 +291,9 @@ public class pReservationMgn extends JPanel implements ActionListener {
 			
 			SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
 			Date today = new Date();
-			String firstDate = sDate.format(today);
+			String date = sDate.format(today);
 
-			if ( table.getValueAt(row, 1).toString().substring(0, 10).equals(firstDate) ) {
+			if ( table.getValueAt(row, 1).toString().substring(0, 10).equals(date) ) {
 				setBackground(new Color(255, 129, 228, 30));
 			}else {
 				setBackground(Color.WHITE);
@@ -340,9 +340,7 @@ public class pReservationMgn extends JPanel implements ActionListener {
 	protected void actionPerformedBtnAllSearch(ActionEvent arg0) {
 		clearList();
 		reloadData();
-		
 	}
-
 }
 
 
