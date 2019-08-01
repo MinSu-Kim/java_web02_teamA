@@ -195,7 +195,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 
 	// 테이블 셀의 폭 설정
 	protected void tableSetWidth(int... width) {
-		for (int i = 0; i < getColumnNames().length-1; i++) {
+		for (int i = 0; i < getColumnNames().length; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(new ReturnTableCellRenderer());
 		}
 		
@@ -211,10 +211,25 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			if (value==null) return this;
 			setText(value.toString());
 			setOpaque(true);
+			if(column == 7) {
+				setHorizontalAlignment(JLabel.RIGHT);
+			}
+			else if(column == 8) {
+				setHorizontalAlignment(JLabel.LEFT);
+			}
+			else {
+				setHorizontalAlignment(JLabel.CENTER);
+			}
 			if (table.getValueAt(row, 1).toString().equals("골드")) {
-				setBackground(new Color(255, 0, 0, 40));
-			} else {
+				setBackground(new Color(255, 215, 0, 30));
+			}else if(table.getValueAt(row, 1).toString().equals("실버")) {
+				setBackground(new Color(192, 192, 192, 70));
+			}
+			else {
 				setBackground(Color.WHITE);
+			}
+			if (isSelected) {
+				setBackground(Color.orange);
 			}
 			return this;
 		}
