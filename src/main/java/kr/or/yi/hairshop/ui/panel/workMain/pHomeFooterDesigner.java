@@ -468,8 +468,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 			return ;
 		
 		List<Product> productList = panelWorkProduct.getProductList();
-		System.out.println("111111111111111111");
-		System.out.println(productList.size());
 		if(productList.size()==0) {
 			JOptionPane.showMessageDialog(null, "상품을 입력해주세요");
 			return ;
