@@ -20,16 +20,20 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.dto.WorkDialog;
+import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.ui.frame.WorkDialogFrame;
 
 import javax.swing.JLabel;
@@ -76,10 +80,11 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 		setBorder(null);
 
 		setLayout(new BorderLayout());
-
-		model = new DefaultTableModel(data, columns);
-
+		
+		
+		MyTableModel model = new MyTableModel(data, columns);
 		jtable = new JTable(model);
+		
 
 		jtable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// 단일선택
 		jtable.addMouseListener(this);
@@ -206,7 +211,8 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 
 	public void clearTable() {
 		lblDesigner.setText(" ");
-		jtable.setModel(new DefaultTableModel(data, columns));
+		MyTableModel model = new MyTableModel(data, columns);
+		jtable.setModel(model);
 	}
 
 //	private Object[][] getRows() {
