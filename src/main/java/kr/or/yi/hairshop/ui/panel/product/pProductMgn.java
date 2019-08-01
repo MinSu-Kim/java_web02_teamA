@@ -597,13 +597,38 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		this.proList = proList;
 	}
 
+//	public void reloadData() {
+//		tableProduct.setModel(new DefaultTableModel(getRowsProduct(), getColumnNamesProduct()));
+//		tableProduct.setSize(100, 100);
+//		tableCellAlignmentProduct(SwingConstants.CENTER, 0, 1, 2);
+//		tableSetWidthProduct(80, 80, 80);
+//
+//		tableEvent.setModel(new DefaultTableModel(getRowsEvent(), getColumnNamesEvent()));
+//		tableCellAlignmentEvent(SwingConstants.CENTER, 0, 1, 2, 3);
+//		tableSetWidthEvent(80, 80, 120, 120);
+//		
+//		MyTableModel model = new MyTableModel(getRowsWoker(), getColumnNamesWoker());
+//		tableWorker.setModel(model);
+//		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+//		tableWorker.setRowSorter(sorter);
+//		tableCellAlignmentWoker(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6);
+//		tableSetWidthWoker(50, 50, 60, 60, 60, 60, 60);
+//
+//	}
+
 	public void reloadData() {
-		tableProduct.setModel(new DefaultTableModel(getRowsProduct(), getColumnNamesProduct()));
+		MyTableModel model2 = new MyTableModel(getRowsProduct(), getColumnNamesProduct());
+		tableProduct.setModel(model2);
 		tableProduct.setSize(100, 100);
+		RowSorter<TableModel> sorter2 = new TableRowSorter<TableModel>(model2);
+		tableProduct.setRowSorter(sorter2);
 		tableCellAlignmentProduct(SwingConstants.CENTER, 0, 1, 2);
 		tableSetWidthProduct(80, 80, 80);
 
-		tableEvent.setModel(new DefaultTableModel(getRowsEvent(), getColumnNamesEvent()));
+		MyTableModel model1 = new MyTableModel(getRowsEvent(), getColumnNamesEvent());
+		tableEvent.setModel(model1);
+		RowSorter<TableModel> sorter1 = new TableRowSorter<TableModel>(model1);
+		tableEvent.setRowSorter(sorter1);
 		tableCellAlignmentEvent(SwingConstants.CENTER, 0, 1, 2, 3);
 		tableSetWidthEvent(80, 80, 120, 120);
 		
@@ -615,7 +640,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		tableSetWidthWoker(50, 50, 60, 60, 60, 60, 60);
 
 	}
-
+	
 	private Object[][] getRowsProduct() {
 		if (proList == null) {
 			proList = new ArrayList<Product>();
