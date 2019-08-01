@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -288,10 +289,12 @@ public class pReservationMgn extends JPanel implements ActionListener {
 				setHorizontalAlignment(JLabel.CENTER);
 			}
 			
-			if (table.getValueAt(row, 5).toString().equals("골드")) {
-				setBackground(new Color(255, 215, 0, 30));
-			}else if(table.getValueAt(row, 5).toString().equals("실버")) {
-				setBackground(new Color(192, 192, 192, 70));
+			SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+			Date today = new Date();
+			String firstDate = sDate.format(today);
+
+			if ( table.getValueAt(row, 1).toString().substring(0, 10).equals(firstDate) ) {
+				setBackground(new Color(255, 129, 228, 30));
 			}else {
 				setBackground(Color.WHITE);
 			}

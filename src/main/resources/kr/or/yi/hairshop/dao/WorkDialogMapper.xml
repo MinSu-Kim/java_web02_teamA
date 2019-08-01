@@ -145,7 +145,7 @@
 		left join choice c on w.w_no = c.c_w_no
 		left join product p on c.c_p_name = p.p_name
 		left join tax t on p.p_name = t.t_name
-		order by w_no
+		order by w_reservTime desc
 	</select>
 	
 	
@@ -161,7 +161,6 @@
 		left join product p on c.c_p_name = p.p_name
 		left join tax t on p.p_name = t.t_name
 		where w_reservTime between #{start} and #{end}
-		order by w_no
 	</select>
 	<insert id="insertWorkDialogResWNoNoGuest" parameterType="WorkDialog" useGeneratedKeys="true" keyProperty="wNo">
 		INSERT INTO hairshop.workdialog
