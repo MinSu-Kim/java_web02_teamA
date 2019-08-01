@@ -346,53 +346,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		return work;
 	}
 
-	protected void actionPerformedBtnAdd(ActionEvent e) {
-
-		WorkDialog work = getWork();
-
-		List<Product> productList = panelWorkProduct.getProductList();
-
-		int confirm = JOptionPane.showConfirmDialog(null, "정말 추가 하시겠습니까?", "추가", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
-
-		if (confirm == 0) {
-
-			boolean check=tfNullTest();
-			if(check==false)
-				return;
-			
-			if(gNo<0) {
-				Guest guest = new Guest();
-				guest.setgTel(tfgTel.getText());
-				guest.setgName(tfgName.getText());
-				gNo = gDao.insertGuestByWorkMain(guest);
-			}
-			if (gNo > 0) {
-				int result = -1;
-				if (productList.size() > 0) {
-					Date date = new Date();
-					work.setwWorkTime(date);
-					work.setwGNo(new Guest(gNo));
-					result = wDao.insertWorkDialogResWNo(work);
-				} else {
-					JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
-				}
-
-				if (result > 0) {
-					for (int i = 0; i < productList.size(); i++) {
-						Map<String, String> map = new HashMap<String, String>();
-						map.put("wNo", result + "");
-						map.put("pName", productList.get(i).getpName());
-						wDao.insertChoice(map);
-					}
-				}
-
-				clean();
-				
-			}else {
-				JOptionPane.showMessageDialog(null, "손님 데이터를 정확히 입력해주세요");
-			}
-		}
-	}
+	
 
 	public boolean tfNullTest() {
 		boolean check=true;
@@ -417,21 +371,6 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		return check;
 	}
 
-	protected void actionPerformedBtnUpdate(ActionEvent e) {
-		WorkDialog work = getWork();
-		work.setwNo(wNo);
-		List<Product> list = panelWorkProduct.getProductList();
-
-		wDao.deleteChoice(wNo);
-		for (int i = 0; i < list.size(); i++) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("wNo", wNo + "");
-			map.put("pName", list.get(i).getpName());
-			wDao.insertChoice(map);
-		}
-		wDao.updateWorkDialog(work);
-		clean();
-	}
 
 	public void clean() {
 		clearTf();
@@ -498,7 +437,103 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		}
 		clean();
 	}
+	
+	protected void actionPerformedBtnUpdate(ActionEvent e) {
+		int confirm = JOptionPane.showConfirmDialog(null, "정말 수정 하시겠습니까?", "수정", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
+			if (confirm == 0) {
+			boolean check=tfNullTest();
+			if(check==false)
+				return ;
+			
+			WorkDialog work = getWork();
+			work.setwNo(wNo);
+			List<Product> list = panelWorkProduct.getProductList();
+			
+			wDao.deleteChoice(wNo);
+			for (int i = 0; i < list.size(); i++) {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("wNo", wNo + "");
+				map.put("pName", list.get(i).getpName());
+				wDao.insertChoice(map);
+			}
+			wDao.updateWorkDialog(work);
+			clean();
+		}
+	}
 	protected void actionPerformedBtnOk(ActionEvent e) {
+		
+		
+		boolean check=tfNullTest();
+		if(check==false)
+			return ;
+		
+		List<Product> productList = panelWorkProduct.getProductList();
+		System.out.println("111111111111111111");
+		System.out.println(productList.size());
+		if(productList.size()==0) {
+			JOptionPane.showMessageDialog(null, "상품을 입력해주세요");
+			return ;
+		}
+		
+		WorkDialog work = getWork();
+		work.setwWorkTime(new Date());
+		work.setwNo(wNo);
+		List<Product> list = panelWorkProduct.getProductList();
+
+		wDao.deleteChoice(wNo);
+		for (int i = 0; i < list.size(); i++) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("wNo", wNo + "");
+			map.put("pName", list.get(i).getpName());
+			wDao.insertChoice(map);
+		}
+		wDao.updateWorkDialogWorkTime(work);
 		clean();
+		
+	}
+	protected void actionPerformedBtnAdd(ActionEvent e) {
+
+		WorkDialog work = getWork();
+
+		List<Product> productList = panelWorkProduct.getProductList();
+
+		int confirm = JOptionPane.showConfirmDialog(null, "정말 추가 하시겠습니까?", "추가", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
+
+		if (confirm == 0) {
+
+			boolean check=tfNullTest();
+			if(check==false)
+				return ;
+			
+			if(gNo<0) {
+				Guest guest = new Guest();
+				guest.setgTel(tfgTel.getText());
+				guest.setgName(tfgName.getText());
+				gNo = gDao.insertGuestByWorkMain(guest);
+			}
+			if (gNo > 0) {
+				int result = -1;
+				if (productList.size() > 0) {
+					work.setwGNo(new Guest(gNo));
+					result = wDao.insertWorkDialogResWNoNoGuest(work);
+				} else {
+					JOptionPane.showMessageDialog(null, "상품을 입력해 주세요!");
+				}
+
+				if (result > 0) {
+					for (int i = 0; i < productList.size(); i++) {
+						Map<String, String> map = new HashMap<String, String>();
+						map.put("wNo", result + "");
+						map.put("pName", productList.get(i).getpName());
+						wDao.insertChoice(map);
+					}
+				}
+
+				clean();
+				
+			}else {
+				JOptionPane.showMessageDialog(null, "손님 데이터를 정확히 입력해주세요");
+			}
+		}
 	}
 }

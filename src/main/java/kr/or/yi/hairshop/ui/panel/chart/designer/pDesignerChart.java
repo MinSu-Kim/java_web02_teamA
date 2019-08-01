@@ -43,6 +43,7 @@ public class pDesignerChart extends JPanel implements ItemListener {
 	
 	private WorkDialogMapper dao = new WorkDialogMapperImpl();
 	private JRadioButton rbBtn12;
+	private ChartByProductPie ChartByProductPie;
 	
 	public pDesignerChart() {
 		setLayout(new BorderLayout(0, 0));
@@ -139,13 +140,16 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		
 		panel_1 = new JPanel();
 		pMain.add(panel_1);
+		ChartByProductPie ch = new ChartByProductPie();
+		panel_1.add(ch);
+		
 		
 		panel_2 = new JPanel();
 		pMain.add(panel_2);
 		
 		Platform.runLater(() -> initFXAll(pLeftAll));
 		Platform.runLater(() -> initFXMon(pPieChartMon));
-
+		Platform.runLater(() -> initFX(ch));
 	}
 
 	public void initFXAll(pPieChartAll p) {
@@ -160,7 +164,12 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		panel.setScene(scene);
 	}
 	
-
+	public void initFX(ChartByProductPie pChart) {
+		Scene scene = pChart.createScene();
+		panel = (JFXPanel) pChart;
+		panel.setScene(scene);
+	}
+	
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getSource() == rbBtn12) {
 			itemStateChangedRbBtn12(e);

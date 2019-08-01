@@ -67,9 +67,9 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	}
 
 	@Override
-	public int insertWorkDialogResWNo(WorkDialog workDialog) {
+	public int insertWorkDialogResWNoNoGuest(WorkDialog workDialog) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			sqlSession.insert(namespace + ".insertWorkDialogResWNo", workDialog);
+			sqlSession.insert(namespace + ".insertWorkDialogResWNoNoGuest", workDialog);
 			sqlSession.commit();
 			return workDialog.getwNo();
 		}
@@ -150,5 +150,16 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 			return sqlSession.selectList(namespace+".selectByDateForChartMon",map);
 		}
 	}
+
+	@Override
+	public int updateWorkDialogWorkTime(WorkDialog workDialog) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateWorkDialogWorkTime", workDialog);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	
 
 }

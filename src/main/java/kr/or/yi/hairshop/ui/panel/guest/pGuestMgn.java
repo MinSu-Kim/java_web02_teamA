@@ -1,6 +1,8 @@
 package kr.or.yi.hairshop.ui.panel.guest;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +18,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -27,8 +31,6 @@ import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
-import javax.swing.UIManager;
-import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class pGuestMgn extends JPanel implements ActionListener {
@@ -113,6 +115,8 @@ public class pGuestMgn extends JPanel implements ActionListener {
 //		table.setModel(new DefaultTableModel(getRows(), getColumnNames()));
 		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
 		table.setRowSorter(sorter);
+		
+	
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8);
 		tableSetWidth(20, 20, 50, 50, 80, 50, 50, 50, 100);
 	}
@@ -178,6 +182,8 @@ public class pGuestMgn extends JPanel implements ActionListener {
 
 	// 테이블 셀 내용의 정렬
 	protected void tableCellAlignment(int align, int... idx) {
+		
+		
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(align);
 
@@ -189,6 +195,10 @@ public class pGuestMgn extends JPanel implements ActionListener {
 
 	// 테이블 셀의 폭 설정
 	protected void tableSetWidth(int... width) {
+		for (int i = 0; i < getColumnNames().length-1; i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(new ReturnTableCellRenderer());
+		}
+		
 		TableColumnModel cModel = table.getColumnModel();
 
 		for (int i = 0; i < width.length; i++) {
@@ -196,4 +206,17 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		}
 	}
 
+	public class ReturnTableCellRenderer extends JLabel implements TableCellRenderer {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			if (value==null) return this;
+			setText(value.toString());
+			setOpaque(true);
+			if (table.getValueAt(row, 1).toString().equals("골드")) {
+				setBackground(new Color(255, 0, 0, 40));
+			} else {
+				setBackground(Color.WHITE);
+			}
+			return this;
+		}
+	}
 }

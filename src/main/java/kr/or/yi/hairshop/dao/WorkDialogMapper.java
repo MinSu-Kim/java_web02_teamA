@@ -17,11 +17,12 @@ public interface WorkDialogMapper {
 	
 	public List<WorkDialog> selectReservDetailByDate(Map<String, String> map);
 	
-	public int insertWorkDialogResWNo(WorkDialog workDialog);
+	public int insertWorkDialogResWNoNoGuest(WorkDialog workDialog);
 	public int insertChoice(Map<String, String> map);
 	
 	public int deleteChoice(int wNo);
 	public int updateWorkDialog(WorkDialog workDialog);
+	public int updateWorkDialogWorkTime(WorkDialog workDialog);
 	public int deleteWorkDialog(int wNo);
 	public List<WorkDialog> selectGuestBarChartPrice();
 	public List<WorkDialog> selectGuestBarChartCount();

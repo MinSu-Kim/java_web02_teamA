@@ -1,5 +1,6 @@
 package kr.or.yi.hairshop.dto;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -149,6 +150,7 @@ public class WorkDialog {
 	
 	public Object[] toArrayReservDetail() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		DecimalFormat df = new DecimalFormat("###,###");
 		String pName="";
 		for(int i=0;i<productList.size();i++) {
 			if(i!=productList.size()-1) {				
@@ -171,7 +173,11 @@ public class WorkDialog {
 		}else {
 			eventstr=wEName.geteName();
 		}
-		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade().getlGrade(), pName, eventstr, wPriceTotal, wWrok };
+		String gradeNull="";
+		if(wGNo.getgLGrade()!=null)
+			gradeNull=wGNo.getgLGrade().getlGrade();
+		
+		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), gradeNull, pName, eventstr, wPriceTotal, wWrok };
 		
 	}
 	
