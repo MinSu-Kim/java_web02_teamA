@@ -163,7 +163,6 @@ public class Guest {
 
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		
 //		return new Object[] { gNo, gLGrade.getlGrade(), gName, gTel, gEmail, date.format(gBirth), date.format(gJoin),
 //				gPoint, gMemo };
 		return null;
@@ -171,8 +170,21 @@ public class Guest {
 
 	public Object[] toArray2() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+//		널처리 해야됨
+		String idNull="";
+		if(gId!=null)
+			idNull=gId;
 		
-		return new Object[] {gName,date.format(gBirth),gId,gLGrade.getlGrade()};
+			
+		String gradeNull="";
+		if(gLGrade!=null)
+			gradeNull=gLGrade.getlGrade();
+		
+		
+		String birthNull="";
+		if(gBirth!=null)
+			birthNull=date.format(gBirth);
+		return new Object[] {gName,birthNull,idNull,gradeNull};
 	}
 
 	

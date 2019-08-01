@@ -171,7 +171,10 @@ public class WorkDialog {
 		}else {
 			eventstr=wEName.geteName();
 		}
-		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), wGNo.getgLGrade().getlGrade(), pName, eventstr, wPriceTotal, wWrok };
+		String gradeNull="";
+		if(wGNo.getgLGrade()!=null)
+			gradeNull=wGNo.getgLGrade().getlGrade();
+		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), gradeNull, pName, eventstr, wPriceTotal, wWrok };
 		
 	}
 	

@@ -147,11 +147,11 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		
 		guestChart = new pGuestChart();
 		tabbedPane.addTab("매출 현황", null, guestChart, null);
-		tabbedPane.setEnabledAt(5, false);
+//		tabbedPane.setEnabledAt(5, false);
 
 		pDesignerChart = new pDesignerChart();
 		tabbedPane.addTab("디자이너 현황", null, pDesignerChart, null);
-		tabbedPane.setEnabledAt(6, false);
+//		tabbedPane.setEnabledAt(6, false);
 
 	}
 
