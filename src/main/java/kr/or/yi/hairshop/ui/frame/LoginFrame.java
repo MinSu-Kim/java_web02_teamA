@@ -38,7 +38,7 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 		initComponents();
 	}
 	private void initComponents() {
-		setTitle("관리자님 반갑습니다");
+		setTitle("로그인");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 320, 320);
 		contentPane = new JPanel();

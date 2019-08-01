@@ -58,7 +58,11 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	private JTable tableProduct;
 	private JTable tableEvent;
 	private JTable tableWorker;
-
+	
+	private int selectedEvent;
+	private int selectedProduct;
+	private int selectedWorker;
+	
 	private List<Product> proList;
 	private List<Event> eventList;
 	private List<Designer> workerList;
@@ -375,8 +379,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			tfEventName.setEditable(true);
 		}
 		if (e.getSource() == mntmPopEventUpdate) {
-			int i = tableEvent.getSelectedRow();
-			Event selectEvent = eventList.get(i);
+//			int i = tableEvent.getSelectedRow();
+			Event selectEvent = eventList.get(selectedEvent);
 			setEventTf(selectEvent);
 			btnEvent.setText("수정");
 			tfEventName.setEditable(false);
@@ -395,8 +399,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			tfProductName.setEditable(true);
 		}
 		if (e.getSource() == mntmPopProductUpdate) {
-			int i = tableProduct.getSelectedRow();
-			Product selectProduct = proList.get(i);
+//			int i = tableProduct.getSelectedRow();
+			Product selectProduct = proList.get(selectedProduct);
 			setProductTf(selectProduct);
 			btnProduct.setText("수정");
 			tfProductName.setEditable(false);
@@ -416,8 +420,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			DesignerFrameView();
 		}
 		if (e.getSource() == mntmPopWorkerUpdate) { // 디자이너 수정
-			int i = tableWorker.getSelectedRow();
-			Designer worker = workerList.get(i);
+//			int i = tableWorker.getSelectedRow();
+			Designer worker = workerList.get(selectedWorker);
 //			System.out.println("============================================"+i);
 //			System.out.println("============================================"+worker.toString2());
 			DesignerFrame.setProductMgn(this);
@@ -444,8 +448,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			// 취소
 		} else if (result == JOptionPane.YES_OPTION) {
 			// 예
-			int i = tableWorker.getSelectedRow();
-			Designer designer = workerList.get(i);
+//			int i = tableWorker.getSelectedRow();
+			Designer designer = workerList.get(selectedWorker);
 			System.out.println(designer);
 			System.out.println(wdao);
 			wdao.deleteDesigner(designer.getdNo());
@@ -463,8 +467,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 
 		} else if (result == JOptionPane.YES_OPTION) {// 예
 
-			int i = tableProduct.getSelectedRow();
-			Product selectProduct = proList.get(i);
+//			int i = tableProduct.getSelectedRow();
+			Product selectProduct = proList.get(selectedProduct);
 			pdao.deleteByName(selectProduct.getpName());
 			clearEventTf();
 			clearList();
@@ -560,8 +564,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 
 		} else if (result == JOptionPane.YES_OPTION) {
 			// 예 선택
-			int i = tableEvent.getSelectedRow();
-			Event selectEvent = eventList.get(i);
+//			int i = tableEvent.getSelectedRow();
+			Event selectEvent = eventList.get(selectedEvent);
 			edao.deleteByName(selectEvent.geteName());
 			clearEventTf();
 			clearList();
@@ -722,6 +726,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		
 	}
 	public void mouseEntered(MouseEvent e) {
 	}
@@ -741,12 +746,15 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void mouseExitedTableEvent(MouseEvent e) {
+		selectedEvent = tableEvent.getSelectedRow();
 		tableEvent.clearSelection();
 	}
 	protected void mouseExitedTableProduct(MouseEvent e) {
+		selectedProduct = tableProduct.getSelectedRow();
 		tableProduct.clearSelection();
 	}
 	protected void mouseExitedTableWorker(MouseEvent e) {
+		selectedWorker = tableWorker.getSelectedRow();
 		tableWorker.clearSelection();
 	}
 }
