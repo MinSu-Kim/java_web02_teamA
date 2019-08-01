@@ -751,7 +751,9 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		
+		selectedEvent = tableEvent.getSelectedRow();
+		selectedProduct = tableProduct.getSelectedRow();
+		selectedWorker = tableWorker.getSelectedRow();
 	}
 	public void mouseEntered(MouseEvent e) {
 	}
@@ -771,15 +773,12 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void mouseExitedTableEvent(MouseEvent e) {
-		selectedEvent = tableEvent.getSelectedRow();
 		tableEvent.clearSelection();
 	}
 	protected void mouseExitedTableProduct(MouseEvent e) {
-		selectedProduct = tableProduct.getSelectedRow();
 		tableProduct.clearSelection();
 	}
 	protected void mouseExitedTableWorker(MouseEvent e) {
-		selectedWorker = tableWorker.getSelectedRow();
 		tableWorker.clearSelection();
 	}
 }

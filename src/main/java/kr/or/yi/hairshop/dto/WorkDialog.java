@@ -152,12 +152,17 @@ public class WorkDialog {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		DecimalFormat df = new DecimalFormat("###,###");
 		String pName="";
-		for(int i=0;i<productList.size();i++) {
-			if(i!=productList.size()-1) {				
-				pName+=productList.get(i).getpName()+",";
-			}else {
-				pName+=productList.get(i).getpName();
-			}			
+		if(productList.size()!=0) {
+			for(int i=0;i<productList.size();i++) {
+				if(i!=productList.size()-1) {				
+					pName+=productList.get(i).getpName()+",";
+				}else {
+					pName+=productList.get(i).getpName();
+				}
+			}
+		}
+		else {
+			pName="미정";
 		}
 		
 		String wWrok = "";
@@ -176,6 +181,8 @@ public class WorkDialog {
 		String gradeNull="";
 		if(wGNo.getgLGrade()!=null)
 			gradeNull=wGNo.getgLGrade().getlGrade();
+		
+		
 		
 		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), gradeNull, pName, eventstr, wPriceTotal, wWrok };
 		
