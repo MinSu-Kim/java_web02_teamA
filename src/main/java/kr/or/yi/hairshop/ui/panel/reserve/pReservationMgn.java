@@ -25,7 +25,6 @@ import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -289,10 +288,11 @@ public class pReservationMgn extends JPanel implements ActionListener {
 
 	}
 	protected void actionPerformedBtnSearch(ActionEvent arg0) {
-		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
+		SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
 		
-		String sDay = date.format(calStart.getDate());
-		String eDay = date.format(calEnd.getDate());
+		String sDay = sdate.format(calStart.getDate());
+		String eDay = edate.format(calEnd.getDate());
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", sDay);
 		map.put("end", eDay);
