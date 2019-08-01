@@ -62,8 +62,19 @@ public class DateYearPriceLineChart extends JFXPanel implements InitScene{
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
 		
 		
-		Object[][] object = new Object[12][2];
-		for(int i=0; i<12; i++) {
+		Object[][] object = new Object[][] {{"01월",0},
+			{"02월",0},
+			{"03월",0},
+			{"04월",0},
+			{"05월",0},
+			{"06월",0},
+			{"07월",0},
+			{"08월",0},
+			{"09월",0},
+			{"10월",0},
+			{"11월",0},
+			{"12월",0}};
+		for(int i=0; i<pList.size(); i++) {
 			String month=pList.get(i).getpName().substring(5, 7);
 			if(i+1==Integer.parseInt(month)) {
 				object[i][0]=month+"월";

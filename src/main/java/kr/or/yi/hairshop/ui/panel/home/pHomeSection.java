@@ -20,7 +20,7 @@ public class pHomeSection extends JPanel {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("D:\\namo\\workspace_java\\java_web02_teamA\\images\\homeimage.PNG"));
+		lblNewLabel.setIcon(new ImageIcon("images/homeimage.PNG"));
 		add(lblNewLabel);
 	}
 
