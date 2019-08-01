@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
+import javax.swing.BoxLayout;
 
 public class pDesignerChart extends JPanel implements ItemListener {
 	private static pDesignerChart pDesignerChart;
@@ -138,14 +139,13 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		pRDB.add(rbBtn12);
 		buttonGroup.add(rbBtn12);
 		
-		panel_1 = new JPanel();
-		pMain.add(panel_1);
-		ChartByProductPie ch = new ChartByProductPie();
-		panel_1.add(ch);
-		
-		
 		panel_2 = new JPanel();
 		pMain.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		ChartByProductPie ch = new ChartByProductPie();
+		panel_2.add(ch);
+		
+		
 		
 		Platform.runLater(() -> initFXAll(pLeftAll));
 		Platform.runLater(() -> initFXMon(pPieChartMon));

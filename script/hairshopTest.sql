@@ -223,16 +223,13 @@ select
 w_no as '번호', w_reservTime as '예약일시', d.d_name as '디자이너', d.d_grade as '직책', g.g_name as '손님명',
 g.g_l_grade as '손님등급', p.p_name as '작업명', w_e_name as '이벤트', w_priceTotal as '가격', w_workTime as '완료일시'
 from workdialog w
-left join designer d
-on w.w_d_no = d.d_no
-left join guest g
-on w.w_g_no = g.g_no
-left join choice c
-on w.w_g_no = c.c_w_no
-left join product p
-on c.c_p_name = p.p_name
-left join tax t
-on p.p_name=t.t_name
+		left join designer d on w.w_d_no = d.d_no
+		left join guest g on w.w_g_no = g.g_no
+		left join event e on w.w_e_name = e.e_name
+		left join level v on g.g_l_grade = v.l_grade
+		left join choice c on w.w_no = c.c_w_no
+		left join product p on c.c_p_name = p.p_name
+		left join tax t on p.p_name = t.t_name
 order by w_reservTime desc
 ;
 

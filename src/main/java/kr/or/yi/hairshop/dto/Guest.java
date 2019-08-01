@@ -162,10 +162,12 @@ public class Guest {
 	public Object[] toArray() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		
-		return new Object[] { gNo, gLGrade.getlGrade(), gName, gTel, gEmail, date.format(gBirth), date.format(gJoin),
-				gPoint, gMemo == null?"":gMemo };
+//		return new Object[] { gNo, gLGrade.getlGrade(), gName, gTel, gEmail, date.format(gBirth), date.format(gJoin),
+//				gPoint, gMemo == null?"":gMemo };
 //		return null;
 
+		
+		return new Object[] { gNo, gLGrade==null?"":gLGrade.getlGrade(), gName, gTel==null?"":gTel, gEmail==null?"":gEmail, gBirth==null?"":date.format(gBirth), gJoin==null?"":date.format(gJoin), gPoint==0?"":gPoint, gMemo==null?"":gMemo };
 	}
 
 	public Object[] toArray2() {

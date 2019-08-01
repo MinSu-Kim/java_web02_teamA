@@ -15,6 +15,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import kr.or.yi.hairshop.dto.WorkDialog;
+import java.awt.GridLayout;
 
 
 @SuppressWarnings("serial")
@@ -32,7 +33,7 @@ public class DesignerPanel extends JPanel {
 		JPanel dsPanel = new JPanel();
 		dsPanel.setBorder(new TitledBorder(null, "작업이력", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		add(dsPanel);
-		dsPanel.setLayout(new BorderLayout(0, 0));
+		dsPanel.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JScrollPane scrollPane = new JScrollPane();
 		dsPanel.add(scrollPane);

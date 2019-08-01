@@ -235,9 +235,12 @@ public class Designer {
 
 	public Object[] toArrayMgn() {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-		String birth = date.format(dBirth);
+		String birth="";
+		if(dBirth!=null)
+			birth=date.format(dBirth);
 		
-		return new Object[] { dGrade, dId, dName, dTel, dTel2, birth, dMemo };
+		
+		return new Object[] { dGrade==null?"":dGrade, dId==null?"":dId, dName, dTel, dTel2==null?"":dTel2, birth, dMemo==null?"":dMemo };
 	}
 
 	
