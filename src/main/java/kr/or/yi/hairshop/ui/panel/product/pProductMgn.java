@@ -58,7 +58,11 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	private JTable tableProduct;
 	private JTable tableEvent;
 	private JTable tableWorker;
-
+	
+	private int selectedEvent;
+	private int selectedProduct;
+	private int selectedWorker;
+	
 	private List<Product> proList;
 	private List<Event> eventList;
 	private List<Designer> workerList;
@@ -375,8 +379,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			tfEventName.setEditable(true);
 		}
 		if (e.getSource() == mntmPopEventUpdate) {
-			int i = tableEvent.getSelectedRow();
-			Event selectEvent = eventList.get(i);
+//			int i = tableEvent.getSelectedRow();
+			Event selectEvent = eventList.get(selectedEvent);
 			setEventTf(selectEvent);
 			btnEvent.setText("수정");
 			tfEventName.setEditable(false);
@@ -395,8 +399,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			tfProductName.setEditable(true);
 		}
 		if (e.getSource() == mntmPopProductUpdate) {
-			int i = tableProduct.getSelectedRow();
-			Product selectProduct = proList.get(i);
+//			int i = tableProduct.getSelectedRow();
+			Product selectProduct = proList.get(selectedProduct);
 			setProductTf(selectProduct);
 			btnProduct.setText("수정");
 			tfProductName.setEditable(false);
@@ -416,8 +420,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			DesignerFrameView();
 		}
 		if (e.getSource() == mntmPopWorkerUpdate) { // 디자이너 수정
-			int i = tableWorker.getSelectedRow();
-			Designer worker = workerList.get(i);
+//			int i = tableWorker.getSelectedRow();
+			Designer worker = workerList.get(selectedWorker);
 //			System.out.println("============================================"+i);
 //			System.out.println("============================================"+worker.toString2());
 			DesignerFrame.setProductMgn(this);
@@ -444,8 +448,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			// 취소
 		} else if (result == JOptionPane.YES_OPTION) {
 			// 예
-			int i = tableWorker.getSelectedRow();
-			Designer designer = workerList.get(i);
+//			int i = tableWorker.getSelectedRow();
+			Designer designer = workerList.get(selectedWorker);
 			System.out.println(designer);
 			System.out.println(wdao);
 			wdao.deleteDesigner(designer.getdNo());
@@ -463,8 +467,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 
 		} else if (result == JOptionPane.YES_OPTION) {// 예
 
-			int i = tableProduct.getSelectedRow();
-			Product selectProduct = proList.get(i);
+//			int i = tableProduct.getSelectedRow();
+			Product selectProduct = proList.get(selectedProduct);
 			pdao.deleteByName(selectProduct.getpName());
 			clearEventTf();
 			clearList();
@@ -560,8 +564,8 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 
 		} else if (result == JOptionPane.YES_OPTION) {
 			// 예 선택
-			int i = tableEvent.getSelectedRow();
-			Event selectEvent = eventList.get(i);
+//			int i = tableEvent.getSelectedRow();
+			Event selectEvent = eventList.get(selectedEvent);
 			edao.deleteByName(selectEvent.geteName());
 			clearEventTf();
 			clearList();
@@ -597,13 +601,38 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		this.proList = proList;
 	}
 
+//	public void reloadData() {
+//		tableProduct.setModel(new DefaultTableModel(getRowsProduct(), getColumnNamesProduct()));
+//		tableProduct.setSize(100, 100);
+//		tableCellAlignmentProduct(SwingConstants.CENTER, 0, 1, 2);
+//		tableSetWidthProduct(80, 80, 80);
+//
+//		tableEvent.setModel(new DefaultTableModel(getRowsEvent(), getColumnNamesEvent()));
+//		tableCellAlignmentEvent(SwingConstants.CENTER, 0, 1, 2, 3);
+//		tableSetWidthEvent(80, 80, 120, 120);
+//		
+//		MyTableModel model = new MyTableModel(getRowsWoker(), getColumnNamesWoker());
+//		tableWorker.setModel(model);
+//		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+//		tableWorker.setRowSorter(sorter);
+//		tableCellAlignmentWoker(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6);
+//		tableSetWidthWoker(50, 50, 60, 60, 60, 60, 60);
+//
+//	}
+
 	public void reloadData() {
-		tableProduct.setModel(new DefaultTableModel(getRowsProduct(), getColumnNamesProduct()));
+		MyTableModel model2 = new MyTableModel(getRowsProduct(), getColumnNamesProduct());
+		tableProduct.setModel(model2);
 		tableProduct.setSize(100, 100);
+		RowSorter<TableModel> sorter2 = new TableRowSorter<TableModel>(model2);
+		tableProduct.setRowSorter(sorter2);
 		tableCellAlignmentProduct(SwingConstants.CENTER, 0, 1, 2);
 		tableSetWidthProduct(80, 80, 80);
 
-		tableEvent.setModel(new DefaultTableModel(getRowsEvent(), getColumnNamesEvent()));
+		MyTableModel model1 = new MyTableModel(getRowsEvent(), getColumnNamesEvent());
+		tableEvent.setModel(model1);
+		RowSorter<TableModel> sorter1 = new TableRowSorter<TableModel>(model1);
+		tableEvent.setRowSorter(sorter1);
 		tableCellAlignmentEvent(SwingConstants.CENTER, 0, 1, 2, 3);
 		tableSetWidthEvent(80, 80, 120, 120);
 		
@@ -615,7 +644,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		tableSetWidthWoker(50, 50, 60, 60, 60, 60, 60);
 
 	}
-
+	
 	private Object[][] getRowsProduct() {
 		if (proList == null) {
 			proList = new ArrayList<Product>();
@@ -722,6 +751,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		
 	}
 	public void mouseEntered(MouseEvent e) {
 	}
@@ -741,12 +771,15 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	public void mouseReleased(MouseEvent e) {
 	}
 	protected void mouseExitedTableEvent(MouseEvent e) {
+		selectedEvent = tableEvent.getSelectedRow();
 		tableEvent.clearSelection();
 	}
 	protected void mouseExitedTableProduct(MouseEvent e) {
+		selectedProduct = tableProduct.getSelectedRow();
 		tableProduct.clearSelection();
 	}
 	protected void mouseExitedTableWorker(MouseEvent e) {
+		selectedWorker = tableWorker.getSelectedRow();
 		tableWorker.clearSelection();
 	}
 }

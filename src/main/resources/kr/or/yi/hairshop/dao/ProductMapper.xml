@@ -41,8 +41,8 @@
 	</select>
 	
 	<select id="selectByProductName" resultType="Product">
-		select count(c_p_name) as pPrice, c_p_name as pName
-		from choice group by c_p_name
+		select count(p_division) as pPrice, p_division as pName
+		from product group by p_division
 	</select>
 	
 </mapper>

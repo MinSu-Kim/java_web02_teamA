@@ -78,6 +78,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 	private void initComponents() {
 		setTitle("미용실 관리 프로그램");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(250, 50, 1280, 960);
 		contentPane = new JPanel();
@@ -174,7 +175,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 			btnLogin.setText("로그인");
 			lblLogin.setText("");
 			LoginFrame.setVisible(true);
-			
+			mainFrame.setTitle("미용실 관리 프로그램");
 			//로그 아웃시 볼수 없음
 			tabbedPane.setEnabledAt(5, false);
 			tabbedPane.setEnabledAt(6, false);
@@ -184,9 +185,8 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 	public void Login(Designer designer) {
 		Auth = designer;
-		btnLogin.setText("로그아웃");
-		lblLogin.setText(Auth.getdName() + "님 반갑습니다");
-		
+		btnLogin.setText("로그아웃");		
+		mainFrame.setTitle(Auth.getdName() + "님 반갑습니다");
 		tabbedPane.setEnabledAt(5, true);
 		tabbedPane.setEnabledAt(6, true);
 	}
