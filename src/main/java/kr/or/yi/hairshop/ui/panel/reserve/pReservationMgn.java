@@ -34,28 +34,32 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.MyTableModel;
-import kr.or.yi.hairshop.panel.pCalendar;
 
 @SuppressWarnings("serial")
-public class pReservationMgn extends JPanel implements ActionListener {
+public class pReservationMgn extends JPanel implements ActionListener, PropertyChangeListener {
 	
 	private List<WorkDialog> workList;
 	private WorkDialogMapper dao = new WorkDialogMapperImpl();
 	private JTable table;
 	private JButton btnSearch;
-	private JCalendar calStart;
-	private JCalendar calEnd;
 	private JButton btnAllSearch;
 
 	private JPopupMenu popupMenu;
 	private JMenuItem mntmUpdate;
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmAdd;
+	private JDateChooser dcStart;
+	private JDateChooser dcEnd;
+	private JButton btnToday;
+	private JButton btnThisMon;
+	private JButton btnThisWeek;
+	private JCalendar rCalendar;
 	
 	public pReservationMgn() {
 
@@ -72,119 +76,71 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		panel.add(pNorth, BorderLayout.NORTH);
 		pNorth.setLayout(new GridLayout(0, 2, 10, 0));
 		
-		JPanel panel_2 = new JPanel();
-		pNorth.add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 2, 10, 0));
-		
 		JPanel panel_4 = new JPanel();
-		panel_2.add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		pNorth.add(panel_4);
+		panel_4.setBorder(new TitledBorder(null, "\uB0A0\uC9DC \uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_4.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panel_8 = new JPanel();
+		panel_4.add(panel_8);
+		panel_8.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblNewLabel_3 = new JLabel("시작일");
-		lblNewLabel_3.setFont(new Font("굴림", Font.BOLD, 22));
+		panel_8.add(lblNewLabel_3);
+		lblNewLabel_3.setFont(new Font("굴림", Font.PLAIN, 12));
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblNewLabel_3, BorderLayout.NORTH);
 		
-		calStart = new JCalendar();
-		calStart.setWeekOfYearVisible(false);
-		calStart.setTodayButtonText("");
-		panel_4.add(calStart);
-		calStart.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent e) {
-				SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
-				SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
-				
-				String oneDay = sdate.format(calStart.getDate());
-				String endDay = edate.format(calEnd.getDate());
-				
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("start", oneDay);
-				map.put("end", endDay);
-				
-				workList = dao.selectReservDetailByDate(map);
-				reloadData();
-				
-			}
-		});
-		
-		JPanel panel_5 = new JPanel();
-		panel_2.add(panel_5);
-		panel_5.setLayout(new BorderLayout(0, 0));
+		dcStart = new JDateChooser();
+		panel_8.add(dcStart);
 		
 		JLabel label_1 = new JLabel("종료일");
-		label_1.setFont(new Font("굴림", Font.BOLD, 22));
+		panel_8.add(label_1);
+		label_1.setFont(new Font("굴림", Font.PLAIN, 12));
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_5.add(label_1, BorderLayout.NORTH);
 		
-		calEnd = new JCalendar();
-		calEnd.setWeekOfYearVisible(false);
-		panel_5.add(calEnd);
-		calEnd.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent e) {
-				SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
-				SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
-				
-				String oneDay = sdate.format(calStart.getDate());
-				String endDay = edate.format(calEnd.getDate());
-				
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("start", oneDay);
-				map.put("end", endDay);
-				
-				workList = dao.selectReservDetailByDate(map);
-				reloadData();
-				
-			}
-		});		
+		dcEnd = new JDateChooser();
+		panel_8.add(dcEnd);
 		
-		JPanel panel_3 = new JPanel();
-		pNorth.add(panel_3);
-		panel_3.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_6 = new JPanel();
-		panel_3.add(panel_6, BorderLayout.WEST);
-		panel_6.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		panel_6.add(lblNewLabel_1);
+		JPanel panel_9 = new JPanel();
+		panel_4.add(panel_9);
 		
 		btnSearch = new JButton("검색");
-		btnSearch.setToolTipText("시작일, 종료일을 선택 후 클릭하면 검색된 정보가 출력된다. 종료일이 시작일 보다 앞이면 검색되지 않는다.");
-		panel_6.add(btnSearch);
+		panel_9.add(btnSearch);
+		btnSearch.setToolTipText("");
+		
+		JPanel panel_5 = new JPanel();
+		pNorth.add(panel_5);
+		panel_5.setBorder(new TitledBorder(null, "\uC120\uD0DD \uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panel_10 = new JPanel();
+		panel_5.add(panel_10);
+		panel_10.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_4 = new JLabel("☆ 일자별 검색을 우측 달력의 일자를 선택해 주세요");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_10.add(lblNewLabel_4);
+		
+		JPanel panel_11 = new JPanel();
+		panel_5.add(panel_11);
+		panel_11.setLayout(new GridLayout(0, 4, 0, 0));
+		
+		btnToday = new JButton("오늘 검색");
+		panel_11.add(btnToday);
+		
+		btnThisWeek = new JButton("이번 주 검색");
+		panel_11.add(btnThisWeek);
+		
+		btnThisMon = new JButton("이번 달 검색");
+		panel_11.add(btnThisMon);
 		
 		btnAllSearch = new JButton("전체 검색");
-		panel_6.add(btnAllSearch);
-		
-		JLabel label = new JLabel("");
-		panel_6.add(label);
+		panel_11.add(btnAllSearch);
 		btnAllSearch.addActionListener(this);
+		btnThisMon.addActionListener(this);
+		btnThisWeek.addActionListener(this);
+		btnToday.addActionListener(this);
 		btnSearch.addActionListener(this);
-		
-		JPanel panel_7 = new JPanel();
-		panel_3.add(panel_7);
-		panel_7.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JLabel lblNewLabel_2 = new JLabel("주의사항");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_7.add(lblNewLabel_2);
-		
-		JLabel label_2 = new JLabel("");
-		label_2.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_7.add(label_2);
-		
-		JLabel label_3 = new JLabel("");
-		label_3.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_7.add(label_3);
-		
-		JLabel label_4 = new JLabel("");
-		label_4.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_7.add(label_4);
-		
-		JLabel label_5 = new JLabel("");
-		label_5.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_7.add(label_5);
 		
 		JPanel pList = new JPanel();
 		pList.setBorder(new TitledBorder(null, "예약정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -201,16 +157,21 @@ public class pReservationMgn extends JPanel implements ActionListener {
 		scrollPane.setViewportView(table);
 		pR.setLayout(new BorderLayout(0, 0));
 		
-		pCalendar pCalendar = new pCalendar();
-		pR.add(pCalendar, BorderLayout.NORTH);
-		pCalendar.setLayout(new GridLayout(1, 0, 0, 0));
-		
 		JPanel panel_1 = new JPanel();
 		pR.add(panel_1);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
 		panel_1.add(lblNewLabel);
+		
+		rCalendar = new JCalendar();
+		rCalendar.getDayChooser().addPropertyChangeListener(this);
+		rCalendar.setWeekOfYearVisible(false);
+		pR.add(rCalendar, BorderLayout.NORTH);
+	
+		
+		
+		
 
 		popupMenu = new JPopupMenu();
 		
@@ -307,6 +268,15 @@ public class pReservationMgn extends JPanel implements ActionListener {
 	}	
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnThisWeek) {
+			actionPerformedBtnThisWeek(e);
+		}
+		if (e.getSource() == btnThisMon) {
+			actionPerformedBtnNewButton_1(e);
+		}
+		if (e.getSource() == btnToday) {
+			actionPerformedBtnNewButton(e);
+		}
 		if (e.getSource() == btnAllSearch) {
 			actionPerformedBtnAllSearch(e);
 		}
@@ -325,21 +295,82 @@ public class pReservationMgn extends JPanel implements ActionListener {
 
 	}
 	protected void actionPerformedBtnSearch(ActionEvent arg0) {
+		//검색 버튼
 		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
 		SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
 		
-		String sDay = sdate.format(calStart.getDate());
-		String eDay = edate.format(calEnd.getDate());
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("start", sDay);
-		map.put("end", eDay);
+		if(dcStart.getDate() == null || dcEnd.getDate() == null) {
+			JOptionPane.showMessageDialog(null, "날짜를 모두 선택하세요");
+		}else {
+			String sDay = sdate.format(dcStart.getDate());
+			String eDay = edate.format(dcEnd.getDate());
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("start", sDay);
+			map.put("end", eDay);
+			
+			workList = dao.selectReservDetailByDate(map);
+			reloadData();			
+		}
 		
-		workList = dao.selectReservDetailByDate(map);
-		reloadData();		
 	}
 	protected void actionPerformedBtnAllSearch(ActionEvent arg0) {
 		clearList();
 		reloadData();
+	}
+	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		//오늘검색
+		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
+		SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
+		Date today = new Date();
+		
+		String sDay = sdate.format(today);
+		String eDay = edate.format(today);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", sDay);
+		map.put("end", eDay);		
+		
+		workList = dao.selectReservDetailByDate(map);
+		reloadData();
+	}
+	protected void actionPerformedBtnNewButton_1(ActionEvent e) {
+		//이번달 검색
+		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-01 00:00");
+		SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-31 23:59");
+		Date today = new Date();
+		
+		String sDay = sdate.format(today);
+		String eDay = edate.format(today);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", sDay);
+		map.put("end", eDay);		
+		
+		workList = dao.selectReservDetailByDate(map);
+		reloadData();
+	}
+	protected void actionPerformedBtnThisWeek(ActionEvent e) {
+		//이번 주 검색
+		JOptionPane.showMessageDialog(null, "주는 어떻게 검색해야하지?");
+	}
+	public void propertyChange(PropertyChangeEvent arg0) {
+		if (arg0.getSource() == rCalendar.getDayChooser()) {
+			propertyChangeRCalendarDayChooser(arg0);
+		}
+	}
+	protected void propertyChangeRCalendarDayChooser(PropertyChangeEvent arg0) {
+		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
+		SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
+		
+		String oneDay = sdate.format(rCalendar.getDate());
+		String endDay = edate.format(rCalendar.getDate());
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", oneDay);
+		map.put("end", endDay);
+		
+		workList = dao.selectReservDetailByDate(map);
+		reloadData();	
 	}
 }
 

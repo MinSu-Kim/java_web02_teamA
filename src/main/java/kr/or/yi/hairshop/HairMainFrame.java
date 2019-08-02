@@ -61,7 +61,6 @@ public class HairMainFrame extends JFrame implements ActionListener {
 					//4-2 달 : 일별로-30 -
 					//4-3 일 : 시간별-24 -
 
-
 					mainFrame = new HairMainFrame();
 					mainFrame.setVisible(true);
 
