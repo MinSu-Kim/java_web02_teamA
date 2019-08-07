@@ -163,7 +163,6 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		if (arg0.getSource() == btnLogin) {
 			actionPerformedBtnLogin(arg0);
 		}
-
 	}
 
 	protected void actionPerformedBtnLogin(ActionEvent arg0) {

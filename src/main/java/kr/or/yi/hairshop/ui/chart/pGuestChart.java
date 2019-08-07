@@ -1,8 +1,15 @@
 package kr.or.yi.hairshop.ui.chart;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import javafx.application.Platform;
@@ -13,16 +20,6 @@ import kr.or.yi.hairshop.dao.ProductMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Product;
-
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class pGuestChart extends JPanel implements ActionListener {
 	private WorkDialogMapper wDao=new WorkDialogMapperImpl();
@@ -135,7 +132,7 @@ public class pGuestChart extends JPanel implements ActionListener {
 				{"12월",0}};
 			for(int i=0; i<pList.size(); i++) {
 				String month=pList.get(i).getpName().substring(5, 7);
-				object[Integer.parseInt(month)][1]=pList.get(i).getpPrice();
+				object[Integer.parseInt(month)-1][1]=pList.get(i).getpPrice();
 			}
 			Platform.runLater(() -> {
 				dateYearPriceChart.addChartData(object);
