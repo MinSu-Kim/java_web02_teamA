@@ -93,8 +93,8 @@ select @w_reservTime,@w_workTime;
 
 /* 1.시작~끝 시간 설정 */
 /* 7/1~8/31셋팅 */
-set @start=UNIX_TIMESTAMP('2019-01-01 00:00:00');
-set @end=UNIX_TIMESTAMP('2019-12-31 23:59:59');
+set @start=UNIX_TIMESTAMP('2017-01-01 00:00:00');
+set @end=UNIX_TIMESTAMP('2017-12-31 23:59:59');
 /* 당일데이터만 삽입 */
 set @start=UNIX_TIMESTAMP(concat(left(curdate(),10),' 08:00:00'));
 set @end=UNIX_TIMESTAMP(concat(left(curdate(),10),' 23:00:00'));
@@ -234,8 +234,19 @@ order by w_reservTime desc
 ;
 
 
+w_no, w_reservTime, e_name, w_priceTotal, w_workTime, d_name, d_grade, g_name, l_grade, p_name;
 
-
+select g_id, g_name, w_reservTime, w_priceTotal, d_name, d_grade, p_name, w_workTime
+from workdialog w
+left join designer d on w.w_d_no = d.d_no
+left join guest g on w.w_g_no = g.g_no
+left join event e on w.w_e_name = e.e_name
+left join level v on g.g_l_grade = v.l_grade
+left join choice c on w.w_no = c.c_w_no
+left join product p on c.c_p_name = p.p_name
+left join tax t on p.p_name = t.t_name
+where g_id='a' and w_worktime is null
+order by w_reservTime desc;
 
 
 
@@ -283,5 +294,14 @@ SELECT *
 
 
 select * from level;
+
+select * from guest where g_name like '%김%';
+
+select * from guest;
+
+update guest
+set g_l_grade='브론즈'
+where g_id='ddd';
+
 
 
