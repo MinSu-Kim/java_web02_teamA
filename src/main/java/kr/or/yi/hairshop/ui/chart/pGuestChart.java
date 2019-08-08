@@ -87,6 +87,7 @@ public class pGuestChart extends JPanel implements ActionListener {
 		panel_2.add(btnAdd);
 		
 		btnDelete = new JButton("삭제");
+		btnDelete.addActionListener(this);
 		panel_2.add(btnDelete);
 		
 		
@@ -104,6 +105,9 @@ public class pGuestChart extends JPanel implements ActionListener {
 		panel.setScene(scene);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnDelete) {
+			actionPerformedBtnDelete(e);
+		}
 		if (e.getSource() == btnAdd) {
 			actionPerformedBtnNewButton(e);
 		}
@@ -138,5 +142,12 @@ public class pGuestChart extends JPanel implements ActionListener {
 				dateYearPriceChart.addChartData(object);
 			});
 		}
+	}
+	protected void actionPerformedBtnDelete(ActionEvent e) {
+		
+		Platform.runLater(() -> {
+			dateYearPriceChart.delChartData(year++);
+		});
+		
 	}
 }
