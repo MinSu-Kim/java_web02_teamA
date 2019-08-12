@@ -15,18 +15,25 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -37,8 +44,12 @@ import javax.swing.table.TableRowSorter;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
+import kr.or.yi.hairshop.HairMainFrame;
+import kr.or.yi.hairshop.dao.DesignerMapper;
+import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
+import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.MyTableModel;
 
@@ -46,7 +57,10 @@ import kr.or.yi.hairshop.panel.MyTableModel;
 public class pReservationMgn extends JPanel implements ActionListener, PropertyChangeListener {
 	
 	private List<WorkDialog> workList;
-	private WorkDialogMapper dao = new WorkDialogMapperImpl();
+	private List<Designer> dList;
+	private WorkDialogMapper wDao = new WorkDialogMapperImpl();
+	private DesignerMapper dDao = new DesignerMapperImpl();
+
 	private JTable table;
 	private JButton btnSearch;
 	private JButton btnAllSearch;
@@ -61,6 +75,15 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 	private JButton btnThisMon;
 	private JButton btnThisWeek;
 	private JCalendar rCalendar;
+
+	private HairMainFrame parent;
+	
+	private JComboBox<Designer> cmbDesigner;
+	private DefaultComboBoxModel<Designer> designerCmbModel;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JRadioButton rdbtnSelect;
+	private JRadioButton rdbtnAll;
+	
 	
 	public pReservationMgn() {
 
@@ -75,10 +98,10 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		
 		JPanel pNorth = new JPanel();
 		panel.add(pNorth, BorderLayout.NORTH);
-		pNorth.setLayout(new GridLayout(0, 2, 10, 0));
+		pNorth.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_4 = new JPanel();
-		pNorth.add(panel_4);
+		pNorth.add(panel_4, BorderLayout.WEST);
 		panel_4.setBorder(new TitledBorder(null, "\uB0A0\uC9DC \uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setLayout(new GridLayout(0, 1, 0, 0));
 		
@@ -108,14 +131,20 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		btnSearch = new JButton("검색");
 		panel_9.add(btnSearch);
 		btnSearch.setToolTipText("");
+		btnSearch.addActionListener(this);
 		
 		JPanel panel_5 = new JPanel();
 		pNorth.add(panel_5);
-		panel_5.setBorder(new TitledBorder(null, "\uC120\uD0DD \uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
+		panel_5.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_5.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "\uB0A0\uC9DC \uAE30\uC900", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
+		panel_5.add(panel_2);
+		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel_10 = new JPanel();
-		panel_5.add(panel_10);
+		panel_2.add(panel_10);
 		panel_10.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_4 = new JLabel("☆ 일자별 검색을 우측 달력의 일자를 선택해 주세요");
@@ -123,25 +152,54 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		panel_10.add(lblNewLabel_4);
 		
 		JPanel panel_11 = new JPanel();
-		panel_5.add(panel_11);
+		panel_2.add(panel_11);
 		panel_11.setLayout(new GridLayout(0, 4, 0, 0));
 		
-		btnToday = new JButton("오늘 검색");
+		btnToday = new JButton("오늘");
 		panel_11.add(btnToday);
 		
-		btnThisWeek = new JButton("이번 주 검색");
+		btnThisWeek = new JButton("이번 주");
 		panel_11.add(btnThisWeek);
 		
-		btnThisMon = new JButton("이번 달 검색");
+		btnThisMon = new JButton("이번 달");
 		panel_11.add(btnThisMon);
 		
-		btnAllSearch = new JButton("전체 검색");
+		btnAllSearch = new JButton("전체");
 		panel_11.add(btnAllSearch);
 		btnAllSearch.addActionListener(this);
 		btnThisMon.addActionListener(this);
 		btnThisWeek.addActionListener(this);
 		btnToday.addActionListener(this);
-		btnSearch.addActionListener(this);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "\uB514\uC790\uC774\uB108 \uAE30\uC900", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		panel_5.add(panel_3);
+		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		
+		
+		rdbtnAll = new JRadioButton("전체 선택");
+		panel_3.add(rdbtnAll);
+		rdbtnAll.setSelected(true);
+		buttonGroup.add(rdbtnAll);
+		
+		
+		dList = dDao.selectDesignerByAll();
+		designerCmbModel = new DefaultComboBoxModel<Designer>(new Vector<Designer>(dList));
+		
+		JLabel label = new JLabel("");
+		panel_3.add(label);
+		
+		rdbtnSelect = new JRadioButton("디자이너 선택");
+		panel_3.add(rdbtnSelect);
+		buttonGroup.add(rdbtnSelect);
+		
+		
+		cmbDesigner = new JComboBox<Designer>();
+		panel_3.add(cmbDesigner);
+		cmbDesigner.setModel(designerCmbModel);
+		
+		cmbDesigner.setSelectedIndex(-1);
 		
 		JPanel pList = new JPanel();
 		pList.setBorder(new TitledBorder(null, "예약정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -169,10 +227,6 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		rCalendar.getDayChooser().addPropertyChangeListener(this);
 		rCalendar.setWeekOfYearVisible(false);
 		pR.add(rCalendar, BorderLayout.NORTH);
-	
-		
-		
-		
 
 		popupMenu = new JPopupMenu();
 		
@@ -192,8 +246,12 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 //		scrollPane.setComponentPopupMenu(popupMenu);
 	}
 	
+	public void setParent(HairMainFrame HairMainFrame) {
+		this.parent = HairMainFrame;
+	}
+	
 	public void clearList() {
-		workList = dao.selectReservDetail();
+		workList = wDao.selectReservDetail();
 	}
 
 	public void reloadData() {
@@ -296,6 +354,8 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 
 	}
 	protected void actionPerformedBtnSearch(ActionEvent arg0) {
+		
+		
 		//검색 버튼
 		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
 		SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
@@ -308,14 +368,23 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("start", sDay);
 			map.put("end", eDay);
+			if (rdbtnSelect.isSelected()) { //디자이너 검색으로 선택되어 있으면
+				Designer selDesigner = (Designer) cmbDesigner.getSelectedItem();
+				map.put("name", selDesigner.getdName());
+			}
 			
-			workList = dao.selectReservDetailByDate(map);
+			workList = wDao.selectReservDetailByDate(map);
 			reloadData();			
 		}
 		
 	}
 	protected void actionPerformedBtnAllSearch(ActionEvent arg0) {
-		clearList();
+		if (rdbtnSelect.isSelected()) { //디자이너 검색으로 선택되어 있으면
+			Designer selDesigner = (Designer) cmbDesigner.getSelectedItem();
+			workList = wDao.selectReservDetailByName(selDesigner.getdName());
+		}else {
+			workList = wDao.selectReservDetail();
+		}
 		reloadData();
 	}
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
@@ -330,8 +399,12 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", sDay);
 		map.put("end", eDay);		
+		if (rdbtnSelect.isSelected()) { //디자이너 검색으로 선택되어 있으면
+			Designer selDesigner = (Designer) cmbDesigner.getSelectedItem();
+			map.put("name", selDesigner.getdName());
+		}
 		
-		workList = dao.selectReservDetailByDate(map);
+		workList = wDao.selectReservDetailByDate(map);
 		reloadData();
 	}
 	protected void actionPerformedBtnNewButton_1(ActionEvent e) {
@@ -346,8 +419,12 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", sDay);
 		map.put("end", eDay);		
+		if (rdbtnSelect.isSelected()) { //디자이너 검색으로 선택되어 있으면
+			Designer selDesigner = (Designer) cmbDesigner.getSelectedItem();
+			map.put("name", selDesigner.getdName());
+		}
 		
-		workList = dao.selectReservDetailByDate(map);
+		workList = wDao.selectReservDetailByDate(map);
 		reloadData();
 	}
 	protected void actionPerformedBtnThisWeek(ActionEvent e) {
@@ -369,8 +446,12 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", sDay);
 		map.put("end", eDay);		
+		if (rdbtnSelect.isSelected()) { //디자이너 검색으로 선택되어 있으면
+			Designer selDesigner = (Designer) cmbDesigner.getSelectedItem();
+			map.put("name", selDesigner.getdName());
+		}
 		
-		workList = dao.selectReservDetailByDate(map);
+		workList = wDao.selectReservDetailByDate(map);
 		reloadData();
 	}
 	public void propertyChange(PropertyChangeEvent arg0) {
@@ -388,8 +469,12 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", oneDay);
 		map.put("end", endDay);
+		if (rdbtnSelect.isSelected()) { //디자이너 검색으로 선택되어 있으면
+			Designer selDesigner = (Designer) cmbDesigner.getSelectedItem();
+			map.put("name", selDesigner.getdName());
+		}
 		
-		workList = dao.selectReservDetailByDate(map);
+		workList = wDao.selectReservDetailByDate(map);
 		reloadData();	
 	}
 }

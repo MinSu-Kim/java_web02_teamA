@@ -140,7 +140,6 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	public List<WorkDialog> selectByDName() {
 		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
 			return sqlSession.selectList(namespace+".selectByDName");
-
 		}
 	}
 
@@ -157,6 +156,13 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 			int res = sqlSession.update(namespace + ".updateWorkDialogWorkTime", workDialog);
 			sqlSession.commit();
 			return res;
+		}
+	}
+
+	@Override
+	public List<WorkDialog> selectReservDetailByName(String name) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectReservDetailByName", name);
 		}
 	}
 

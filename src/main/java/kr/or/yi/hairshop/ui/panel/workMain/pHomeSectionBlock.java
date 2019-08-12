@@ -7,42 +7,25 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.RowSorter;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
-import kr.or.yi.hairshop.dao.WorkDialogMapper;
-import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
-import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.MyTableModel;
-import kr.or.yi.hairshop.ui.frame.WorkDialogFrame;
-
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
 
 public class pHomeSectionBlock extends JPanel implements MouseListener, ActionListener {
 	JTable jtable;
@@ -190,6 +173,7 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 
 			int index = work.getwReserveTime().getHours() - 8;
 			String text = jtable.getValueAt(index, 0).toString();
+			
 			if (dWorkList.get(index) != null) {
 				dWorkList.get(index).add(work);
 				
