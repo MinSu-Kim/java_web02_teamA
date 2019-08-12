@@ -30,6 +30,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -83,6 +84,8 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton rdbtnSelect;
 	private JRadioButton rdbtnAll;
+	private JTextField tfGuestName;
+	private JButton btnNameSearch;
 	
 	
 	public pReservationMgn() {
@@ -136,7 +139,7 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		JPanel panel_5 = new JPanel();
 		pNorth.add(panel_5);
 		panel_5.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_5.setLayout(new GridLayout(0, 2, 0, 0));
+		panel_5.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "\uB0A0\uC9DC \uAE30\uC900", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
@@ -155,16 +158,16 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		panel_2.add(panel_11);
 		panel_11.setLayout(new GridLayout(0, 4, 0, 0));
 		
-		btnToday = new JButton("오늘");
+		btnToday = new JButton("today");
 		panel_11.add(btnToday);
 		
-		btnThisWeek = new JButton("이번 주");
+		btnThisWeek = new JButton("week");
 		panel_11.add(btnThisWeek);
 		
-		btnThisMon = new JButton("이번 달");
+		btnThisMon = new JButton("month");
 		panel_11.add(btnThisMon);
 		
-		btnAllSearch = new JButton("전체");
+		btnAllSearch = new JButton("All");
 		panel_11.add(btnAllSearch);
 		btnAllSearch.addActionListener(this);
 		btnThisMon.addActionListener(this);
@@ -201,6 +204,18 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		
 		cmbDesigner.setSelectedIndex(-1);
 		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "손님 기준", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		panel_5.add(panel_7);
+		
+		tfGuestName = new JTextField("이름 검색");
+		panel_7.add(tfGuestName);
+		tfGuestName.setColumns(10);
+		
+		btnNameSearch = new JButton("검색");
+		btnNameSearch.addActionListener(this);
+		panel_7.add(btnNameSearch);
+		
 		JPanel pList = new JPanel();
 		pList.setBorder(new TitledBorder(null, "예약정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(pList);
@@ -214,6 +229,9 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		JPanel panel_6 = new JPanel();
+		pList.add(panel_6, BorderLayout.NORTH);
 		pR.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_1 = new JPanel();
@@ -327,14 +345,14 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 	}	
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNameSearch) {
+			actionPerformedBtnNameSearch(e);
+		}
 		if (e.getSource() == btnThisWeek) {
 			actionPerformedBtnThisWeek(e);
 		}
 		if (e.getSource() == btnThisMon) {
 			actionPerformedBtnNewButton_1(e);
-		}
-		if (e.getSource() == btnToday) {
-			actionPerformedBtnNewButton(e);
 		}
 		if (e.getSource() == btnAllSearch) {
 			actionPerformedBtnAllSearch(e);
@@ -381,30 +399,10 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 	protected void actionPerformedBtnAllSearch(ActionEvent arg0) {
 		if (rdbtnSelect.isSelected()) { //디자이너 검색으로 선택되어 있으면
 			Designer selDesigner = (Designer) cmbDesigner.getSelectedItem();
-			workList = wDao.selectReservDetailByName(selDesigner.getdName());
+			workList = wDao.selectReservDetailByDesignerName(selDesigner.getdName());
 		}else {
 			workList = wDao.selectReservDetail();
 		}
-		reloadData();
-	}
-	protected void actionPerformedBtnNewButton(ActionEvent e) {
-		//오늘검색
-		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
-		SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
-		Date today = new Date();
-		
-		String sDay = sdate.format(today);
-		String eDay = edate.format(today);
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("start", sDay);
-		map.put("end", eDay);		
-		if (rdbtnSelect.isSelected()) { //디자이너 검색으로 선택되어 있으면
-			Designer selDesigner = (Designer) cmbDesigner.getSelectedItem();
-			map.put("name", selDesigner.getdName());
-		}
-		
-		workList = wDao.selectReservDetailByDate(map);
 		reloadData();
 	}
 	protected void actionPerformedBtnNewButton_1(ActionEvent e) {
@@ -476,6 +474,10 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		
 		workList = wDao.selectReservDetailByDate(map);
 		reloadData();	
+	}
+	protected void actionPerformedBtnNameSearch(ActionEvent e) {
+		workList = wDao.selectReservDetailByGuestName(tfGuestName.getText());
+		reloadData();
 	}
 }
 

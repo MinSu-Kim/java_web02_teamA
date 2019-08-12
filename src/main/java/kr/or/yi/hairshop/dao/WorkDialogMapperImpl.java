@@ -160,9 +160,16 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	}
 
 	@Override
-	public List<WorkDialog> selectReservDetailByName(String name) {
+	public List<WorkDialog> selectReservDetailByDesignerName(String name) {
 		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
-			return sqlSession.selectList(namespace+".selectReservDetailByName", name);
+			return sqlSession.selectList(namespace+".selectReservDetailByDesignerName", name);
+		}
+	}
+
+	@Override
+	public List<WorkDialog> selectReservDetailByGuestName(String name) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectReservDetailByGuestName", name);
 		}
 	}
 
