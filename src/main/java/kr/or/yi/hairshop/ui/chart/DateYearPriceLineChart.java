@@ -1,8 +1,7 @@
 package kr.or.yi.hairshop.ui.chart;
 
+import java.util.Iterator;
 import java.util.List;
-
-import javax.swing.JOptionPane;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +15,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import kr.or.yi.hairshop.dto.Product;
-import kr.or.yi.hairshop.dto.WorkDialog;
 
 public class DateYearPriceLineChart extends JFXPanel implements InitScene{
 	private LineChart<String, Number> lineChart;
@@ -88,6 +86,19 @@ public class DateYearPriceLineChart extends JFXPanel implements InitScene{
 	public void addChartData(Object[][] obj) {
 		lineChart.getData().add(getChartData(obj));
 	}
+	
+	public void delChartData(int year) {
+		ObservableList<XYChart.Series<String, Number>> list = lineChart.getData();
+		Iterator<Series<String, Number>>  it = list.iterator();
+		while(it.hasNext()) {
+			Series<String, Number> s = it.next();
+			if (s.getName().equals(year+"")) {
+				lineChart.getData().remove(s);
+				break;
+			}
+		}
+	}
+	
 	public XYChart.Series<String, Number> getChartData(Object[][] obj) {
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
 		
