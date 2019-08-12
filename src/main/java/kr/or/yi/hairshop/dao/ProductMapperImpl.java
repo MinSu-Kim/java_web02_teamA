@@ -15,7 +15,6 @@ public class ProductMapperImpl implements ProductMapper {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + ".selectProductByAll");
 		}
-
 	}
 
 	@Override
@@ -57,7 +56,6 @@ public class ProductMapperImpl implements ProductMapper {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + ".selectDateYearPriceChart",year);
 		}
-
 	}
 
 
@@ -65,6 +63,13 @@ public class ProductMapperImpl implements ProductMapper {
 	public List<Product> selectByProductName() {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + ".selectByProductName");
+		}
+	}
+
+	@Override
+	public List<Product> searchByName(String name) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".searchByName", name);
 		}
 	}
 

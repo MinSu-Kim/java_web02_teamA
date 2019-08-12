@@ -45,4 +45,9 @@
 		from product group by p_division
 	</select>
 	
+	<select id="searchByName" resultType="Product">
+		select * from product where p_secession = false and p_name like CONCAT('%',#{name},'%')
+	</select>
+	
+	
 </mapper>

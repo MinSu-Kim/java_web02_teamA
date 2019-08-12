@@ -32,7 +32,6 @@ import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JDateChooser;
 
-import kr.or.yi.hairshop.HairMainFrame;
 import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dao.EventMapper;
@@ -46,6 +45,7 @@ import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
 import kr.or.yi.hairshop.ui.frame.DesignerFrame;
 
+@SuppressWarnings("serial")
 public class pProductMgn extends JPanel implements ActionListener, MouseListener {
 
 	public pProductMgn ProductMgn;
@@ -57,16 +57,14 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	private JTable tableProduct;
 	private JTable tableEvent;
 	private JTable tableWorker;
-	
+
 	private int selectedEvent;
 	private int selectedProduct;
 	private int selectedWorker;
-	
+
 	private List<Product> proList;
 	private List<Event> eventList;
 	private List<Designer> workerList;
-
-	private HairMainFrame parent;
 
 	private ProductMapper pdao = new ProductMapperImpl();
 	private EventMapper edao = new EventMapperImpl();
@@ -109,8 +107,6 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	private JLabel label;
 	private JSpinner spProductPrice;
 	private JLabel label_1;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
 	private JPanel panel_2;
 	private JPanel panel_5;
 	private JButton btnProduct;
@@ -124,6 +120,11 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	private JMenuItem mntmPopWorkerUpdate;
 	private JMenuItem mntmPopWorkerDelete;
 	private DesignerFrame DesignerFrame;
+	private JPanel panel_6;
+	private JPanel panel_7;
+	private JButton btnSearchName;
+	private JTextField tfPName;
+	private JButton btnSearchAll;
 
 	public pProductMgn() {
 		DesignerFrame = new DesignerFrame();
@@ -217,19 +218,63 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		tableProduct.addMouseListener(this);
 		scrollPaneProduct.setViewportView(tableProduct);
 
+		pWorker = new JPanel(); // 디자이너
+		Section.add(pWorker);
+		pWorker.setBorder(new TitledBorder(null, "디자이너 관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pWorker.setLayout(new BorderLayout(0, 0));
+		JScrollPane scrollPaneWorker = new JScrollPane();
+
+		pWorker.add(scrollPaneWorker);
+		tableWorker = new JTable();
+		tableWorker.addMouseListener(this);
+		scrollPaneWorker.setViewportView(tableWorker);
+
+		panel = new JPanel();
+		add(panel, BorderLayout.EAST);
+		panel.setLayout(new BorderLayout(0, 0));
+
+		pCalandar = new pCalendar();
+		panel.add(pCalandar, BorderLayout.NORTH);
+		pCalandar.setLayout(new GridLayout(1, 0, 0, 0));
+
+		panel_4 = new JPanel();
+		panel.add(panel_4);
+
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
+		panel_4.add(lblNewLabel);
+
+		popupMenuEventInit(scrollPaneEvent);
+		popupMenuProductInit(scrollPaneProduct);
+
+		panel_6 = new JPanel();
+		pProduct.add(panel_6, BorderLayout.NORTH);
+		panel_6.setLayout(new BorderLayout(0, 0));
+
+		panel_7 = new JPanel();
+		panel_7.setBorder(new TitledBorder(null, "\uC774\uB984 \uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.BELOW_TOP, null, null));
+		panel_6.add(panel_7, BorderLayout.NORTH);
+
+		tfPName = new JTextField();
+		panel_7.add(tfPName);
+		tfPName.setColumns(10);
+
+		btnSearchName = new JButton("검색");
+		btnSearchName.addActionListener(this);
+		panel_7.add(btnSearchName);
+
+		btnSearchAll = new JButton("전체 검색");
+		btnSearchAll.addActionListener(this);
+		panel_7.add(btnSearchAll);
+
 		panel_2 = new JPanel();
-		pProduct.add(panel_2, BorderLayout.NORTH);
+		panel_2.setBorder(new TitledBorder(null, "\uC791\uC5C5 \uB4F1\uB85D", TitledBorder.LEADING, TitledBorder.BELOW_TOP, null, null));
+		panel_6.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 
 		pProductTF = new JPanel();
 		panel_2.add(pProductTF, BorderLayout.CENTER);
 		pProductTF.setLayout(new GridLayout(0, 2, 0, 0));
-
-		lblNewLabel_3 = new JLabel("");
-		pProductTF.add(lblNewLabel_3);
-
-		lblNewLabel_4 = new JLabel("");
-		pProductTF.add(lblNewLabel_4);
 
 		lblNewLabel_2 = new JLabel("이름");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -268,35 +313,6 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 
 		lblNewLabel_5 = new JLabel("");
 		panel_5.add(lblNewLabel_5);
-
-		pWorker = new JPanel(); // 디자이너
-		Section.add(pWorker);
-		pWorker.setBorder(new TitledBorder(null, "디자이너 관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pWorker.setLayout(new BorderLayout(0, 0));
-		JScrollPane scrollPaneWorker = new JScrollPane();
-
-		pWorker.add(scrollPaneWorker);
-		tableWorker = new JTable();
-		tableWorker.addMouseListener(this);
-		scrollPaneWorker.setViewportView(tableWorker);
-
-		panel = new JPanel();
-		add(panel, BorderLayout.EAST);
-		panel.setLayout(new BorderLayout(0, 0));
-
-		pCalandar = new pCalendar();
-		panel.add(pCalandar, BorderLayout.NORTH);
-		pCalandar.setLayout(new GridLayout(1, 0, 0, 0));
-
-		panel_4 = new JPanel();
-		panel.add(panel_4);
-
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("images\\home.jpg"));
-		panel_4.add(lblNewLabel);
-
-		popupMenuEventInit(scrollPaneEvent);
-		popupMenuProductInit(scrollPaneProduct);
 		popupMenuWorkerInit(scrollPaneWorker);
 
 	}
@@ -359,18 +375,20 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		scrollPaneWorker.setComponentPopupMenu(popupMenuWorker);
 	}
 
-	public void setParent(HairMainFrame HairMainFrame) {
-		this.parent = HairMainFrame;
-	}
-
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearchAll) {
+			actionPerformedBtnSearchAll(e);
+		}
+		if (e.getSource() == btnSearchName) {
+			actionPerformedBtnSearchName(e);
+		}
 		if (e.getSource() == btnProduct) {
 			actionPerformedBtnProduct(e);
 		}
 		if (e.getSource() == btnEvent) {
 			actionPerformedBtnEvent(e);
 		}
-		
+
 		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ event 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopEventAdd) {
 			clearEventTf();
@@ -390,7 +408,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			btnEvent.setText("등록");
 			tfEventName.setEditable(true);
 		}
-		
+
 		/* ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ product 팝업 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 		if (e.getSource() == mntmPopProductAdd) {
 			clearProductTf();
@@ -489,7 +507,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 				String pDivision = tfDivision.getText();
 
 				Product pro = new Product(pPrice, pName, pDivision);
-				
+
 				pdao.updateByName(pro);
 				btnProduct.setText("등록");
 				tfProductName.setEditable(true);
@@ -511,19 +529,19 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 
 	// event 등록 버튼
 	protected void actionPerformedBtnEvent(ActionEvent e) {
-		if(tfEventName.getText().equals("")) {
+		if (tfEventName.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "모두 입력하세요");
-		}else {
+		} else {
 			if (btnEvent.getText().equals("수정")) {
 				String eName = tfEventName.getText();
 				Date eStartDay = dcEventStartDate.getDate();
 				Date eEndDay = dcEventEndDate.getDate();
-				
-				if(eEndDay.compareTo(eStartDay) == -1) {
+
+				if (eEndDay.compareTo(eStartDay) == -1) {
 					JOptionPane.showMessageDialog(null, "날짜를 잘못입력하였습니다.");
 					return;
 				}
-				
+
 				int eSale = (int) spEventSale.getValue();
 
 				Event event = new Event(eName, eStartDay, eEndDay, eSale);
@@ -539,7 +557,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 				Date eStartDay = dcEventStartDate.getDate();
 				Date eEndDay = dcEventEndDate.getDate();
 				int eSale = (int) spEventSale.getValue();
-				if(eEndDay.compareTo(eStartDay) == -1) {
+				if (eEndDay.compareTo(eStartDay) == -1) {
 					JOptionPane.showMessageDialog(null, "날짜를 잘못입력하였습니다.");
 					return;
 				}
@@ -589,7 +607,6 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		dcEventStartDate.setDate(e.geteStartDay());
 		dcEventEndDate.setDate(e.geteEndDay());
 		spEventSale.setValue(e.geteSale());
-
 	}
 
 	private void clearEventTf() {
@@ -643,7 +660,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		tableEvent.setRowSorter(sorter1);
 		tableCellAlignmentEvent(SwingConstants.CENTER, 0, 1, 2, 3);
 		tableSetWidthEvent(80, 80, 120, 120);
-		
+
 		MyTableModel model = new MyTableModel(getRowsWoker(), getColumnNamesWoker());
 		tableWorker.setModel(model);
 		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
@@ -652,7 +669,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		tableSetWidthWoker(50, 50, 60, 60, 60, 60, 60);
 
 	}
-	
+
 	private Object[][] getRowsProduct() {
 		if (proList == null) {
 			proList = new ArrayList<Product>();
@@ -763,8 +780,10 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		selectedProduct = tableProduct.getSelectedRow();
 		selectedWorker = tableWorker.getSelectedRow();
 	}
+
 	public void mouseEntered(MouseEvent e) {
 	}
+
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == tableWorker) {
 			mouseExitedTableWorker(e);
@@ -776,17 +795,32 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 			mouseExitedTableEvent(e);
 		}
 	}
+
 	public void mousePressed(MouseEvent e) {
 	}
+
 	public void mouseReleased(MouseEvent e) {
 	}
+
 	protected void mouseExitedTableEvent(MouseEvent e) {
 		tableEvent.clearSelection();
 	}
+
 	protected void mouseExitedTableProduct(MouseEvent e) {
 		tableProduct.clearSelection();
 	}
+
 	protected void mouseExitedTableWorker(MouseEvent e) {
 		tableWorker.clearSelection();
+	}
+	protected void actionPerformedBtnSearchName(ActionEvent e) {
+		String name = tfPName.getText();
+		proList = pdao.searchByName(name);
+		reloadData();
+		tfPName.setText("");
+	}
+	protected void actionPerformedBtnSearchAll(ActionEvent e) {
+		clearList();
+		reloadData();		
 	}
 }

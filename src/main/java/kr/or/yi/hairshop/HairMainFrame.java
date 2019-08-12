@@ -150,10 +150,10 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		tabbedPane.addTab("고객 관리", null, GuestMgn, null);
 
 		ProductMgn = new pProductMgn();
-		ProductMgn.setParent(HairMainFrame.this);
+//		ProductMgn.setParent(HairMainFrame.this);
 		ProductMgn.clearList();
 		ProductMgn.reloadData();
-		tabbedPane.addTab("제품 관리", null, ProductMgn, null);
+		tabbedPane.addTab("기타 관리", null, ProductMgn, null);
 		
 		guestChart = new pGuestChart();
 		tabbedPane.addTab("매출 현황", null, guestChart, null);
