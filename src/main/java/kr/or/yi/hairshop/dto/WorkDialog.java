@@ -184,7 +184,7 @@ public class WorkDialog {
 		
 		
 		
-		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), gradeNull, pName, eventstr, wPriceTotal, wWrok };
+		return new Object[] { wNo, date.format(wReservTime), wDNo.getdName(), wDNo.getdGrade(), wGNo.getgName(), gradeNull, pName, eventstr, df.format(wPriceTotal)+"원", wWrok };
 		
 	}
 	

@@ -1,6 +1,7 @@
 package kr.or.yi.hairshop.ui.panel.chart.designer;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -19,7 +20,6 @@ import javafx.scene.Scene;
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
-import javax.swing.BoxLayout;
 
 public class pDesignerChart extends JPanel implements ItemListener {
 	private static pDesignerChart pDesignerChart;
@@ -73,6 +73,7 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		JPanel pRDB = new JPanel();
 		pRightMon.add(pRDB, BorderLayout.SOUTH);
 		pRDB.setLayout(new GridLayout(0, 7, 0, 0));
+		pRDB.setBackground(Color.white);
 		
 		rbBtn0 = new JRadioButton("1월");
 		rbBtn0.addItemListener(this);
@@ -145,11 +146,30 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		ChartByProductPie ch = new ChartByProductPie();
 		panel_2.add(ch);
 		
+		tbBtnBackgroundColor();
 		
 		
 		Platform.runLater(() -> initFXAll(pLeftAll));
 		Platform.runLater(() -> initFXMon(pPieChartMon));
 		Platform.runLater(() -> initFX(ch));
+	}
+
+	public void tbBtnBackgroundColor() {
+		rbBtn0.setBackground(Color.white);
+		rbBtn1.setBackground(Color.white);
+		rbBtn2.setBackground(Color.white);
+		rbBtn3.setBackground(Color.white);
+		rbBtn4.setBackground(Color.white);
+		rbBtn5.setBackground(Color.white);
+		rbBtn6.setBackground(Color.white);
+		rbBtn7.setBackground(Color.white);
+		rbBtn8.setBackground(Color.white);
+		rbBtn9.setBackground(Color.white);
+		rbBtn10.setBackground(Color.white);
+		rbBtn11.setBackground(Color.white);
+		rbBtn12.setBackground(Color.white);
+		
+		
 	}
 
 	public void initFXAll(pPieChartAll p) {
@@ -210,13 +230,12 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		if (e.getSource() == rbBtn0) {
 			itemStateChangedRbBtn0(e);
 		}
-		
-		
 	}
-	protected void itemStateChangedRbBtn0(ItemEvent e) {
+	
+	public void monthSearch(String month) {
 		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-01-01 00:00";
-		String end = "2019-01-31 23:59";
+		String start = "2019-"+month+"-01 00:00";
+		String end = "2019-"+month+"-31 23:59";
 		
 		map.put("start", start);
 		map.put("end", end);
@@ -224,147 +243,55 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		if(list.size() != 0) {
 			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
 		}
+	}
+	
+	protected void itemStateChangedRbBtn0(ItemEvent e) {
+		String month = "01";
+		monthSearch(month);
 	}
 	protected void itemStateChangedRbBtn1(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-02-01 00:00";
-		String end = "2019-02-28 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}			
+		String month = "02";
+		monthSearch(month);		
 	}
 	protected void itemStateChangedRbBtn2(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-03-01 00:00";
-		String end = "2019-03-31 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}
+		String month = "03";
+		monthSearch(month);
 	}
 	protected void itemStateChangedRbBtn3(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-04-01 00:00";
-		String end = "2019-04-30 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}
+		String month = "04";
+		monthSearch(month);
 	}
 	protected void itemStateChangedRbBtn4(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-05-01 00:00";
-		String end = "2019-05-31 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}		
+		String month = "05";
+		monthSearch(month);		
 	}
 	protected void itemStateChangedRbBtn5(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-06-01 00:00";
-		String end = "2019-06-30 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}	
+		String month = "06";
+		monthSearch(month);	
 	}
 	protected void itemStateChangedRbBtn6(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-07-01 00:00";
-		String end = "2019-07-31 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}
+		String month = "07";
+		monthSearch(month);
 	}
 	protected void itemStateChangedRbBtn7(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-08-01 00:00";
-		String end = "2019-08-31 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}		
+		String month = "08";
+		monthSearch(month);	
 	}
 	protected void itemStateChangedRbBtn8(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-09-01 00:00";
-		String end = "2019-09-31 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}
+		String month = "09";
+		monthSearch(month);
 	}
 	protected void itemStateChangedRbBtn9(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-10-01 00:00";
-		String end = "2019-10-31 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}
+		String month = "10";
+		monthSearch(month);
 	}
 	protected void itemStateChangedRbBtn10(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-11-01 00:00";
-		String end = "2019-11-31 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}
+		String month = "11";
+		monthSearch(month);
 	}
 	protected void itemStateChangedRbBtn11(ItemEvent e) {
-		Map<String, String> map = new HashMap<String, String>();
-		String start = "2019-12-01 00:00";
-		String end = "2019-12-31 23:59";
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<WorkDialog> list = dao.selectByDateForChartMon(map);
-		if(list.size() != 0) {
-			Platform.runLater(() -> pPieChartMon.reloadAllData(list) );
-		}
+		String month = "12";
+		monthSearch(month);
 	}
 	protected void itemStateChangedRbBtn12(ItemEvent e) {
 		Map<String, String> map = new HashMap<String, String>();
