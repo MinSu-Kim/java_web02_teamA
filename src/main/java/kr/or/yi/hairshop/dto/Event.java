@@ -41,8 +41,8 @@ public class Event {
 		if(eStartDay!=null)
 			start=date.format(eStartDay);
 		if(eEndDay!=null)
-			end=date.format(eStartDay);
-		return new Object[] { eName, start, end, eSale };
+			end=date.format(eEndDay);
+		return new Object[] { eName, start, end, eSale+"%" };
 	}
 
 	public String geteName() {

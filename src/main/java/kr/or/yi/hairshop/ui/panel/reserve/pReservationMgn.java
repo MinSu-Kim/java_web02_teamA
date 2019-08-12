@@ -175,17 +175,14 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		btnToday.addActionListener(this);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "\uB514\uC790\uC774\uB108 \uAE30\uC900", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "손님 기준", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		panel_5.add(panel_3);
 		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		
 		
 		rdbtnAll = new JRadioButton("전체 선택");
 		panel_3.add(rdbtnAll);
 		rdbtnAll.setSelected(true);
 		buttonGroup.add(rdbtnAll);
-		
 		
 		dList = dDao.selectDesignerByAll();
 		designerCmbModel = new DefaultComboBoxModel<Designer>(new Vector<Designer>(dList));
@@ -196,7 +193,6 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		rdbtnSelect = new JRadioButton("디자이너 선택");
 		panel_3.add(rdbtnSelect);
 		buttonGroup.add(rdbtnSelect);
-		
 		
 		cmbDesigner = new JComboBox<Designer>();
 		panel_3.add(cmbDesigner);
@@ -331,11 +327,16 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 			Date today = new Date();
 			String date = sDate.format(today);
 
-			if ( table.getValueAt(row, 1).toString().substring(0, 10).equals(date) ) {
+			if ( table.getValueAt(row, 1).toString().substring(0, 10).equals(date) ) { //오늘 날짜 면
 				setBackground(new Color(255, 129, 228, 30));
+			}else if( !table.getValueAt(row, 9).toString().equals("작업전") ) {
+				setBackground(new Color(245, 185, 174, 100));
+			}else if( !table.getValueAt(row, 7).toString().equals("일반") ){
+				setBackground(new Color(150, 235, 176, 100));
 			}else {
 				setBackground(Color.WHITE);
 			}
+
 			
 			if (isSelected) {
 				setBackground(Color.orange);

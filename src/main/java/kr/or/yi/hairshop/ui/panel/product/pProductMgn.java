@@ -26,7 +26,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -519,6 +518,12 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 				String eName = tfEventName.getText();
 				Date eStartDay = dcEventStartDate.getDate();
 				Date eEndDay = dcEventEndDate.getDate();
+				
+				if(eEndDay.compareTo(eStartDay) == -1) {
+					JOptionPane.showMessageDialog(null, "날짜를 잘못입력하였습니다.");
+					return;
+				}
+				
 				int eSale = (int) spEventSale.getValue();
 
 				Event event = new Event(eName, eStartDay, eEndDay, eSale);
@@ -534,7 +539,10 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 				Date eStartDay = dcEventStartDate.getDate();
 				Date eEndDay = dcEventEndDate.getDate();
 				int eSale = (int) spEventSale.getValue();
-
+				if(eEndDay.compareTo(eStartDay) == -1) {
+					JOptionPane.showMessageDialog(null, "날짜를 잘못입력하였습니다.");
+					return;
+				}
 				Event event = new Event(eName, eStartDay, eEndDay, eSale);
 				edao.insert(event);
 				clearEventTf();

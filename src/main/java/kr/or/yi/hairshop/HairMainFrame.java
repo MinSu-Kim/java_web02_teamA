@@ -194,7 +194,6 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		Auth = designer;
 		btnLogin.setText("로그아웃");		
 		mainFrame.setTitle(Auth.getdName() + "님 반갑습니다");
-
 		CreateTP();
 	}
 

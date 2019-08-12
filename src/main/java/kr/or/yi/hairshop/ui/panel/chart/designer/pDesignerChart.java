@@ -39,12 +39,11 @@ public class pDesignerChart extends JPanel implements ItemListener {
 	private JRadioButton rbBtn9;
 	private JRadioButton rbBtn10;
 	private JRadioButton rbBtn11;
-	private JPanel panel_1;
-	private JPanel panel_2;
+	private JPanel pLBbyWork;
 	
 	private WorkDialogMapper dao = new WorkDialogMapperImpl();
 	private JRadioButton rbBtn12;
-	private ChartByProductPie ChartByProductPie;
+	private JPanel pRB;
 	
 	public pDesignerChart() {
 		setLayout(new BorderLayout(0, 0));
@@ -58,20 +57,20 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		add(pMain);
 		pMain.setLayout(new GridLayout(0, 2, 0, 0));
 
-		pPieChartAll pLeftAll = new pPieChartAll();
-		pMain.add(pLeftAll);
-		pLeftAll.setLayout(new BorderLayout(0, 0));
+		pPieChartAll pLTAll = new pPieChartAll();
+		pMain.add(pLTAll);
+		pLTAll.setLayout(new BorderLayout(0, 0));
 		
-		JPanel pRightMon = new JPanel();
-		pMain.add(pRightMon);
-		pRightMon.setLayout(new BorderLayout(0, 0));
+		JPanel pRTMon = new JPanel();
+		pMain.add(pRTMon);
+		pRTMon.setLayout(new BorderLayout(0, 0));
 		
 		pPieChartMon pPieChartMon = new pPieChartMon();
-		pRightMon.add(pPieChartMon);
+		pRTMon.add(pPieChartMon);
 		pPieChartMon.setParent(pDesignerChart.this);
 
 		JPanel pRDB = new JPanel();
-		pRightMon.add(pRDB, BorderLayout.SOUTH);
+		pRTMon.add(pRDB, BorderLayout.SOUTH);
 		pRDB.setLayout(new GridLayout(0, 7, 0, 0));
 		pRDB.setBackground(Color.white);
 		
@@ -140,16 +139,18 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		pRDB.add(rbBtn12);
 		buttonGroup.add(rbBtn12);
 		
-		panel_2 = new JPanel();
-		pMain.add(panel_2);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		pLBbyWork = new JPanel();
+		pMain.add(pLBbyWork);
+		pLBbyWork.setLayout(new BorderLayout(0, 0));
 		ChartByProductPie ch = new ChartByProductPie();
-		panel_2.add(ch);
+		pLBbyWork.add(ch);
+		
+		pRB = new JPanel();
+		pMain.add(pRB);
 		
 		tbBtnBackgroundColor();
 		
-		
-		Platform.runLater(() -> initFXAll(pLeftAll));
+		Platform.runLater(() -> initFXAll(pLTAll));
 		Platform.runLater(() -> initFXMon(pPieChartMon));
 		Platform.runLater(() -> initFX(ch));
 	}
@@ -168,8 +169,6 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		rbBtn10.setBackground(Color.white);
 		rbBtn11.setBackground(Color.white);
 		rbBtn12.setBackground(Color.white);
-		
-		
 	}
 
 	public void initFXAll(pPieChartAll p) {
