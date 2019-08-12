@@ -14,9 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.yi.hairshop.dto.Guest;
-import kr.or.yi.hairshop.ui.list.guest.GuestList;
-
 @SuppressWarnings("serial")
 public class GuestFrame extends JFrame implements ActionListener{
 

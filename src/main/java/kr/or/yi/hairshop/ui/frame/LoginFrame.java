@@ -22,6 +22,7 @@ import kr.or.yi.hairshop.dao.DesignerMapper;
 import kr.or.yi.hairshop.dao.DesignerMapperImpl;
 import kr.or.yi.hairshop.dto.Designer;
 
+@SuppressWarnings("serial")
 public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 
 	private static Designer Auth = null;
@@ -97,6 +98,9 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 		JLabel label_2 = new JLabel("");
 		panel_6.add(label_2);
 		panel_6.add(btnLogin);
+		
+		JButton btnNewButton = new JButton("비번 찾기");
+		panel_6.add(btnNewButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		panel_6.add(lblNewLabel_1);

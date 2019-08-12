@@ -124,7 +124,17 @@ public class HairMainFrame extends JFrame implements ActionListener {
 
 		home = new pHomeSection();
 		tabbedPane.addTab("홈", null, home, "홈");
+
 		
+		// 프로그램이 실행되면 로그인 창이 실행 되게
+		// 최상단, 중앙에 나오게 하는법 찾기
+//		LoginFrame = new LoginFrame();
+//		LoginFrame.setParent(HairMainFrame.this);
+//		LoginFrame.setVisible(true);
+		
+	}
+
+	public void CreateTP() {
 		pHomeSectionForm workMain = new pHomeSectionForm();
 		workMain.refresh(0);
 		tabbedPane.addTab("작업화면", null, workMain, "작업화면");
@@ -147,14 +157,9 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		
 		guestChart = new pGuestChart();
 		tabbedPane.addTab("매출 현황", null, guestChart, null);
-//		tabbedPane.setEnabledAt(5, false);
 
 		pDesignerChart = new pDesignerChart();
 		tabbedPane.addTab("디자이너 현황", null, pDesignerChart, null);
-//		tabbedPane.setEnabledAt(6, false);
-		
-		tabbedPane.setEnabledAt(5, false);
-		tabbedPane.setEnabledAt(6, false);
 
 	}
 
@@ -177,10 +182,11 @@ public class HairMainFrame extends JFrame implements ActionListener {
 			lblLogin.setText("");
 			LoginFrame.setVisible(true);
 			mainFrame.setTitle("미용실 관리 프로그램");
-			//로그 아웃시 볼수 없음
-			tabbedPane.setEnabledAt(5, false);
-			tabbedPane.setEnabledAt(6, false);
 			
+			tabbedPane.removeAll();
+			home = new pHomeSection();
+			tabbedPane.addTab("홈", null, home, "홈");
+
 		}
 	}
 
@@ -188,8 +194,8 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		Auth = designer;
 		btnLogin.setText("로그아웃");		
 		mainFrame.setTitle(Auth.getdName() + "님 반갑습니다");
-		tabbedPane.setEnabledAt(5, true);
-		tabbedPane.setEnabledAt(6, true);
+
+		CreateTP();
 	}
 
 }

@@ -30,7 +30,6 @@ import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.DesignerPanel;
 import kr.or.yi.hairshop.panel.SumPanel;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
-import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class DesignerFrame extends JFrame implements ActionListener {

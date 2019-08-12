@@ -2,8 +2,13 @@ package kr.or.yi.hairshop.ui.frame;
 
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,19 +18,13 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.hairshop.dao.WorkDialogMapper;
 import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.WorkDialog;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class WorkDialogFrame extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
