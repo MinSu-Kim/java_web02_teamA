@@ -95,7 +95,7 @@ public class Level {
 
 
 	public Object[] toArray() {
-		return new Object[] { lGrade, lSale };
+		return new Object[] { lGrade, lSale+("%") };
 	}
 
 

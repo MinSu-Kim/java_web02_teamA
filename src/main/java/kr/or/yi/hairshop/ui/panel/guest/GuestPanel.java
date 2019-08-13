@@ -9,7 +9,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -19,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -54,7 +58,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private JTextField tfMemo;
 	private JButton btnAdd;
 	private JTextField tfId;
-	private JTextField tfPassword;
+	private JPasswordField tfPassword;
+	private JPasswordField tfPassword2;
 	private JDateChooser dcBirth;
 	private JDateChooser dcJoin;
 	private JSpinner spPoint;
@@ -129,9 +134,21 @@ public class GuestPanel extends JPanel implements ActionListener {
 		lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 14));
 		panel_1.add(lblNewLabel_2);
 
-		tfPassword = new JTextField();
+		tfPassword = new JPasswordField();
 		panel_1.add(tfPassword);
 		tfPassword.setColumns(10);
+		tfPassword.setEchoChar('*');
+		
+		JLabel lblNewLabel_9 = new JLabel("비밀번호확인");
+		lblNewLabel_9.setFont(new Font("굴림", Font.PLAIN, 14));
+		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(lblNewLabel_9);
+		
+		
+		tfPassword2 = new JPasswordField();
+		panel_1.add(tfPassword2);
+		tfPassword2.setColumns(10);
+		tfPassword2.setEchoChar('*');
 
 		JLabel label_2 = new JLabel("전화번호");
 		label_2.setFont(new Font("굴림", Font.PLAIN, 14));
@@ -175,6 +192,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		spPoint = new JSpinner();
 		spPoint.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(100)));
 		panel_1.add(spPoint);
+		
 
 		JLabel label_7 = new JLabel("메모");
 		label_7.setFont(new Font("굴림", Font.PLAIN, 14));
@@ -401,7 +419,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	protected void updateGuest() {
 		Guest modifyguest = new Guest();
-
+		
+		
 		Level level = (Level) cbGrade.getSelectedItem();
 		String name = tfName.getText();
 		String id = tfId.getText();
@@ -413,6 +432,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 		int point = (int) spPoint.getValue();
 		String memo = tfMemo.getText();
 
+		
+		
 		modifyguest.setgNo(gno);
 		modifyguest.setgLGrade(level);
 		modifyguest.setgName(name);
@@ -453,6 +474,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 	private void MakeGuest() {
 		Guest guest = new Guest();
 
+
+		
 		Level level = (Level) cbGrade.getSelectedItem();
 		String name = tfName.getText();
 		String id = tfId.getText();
@@ -464,6 +487,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 		int point = (int) spPoint.getValue();
 		String memo = tfMemo.getText();
 
+		
+		
 		guest.setgLGrade(level);
 		guest.setgName(name);
 		guest.setgId(id);
@@ -599,7 +624,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 	
 	private String[] getColumnNames() {
 		
-		return new String[] {"등급종류", "할인율"};
+		return new String[] {"등급종류", "할인율(%)"};
 	}
 	
 	// 테이블 셀 내용의 정렬
@@ -622,5 +647,11 @@ public class GuestPanel extends JPanel implements ActionListener {
 			}
 		}
 	
-	
+//	private void checkValue() {
+//		if(tfPassword.getText() == tfPassword2.getText()) {
+//		
+//		}else if(tfPassword.getText() != tfPassword2.getText()) {
+//			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지않습니다.");
+//		}
+//	}
 }

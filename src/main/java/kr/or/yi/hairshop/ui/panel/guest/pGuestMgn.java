@@ -117,8 +117,8 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		table.setRowSorter(sorter);
 		
 	
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8);
-		tableSetWidth(20, 20, 50, 50, 80, 50, 50, 50, 100);
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+		tableSetWidth(20, 20, 20, 50, 50, 80, 50, 50, 50, 100);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -177,7 +177,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 	}
 
 	private String[] getColumnNames() {
-		return new String[] { "번호", "등급", "이름", "전화번호", "이메일", "생일", "가입일", "포인트", "메모" };
+		return new String[] { "번호", "등급", "이름","아이디", "전화번호", "이메일", "생일", "가입일", "포인트", "메모" };
 	}
 
 	// 테이블 셀 내용의 정렬
@@ -211,10 +211,10 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			if (value==null) return this;
 			setText(value.toString());
 			setOpaque(true);
-			if(column == 7) {
+			if(column == 8) {
 				setHorizontalAlignment(JLabel.RIGHT);
 			}
-			else if(column == 8) {
+			else if(column == 9) {
 				setHorizontalAlignment(JLabel.LEFT);
 			}
 			else {
