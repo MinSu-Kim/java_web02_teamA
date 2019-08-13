@@ -38,6 +38,8 @@ dependencies {
     compile files('libs/jcommon-1.0.23.jar')
     compile files('libs/jfreechart-1.0.19.jar')
     
+	compile group: 'javax.mail', name: 'mail', version: '1.5.0-b01'
+
 }
 
 jar{
