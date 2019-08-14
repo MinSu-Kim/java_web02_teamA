@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -65,6 +66,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		pList.add(scrollPane);
 
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		scrollPane.setSize(200, 200);
 
@@ -134,6 +136,7 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			pInfomation.setGuestTf(selectGuest);
 			
 			pInfomation.setBtn2();
+			
 
 			
 		}		

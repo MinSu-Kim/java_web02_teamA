@@ -28,6 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
@@ -150,6 +151,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 		tfPassword2.setColumns(10);
 		tfPassword2.setEchoChar('*');
 
+		
+		
 		JLabel label_2 = new JLabel("전화번호");
 		label_2.setFont(new Font("굴림", Font.PLAIN, 14));
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -279,6 +282,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_8.add(scrollPane, BorderLayout.CENTER);
 
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		scrollPane.setSize(100, 100);
 		
@@ -364,7 +368,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		if (e.getSource() == btnAdd) {
 			if (e.getActionCommand().equals("등록")) {
 				actionPerformedBtnAddJButton(e);
-				clear();
+				clear3();
 			} else if (e.getActionCommand().equals("수정")) {
 				updateGuest();
 				clear();
@@ -417,6 +421,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		}
 	}
 
+	
 	protected void updateGuest() {
 		Guest modifyguest = new Guest();
 		
@@ -425,6 +430,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		String name = tfName.getText();
 		String id = tfId.getText();
 		String pass = tfPassword.getText();
+		String pass2 = tfPassword2.getText();
 		String tel = tfTel.getText();
 		String email = tfEmail.getText();
 		Date birth = dcBirth.getDate();
@@ -434,19 +440,25 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 		
 		
+		
 		modifyguest.setgNo(gno);
 		modifyguest.setgLGrade(level);
 		modifyguest.setgName(name);
 		modifyguest.setgId(id);
 		modifyguest.setgPassword(pass);
+		modifyguest.setgPassword2(pass2);
 		modifyguest.setgTel(tel);
 		modifyguest.setgEmail(email);
 		modifyguest.setgBirth(birth);
 		modifyguest.setgJoin(join);
 		modifyguest.setgPoint(point);
 		modifyguest.setgMemo(memo);
-
-		dao.updateGuest(modifyguest);
+		
+		if(pass.equals(pass2)) {
+			dao.updateGuest(modifyguest);
+		}else {
+			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다. 다시확인해주세요!");
+		}
 		parent.clearList();
 		parent.reloadData();
 	}
@@ -480,6 +492,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		String name = tfName.getText();
 		String id = tfId.getText();
 		String pass = tfPassword.getText();
+		String pass2 = tfPassword2.getText();
 		String tel = tfTel.getText();
 		String email = tfEmail.getText();
 		Date birth = dcBirth.getDate();
@@ -493,6 +506,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		guest.setgName(name);
 		guest.setgId(id);
 		guest.setgPassword(pass);
+		guest.setgPassword2(pass2);
 		guest.setgTel(tel);
 		guest.setgEmail(email);
 		guest.setgBirth(birth);
@@ -500,7 +514,13 @@ public class GuestPanel extends JPanel implements ActionListener {
 		guest.setgPoint(point);
 		guest.setgMemo(memo);
 
-		dao.insertGuest(guest);
+		if(pass.equals(pass2)) {
+			dao.insertGuest(guest);
+		}else {
+			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다. 다시확인해주세요!");
+		}
+		
+		
 		parent.clearList();
 		parent.reloadData();
 	}
@@ -555,8 +575,9 @@ public class GuestPanel extends JPanel implements ActionListener {
 		dcJoin.setDate(g.getgJoin());
 		spPoint.setValue(g.getgPoint());
 		tfMemo.setText(g.getgMemo());
+		tfId.setEditable(false);
 	}
-
+	
 	public void setLevelTf(Level lv) {
 		tfGrade.setText(lv.getlGrade());
 		spSale.setValue(lv.getlSale());
@@ -567,18 +588,24 @@ public class GuestPanel extends JPanel implements ActionListener {
 		tfName.setText("");
 		tfId.setText("");
 		tfPassword.setText("");
+		tfPassword2.setText("");
 		tfTel.setText("");
 		tfEmail.setText("");
 		dcBirth.setDate(new Date());
 		dcJoin.setDate(new Date());
 		spPoint.setValue(0);
 		tfMemo.setText("");
-
+		tfId.setEditable(true);
 	}
 	
 	public void clear2() {
 		tfGrade.setText("");
 		spSale.setValue(0);
+	}
+	
+	public void clear3() {
+		tfPassword.setText("");
+		tfPassword2.setText("");
 	}
 
 	protected void actionPerformedBtnCancelJButton(ActionEvent e) {
@@ -647,11 +674,6 @@ public class GuestPanel extends JPanel implements ActionListener {
 			}
 		}
 	
-//	private void checkValue() {
-//		if(tfPassword.getText() == tfPassword2.getText()) {
-//		
-//		}else if(tfPassword.getText() != tfPassword2.getText()) {
-//			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지않습니다.");
-//		}
-//	}
+	
+	
 }

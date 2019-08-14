@@ -8,6 +8,7 @@ public class Guest {
 	private int gNo;
 	private String gId;
 	private String gPassword;
+	private String gPassword2;
 	private Level gLGrade;
 	private String gName;
 	private String gTel;
@@ -32,12 +33,13 @@ public class Guest {
 		this.gName = gName;
 	}
 
-	public Guest(int gNo, String gId, String gPassword, Level gLGrade, String gName, String gTel, String gEmail,
+	public Guest(int gNo, String gId, String gPassword,String gPassword2, Level gLGrade, String gName, String gTel, String gEmail,
 			Date gBirth, Date gJoin, int gPoint, String gMemo, boolean gSecession, List<WorkDialog> workDialogList) {
 		super();
 		this.gNo = gNo;
 		this.gId = gId;
 		this.gPassword = gPassword;
+		this.gPassword2 = gPassword2;
 		this.gLGrade = gLGrade;
 		this.gName = gName;
 		this.gTel = gTel;
@@ -69,11 +71,15 @@ public class Guest {
 	public String getgPassword() {
 		return gPassword;
 	}
-
+	public String getgPassword2() {
+		return gPassword2;
+	}
 	public void setgPassword(String gPassword) {
 		this.gPassword = gPassword;
 	}
-
+	public void setgPassword2(String gPassword2) {
+		this.gPassword2 = gPassword2;
+	}
 	public Level getgLGrade() {
 		return gLGrade;
 	}
