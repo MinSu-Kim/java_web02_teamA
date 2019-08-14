@@ -110,19 +110,32 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 	}
 	
 	protected void actionPerformedBtnFindPass(ActionEvent arg0) {
-		int result = JOptionPane.showConfirmDialog(null, "비밀번호를 찾으시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
-		if (result == JOptionPane.CLOSED_OPTION) {
-			JOptionPane.showMessageDialog(null, "취소하셨습니다.");
-		}else if (result == JOptionPane.YES_OPTION) {
+		
+		
+		if(btnFindPass.getText().equals("비번 찾기")) {
+			int result = JOptionPane.showConfirmDialog(null, "비밀번호를 찾으시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.CLOSED_OPTION) {
+				JOptionPane.showMessageDialog(null, "취소하셨습니다.");
+			}else if (result == JOptionPane.YES_OPTION) {
+				center.removeAll();
+				center.add(pFindPass);
+				center.revalidate();
+				center.repaint();
+
+				btnFindPass.setText("취소");
+				btnLogin.setText("비번 변경");
+				
+			}else {
+				JOptionPane.showMessageDialog(null, "취소하셨습니다.");
+			}		
+		}else {
+			pFindPass.tfClear();
 			center.removeAll();
-			center.add(pFindPass);
+			center.add(pLogin);
 			center.revalidate();
 			center.repaint();
-			btnFindPass.setVisible(false);
-			btnLogin.setText("비번 변경");
-			
-		}else {
-			JOptionPane.showMessageDialog(null, "취소하셨습니다.");
+			btnFindPass.setText("비번 찾기");
+			btnLogin.setText("로그인");
 		}
 	}
 	
@@ -166,7 +179,6 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 		}else {
 			findPassword();
 		}
-		
 	}
 
 	public void keyPressed(KeyEvent e) {

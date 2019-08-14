@@ -98,6 +98,14 @@ public class pFindPassPanel extends JPanel implements ActionListener {
 	public int getCerNumber() {
 		return CerNumber;
 	}
+	
+	public void tfClear() {
+		tfCerNumber.setText("");
+		tfId.setText("");
+		tfNewPass.setText("");
+		tfNewPassCheck.setText("");
+		
+	}
 }
 
 
