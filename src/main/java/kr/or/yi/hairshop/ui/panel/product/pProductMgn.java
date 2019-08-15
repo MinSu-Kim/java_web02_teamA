@@ -44,6 +44,9 @@ import kr.or.yi.hairshop.dto.Product;
 import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
 import kr.or.yi.hairshop.ui.frame.DesignerFrame;
+import kr.or.yi.hairshop.panel.SumPanel;
+import kr.or.yi.hairshop.panel.DesignerPanel;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class pProductMgn extends JPanel implements ActionListener, MouseListener {
@@ -125,6 +128,9 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	private JButton btnSearchName;
 	private JTextField tfPName;
 	private JButton btnSearchAll;
+	private JPanel panel_9;
+	private JPanel panel_8;
+	private DesignerPanel designerPanel;
 
 	public pProductMgn() {
 		DesignerFrame = new DesignerFrame();
@@ -221,13 +227,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 		pWorker = new JPanel(); // 디자이너
 		Section.add(pWorker);
 		pWorker.setBorder(new TitledBorder(null, "디자이너 관리", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pWorker.setLayout(new BorderLayout(0, 0));
-		JScrollPane scrollPaneWorker = new JScrollPane();
-
-		pWorker.add(scrollPaneWorker);
-		tableWorker = new JTable();
-		tableWorker.addMouseListener(this);
-		scrollPaneWorker.setViewportView(tableWorker);
+		pWorker.setLayout(new GridLayout(0, 2, 0, 0));
 
 		panel = new JPanel();
 		add(panel, BorderLayout.EAST);
@@ -313,7 +313,21 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 
 		lblNewLabel_5 = new JLabel("");
 		panel_5.add(lblNewLabel_5);
+		JScrollPane scrollPaneWorker = new JScrollPane();
+		
+		pWorker.add(scrollPaneWorker);
+		tableWorker = new JTable();
+		tableWorker.addMouseListener(this);
+		scrollPaneWorker.setViewportView(tableWorker);
 		popupMenuWorkerInit(scrollPaneWorker);
+				
+		panel_8 = new JPanel();
+		pWorker.add(panel_8);
+		panel_8.setLayout(new BorderLayout(0, 0));
+		
+		designerPanel = new DesignerPanel();
+		panel_8.add(designerPanel, BorderLayout.NORTH);
+		
 
 	}
 

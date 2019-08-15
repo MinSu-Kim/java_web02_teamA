@@ -34,7 +34,7 @@ public class DesignerPanel extends JPanel {
 		dsPanel.setBorder(new TitledBorder(null, "작업이력", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		add(dsPanel);
 		dsPanel.setLayout(new GridLayout(0, 1, 0, 0));
-
+		dsPanel.setSize(200, 200);
 		JScrollPane scrollPane = new JScrollPane();
 		dsPanel.add(scrollPane);
 
