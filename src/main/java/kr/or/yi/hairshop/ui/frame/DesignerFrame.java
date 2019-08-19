@@ -3,6 +3,7 @@ package kr.or.yi.hairshop.ui.frame;
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,8 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
@@ -46,13 +49,14 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private JButton button;
 	private JTextField tfdGrade;
 	private JTextField tfdId;
-	private JTextField tfdPassword;
 	private JPanel panel_4;
 	private JDateChooser dcdBirth;
 	private JDateChooser dcdJoin;
 	private pProductMgn pProductMgn;
 	private DesignerPanel designerPanel;
 	private SumPanel sumpanel;
+	private JPasswordField passwordField;
+	private JButton btnNewButton;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -67,7 +71,18 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		});
 
 	}
-
+	
+	public void tfEnable() { //textfield 비활성화, 버튼 숨기기
+		passwordField.setEditable(false);
+		tfdId.setEditable(false);
+		btnNewButton.setVisible(false);
+	}
+	public void tfEnable2() { 
+		passwordField.setEditable(true);
+		tfdId.setEditable(true);
+		btnNewButton.setVisible(true);
+	}
+	
 	public DesignerFrame() {
 //		designerPanel.clearList(work);
 		
@@ -103,104 +118,135 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2);
 		panel_2.setSize(200, 600);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		panel_2.setLayout(null);
 		
 		panel_4 = new JPanel();
+		panel_4.setBounds(0, 0, 415, 522);
 		
 		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		panel_2.add(panel_4, BorderLayout.CENTER);
-		panel_4.setLayout(new GridLayout(0, 2, 10, 10));
+		panel_2.add(panel_4);
+		panel_4.setLayout(null);
 		
 		JLabel label = new JLabel("아이디");
+		label.setBounds(47, 1, 153, 38);
 		label.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(label);
 		
 		tfdId = new JTextField();
+		tfdId.setBounds(212, 2, 137, 38);
 		tfdId.setColumns(10);
 		panel_4.add(tfdId);
 		
+		btnNewButton = new JButton("중복체크");
+		btnNewButton.setBorder(new EmptyBorder(-10, -10, -10, -10));
+		btnNewButton.addActionListener(this);
+		btnNewButton.setFont(new Font("굴림", Font.PLAIN, 12));
+		btnNewButton.setBounds(351, 1, 64, 38);
+		panel_4.add(btnNewButton);
+		
 		JLabel lbldPassword = new JLabel("비밀번호");
+		lbldPassword.setBounds(0, 50, 202, 38);
 		lbldPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldPassword);
 		
-		tfdPassword = new JTextField();
-		tfdPassword.setColumns(10);
-		panel_4.add(tfdPassword);
+		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("굴림", Font.PLAIN, 14));
+		passwordField.setBounds(212, 50, 202, 38);
+		panel_4.add(passwordField);
 		
 		
 		JLabel lbldGrade = new JLabel("직급");
+		lbldGrade.setBounds(0, 98, 202, 38);
 		lbldGrade.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldGrade);
 		
 		tfdGrade = new JTextField();
+		tfdGrade.setBounds(212, 98, 202, 38);
 		tfdGrade.setColumns(10);
 		panel_4.add(tfdGrade);
 		
 		
 		JLabel lbldName = new JLabel("이름");
+		lbldName.setBounds(0, 146, 202, 38);
 		lbldName.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldName);
 		
 		tfdName = new JTextField();
+		tfdName.setBounds(212, 146, 202, 38);
 		panel_4.add(tfdName);
 		tfdName.setColumns(10);
 		
 		JLabel lbldTel = new JLabel("전화번호");
+		lbldTel.setBounds(0, 194, 202, 38);
 		lbldTel.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldTel);
 		
 		tfdTel = new JTextField();
+		tfdTel.setBounds(212, 194, 202, 38);
 		tfdTel.setColumns(10);
 		panel_4.add(tfdTel);
 		
 		JLabel lbldTel2 = new JLabel("비상연락망");
+		lbldTel2.setBounds(0, 242, 202, 38);
 		lbldTel2.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldTel2);
 		
 		tfdTel2 = new JTextField();
+		tfdTel2.setBounds(212, 242, 202, 38);
 		panel_4.add(tfdTel2);
 		tfdTel2.setColumns(10);
 		
 		JLabel lbldAddr = new JLabel("주소");
+		lbldAddr.setBounds(0, 290, 202, 38);
 		lbldAddr.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldAddr);
 		
 		tfdAddr = new JTextField();
+		tfdAddr.setBounds(212, 290, 202, 38);
 		panel_4.add(tfdAddr);
 		tfdAddr.setColumns(10);
 		
 		JLabel lbldAddr2 = new JLabel("상세주소");
+		lbldAddr2.setBounds(0, 338, 202, 38);
 		lbldAddr2.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldAddr2);
 		
 		tfdAddr2 = new JTextField();
+		tfdAddr2.setBounds(212, 338, 202, 38);
 		panel_4.add(tfdAddr2);
 		tfdAddr2.setColumns(10);
 		
 		JLabel lbldBirth = new JLabel("생일");
+		lbldBirth.setBounds(0, 386, 202, 38);
 		lbldBirth.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldBirth);
 		
 		dcdBirth = new JDateChooser();
+		dcdBirth.setBounds(212, 386, 202, 38);
 		panel_4.add(dcdBirth);
 		
 		JLabel lbldJoin = new JLabel("입사일");
+		lbldJoin.setBounds(0, 434, 202, 38);
 		lbldJoin.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldJoin);
 		
 		dcdJoin = new JDateChooser();
+		dcdJoin.setBounds(212, 434, 202, 38);
 		panel_4.add(dcdJoin);
 		
 		JLabel lbldMemo = new JLabel("메모");
+		lbldMemo.setBounds(0, 482, 202, 38);
 		lbldMemo.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lbldMemo);
 		
 		tfdMemo = new JTextField();
+		tfdMemo.setBounds(212, 482, 202, 38);
 		tfdMemo.setColumns(10);
 		panel_4.add(tfdMemo);
 		
 		JPanel panel_5 = new JPanel();
-		panel_2.add(panel_5, BorderLayout.SOUTH);
+		panel_5.setBounds(0, 522, 415, 33);
+		panel_2.add(panel_5);
 		
 		button = new JButton("확인");
 		button.addActionListener(this);
@@ -221,7 +267,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 	public void clearTextField() { 
 		tfdId.setText("");
-		tfdPassword.setText("");
+		passwordField.setText("");
 		tfdGrade.setText("");
 		tfdName.setText("");
 		tfdTel.setText("");
@@ -235,6 +281,9 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnNewButton) {
+			actionPerformedBtnNewButton(arg0);
+		}
 		if (arg0.getSource() == button) {
 			if(arg0.getActionCommand().equals("등록")) {
 				actionPerformedBtnAdd(arg0);
@@ -247,7 +296,11 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	
 	private void actionPerformedBtnAdd(ActionEvent arg0) { //등록버튼
 		String tfi = tfdId.getText();
-		String tfp = tfdPassword.getText();	
+		char[] pp = passwordField.getPassword();	
+		String tfp = "";
+		for(char cha : pp) {
+			tfp +=cha;
+		}
 		String tfg =tfdGrade.getText();
 		String tfn =tfdName.getText();
 		String tft =tfdTel.getText();
@@ -256,8 +309,14 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		String tfa2 =tfdAddr2.getText();
 		Date tfb =dcdBirth.getDate();
 		Date tfj =dcdJoin.getDate();
-		String tfm =tfdMemo.getText();		
-				
+		String tfm =tfdMemo.getText();
+		
+		//가져왔을 때 비었으면 
+//		if(tfi.equals("")|tfp.equals("")|tfn.equals("")) {
+//			JOptionPane.showMessageDialog(null, "입력하세요");
+//		}
+		
+		
 		Designer designer = new Designer();
 		designer.setdId(tfi);
 		designer.setdPassword(tfp);
@@ -291,7 +350,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	
 		
 		tfdId.setText(design.getdId());
-		tfdPassword.setText(design.getdPassword());
+		passwordField.setText(design.getdPassword());
 		tfdGrade.setText(design.getdGrade());
 		tfdName.setText(design.getdName());
 		tfdTel.setText(design.getdTel());
@@ -306,7 +365,12 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	
 	public void actionPerformedBtnModify(ActionEvent arg0) { //수정버튼
 		String id = tfdId.getText();
-		String ps = tfdPassword.getText();
+		
+		char[] pp = passwordField.getPassword();	
+		String ps = "";
+		for(char cha : pp) {
+			ps +=cha;
+		}
 		String grade = tfdGrade.getText();
 		String name = tfdName.getText();
 		String tel = tfdTel.getText();
@@ -316,7 +380,6 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		Date tfb =dcdBirth.getDate();
 		Date tfj =dcdJoin.getDate();
 		String memo = tfdMemo.getText();
-		
 		
 		Designer designer = new Designer(dNo, grade, id, ps, name, tel, tel2, addr, addr2, tfb, tfj, memo);
 //		JOptionPane.showMessageDialog(null, designer.toString2());
@@ -328,10 +391,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 	}
 
-	
-
 	public void setParent(HairMainFrame hairMainFrame) {
-		
 	}
 
 	public void setBtnText(String string) {
@@ -341,7 +401,24 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	public void setProductMgn(pProductMgn pP) {
 		this.pProductMgn = pP;
 	}
-	
+	protected void actionPerformedBtnNewButton(ActionEvent arg0) {
+		String tfi = tfdId.getText();
+		Designer tfid = ds.selelctDesignerById(tfi);
+		int checkId = 0;
+		
+		if(tfi.equals("")) { 
+			JOptionPane.showMessageDialog(null, "아이디를 입력하세요");
+		}else {
+			if(tfid == null) { 
+				JOptionPane.showMessageDialog(null, "사용가능한 아이디입니다.");
+				passwordField.requestFocus();
+			}else {
+				checkId = 1;
+				JOptionPane.showMessageDialog(null, "사용중인 아이디입니다.");
+				tfdId.requestFocus();
+			}
+		}
+	}
 }
 
 

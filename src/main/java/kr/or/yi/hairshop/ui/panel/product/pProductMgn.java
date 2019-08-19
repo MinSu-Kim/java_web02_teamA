@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -448,12 +449,15 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	}
 
 	private void DesignerFrameView() { // 등록
+		DesignerFrame.tfEnable2();
+		DesignerFrame.clearTextField();
 		DesignerFrame.setBtnText("등록");
 		DesignerFrame.setProductMgn(this);
 		DesignerFrame.setVisible(true);
 	}
 
 	private void setWorker(Designer worker) { // 수정
+		DesignerFrame.tfEnable();
 		DesignerFrame.setBtnText("수정");
 		DesignerFrame.setVisible(true);
 	}
