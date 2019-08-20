@@ -294,7 +294,8 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_4.setLayout(new BorderLayout(0, 0));
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("images\\ppp.jpg"));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon("images\\ppp2.jpg"));
 		panel_4.add(lblNewLabel);
 		
 		
