@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -57,11 +58,17 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private SumPanel sumpanel;
 	private JPasswordField passwordField;
 	private JButton btnNewButton;
+	private JButton button_1;
+	private PostFrame postframe = new PostFrame();
+	private AbstractButton tfdAddr3;
 	
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+					
 					DesignerFrame frame = new DesignerFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -71,31 +78,33 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		});
 
 	}
+	public void setAddr(String addr) {
+		tfdAddr.setText(addr);
+	}
 	
 	public void tfEnable() { //textfield 비활성화, 버튼 숨기기
 		passwordField.setEditable(false);
 		tfdId.setEditable(false);
 		btnNewButton.setVisible(false);
+		tfdAddr.setEditable(true);
 	}
 	public void tfEnable2() { 
 		passwordField.setEditable(true);
 		tfdId.setEditable(true);
 		btnNewButton.setVisible(true);
+		tfdAddr.setEditable(false);
 	}
 	
 	public DesignerFrame() {
-//		designerPanel.clearList(work);
-		
-//		designerPanel.reloadData();
-		
-		
-//		sumpanel.clearList(wDNo);
-//		sumpanel.reloadData();
-	
 		initComponents();
 	}
+	
 	private void initComponents() {
 		setTitle("디자이너 관리 프로그램");
+		
+		
+		postframe.setParent(this);
+		
 		
 		ds = new DesignerMapperImpl();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -202,7 +211,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		panel_4.add(lbldAddr);
 		
 		tfdAddr = new JTextField();
-		tfdAddr.setBounds(212, 290, 202, 38);
+		tfdAddr.setBounds(212, 290, 153, 38);
 		panel_4.add(tfdAddr);
 		tfdAddr.setColumns(10);
 		
@@ -244,6 +253,13 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		tfdMemo.setColumns(10);
 		panel_4.add(tfdMemo);
 		
+		button_1 = new JButton("검색");
+		button_1.addActionListener(this);
+		button_1.setFont(new Font("굴림", Font.PLAIN, 12));
+		button_1.setBorder(new EmptyBorder(-10, -10, -10, -10));
+		button_1.setBounds(372, 290, 43, 38);
+		panel_4.add(button_1);
+		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBounds(0, 522, 415, 33);
 		panel_2.add(panel_5);
@@ -281,6 +297,9 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == button_1) {
+			actionPerformedButton_1(arg0);
+		}
 		if (arg0.getSource() == btnNewButton) {
 			actionPerformedBtnNewButton(arg0);
 		}
@@ -305,8 +324,8 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		String tfn =tfdName.getText();
 		String tft =tfdTel.getText();
 		String tft2 =tfdTel2.getText();	
-		String tfa =tfdAddr.getText();
-		String tfa2 =tfdAddr2.getText();
+		String tfa =tfdAddr.getText(); //검색한주소 통으로 있음
+		String tfa2 =tfdAddr2.getText(); //입력한 상세주소
 		Date tfb =dcdBirth.getDate();
 		Date tfj =dcdJoin.getDate();
 		String tfm =tfdMemo.getText();
@@ -315,7 +334,8 @@ public class DesignerFrame extends JFrame implements ActionListener {
 //		if(tfi.equals("")|tfp.equals("")|tfn.equals("")) {
 //			JOptionPane.showMessageDialog(null, "입력하세요");
 //		}
-		
+		String tfaa = tfa.substring(0,4);
+		String tfaaa = tfa.substring(6, tfa.length());
 		
 		Designer designer = new Designer();
 		designer.setdId(tfi);
@@ -324,8 +344,9 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		designer.setdName(tfn);
 		designer.setdTel(tft);
 		designer.setdTel2(tft2);
-		designer.setdAddr(tfa);
-		designer.setdAddr2(tfa2);
+		designer.setdAddr(tfaa);
+		designer.setdAddr2(tfaaa); //우편번호
+		designer.setdAddr3(tfa2); //대구광역시남구
 		designer.setdBirth(tfb);
 		designer.setdJoin(tfj);
 		designer.setdMemo(tfm);
@@ -347,20 +368,17 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		int sum=designerPanel.getSum();
 		sumpanel.setSum(sum);
 		sumpanel.setCount(workDialog.size());
-	
-		
 		tfdId.setText(design.getdId());
 		passwordField.setText(design.getdPassword());
 		tfdGrade.setText(design.getdGrade());
 		tfdName.setText(design.getdName());
 		tfdTel.setText(design.getdTel());
 		tfdTel2.setText(design.getdTel2());
-		tfdAddr.setText(design.getdAddr());
-		tfdAddr2.setText(design.getdAddr2());
+		tfdAddr.setText(design.getdAddr()+design.getdAddr2());
+		tfdAddr2.setText(design.getdAddr3());
 		dcdBirth.setDate(design.getdBirth());
 		dcdJoin.setDate(design.getdJoin());
 		tfdMemo.setText(design.getdMemo());
-		
 	}
 	
 	public void actionPerformedBtnModify(ActionEvent arg0) { //수정버튼
@@ -375,20 +393,19 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		String name = tfdName.getText();
 		String tel = tfdTel.getText();
 		String tel2 = tfdTel2.getText();
-		String addr = tfdAddr.getText();
-		String addr2 = tfdAddr2.getText();
+		String addr = tfdAddr.getText(); //통
+		String addr2 = tfdAddr2.getText(); //입력한것
 		Date tfb =dcdBirth.getDate();
 		Date tfj =dcdJoin.getDate();
 		String memo = tfdMemo.getText();
-		
-		Designer designer = new Designer(dNo, grade, id, ps, name, tel, tel2, addr, addr2, tfb, tfj, memo);
+		String addr11 = addr.substring(0,4);
+		String addr22 = addr.substring(6, addr.length());
+		Designer designer = new Designer(dNo, grade, id, ps, name, tel, tel2, addr11, addr22, addr2, tfb, tfj, memo);
 //		JOptionPane.showMessageDialog(null, designer.toString2());
 		ds.updateDesigner(designer);
 		pProductMgn.setWorkList(ds.selectDesignerByAll());
 		JOptionPane.showMessageDialog(null, "수정되었습니다.");
-		clearTextField();
-		pProductMgn.reloadData();
-		
+		dispose();
 	}
 
 	public void setParent(HairMainFrame hairMainFrame) {
@@ -418,6 +435,9 @@ public class DesignerFrame extends JFrame implements ActionListener {
 				tfdId.requestFocus();
 			}
 		}
+	}
+	protected void actionPerformedButton_1(ActionEvent arg0) {
+		postframe.setVisible(true);
 	}
 }
 
