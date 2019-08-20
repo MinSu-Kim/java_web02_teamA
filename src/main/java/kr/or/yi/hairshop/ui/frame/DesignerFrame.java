@@ -34,6 +34,7 @@ import kr.or.yi.hairshop.dto.WorkDialog;
 import kr.or.yi.hairshop.panel.DesignerPanel;
 import kr.or.yi.hairshop.panel.SumPanel;
 import kr.or.yi.hairshop.ui.panel.product.pProductMgn;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class DesignerFrame extends JFrame implements ActionListener {
@@ -61,6 +62,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private JButton button_1;
 	private PostFrame postframe = new PostFrame();
 	private AbstractButton tfdAddr3;
+	private JButton btnNewButton_1;
 	
 	public static void main(String[] args) {
 		
@@ -82,17 +84,21 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		tfdAddr.setText(addr);
 	}
 	
-	public void tfEnable() { //textfield 비활성화, 버튼 숨기기
+	public void tfEnable() { //수정버튼(비활성화, 버튼 숨기기)
 		passwordField.setEditable(false);
 		tfdId.setEditable(false);
 		btnNewButton.setVisible(false);
 		tfdAddr.setEditable(true);
+		btnNewButton_1.setVisible(false); //가라버튼
+		
 	}
-	public void tfEnable2() { 
+	public void tfEnable2() { //등록버튼눌렀을때
 		passwordField.setEditable(true);
 		tfdId.setEditable(true);
 		btnNewButton.setVisible(true);
 		tfdAddr.setEditable(false);
+		btnNewButton_1.setVisible(true); //가라버튼
+		button.setVisible(false); //진짜확인버튼
 	}
 	
 	public DesignerFrame() {
@@ -268,6 +274,11 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		button.addActionListener(this);
 		panel_5.add(button);
 		
+		btnNewButton_1 = new JButton("등록");
+		btnNewButton_1.addActionListener(this);
+		btnNewButton_1.setForeground(Color.BLACK);
+		panel_5.add(btnNewButton_1);
+		
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
@@ -297,6 +308,9 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnNewButton_1) {
+			actionPerformedBtnNewButton_1(arg0);
+		}
 		if (arg0.getSource() == button_1) {
 			actionPerformedButton_1(arg0);
 		}
@@ -331,9 +345,18 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		String tfm =tfdMemo.getText();
 		
 		//가져왔을 때 비었으면 
-//		if(tfi.equals("")|tfp.equals("")|tfn.equals("")) {
-//			JOptionPane.showMessageDialog(null, "입력하세요");
-//		}
+		if(tfn.equals("")) {
+			JOptionPane.showMessageDialog(null, "이름을 입력하세요");
+		}else if(tft.equals("")) {
+			JOptionPane.showMessageDialog(null, "전화번호를 입력하세요");
+		}else if(tfi.equals("")) {
+			JOptionPane.showMessageDialog(null, "아이디를 입력하세요");
+		}else if(tfp.equals("")) {
+			JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요");
+		}else if(tfa.equals("")) {
+			JOptionPane.showMessageDialog(null, "주소를 입력하세요");
+		}
+		
 		String tfaa = tfa.substring(0,4);
 		String tfaaa = tfa.substring(6, tfa.length());
 		
@@ -353,9 +376,9 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		
 		ds.insertDesigner(designer);
 		JOptionPane.showMessageDialog(null, "입력되었습니다.");
-		clearTextField();
 		pProductMgn.setWorkList(ds.selectDesignerByAll());
 		pProductMgn.reloadData();
+		dispose();
 	
 	}
 	
@@ -399,6 +422,18 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		Date tfj =dcdJoin.getDate();
 		String memo = tfdMemo.getText();
 		String addr11 = addr.substring(0,4);
+//		수정버튼 누른 후 칸이 비었을 때 뜨는 메세지
+//		if(name.equals("")) {
+//			JOptionPane.showMessageDialog(null, "이름을 입력하세요");
+//		}else if(tel.equals("")) {
+//			JOptionPane.showMessageDialog(null, "전화번호를 입력하세요");
+//		}else if(id.equals("")) {
+//			JOptionPane.showMessageDialog(null, "아이디를 입력하세요");
+//		}else if(ps.equals("")) {
+//			JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요");
+//		}else if(addr.equals("")) {
+//			JOptionPane.showMessageDialog(null, "주소를 입력하세요");
+//		}
 		String addr22 = addr.substring(6, addr.length());
 		Designer designer = new Designer(dNo, grade, id, ps, name, tel, tel2, addr11, addr22, addr2, tfb, tfj, memo);
 //		JOptionPane.showMessageDialog(null, designer.toString2());
@@ -418,7 +453,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	public void setProductMgn(pProductMgn pP) {
 		this.pProductMgn = pP;
 	}
-	protected void actionPerformedBtnNewButton(ActionEvent arg0) {
+	protected void actionPerformedBtnNewButton(ActionEvent arg0) { //증복체크하는곳
 		String tfi = tfdId.getText();
 		Designer tfid = ds.selelctDesignerById(tfi);
 		int checkId = 0;
@@ -435,9 +470,16 @@ public class DesignerFrame extends JFrame implements ActionListener {
 				tfdId.requestFocus();
 			}
 		}
+		
+		button.setVisible(true);
+		btnNewButton_1.setVisible(false); //가라버튼
 	}
 	protected void actionPerformedButton_1(ActionEvent arg0) {
 		postframe.setVisible(true);
+		
+	}
+	protected void actionPerformedBtnNewButton_1(ActionEvent arg0) {
+		JOptionPane.showMessageDialog(null, "아이디 중복체크를 하세요.");
 	}
 }
 

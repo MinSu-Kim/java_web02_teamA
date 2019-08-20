@@ -43,7 +43,7 @@ public class PostFrame extends JFrame implements ActionListener {
 	}
 	private void initComponents() {
 		setTitle("주소 검색");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 339);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
