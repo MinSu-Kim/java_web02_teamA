@@ -32,6 +32,10 @@ import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
 public class pGuestMgn extends JPanel implements ActionListener {
@@ -45,6 +49,10 @@ public class pGuestMgn extends JPanel implements ActionListener {
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmAdd;
 	private GuestPanel pInfomation;
+	
+	private JButton btnSearchName;
+	private JTextField tfName;
+	private JButton btnSearchAll;
 
 	public pGuestMgn() {
 		initComponents();
@@ -68,7 +76,6 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
-		scrollPane.setSize(200, 200);
 
 		pInfomation = new GuestPanel();
 		pInfomation.setParent(pGuestMgn.this);
@@ -105,6 +112,21 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		
 		table.setComponentPopupMenu(popupMenu);
 		scrollPane.setComponentPopupMenu(popupMenu);
+		
+		JPanel panel_2 = new JPanel();
+		pList.add(panel_2, BorderLayout.NORTH);
+		
+		tfName = new JTextField();
+		panel_2.add(tfName);
+		tfName.setColumns(10);
+		
+		btnSearchName = new JButton("검색");
+		btnSearchName.addActionListener(this);
+		panel_2.add(btnSearchName);
+		
+		btnSearchAll = new JButton("전체 검색");
+		btnSearchAll.addActionListener(this);
+		panel_2.add(btnSearchAll);
 	}
 
 	public void clearList() {
@@ -144,12 +166,33 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			deleteGuestUI();
 			pInfomation.resetGradeCmb();
 			
-		}		
+		}	
+		
+		
+		if (e.getSource() == btnSearchAll) {
+			actionPerformedBtnSearchAll(e);
+		}
+		
+		if (e.getSource() == btnSearchName) {
+			actionPerformedBtnSearchName(e);
+		}
 	}
 	
 	
 	
 	
+	private void actionPerformedBtnSearchName(ActionEvent e) {
+		String name = tfName.getText();
+		gList = dao.selectGuestBygName(name);
+		reloadData();
+		tfName.setText("");
+	}
+
+	private void actionPerformedBtnSearchAll(ActionEvent e) {
+		clearList();
+		reloadData();
+	}
+
 	private void deleteGuestUI() {
 		int result = JOptionPane.showConfirmDialog(null, "삭제하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
 		
