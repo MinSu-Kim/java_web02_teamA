@@ -6,9 +6,12 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -16,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
@@ -32,9 +37,10 @@ import kr.or.yi.hairshop.dao.GuestMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
+import java.awt.event.KeyListener;
 
 @SuppressWarnings("serial")
-public class pGuestMgn extends JPanel implements ActionListener {
+public class pGuestMgn extends JPanel implements ActionListener, KeyListener {
 
 	private JTable table;
 	private List<Guest> gList;
@@ -45,6 +51,10 @@ public class pGuestMgn extends JPanel implements ActionListener {
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmAdd;
 	private GuestPanel pInfomation;
+	
+	private JButton btnSearchName;
+	private JTextField tfName;
+	private JButton btnSearchAll;
 
 	public pGuestMgn() {
 		initComponents();
@@ -68,7 +78,6 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
-		scrollPane.setSize(200, 200);
 
 		pInfomation = new GuestPanel();
 		pInfomation.setParent(pGuestMgn.this);
@@ -105,6 +114,22 @@ public class pGuestMgn extends JPanel implements ActionListener {
 		
 		table.setComponentPopupMenu(popupMenu);
 		scrollPane.setComponentPopupMenu(popupMenu);
+		
+		JPanel panel_2 = new JPanel();
+		pList.add(panel_2, BorderLayout.NORTH);
+		
+		tfName = new JTextField();
+		tfName.addKeyListener(this);
+		panel_2.add(tfName);
+		tfName.setColumns(10);
+		
+		btnSearchName = new JButton("검색");
+		btnSearchName.addActionListener(this);
+		panel_2.add(btnSearchName);
+		
+		btnSearchAll = new JButton("전체 검색");
+		btnSearchAll.addActionListener(this);
+		panel_2.add(btnSearchAll);
 	}
 
 	public void clearList() {
@@ -144,12 +169,33 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			deleteGuestUI();
 			pInfomation.resetGradeCmb();
 			
-		}		
+		}	
+		
+		
+		if (e.getSource() == btnSearchAll) {
+			actionPerformedBtnSearchAll(e);
+		}
+		
+		if (e.getSource() == btnSearchName) {
+			actionPerformedBtnSearchName(e);
+		}
 	}
 	
 	
 	
 	
+	private void actionPerformedBtnSearchName(ActionEvent e) {
+		String name = tfName.getText();
+		gList = dao.selectGuestBygName(name);
+		reloadData();
+		tfName.setText("");
+	}
+
+	private void actionPerformedBtnSearchAll(ActionEvent e) {
+		clearList();
+		reloadData();
+	}
+
 	private void deleteGuestUI() {
 		int result = JOptionPane.showConfirmDialog(null, "삭제하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
 		
@@ -237,4 +283,24 @@ public class pGuestMgn extends JPanel implements ActionListener {
 			return this;
 		}
 	}
+	public void keyPressed(KeyEvent arg0) {
+		if (arg0.getSource() == tfName) {
+			keyPressedTfNameJTextField(arg0);
+		}
+	}
+	public void keyReleased(KeyEvent arg0) {
+	}
+	public void keyTyped(KeyEvent arg0) {
+	}
+	protected void keyPressedTfNameJTextField(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) { //...동작을 실행한다.
+
+			String name = tfName.getText();
+			gList = dao.selectGuestBygName(name);
+			reloadData();
+			tfName.setText("");
+		}
+	}
+
 }
+
