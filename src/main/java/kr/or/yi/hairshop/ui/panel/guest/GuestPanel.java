@@ -244,7 +244,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_7.add(lblSale);
 		
 		spSale = new JSpinner();
-		spSale.setModel(new SpinnerNumberModel(0, 0, 50, 1));
+		spSale.setModel(new SpinnerNumberModel(0, 0, 50, 5));
 		panel_7.add(spSale);
 
 		btnAdd2 = new JButton("등록");
@@ -369,11 +369,10 @@ public class GuestPanel extends JPanel implements ActionListener {
 		if (e.getSource() == btnAdd) {
 			if (e.getActionCommand().equals("등록")) {
 				actionPerformedBtnAddJButton(e);
-				clear3();
+				
 			} else if (e.getActionCommand().equals("수정")) {
 				updateGuest();
-				clear();
-				setBtn();
+				
 			}
 
 		}
@@ -457,8 +456,11 @@ public class GuestPanel extends JPanel implements ActionListener {
 		
 		if(pass.equals(pass2)) {
 			dao.updateGuest(modifyguest);
+			clear();
+			setBtn();
 		}else {
 			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다. 다시확인해주세요!");
+			clear3();
 		}
 		parent.clearList();
 		parent.reloadData();
@@ -517,13 +519,16 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 		if(pass.equals(pass2)) {
 			dao.insertGuest(guest);
+			clear();
 		}else {
 			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다. 다시확인해주세요!");
+			clear3();
 		}
 		
 		
 		parent.clearList();
 		parent.reloadData();
+		
 	}
 	
 	private void MakeLevel() {
