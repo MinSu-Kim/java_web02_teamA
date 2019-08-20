@@ -1,5 +1,6 @@
 package kr.or.yi.hairshop.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -112,9 +113,9 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	}
 
 	@Override
-	public List<WorkDialog> selectGuestBarChartPrice() {
+	public List<WorkDialog> selectGuestBarChartPrice(Map<String, Date> map) {
 		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
-			return sqlSession.selectList(namespace+".selectGuestBarChartPrice");
+			return sqlSession.selectList(namespace+".selectGuestBarChartPrice",map);
 		}
 	}
 	@Override
@@ -131,7 +132,7 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 		}
 	}
 	@Override
-	public List<WorkDialog> selectGuestBarChartCount() {
+	public List<WorkDialog> selectGuestBarChartCount(Map<String, Date> map) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + ".selectGuestBarChartCount");
 		}

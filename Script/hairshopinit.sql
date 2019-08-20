@@ -192,11 +192,13 @@ ALTER TABLE hairshop.Review
 
 -- 덧글
 CREATE TABLE hairshop.Comment (
-	c_no      INT     NOT NULL COMMENT '댓글번호', -- 댓글번호
-	g_no      INT     NOT NULL COMMENT '손님번호', -- 손님번호
-	r_no      INT     NULL     COMMENT '리뷰번호', -- 리뷰번호
-	c_content TEXT    NOT NULL COMMENT '내용', -- 내용
-	c_delete  BOOLEAN NULL     DEFAULT false COMMENT '삭제여부' -- 삭제여부
+	c_no        INT         NOT NULL COMMENT '덧글번호', -- 덧글번호
+	g_no        INT         NOT NULL COMMENT '손님번호', -- 손님번호
+	r_no        INT         NULL     COMMENT '리뷰번호', -- 리뷰번호
+	c_content   TEXT        NOT NULL COMMENT '내용', -- 내용
+	c_writer    VARCHAR(20) NULL     COMMENT '작성자', -- 작성자
+	c_writetime DATETIME    NULL     COMMENT '작성일', -- 작성일
+	c_delete    BOOLEAN     NULL     DEFAULT false COMMENT '삭제여부' -- 삭제여부
 )
 COMMENT '덧글';
 
@@ -204,11 +206,11 @@ COMMENT '덧글';
 ALTER TABLE hairshop.Comment
 	ADD CONSTRAINT PK_Comment -- 덧글 기본키
 		PRIMARY KEY (
-			c_no -- 댓글번호
+			c_no -- 덧글번호
 		);
 
 ALTER TABLE hairshop.Comment
-	MODIFY COLUMN c_no INT NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
+	MODIFY COLUMN c_no INT NOT NULL AUTO_INCREMENT COMMENT '덧글번호';
 
 -- 소셜인포
 CREATE TABLE hairshop.SNSinfo (

@@ -198,3 +198,12 @@ INSERT INTO comment
 (20, 15, '저도 2주전에 이 펌했어요~ ','rerer', '2019-04-28 18:16'),
 (19, 15, '와우!!!!','gugu11', '2019-06-11 12:28');
 
+
+
+LOAD data LOCAL INFILE 'D:\\zipcode_DB\\대구광역시.txt' 
+INTO table hairshop.post
+character set 'euckr'
+fields TERMINATED by '|' 
+IGNORE 1 lines 
+(@zipcode, @sido, @d, @sigungu , @d, @d, @d, @d, @doro, @d, @d, @building1, @building2, @d, @d, @d, @d, @d, @d ,@d, @d, @d, @d, @d, @d, @d) 
+set p_zipcode=@zipcode, p_sido=@sido, p_sigungu=@sigungu, p_doro=@doro, p_address1=@building1, p_address2=@building2;
