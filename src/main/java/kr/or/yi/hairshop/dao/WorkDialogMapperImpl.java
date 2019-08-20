@@ -134,7 +134,7 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	@Override
 	public List<WorkDialog> selectGuestBarChartCount(Map<String, Date> map) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			return sqlSession.selectList(namespace + ".selectGuestBarChartCount");
+			return sqlSession.selectList(namespace + ".selectGuestBarChartCount",map);
 		}
 	}
 

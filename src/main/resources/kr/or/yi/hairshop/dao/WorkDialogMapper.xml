@@ -246,6 +246,7 @@
 		from workdialog w 
 		join guest g
 		on w.w_g_no=g.g_no
+		where w_workTime between #{dateStart} and #{dateEnd}
 		group by w_g_no 
 		order by count(w_priceTotal) desc
 	</select>
@@ -254,6 +255,7 @@
 		from workdialog w 
 		join guest g
 		on w.w_g_no=g.g_no
+		where w_workTime between #{dateStart} and #{dateEnd} 
 		group by w_g_no 
 		order by sum(w_priceTotal) desc
 	</select>

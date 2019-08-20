@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import javafx.application.Platform;
@@ -30,7 +31,7 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 	private WorkDialogMapper wDao=new WorkDialogMapperImpl();
 	private ProductMapper pDao=new ProductMapperImpl();
 	GuestCountBarChart pBarPriceChart;
-	GuestPriceBarChart pBarCountChart;
+	GuestPriceBarChart pBarCountChart=new GuestPriceBarChart();
 	DateYearPriceLineChart dateYearPriceChart;
 	private JPanel panel_1;
 	private JPanel panel_2;
@@ -48,7 +49,7 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 	private Map<String, Date> map;
 	private Date date;
 	
-	
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public pGuestChart() {
 		initComponents();
@@ -94,8 +95,12 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 		
 		map = new HashMap<String, Date>();
 		date = new Date();
-		map.put("dateStart",new Date(date.getYear(),1,1));
-		map.put("dateEnd",new Date(date.getYear(),12,31));
+		
+		map.put("dateStart",new Date(date.getYear(),0,1));
+		map.put("dateEnd",new Date(date.getYear(),11,31,23,59,59));
+		
+		dateStart.setDate(new Date(date.getYear(),0,1));
+		dateEnd.setDate(new Date(date.getYear(),11,31,23,59,59));
 		
 		pBarPriceChart.setWList(wDao.selectGuestBarChartPrice(map));
 		
@@ -103,7 +108,7 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 		panel_3.add(panel_5);
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
 		
-		pBarCountChart = new GuestPriceBarChart();
+		
 		panel_5.add(pBarCountChart);
 		pBarCountChart.setWList(wDao.selectGuestBarChartCount(map));
 		
@@ -182,9 +187,13 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 	}
 	protected void actionPerformedBtnDelete(ActionEvent e) {
 		
-		Platform.runLater(() -> {
-			dateYearPriceChart.delChartData(year++);
-		});
+		if(year==Integer.parseInt(sf.format(date).substring(0, 4))) {
+			JOptionPane.showMessageDialog(null, "다음해는 검색이 불가합니다.");
+		}else {
+			Platform.runLater(() -> {
+				dateYearPriceChart.delChartData(year++);
+			});
+		}
 		
 	}
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -196,22 +205,45 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 		}
 	}
 	protected void propertyChangeDateStart(PropertyChangeEvent evt) {
-		if(dateStart!=null && dateEnd!=null && wDao!=null) {
+		
+		System.out.println(pBarCountChart);
+		if(dateStart!=null && dateEnd!=null && wDao!=null && map!=null) {
 			map.put("dateStart", dateStart.getDate());
+			map.put("dateEnd", dateEnd.getDate());
 			
-			System.out.println(map.get("dateStart"));
+			pBarPriceChart.setWList(wDao.selectGuestBarChartPrice(map));
+			pBarCountChart.setWList(wDao.selectGuestBarChartCount(map));
 			
-			
+			Platform.runLater(() -> initFX(pBarPriceChart));
+			Platform.runLater(() -> initFX(pBarCountChart));
 		}
 	}
 	protected void propertyChangeDateEnd(PropertyChangeEvent evt) {
-		if(dateStart!=null && dateEnd!=null && wDao!=null) {
-			dateEnd.getDate();
+		if(dateStart!=null && dateEnd!=null && wDao!=null && map!=null) {
+			map.put("dateStart", dateStart.getDate());
 			map.put("dateEnd", dateEnd.getDate());
-			System.out.println(map.get("dateEnd"));
+			
+			pBarPriceChart.setWList(wDao.selectGuestBarChartPrice(map));
+			pBarCountChart.setWList(wDao.selectGuestBarChartCount(map));
+			
+			
+			Platform.runLater(() -> initFX(pBarPriceChart));
+			Platform.runLater(() -> initFX(pBarCountChart));
 		}
 	}
 	protected void actionPerformedBtnAllDay(ActionEvent e) {
 		
+		map.put("dateStart", new Date(date.getYear()-100,0,1));
+		map.put("dateEnd", new Date());
+		
+		System.out.println(map.get("dateStart"));
+		System.out.println(map.get("dateEnd"));
+		
+		pBarPriceChart.setWList(wDao.selectGuestBarChartPrice(map));
+		pBarCountChart.setWList(wDao.selectGuestBarChartCount(map));
+		
+		
+		Platform.runLater(() -> initFX(pBarPriceChart));
+		Platform.runLater(() -> initFX(pBarCountChart));
 	}
 }
