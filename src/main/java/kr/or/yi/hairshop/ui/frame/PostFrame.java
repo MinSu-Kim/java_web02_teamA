@@ -41,6 +41,7 @@ public class PostFrame extends JFrame implements ActionListener {
 		pList = null;
 		initComponents();
 	}
+	
 	private void initComponents() {
 		setTitle("주소 검색");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -85,22 +86,15 @@ public class PostFrame extends JFrame implements ActionListener {
 		btnNewButton_1.addActionListener(this);
 		btnNewButton_1.setBounds(332, 251, 80, 30);
 		panel.add(btnNewButton_1);
-		
-		
-		
-		
-		
 	}
+	
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnNewButton | arg0.getSource() == btnNewButton) { //검색
 			actionPerformedBtnNewButton(arg0);
 		}
-		
 		if (arg0.getSource() == btnNewButton_1) { //확인
 			actionPerformedBtnNewButton_1(arg0);
 		}
-		
-		
 	}
 	protected void actionPerformedBtnNewButton(ActionEvent arg0) { //검색
 		if(textField.getText().equals("")) {
@@ -135,8 +129,6 @@ public class PostFrame extends JFrame implements ActionListener {
 	protected void actionPerformedBtnNewButton_1(ActionEvent arg0) { //확인
 		setVisible(false);
 		String addr = JList.getSelectedValue();
-		//찾은 주소가 주소창에 보이도록
-		System.out.println(addr);
 		designerFrame.setAddr(addr);
 	}
 	

@@ -61,7 +61,6 @@ public class DesignerFrame extends JFrame implements ActionListener {
 	private JButton btnNewButton;
 	private JButton button_1;
 	private PostFrame postframe = new PostFrame();
-	private AbstractButton tfdAddr3;
 	private JButton btnNewButton_1;
 	
 	public static void main(String[] args) {
@@ -90,7 +89,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		btnNewButton.setVisible(false);
 		tfdAddr.setEditable(true);
 		btnNewButton_1.setVisible(false); //가라버튼
-		
+		button.setVisible(true);
 	}
 	public void tfEnable2() { //등록버튼눌렀을때
 		passwordField.setEditable(true);
@@ -440,6 +439,7 @@ public class DesignerFrame extends JFrame implements ActionListener {
 		ds.updateDesigner(designer);
 		pProductMgn.setWorkList(ds.selectDesignerByAll());
 		JOptionPane.showMessageDialog(null, "수정되었습니다.");
+		pProductMgn.reloadData();
 		dispose();
 	}
 
