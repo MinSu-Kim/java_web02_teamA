@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import javafx.application.Platform;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.ui.chart.pGuestChart;
 import kr.or.yi.hairshop.ui.frame.LoginFrame;
@@ -210,7 +211,6 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 		}
 	}
 	protected void stateChangedTabbedPane(ChangeEvent arg0) {
-		
 		if(tabbedPane.getSelectedIndex() == 0) {
 		}else if (tabbedPane.getSelectedIndex() == 1){
 			workMain.refresh(0);
@@ -226,13 +226,8 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 		}else if (tabbedPane.getSelectedIndex() == 5){
 			
 		}else if (tabbedPane.getSelectedIndex() == 6){
-			pDesignerChart.reload();
-			pDesignerChart.revalidate();
-			pDesignerChart.repaint();
-			
+			Platform.runLater(() -> pDesignerChart.reload());
 		}
-		
-		
 		
 	}
 }

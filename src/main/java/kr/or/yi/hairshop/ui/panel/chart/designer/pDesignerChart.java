@@ -11,7 +11,6 @@ import java.util.Map;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -162,11 +161,6 @@ public class pDesignerChart extends JPanel implements ItemListener {
 	}
 
 	public void reload() {
-		JOptionPane.showMessageDialog(null, "다시 그려라");
-
-//		pLTAll.addAllChartData();
-//		pPieChartMon.addAllChartData();
-//		ch.addAllChartData();
 		Platform.runLater(() -> initFXAll(pLTAll));
 		Platform.runLater(() -> initFXMon(pPieChartMon));
 		Platform.runLater(() -> initFX(ch));
