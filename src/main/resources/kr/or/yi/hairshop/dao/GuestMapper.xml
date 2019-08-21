@@ -37,6 +37,7 @@
 		g_birth, g_join, g_point, g_memo
 		FROM guest
 		where g_name like CONCAT('%',#{gName},'%')
+		and g_secession = false
 	</select>
 	
 	<insert id="insertGuest" parameterType="Guest">
