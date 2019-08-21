@@ -224,7 +224,7 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 			ProductMgn.clearList();
 			ProductMgn.reloadData();
 		}else if (tabbedPane.getSelectedIndex() == 5){
-			
+			guestChart.reloadData();
 		}else if (tabbedPane.getSelectedIndex() == 6){
 			Platform.runLater(() -> pDesignerChart.reload());
 		}

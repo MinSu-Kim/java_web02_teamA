@@ -123,7 +123,6 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 		Date date = new Date();
 		year = Integer.parseInt(sf.format(date));
 		dateYearPriceChart.setWList(pDao.selectDateYearPriceChart(year));
-		
 		panel_2 = new JPanel();
 		panel_1.add(panel_2, BorderLayout.SOUTH);
 		
@@ -231,6 +230,26 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 			Platform.runLater(() -> initFX(pBarCountChart));
 		}
 	}
+	
+	public void reloadData() {
+		map = new HashMap<String, Date>();
+		date = new Date();
+		
+		map.put("dateStart",new Date(date.getYear(),0,1));
+		map.put("dateEnd",new Date(date.getYear(),11,31,23,59,59));
+		
+		dateStart.setDate(new Date(date.getYear(),0,1));
+		dateEnd.setDate(new Date(date.getYear(),11,31,23,59,59));
+		
+		pBarPriceChart.setWList(wDao.selectGuestBarChartPrice(map));
+		dateYearPriceChart.setWList(pDao.selectDateYearPriceChart(year));
+		pBarCountChart.setWList(wDao.selectGuestBarChartCount(map));
+		
+		Platform.runLater(() -> initFX(pBarPriceChart));
+		Platform.runLater(() -> initFX(pBarCountChart));
+		Platform.runLater(() -> initFX(dateYearPriceChart));
+	}
+	
 	protected void actionPerformedBtnAllDay(ActionEvent e) {
 		
 		map.put("dateStart", new Date(date.getYear()-100,0,1));
