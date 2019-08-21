@@ -231,7 +231,7 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 			ProductMgn.reloadData();
 		}else if (tabbedPane.getSelectedIndex() == 5){
 			JOptionPane.showMessageDialog(null, "매출 현황 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
-			
+			guestChart.reloadData();
 		}else if (tabbedPane.getSelectedIndex() == 6){
 			JOptionPane.showMessageDialog(null, "디자이너 현황탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 			
