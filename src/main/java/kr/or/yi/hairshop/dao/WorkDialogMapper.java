@@ -1,5 +1,6 @@
 package kr.or.yi.hairshop.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +25,8 @@ public interface WorkDialogMapper {
 	public int updateWorkDialog(WorkDialog workDialog);
 	public int updateWorkDialogWorkTime(WorkDialog workDialog);
 	public int deleteWorkDialog(int wNo);
-	public List<WorkDialog> selectGuestBarChartPrice();
-	public List<WorkDialog> selectGuestBarChartCount();
+	public List<WorkDialog> selectGuestBarChartPrice(Map<String, Date> map);
+	public List<WorkDialog> selectGuestBarChartCount(Map<String, Date> map);
 
 	public List<WorkDialog> selectTotalPriceByDesigner (int wDNo);
 

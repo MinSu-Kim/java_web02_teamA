@@ -49,6 +49,24 @@ public class Designer {
 		this.dJoin = dJoin;
 		this.dMemo = dMemo;
 	}
+	
+
+	public Designer(int dNo, String dGrade, String dId, String dPassword, String dName, String dTel, String dTel2,
+			String dAddr, String dAddr2, String dAddr3, Date dBirth, Date dJoin, String dMemo) {
+		this.dNo = dNo;
+		this.dGrade = dGrade;
+		this.dId = dId;
+		this.dPassword = dPassword;
+		this.dName = dName;
+		this.dTel = dTel;
+		this.dTel2 = dTel2;
+		this.dAddr = dAddr;
+		this.dAddr2 = dAddr2;
+		this.dAddr3 = dAddr3;
+		this.dBirth = dBirth;
+		this.dJoin = dJoin;
+		this.dMemo = dMemo;
+	}
 
 	public Designer(int dNo, String dGrade, String dId, String dPassword, String dName, String dTel, String dTel2,
 			String dAddr, String dAddr2, String dAddr3, Date dBirth, Date dJoin, String dMemo,

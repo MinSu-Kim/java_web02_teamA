@@ -83,7 +83,8 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 		setTitle("미용실 관리 프로그램");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(250, 50, 1280, 960);
+		setBounds(250, 50, 1255, 960);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setForeground(Color.GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

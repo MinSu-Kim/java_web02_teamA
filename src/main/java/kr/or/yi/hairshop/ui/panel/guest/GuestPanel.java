@@ -34,6 +34,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -47,11 +48,17 @@ import kr.or.yi.hairshop.dao.LevelMapperImpl;
 import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.dto.Level;
 import kr.or.yi.hairshop.panel.MyTableModel;
+import kr.or.yi.hairshop.ui.panel.guest.pGuestMgn.ReturnTableCellRenderer;
+
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.UIManager;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class GuestPanel extends JPanel implements ActionListener {
+public class GuestPanel extends JPanel implements ActionListener, MouseListener {
 	private int gno;
 	private JTextField tfName;
 	private JTextField tfTel;
@@ -92,7 +99,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 	public GuestPanel() {
 		setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		setLayout(new GridLayout(0, 3, 0, 0));
+		setLayout(new GridLayout(0, 2, 0, 0));
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uACE0\uAC1D\uB4F1\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
@@ -244,7 +251,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_7.add(lblSale);
 		
 		spSale = new JSpinner();
-		spSale.setModel(new SpinnerNumberModel(0, 0, 50, 1));
+		spSale.setModel(new SpinnerNumberModel(0, 0, 50, 5));
 		panel_7.add(spSale);
 
 		btnAdd2 = new JButton("등록");
@@ -282,20 +289,13 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_8.add(scrollPane, BorderLayout.CENTER);
 
 		table = new JTable();
+		table.addMouseListener(this);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		scrollPane.setSize(100, 100);
 		
 		clearLevelList();			
 		reloadLevelData();
-
-		JPanel panel_4 = new JPanel();
-		add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("images\\ppp.jpg"));
-		panel_4.add(lblNewLabel);
 		
 		
 		popupMenu2 = new JPopupMenu();
@@ -368,11 +368,10 @@ public class GuestPanel extends JPanel implements ActionListener {
 		if (e.getSource() == btnAdd) {
 			if (e.getActionCommand().equals("등록")) {
 				actionPerformedBtnAddJButton(e);
-				clear3();
+				
 			} else if (e.getActionCommand().equals("수정")) {
 				updateGuest();
-				clear();
-				setBtn();
+				
 			}
 
 		}
@@ -456,8 +455,11 @@ public class GuestPanel extends JPanel implements ActionListener {
 		
 		if(pass.equals(pass2)) {
 			dao.updateGuest(modifyguest);
+			clear();
+			setBtn();
 		}else {
 			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다. 다시확인해주세요!");
+			clear3();
 		}
 		parent.clearList();
 		parent.reloadData();
@@ -516,13 +518,16 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 		if(pass.equals(pass2)) {
 			dao.insertGuest(guest);
+			clear();
 		}else {
 			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다. 다시확인해주세요!");
+			clear3();
 		}
 		
 		
 		parent.clearList();
 		parent.reloadData();
+		
 	}
 	
 	private void MakeLevel() {
@@ -667,13 +672,57 @@ public class GuestPanel extends JPanel implements ActionListener {
 
 		// 테이블 셀의 폭 설정
 		protected void tableSetWidth(int... width) {
+			for (int i = 0; i < getColumnNames().length; i++) {
+				table.getColumnModel().getColumn(i).setCellRenderer(new ReturnTableCellRenderer2());
+			}
+			
 			TableColumnModel cModel = table.getColumnModel();
 
 			for (int i = 0; i < width.length; i++) {
 				cModel.getColumn(i).setPreferredWidth(width[i]);
 			}
 		}
+		
+		public class ReturnTableCellRenderer2 extends JLabel implements TableCellRenderer {
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				if (value==null) return this;
+				setText(value.toString());
+				setOpaque(true);
+				
+				if(column == 0) {
+					setHorizontalAlignment(JLabel.CENTER);
+				}
+				if(column == 1) {
+					setHorizontalAlignment(JLabel.CENTER);
+				}
+				if (table.getValueAt(row, 0).toString().equals("골드")) {
+					setBackground(new Color(255, 215, 0, 30));
+				}else if(table.getValueAt(row, 0).toString().equals("실버")) {
+					setBackground(new Color(192, 192, 192, 70));
+				}
+				else {
+					setBackground(Color.WHITE);
+				}
+				if (isSelected) {
+					setBackground(Color.orange);
+				}
+				return this;
+			}
+		}
 	
 	
 	
+	public void mouseClicked(MouseEvent arg0) {
+	}
+	public void mouseEntered(MouseEvent arg0) {
+	}
+	public void mouseExited(MouseEvent arg0) {
+		table.clearSelection();
+	}
+	public void mousePressed(MouseEvent arg0) {
+	}
+	public void mouseReleased(MouseEvent arg0) {
+	}
+	protected void mouseExitedTableJTable(MouseEvent arg0) {
+	}
 }
