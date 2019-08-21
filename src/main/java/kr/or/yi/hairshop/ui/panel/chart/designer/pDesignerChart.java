@@ -44,6 +44,11 @@ public class pDesignerChart extends JPanel implements ItemListener {
 	private WorkDialogMapper dao = new WorkDialogMapperImpl();
 	private JRadioButton rbBtn12;
 	private JPanel pRB;
+	private JPanel pRDB;
+	private pPieChartMon pPieChartMon;
+	private JPanel pRTMon;
+	private pPieChartAll pLTAll;
+	private ChartByProductPie ch;
 	
 	public pDesignerChart() {
 		setLayout(new BorderLayout(0, 0));
@@ -57,19 +62,19 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		add(pMain);
 		pMain.setLayout(new GridLayout(0, 2, 0, 0));
 
-		pPieChartAll pLTAll = new pPieChartAll();
+		pLTAll = new pPieChartAll();
 		pMain.add(pLTAll);
 		pLTAll.setLayout(new BorderLayout(0, 0));
 		
-		JPanel pRTMon = new JPanel();
+		pRTMon = new JPanel();
 		pMain.add(pRTMon);
 		pRTMon.setLayout(new BorderLayout(0, 0));
 		
-		pPieChartMon pPieChartMon = new pPieChartMon();
+		pPieChartMon = new pPieChartMon();
 		pRTMon.add(pPieChartMon);
 		pPieChartMon.setParent(pDesignerChart.this);
 
-		JPanel pRDB = new JPanel();
+		pRDB = new JPanel();
 		pRTMon.add(pRDB, BorderLayout.SOUTH);
 		pRDB.setLayout(new GridLayout(0, 7, 0, 0));
 		pRDB.setBackground(Color.white);
@@ -142,7 +147,7 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		pLBbyWork = new JPanel();
 		pMain.add(pLBbyWork);
 		pLBbyWork.setLayout(new BorderLayout(0, 0));
-		ChartByProductPie ch = new ChartByProductPie();
+		ch = new ChartByProductPie();
 		pLBbyWork.add(ch);
 		
 		pRB = new JPanel();
@@ -155,6 +160,11 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		Platform.runLater(() -> initFX(ch));
 	}
 
+	public void reload() {
+		Platform.runLater(() -> initFXAll(pLTAll));
+		Platform.runLater(() -> initFXMon(pPieChartMon));
+		Platform.runLater(() -> initFX(ch));
+	}
 	public void tbBtnBackgroundColor() {
 		rbBtn0.setBackground(Color.white);
 		rbBtn1.setBackground(Color.white);
@@ -183,9 +193,9 @@ public class pDesignerChart extends JPanel implements ItemListener {
 		panel.setScene(scene);
 	}
 	
-	public void initFX(ChartByProductPie pChart) {
-		Scene scene = pChart.createScene();
-		panel = (JFXPanel) pChart;
+	public void initFX(ChartByProductPie p) {
+		Scene scene = p.createScene();
+		panel = (JFXPanel) p;
 		panel.setScene(scene);
 	}
 	

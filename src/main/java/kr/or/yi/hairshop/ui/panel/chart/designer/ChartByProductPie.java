@@ -24,6 +24,7 @@ public class ChartByProductPie extends JFXPanel implements InitScene {
 
 	private PieChart pieChart;
 	private ProductMapper dao = new ProductMapperImpl();
+	private List<Product> li;
 	
 	@Override
 	public Scene createScene() {
@@ -50,10 +51,14 @@ public class ChartByProductPie extends JFXPanel implements InitScene {
 
 		return scene;
 	}
-
+	
+	public void reloadList() {
+		li = dao.selectByProductName();
+	}
+	
 	public ObservableList<Data> getChartData() {
 		ObservableList<Data> list = FXCollections.observableArrayList();
-		List<Product> li = dao.selectByProductName();
+		li = dao.selectByProductName();
 
 		int size = li.size();	
 		String[] name = new String[size];
