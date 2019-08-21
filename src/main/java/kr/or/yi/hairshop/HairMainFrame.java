@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import javafx.application.Platform;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.ui.chart.pGuestChart;
 import kr.or.yi.hairshop.ui.frame.LoginFrame;
@@ -216,6 +217,7 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 			JOptionPane.showMessageDialog(null, "홈탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 		}else if (tabbedPane.getSelectedIndex() == 1){
 			JOptionPane.showMessageDialog(null, "작업 화면 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
+			workMain.reloadData();
 			workMain.refresh(0);
 		}else if (tabbedPane.getSelectedIndex() == 2){
 			JOptionPane.showMessageDialog(null, "예약관리 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
@@ -231,7 +233,8 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 			ProductMgn.reloadData();
 		}else if (tabbedPane.getSelectedIndex() == 5){
 			JOptionPane.showMessageDialog(null, "매출 현황 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
-			guestChart.reloadData();
+			
+			Platform.runLater(() ->guestChart.reloadData());
 		}else if (tabbedPane.getSelectedIndex() == 6){
 			JOptionPane.showMessageDialog(null, "디자이너 현황탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 			

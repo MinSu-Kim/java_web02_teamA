@@ -235,6 +235,8 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 		map = new HashMap<String, Date>();
 		date = new Date();
 		
+		pBarPriceChart = new GuestCountBarChart();
+		
 		map.put("dateStart",new Date(date.getYear(),0,1));
 		map.put("dateEnd",new Date(date.getYear(),11,31,23,59,59));
 		
