@@ -38,9 +38,11 @@ import kr.or.yi.hairshop.dto.Guest;
 import kr.or.yi.hairshop.panel.MyTableModel;
 import kr.or.yi.hairshop.panel.pCalendar;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class pGuestMgn extends JPanel implements ActionListener, KeyListener {
+public class pGuestMgn extends JPanel implements ActionListener, KeyListener, MouseListener {
 
 	private JTable table;
 	private List<Guest> gList;
@@ -76,6 +78,7 @@ public class pGuestMgn extends JPanel implements ActionListener, KeyListener {
 		pList.add(scrollPane);
 
 		table = new JTable();
+		table.addMouseListener(this);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 
@@ -302,5 +305,18 @@ public class pGuestMgn extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 
+	public void mouseClicked(MouseEvent e) {
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+		table.clearSelection();
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseExitedTableJTable(MouseEvent e) {
+	}
 }
 

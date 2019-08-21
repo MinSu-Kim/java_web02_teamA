@@ -54,9 +54,11 @@ import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.UIManager;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
-public class GuestPanel extends JPanel implements ActionListener {
+public class GuestPanel extends JPanel implements ActionListener, MouseListener {
 	private int gno;
 	private JTextField tfName;
 	private JTextField tfTel;
@@ -287,6 +289,7 @@ public class GuestPanel extends JPanel implements ActionListener {
 		panel_8.add(scrollPane, BorderLayout.CENTER);
 
 		table = new JTable();
+		table.addMouseListener(this);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		scrollPane.setSize(100, 100);
@@ -709,4 +712,17 @@ public class GuestPanel extends JPanel implements ActionListener {
 	
 	
 	
+	public void mouseClicked(MouseEvent arg0) {
+	}
+	public void mouseEntered(MouseEvent arg0) {
+	}
+	public void mouseExited(MouseEvent arg0) {
+		table.clearSelection();
+	}
+	public void mousePressed(MouseEvent arg0) {
+	}
+	public void mouseReleased(MouseEvent arg0) {
+	}
+	protected void mouseExitedTableJTable(MouseEvent arg0) {
+	}
 }
