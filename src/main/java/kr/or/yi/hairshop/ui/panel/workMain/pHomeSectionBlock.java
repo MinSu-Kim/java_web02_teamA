@@ -105,7 +105,6 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 
 	public void mouseExited(MouseEvent e) {
 		jtable.clearSelection();
-		
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -244,7 +243,6 @@ public class pHomeSectionBlock extends JPanel implements MouseListener, ActionLi
 		if(str.equals("추가")) {
 			parent.setReservTime(row);
 		}else {
-			System.out.println("ddddddd");
 			int index=Integer.parseInt(str.substring(0, str.indexOf(".")));
 			System.out.println(index);
 			str = str.substring(str.length() - 5, str.length());
