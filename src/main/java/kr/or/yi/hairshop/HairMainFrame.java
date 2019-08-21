@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
@@ -213,27 +212,23 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 	protected void stateChangedTabbedPane(ChangeEvent arg0) {
 		
 		if(tabbedPane.getSelectedIndex() == 0) {
-			JOptionPane.showMessageDialog(null, "홈탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 		}else if (tabbedPane.getSelectedIndex() == 1){
-			JOptionPane.showMessageDialog(null, "작업 화면 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 			workMain.refresh(0);
 		}else if (tabbedPane.getSelectedIndex() == 2){
-			JOptionPane.showMessageDialog(null, "예약관리 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 			ReservationMgn.clearList();
 			ReservationMgn.reloadData();
 		}else if (tabbedPane.getSelectedIndex() == 3){
-			JOptionPane.showMessageDialog(null, "고객관리 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 			GuestMgn.clearList();
 			GuestMgn.reloadData();
 		}else if (tabbedPane.getSelectedIndex() == 4){
-			JOptionPane.showMessageDialog(null, "기타 관리 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 			ProductMgn.clearList();
 			ProductMgn.reloadData();
 		}else if (tabbedPane.getSelectedIndex() == 5){
-			JOptionPane.showMessageDialog(null, "매출 현황 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 			
 		}else if (tabbedPane.getSelectedIndex() == 6){
-			JOptionPane.showMessageDialog(null, "디자이너 현황탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
+			pDesignerChart.reload();
+			pDesignerChart.revalidate();
+			pDesignerChart.repaint();
 			
 		}
 		

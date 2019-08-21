@@ -24,6 +24,7 @@ public class pPieChartAll extends JFXPanel implements InitScene {
 
 	private PieChart pieChart;
 	private WorkDialogMapper dao = new WorkDialogMapperImpl();
+	private List<WorkDialog> li;
 
 	@Override
 	public Scene createScene() {
@@ -51,9 +52,13 @@ public class pPieChartAll extends JFXPanel implements InitScene {
 		return scene;
 	}
 
+	public void reloadList() {
+		li = dao.selectByDName();
+	}
+	
 	public ObservableList<Data> getChartData() {
 		ObservableList<Data> list = FXCollections.observableArrayList();
-		List<WorkDialog> li = dao.selectByDName();
+		li = dao.selectByDName();
 
 		int size = li.size();
 		String[] name = new String[size];
