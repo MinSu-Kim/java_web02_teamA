@@ -26,6 +26,7 @@ import kr.or.yi.hairshop.dto.Product;
 import com.toedter.calendar.JDateChooser;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.awt.Dimension;
 
 public class pGuestChart extends JPanel implements ActionListener, PropertyChangeListener {
 	private WorkDialogMapper wDao=new WorkDialogMapperImpl();
@@ -70,10 +71,12 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 		panel_6.add(panel_7, BorderLayout.NORTH);
 		
 		dateStart = new JDateChooser();
+		dateStart.setPreferredSize(new Dimension(100, 21));
 		dateStart.addPropertyChangeListener(this);
 		panel_7.add(dateStart);
 		
 		dateEnd = new JDateChooser();
+		dateEnd.setPreferredSize(new Dimension(100, 21));
 		dateEnd.addPropertyChangeListener(this);
 		panel_7.add(dateEnd);
 		
