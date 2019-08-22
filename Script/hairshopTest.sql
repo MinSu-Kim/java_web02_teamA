@@ -121,7 +121,7 @@ insert into choice(c_w_no,c_p_name) values
 ((select LAST_INSERT_ID()),(select p_name from product order by rand() limit 1))
 ;
 
-
+select * from workdialog;
 /* 3.불필요 데이터 삭제 */
 
 delete from choice where c_w_no in (select w_no from workdialog where `w_reservTime` between '2015-01-01' and '2019-12-31'
