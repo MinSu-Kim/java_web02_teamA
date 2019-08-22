@@ -40,7 +40,7 @@ public class pHomeWorkProductTable extends AbstractPanelTable<Product> implement
 
 	@Override
 	protected String[] getColumnNames() {
-		return new String[] { "이름", "가격", "사용여부"};
+		return new String[] { "이름", "가격", "분류"};
 	}
 
 	@Override

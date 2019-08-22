@@ -43,7 +43,7 @@ public class pHomeProductTable extends AbstractPanelTable<Product> implements Mo
 
 	@Override
 	protected String[] getColumnNames() {
-		return new String[] { "이름", "가격", "사용여부"};
+		return new String[] { "이름", "가격", "분류"};
 	}
 
 	@Override

@@ -434,7 +434,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 
 	protected void actionPerformedBtnDelete(ActionEvent e) {
-		int confirm = JOptionPane.showConfirmDialog(null, "정말 삭제 하시겠습니까?", "삭제", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
+		int confirm = JOptionPane.showConfirmDialog(null, "삭제 하시겠습니까?", "삭제", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
 		if (confirm == 0) {
 			int res1 = wDao.deleteChoice(wNo);
 			int res2 = wDao.deleteWorkDialog(wNo);
@@ -444,7 +444,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 	}
 	
 	protected void actionPerformedBtnUpdate(ActionEvent e) {
-		int confirm = JOptionPane.showConfirmDialog(null, "정말 수정 하시겠습니까?", "수정", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
+		int confirm = JOptionPane.showConfirmDialog(null, "수정 하시겠습니까?", "수정", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
 			if (confirm == 0) {
 			boolean check=tfNullTest();
 			if(check==false)
@@ -492,7 +492,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		}
 		wDao.updateWorkDialogWorkTime(work);
 		clean();
-		
+		JOptionPane.showMessageDialog(null, "작업이 완료되었습니다.");
 	}
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 
@@ -500,7 +500,7 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 
 		List<Product> productList = panelWorkProduct.getProductList();
 
-		int confirm = JOptionPane.showConfirmDialog(null, "정말 추가 하시겠습니까?", "추가", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
+		int confirm = JOptionPane.showConfirmDialog(null, "추가 하시겠습니까?", "추가", JOptionPane.YES_NO_OPTION);// 예 0 /아니오1
 
 		if (confirm == 0) {
 
