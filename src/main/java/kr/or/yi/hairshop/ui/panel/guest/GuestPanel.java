@@ -570,10 +570,11 @@ public class GuestPanel extends JPanel implements ActionListener, MouseListener 
 
 	public void setGuestTf(Guest g) {
 		gno = g.getgNo();
+		
 		cbGrade.setSelectedItem(new Level(g.getgLGrade().getlGrade()));
 		tfName.setText(g.getgName());
 		tfId.setText(g.getgId());
-		tfPassword.setText(g.getgPassword());
+//		tfPassword.setText(g.getgPassword());
 		tfTel.setText(g.getgTel());
 		tfEmail.setText(g.getgEmail());
 		dcBirth.setDate(g.getgBirth());
