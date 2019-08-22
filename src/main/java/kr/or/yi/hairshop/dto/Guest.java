@@ -173,7 +173,7 @@ public class Guest {
 //		return null;
 
 		
-		return new Object[] { gNo, gLGrade==null?"":gLGrade.getlGrade(), gName,gId, gTel==null?"":gTel, gEmail==null?"":gEmail, gBirth==null?"":date.format(gBirth), gJoin==null?"":date.format(gJoin), gPoint==0?"":gPoint+("p"), gMemo==null?"":gMemo };
+		return new Object[] { gNo, gLGrade==null?"":gLGrade.getlGrade(), gName,gId==null?"":gId, gTel==null?"":gTel, gEmail==null?"":gEmail, gBirth==null?"":date.format(gBirth), gJoin==null?"":date.format(gJoin), gPoint==0?"":gPoint+("p"), gMemo==null?"":gMemo };
 	}
 
 	public Object[] toArray2() {
