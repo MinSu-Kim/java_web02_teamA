@@ -237,9 +237,14 @@ public class pHomeSectionForm extends JPanel implements ActionListener, Property
 		this.dList=dList;
 	}
 	
-	
+	public void reloadData() {
+		dList = d_Dao.selectDesignerByAll();
+		
+		panelFooterTf.setBaseTf(eDao.selectEventByAll(),dDao.selectDesignerByAll(),pDao.selectProductByAll());
+	}
 	
 	public void refresh(int start) {
+		
 		for(int i=0; i<5; i++) {
 			if(dList.size()>i+start) {
 				panelList[i].setParent(this);

@@ -12,11 +12,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import javafx.application.Platform;
 import kr.or.yi.hairshop.dto.Designer;
 import kr.or.yi.hairshop.ui.chart.pGuestChart;
 import kr.or.yi.hairshop.ui.frame.LoginFrame;
@@ -28,7 +32,7 @@ import kr.or.yi.hairshop.ui.panel.reserve.pReservationMgn;
 import kr.or.yi.hairshop.ui.panel.workMain.pHomeSectionForm;
 
 @SuppressWarnings("serial")
-public class HairMainFrame extends JFrame implements ActionListener {
+public class HairMainFrame extends JFrame implements ActionListener, ChangeListener{
 
 	private static HairMainFrame mainFrame;
 	private static LoginFrame LoginFrame;
@@ -44,6 +48,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	private pGuestMgn GuestMgn;
 	private pHomeSection home;
 	private pReservationMgn ReservationMgn;
+	private pHomeSectionForm workMain;
 	private JTabbedPane tabbedPane;
 
 	public static void main(String[] args) {
@@ -121,9 +126,11 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		pMain.setLayout(new BorderLayout(0, 0));
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addChangeListener(this);
 		pMain.add(tabbedPane);
 
 		home = new pHomeSection();
+
 		tabbedPane.addTab("홈", null, home, "홈");
 
 		
@@ -136,7 +143,7 @@ public class HairMainFrame extends JFrame implements ActionListener {
 	}
 
 	public void CreateTP() {
-		pHomeSectionForm workMain = new pHomeSectionForm();
+		workMain = new pHomeSectionForm();
 		workMain.refresh(0);
 		tabbedPane.addTab("작업화면", null, workMain, "작업화면");
 
@@ -198,4 +205,31 @@ public class HairMainFrame extends JFrame implements ActionListener {
 		CreateTP();
 	}
 
+
+	public void stateChanged(ChangeEvent arg0) {
+		if (arg0.getSource() == tabbedPane) {
+			stateChangedTabbedPane(arg0);
+		}
+	}
+	protected void stateChangedTabbedPane(ChangeEvent arg0) {
+		if(tabbedPane.getSelectedIndex() == 0) {
+		}else if (tabbedPane.getSelectedIndex() == 1){
+			workMain.reloadData();
+			workMain.refresh(0);
+		}else if (tabbedPane.getSelectedIndex() == 2){
+			ReservationMgn.clearList();
+			ReservationMgn.reloadData();
+		}else if (tabbedPane.getSelectedIndex() == 3){
+			GuestMgn.clearList();
+			GuestMgn.reloadData();
+		}else if (tabbedPane.getSelectedIndex() == 4){
+			ProductMgn.clearList();
+			ProductMgn.reloadData();
+		}else if (tabbedPane.getSelectedIndex() == 5){
+			Platform.runLater(() ->guestChart.reloadData());
+		}else if (tabbedPane.getSelectedIndex() == 6){
+			Platform.runLater(() -> pDesignerChart.reload());
+		}
+		
+	}
 }

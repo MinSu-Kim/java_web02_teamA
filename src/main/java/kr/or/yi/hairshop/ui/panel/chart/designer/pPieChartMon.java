@@ -24,6 +24,7 @@ public class pPieChartMon extends JFXPanel implements InitScene {
 	private pDesignerChart parent;
 
 	private static WorkDialogMapper dao = new WorkDialogMapperImpl();
+	private List<WorkDialog> li;
 
 	public void setParent(pDesignerChart pDesignerChart) {
 		this.parent = pDesignerChart;
@@ -55,9 +56,13 @@ public class pPieChartMon extends JFXPanel implements InitScene {
 		return scene;
 	}
 
+	public void reloadList() {
+		li = dao.selectByDName();
+	}	
+	
 	public ObservableList<Data> getChartData() {
 		ObservableList<Data> list = FXCollections.observableArrayList();
-		List<WorkDialog> li = dao.selectByDName();
+		li = dao.selectByDName();
 
 		int size = li.size();
 		String[] name = new String[size];

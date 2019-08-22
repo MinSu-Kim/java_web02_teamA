@@ -159,6 +159,7 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		panel_11.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		btnToday = new JButton("today");
+		btnToday.addActionListener(this);
 		panel_11.add(btnToday);
 		
 		btnThisWeek = new JButton("week");
@@ -172,7 +173,6 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		btnAllSearch.addActionListener(this);
 		btnThisMon.addActionListener(this);
 		btnThisWeek.addActionListener(this);
-		btnToday.addActionListener(this);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "손님 기준", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
@@ -346,6 +346,9 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 	}	
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnToday) {
+			actionPerformedBtnToday(e);
+		}
 		if (e.getSource() == btnNameSearch) {
 			actionPerformedBtnNameSearch(e);
 		}
@@ -373,8 +376,6 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 
 	}
 	protected void actionPerformedBtnSearch(ActionEvent arg0) {
-		
-		
 		//검색 버튼
 		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
 		SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
@@ -479,6 +480,31 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 	protected void actionPerformedBtnNameSearch(ActionEvent e) {
 		workList = wDao.selectReservDetailByGuestName(tfGuestName.getText());
 		reloadData();
+	}
+	protected void actionPerformedBtnToday(ActionEvent e) {
+		//오늘 검색
+		SimpleDateFormat sdate = new SimpleDateFormat("yyyy-MM-dd 00:00");
+		SimpleDateFormat edate = new SimpleDateFormat("yyyy-MM-dd 23:59");
+		Date today = new Date();
+		
+		Calendar c = Calendar.getInstance();
+
+		c.setTime(today);
+		String eDay = edate.format(c.getTime());
+		String sDay = sdate.format(c.getTime());
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", sDay);
+		map.put("end", eDay);
+		
+		if (rdbtnSelect.isSelected()) { //디자이너 검색으로 선택되어 있으면
+			Designer selDesigner = (Designer) cmbDesigner.getSelectedItem();
+			map.put("name", selDesigner.getdName());
+		}
+		
+		workList = wDao.selectReservDetailByDate(map);
+		reloadData();			
+		
 	}
 }
 
