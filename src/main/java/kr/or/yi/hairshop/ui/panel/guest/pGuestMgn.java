@@ -310,7 +310,7 @@ public class pGuestMgn extends JPanel implements ActionListener, KeyListener, Mo
 	public void mouseEntered(MouseEvent e) {
 	}
 	public void mouseExited(MouseEvent e) {
-		table.clearSelection();
+//		table.clearSelection();
 	}
 	public void mousePressed(MouseEvent e) {
 	}

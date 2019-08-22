@@ -717,7 +717,7 @@ public class GuestPanel extends JPanel implements ActionListener, MouseListener 
 	public void mouseEntered(MouseEvent arg0) {
 	}
 	public void mouseExited(MouseEvent arg0) {
-		table.clearSelection();
+//		table.clearSelection();
 	}
 	public void mousePressed(MouseEvent arg0) {
 	}
