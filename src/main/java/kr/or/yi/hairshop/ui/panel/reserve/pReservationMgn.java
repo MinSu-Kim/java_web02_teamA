@@ -105,7 +105,7 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		
 		JPanel panel_4 = new JPanel();
 		pNorth.add(panel_4, BorderLayout.WEST);
-		panel_4.setBorder(new TitledBorder(null, "\uB0A0\uC9DC \uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_4.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uAE30\uAC04 \uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_4.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel_8 = new JPanel();
@@ -142,7 +142,7 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		panel_5.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "\uB0A0\uC9DC \uAE30\uC900", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, null));
+		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "\uB0A0\uC9DC \uAE30\uC900", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_5.add(panel_2);
 		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
 		
@@ -175,7 +175,7 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		btnThisWeek.addActionListener(this);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "손님 기준", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "\uB514\uC790\uC774\uB108 \uAE30\uC900", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_5.add(panel_3);
 		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
 		
@@ -201,16 +201,46 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		cmbDesigner.setSelectedIndex(-1);
 		
 		JPanel panel_7 = new JPanel();
-		panel_7.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "손님 기준", TitledBorder.CENTER, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		panel_7.setBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "\uC190\uB2D8 \uAE30\uC900", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_5.add(panel_7);
+		panel_7.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panel_12 = new JPanel();
+		panel_7.add(panel_12);
 		
 		tfGuestName = new JTextField("이름 검색");
-		panel_7.add(tfGuestName);
+		panel_12.add(tfGuestName);
 		tfGuestName.setColumns(10);
 		
 		btnNameSearch = new JButton("검색");
+		panel_12.add(btnNameSearch);
 		btnNameSearch.addActionListener(this);
-		panel_7.add(btnNameSearch);
+		
+		JPanel panel_13 = new JPanel();
+		//panel_13.setBackground(Color.black);
+		panel_7.add(panel_13);
+		
+		panel_13.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel lblto = new JLabel("오늘");
+		lblto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblto.setForeground(new Color(255, 129, 228));
+		panel_13.add(lblto);
+		
+		JLabel label_2 = new JLabel("작업완료");
+		label_2.setHorizontalAlignment(SwingConstants.CENTER);
+		label_2.setForeground(new Color(150, 235, 176));
+		panel_13.add(label_2);
+		
+		JLabel label_3 = new JLabel("이벤트 적용");
+		label_3.setHorizontalAlignment(SwingConstants.CENTER);
+		label_3.setForeground(new Color(245, 185, 174));
+		panel_13.add(label_3);
+		
+		JLabel lbldone = new JLabel("일반");
+		lbldone.setForeground(Color.WHITE);
+		lbldone.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_13.add(lbldone);
 		
 		JPanel pList = new JPanel();
 		pList.setBorder(new TitledBorder(null, "예약정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -327,13 +357,15 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 			Date today = new Date();
 			String date = sDate.format(today);
 
-			if ( table.getValueAt(row, 1).toString().substring(0, 10).equals(date) ) { //오늘 날짜 면
-				setBackground(new Color(255, 129, 228, 30));
-			}else if( !table.getValueAt(row, 9).toString().equals("작업전") ) {
+			if ( table.getValueAt(row, 1).toString().substring(0, 10).equals(date) ) { 
+				setBackground(new Color(255, 129, 228, 30));//오늘 날짜 면 핑크
+			}else if( !table.getValueAt(row, 9).toString().equals("작업전") ) { //작업완료 된것 레디쉬
 				setBackground(new Color(245, 185, 174, 100));
-			}else if( !table.getValueAt(row, 7).toString().equals("일반") ){
+			}
+			else if( !table.getValueAt(row, 7).toString().equals("일반") ){ //이벤트가 적용된것
 				setBackground(new Color(150, 235, 176, 100));
-			}else {
+			}
+			else {
 				setBackground(Color.WHITE);
 			}
 
