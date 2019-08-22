@@ -93,8 +93,8 @@ select @w_reservTime,@w_workTime;
 
 /* 1.시작~끝 시간 설정 */
 /* 7/1~8/31셋팅 */
-set @start=UNIX_TIMESTAMP('2016-08-01 00:00:00');
-set @end=UNIX_TIMESTAMP('2019-08-31 23:59:59');
+set @start=UNIX_TIMESTAMP('2019-01-01 00:00:00');
+set @end=UNIX_TIMESTAMP('2019-12-31 23:59:59');
 /* 당일데이터만 삽입 */
 set @start=UNIX_TIMESTAMP(concat(left(curdate(),10),' 08:00:00'));
 set @end=UNIX_TIMESTAMP(concat(left(curdate(),10),' 23:00:00'));
@@ -121,7 +121,7 @@ insert into choice(c_w_no,c_p_name) values
 ((select LAST_INSERT_ID()),(select p_name from product order by rand() limit 1))
 ;
 
-
+select * from workdialog;
 /* 3.불필요 데이터 삭제 */
 
 delete from choice where c_w_no in (select w_no from workdialog where `w_reservTime` between '2015-01-01' and '2019-12-31'

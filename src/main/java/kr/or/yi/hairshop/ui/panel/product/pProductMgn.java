@@ -708,7 +708,7 @@ public class pProductMgn extends JPanel implements ActionListener, MouseListener
 	}
 
 	private String[] getColumnNamesProduct() {
-		return new String[] { "이름", "가격", "소모품 사영여부" };
+		return new String[] { "이름", "가격", "분류" };
 	}
 
 	private String[] getColumnNamesEvent() {

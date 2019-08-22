@@ -46,7 +46,6 @@
 		(g_id, g_password, g_l_grade, g_name, g_tel, g_email, g_birth, g_join,
 		g_point, g_memo)
 		VALUES(#{gId}, #{gPassword}, #{gLGrade.lGrade}, #{gName}, #{gTel}, #{gEmail}, #{gBirth}, #{gJoin}, 0, #{gMemo});
-
 	</insert>
 
 	<update id="updateGuest">
@@ -65,7 +64,7 @@
 	
 	<insert id="insertGuestByWorkMain"  useGeneratedKeys="true" keyProperty="gNo">
 		INSERT INTO hairshop.guest
-		(g_name, g_tel,g_join)
-		VALUES(#{gName},#{gTel},#{gJoin});
+		(g_name, g_tel,g_join,g_memo)
+		VALUES(#{gName},#{gTel},#{gJoin},'비회원');
 	</insert>
 </mapper>
