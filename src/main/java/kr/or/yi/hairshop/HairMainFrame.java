@@ -214,7 +214,6 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 	protected void stateChangedTabbedPane(ChangeEvent arg0) {
 		if(tabbedPane.getSelectedIndex() == 0) {
 		}else if (tabbedPane.getSelectedIndex() == 1){
-			JOptionPane.showMessageDialog(null, "작업 화면 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 			workMain.reloadData();
 			workMain.refresh(0);
 		}else if (tabbedPane.getSelectedIndex() == 2){
@@ -227,7 +226,6 @@ public class HairMainFrame extends JFrame implements ActionListener, ChangeListe
 			ProductMgn.clearList();
 			ProductMgn.reloadData();
 		}else if (tabbedPane.getSelectedIndex() == 5){
-			JOptionPane.showMessageDialog(null, "매출 현황 탭이 선택 되었다 (" + tabbedPane.getSelectedIndex()+")");
 			Platform.runLater(() ->guestChart.reloadData());
 		}else if (tabbedPane.getSelectedIndex() == 6){
 			Platform.runLater(() -> pDesignerChart.reload());
