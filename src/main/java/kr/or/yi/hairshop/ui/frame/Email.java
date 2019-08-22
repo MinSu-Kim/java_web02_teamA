@@ -37,7 +37,7 @@ public class Email {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("younggak@gmail.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("younggak@gmail.com")); //헤어샵 대표 이메일
             message.setSubject("이메일 인증");
             message.setText("인증번호는 "+CerNumber+"입니다");
 

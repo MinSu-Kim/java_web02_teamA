@@ -696,6 +696,7 @@ public class GuestPanel extends JPanel implements ActionListener, MouseListener 
 				if(column == 1) {
 					setHorizontalAlignment(JLabel.CENTER);
 				}
+				
 				if (table.getValueAt(row, 0).toString().equals("골드")) {
 					setBackground(new Color(255, 215, 0, 30));
 				}else if(table.getValueAt(row, 0).toString().equals("실버")) {
