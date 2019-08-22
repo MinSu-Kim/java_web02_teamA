@@ -1,3 +1,6 @@
+
+
+
 -- 헤어샵
 DROP SCHEMA IF EXISTS hairshop;
 

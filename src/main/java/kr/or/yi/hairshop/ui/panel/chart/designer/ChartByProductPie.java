@@ -13,6 +13,8 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
 import kr.or.yi.hairshop.dao.ProductMapper;
 import kr.or.yi.hairshop.dao.ProductMapperImpl;
+import kr.or.yi.hairshop.dao.WorkDialogMapper;
+import kr.or.yi.hairshop.dao.WorkDialogMapperImpl;
 import kr.or.yi.hairshop.dto.Product;
 
 @SuppressWarnings("serial")
@@ -24,6 +26,7 @@ public class ChartByProductPie extends JFXPanel implements InitScene {
 
 	private PieChart pieChart;
 	private ProductMapper dao = new ProductMapperImpl();
+//	private WorkDialogMapper dao = new WorkDialogMapperImpl();
 	private List<Product> li;
 	
 	@Override

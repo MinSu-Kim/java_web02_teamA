@@ -42,7 +42,10 @@
 	
 	<select id="selectByProductName" resultType="Product">
 		select count(p_division) as pPrice, p_division as pName
-		from product group by p_division
+		from product p
+		join choice c
+		on p.p_name=c.c_p_name
+		group by p_division 
 	</select>
 	
 	<select id="searchByName" resultType="Product">

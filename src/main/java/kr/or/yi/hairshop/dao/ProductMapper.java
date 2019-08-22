@@ -18,4 +18,5 @@ public interface ProductMapper {
 	public Product selectByName(String name);
 	public List<Product> selectByProductName();
 	
+	
 }

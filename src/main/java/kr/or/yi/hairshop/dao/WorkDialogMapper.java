@@ -35,5 +35,7 @@ public interface WorkDialogMapper {
 	public List<WorkDialog> selectReservDetailByDesignerName(String name);
 	public List<WorkDialog> selectReservDetailByGuestName(String name);
 	
-
+	
+	
+	
 }

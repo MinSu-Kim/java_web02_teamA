@@ -280,7 +280,11 @@ public class pHomeFooterDesigner extends JPanel implements ActionListener, KeyLi
 		tfgTel.setText(workDialog.getwGNo().getgTel());
 		tfgTel.setEditable(false);
 		cmbDesigner.setSelectedItem(new Designer(workDialog.getwDNo().getdNo()));
-		cmbEvent.setSelectedItem(new Event(workDialog.getwEName().geteName()));
+		if(workDialog.getwEName()!=null) {
+			cmbEvent.setSelectedItem(new Event(workDialog.getwEName().geteName()));
+		}else {
+			cmbEvent.setSelectedItem("일반");
+		}
 		tfgName.setText(workDialog.getwGNo().getgName());
 		tfgName.setEditable(false);
 		tfpPrice.setText(workDialog.getwPriceTotal() + "");
