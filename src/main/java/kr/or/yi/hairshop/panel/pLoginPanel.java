@@ -4,12 +4,13 @@ import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class pLoginPanel extends JPanel {
-	private JTextField tfPassWord;
 	private JTextField tfId;
+	private JPasswordField tfPassWord;
 
 	public pLoginPanel() {
 		initComponents();
@@ -30,9 +31,9 @@ public class pLoginPanel extends JPanel {
 		lblPassWord.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblPassWord);
 		
-		tfPassWord = new JTextField();
+		tfPassWord = new JPasswordField();
 		add(tfPassWord);
-		tfPassWord.setColumns(10);
+	
 	}
 	
 	public String getTfId() {

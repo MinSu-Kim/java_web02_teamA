@@ -150,7 +150,7 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		panel_2.add(panel_10);
 		panel_10.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_4 = new JLabel("☆ 일자별 검색을 우측 달력의 일자를 선택해 주세요");
+		JLabel lblNewLabel_4 = new JLabel("☆오늘, 이번주, 이번달, 전체검색");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_10.add(lblNewLabel_4);
 		
@@ -229,10 +229,10 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		
 		JLabel label_2 = new JLabel("작업완료");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setForeground(new Color(150, 235, 176));
+		label_2.setForeground(new Color(120, 255, 213));
 		panel_13.add(label_2);
 		
-		JLabel label_3 = new JLabel("이벤트 적용");
+/*		JLabel label_3 = new JLabel("이벤트 적용");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setForeground(new Color(245, 185, 174));
 		panel_13.add(label_3);
@@ -241,7 +241,7 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 		lbldone.setForeground(Color.WHITE);
 		lbldone.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_13.add(lbldone);
-		
+*/
 		JPanel pList = new JPanel();
 		pList.setBorder(new TitledBorder(null, "예약정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(pList);
@@ -359,16 +359,15 @@ public class pReservationMgn extends JPanel implements ActionListener, PropertyC
 
 			if ( table.getValueAt(row, 1).toString().substring(0, 10).equals(date) ) { 
 				setBackground(new Color(255, 129, 228, 30));//오늘 날짜 면 핑크
-			}else if( !table.getValueAt(row, 9).toString().equals("작업전") ) { //작업완료 된것 레디쉬
-				setBackground(new Color(245, 185, 174, 100));
-			}
-			else if( !table.getValueAt(row, 7).toString().equals("일반") ){ //이벤트가 적용된것
-				setBackground(new Color(150, 235, 176, 100));
-			}
-			else {
+			}else if( !table.getValueAt(row, 9).toString().equals("작업전") ) { //작업완료 된것
+				setBackground(new Color(198, 255, 213, 100));
+			}else if( table.getValueAt(row, 5).toString().equals("골드") ) {
+				setBackground(new Color(255, 215, 0, 30));
+			}else if(table.getValueAt(row, 5).toString().equals("실버")) {
+				setBackground(new Color(192, 192, 192, 70));
+			}else {
 				setBackground(Color.WHITE);
 			}
-
 			
 			if (isSelected) {
 				setBackground(Color.orange);
