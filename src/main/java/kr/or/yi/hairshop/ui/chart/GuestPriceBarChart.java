@@ -26,8 +26,8 @@ public class GuestPriceBarChart extends JFXPanel implements InitScene{
 	
 	public GuestPriceBarChart() {
 		
-		
 	}
+	
 	public void setWList(List<WorkDialog> wList) {
 		this.wList = wList;
 	}

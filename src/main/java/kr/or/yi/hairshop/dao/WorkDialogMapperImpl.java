@@ -112,12 +112,7 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 		}
 	}
 
-	@Override
-	public List<WorkDialog> selectGuestBarChartPrice(Map<String, Date> map) {
-		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
-			return sqlSession.selectList(namespace+".selectGuestBarChartPrice",map);
-		}
-	}
+
 	@Override
 	public List<WorkDialog> selectTotalPriceByDesigner(int wDNo) {
 		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
@@ -129,6 +124,12 @@ public class WorkDialogMapperImpl implements WorkDialogMapper{
 	public List<WorkDialog> selectGuestBarChart() {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + ".selectGuestBarChartPrice");
+		}
+	}
+	@Override
+	public List<WorkDialog> selectGuestBarChartPrice(Map<String, Date> map) {
+		try(SqlSession sqlSession=MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace+".selectGuestBarChartPrice",map);
 		}
 	}
 	@Override

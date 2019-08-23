@@ -208,7 +208,6 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 	}
 	protected void propertyChangeDateStart(PropertyChangeEvent evt) {
 		
-		System.out.println(pBarCountChart);
 		if(dateStart!=null && dateEnd!=null && wDao!=null && map!=null) {
 			map.put("dateStart", dateStart.getDate());
 			map.put("dateEnd", dateEnd.getDate());
@@ -247,8 +246,8 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 		dateEnd.setDate(new Date(date.getYear(),11,31,23,59,59));
 		
 		pBarPriceChart.setWList(wDao.selectGuestBarChartPrice(map));
-		dateYearPriceChart.setWList(pDao.selectDateYearPriceChart(year));
 		pBarCountChart.setWList(wDao.selectGuestBarChartCount(map));
+		dateYearPriceChart.setWList(pDao.selectDateYearPriceChart(year));
 		
 		Platform.runLater(() -> initFX(pBarPriceChart));
 		Platform.runLater(() -> initFX(pBarCountChart));
@@ -256,12 +255,8 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 	}
 	
 	protected void actionPerformedBtnAllDay(ActionEvent e) {
-		
 		map.put("dateStart", new Date(date.getYear()-100,0,1));
 		map.put("dateEnd", new Date());
-		
-		System.out.println(map.get("dateStart"));
-		System.out.println(map.get("dateEnd"));
 		
 		pBarPriceChart.setWList(wDao.selectGuestBarChartPrice(map));
 		pBarCountChart.setWList(wDao.selectGuestBarChartCount(map));
