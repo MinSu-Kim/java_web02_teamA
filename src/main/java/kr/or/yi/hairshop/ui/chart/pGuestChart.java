@@ -31,7 +31,7 @@ import java.awt.Dimension;
 public class pGuestChart extends JPanel implements ActionListener, PropertyChangeListener {
 	private WorkDialogMapper wDao=new WorkDialogMapperImpl();
 	private ProductMapper pDao=new ProductMapperImpl();
-	GuestCountBarChart pBarPriceChart;
+	GuestCountBarChart pBarPriceChart=new GuestCountBarChart();
 	GuestPriceBarChart pBarCountChart=new GuestPriceBarChart();
 	DateYearPriceLineChart dateYearPriceChart;
 	private JPanel panel_1;
@@ -93,7 +93,6 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 		panel_4 = new JPanel();
 		panel_3.add(panel_4);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
-		pBarPriceChart = new GuestCountBarChart();
 		panel_4.add(pBarPriceChart);
 		
 		map = new HashMap<String, Date>();
@@ -237,7 +236,6 @@ public class pGuestChart extends JPanel implements ActionListener, PropertyChang
 		map = new HashMap<String, Date>();
 		date = new Date();
 		
-		pBarPriceChart = new GuestCountBarChart();
 		
 		map.put("dateStart",new Date(date.getYear(),0,1));
 		map.put("dateEnd",new Date(date.getYear(),11,31,23,59,59));
